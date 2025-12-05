@@ -1,5 +1,36 @@
 import { z } from "zod";
 
+const operations = [{
+    operation: "copy",
+    type: "sourceNumber",
+}, {
+    operation: "move",
+    type: "sourceNumber",
+}, {
+    operation: "set",
+    type: "set"
+}, {
+operation: "delete",
+    type: "source"
+}, {
+    operation: "go",
+    type:"source"
+}, {
+    operation: "open",
+    type: "open"
+}, {
+    operation: "empty",
+    type: "destination"
+}, {
+    operation: "record",
+    type: "destination"
+}, {
+    operation: "assign",
+    type: "sourceDestination"
+}, {
+    operation: "get",
+    type: "get"
+}]
 export const mathOperators = ["add", "subtract", "multiply", "divide", "mod", "exponent"]
 
 export const value = z.union([
@@ -66,7 +97,7 @@ export const subReference = z.union([
 ]);
 
 export const sourceNumberCommand = z.object({
-    operation: z.union([z.literal("copy"), z.literal("move")]),
+    operation: z.union(operations.filter(o => o.type === "sourceNumber").map(o => o.operation)),
     source: directReference,
     subSources: z.array(subReference),
     value,
@@ -74,7 +105,7 @@ export const sourceNumberCommand = z.object({
 });
 
 export const setCommand = z.object({
-    operation: z.literal("set"),
+    operation: z.union(operations.filter(o => o.type === "set").map(o => o.operation)),
     source: directReference,
     subSources: z.array(subReference),
     value,
@@ -82,14 +113,14 @@ export const setCommand = z.object({
 });
 
 export const sourceCommand = z.object({
-    operation: z.union([z.literal("delete"), z.literal("go")]),
+    operation: z.union(operations.filter(o => o.type === "source").map(o => o.operation)),
     source: directReference,
     subSources: z.array(subReference),
     options: z.object({}),
 });
 
 export const openCommand = z.object({
-    operation: z.literal("open"),
+    operation: z.union(operations.filter(o => o.type === "open").map(o => o.operation)),
     source: directReference,
     subSources: z.array(subReference),
     options: z.union([
@@ -104,14 +135,14 @@ export const openCommand = z.object({
 })
 
 export const destinationCommand = z.object({
-    operation: z.union([z.literal("empty"), z.literal("record")]),
+    operation: z.union(operations.filter(o => o.type === "destination").map(o => o.operation)),
     destination: directReference,
     subDestinations: z.array(subReference),
     options: z.object({}),
 });
 
 export const sourceDestinationCommand = z.object({
-    operation: z.literal("assign"),
+    operation: z.union(operations.filter(o => o.type === "sourceDestination").map(o => o.operation)),
     source: directReference,
     subSources: z.array(subReference),
     destination: directReference,
@@ -120,7 +151,7 @@ export const sourceDestinationCommand = z.object({
 });
 
 export const getCommand = z.object({
-    operation: z.literal("get"),
+    operation: z.union(operations.filter(o => o.type === "get").map(o => o.operation)),
     source: directReference,
     subSources: z.array(subReference),
     options: z.object({}),
