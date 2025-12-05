@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const operations = [{
+export const operations = [{
     operation: "copy",
     type: "sourceNumber",
 }, {
@@ -10,11 +10,11 @@ const operations = [{
     operation: "set",
     type: "set"
 }, {
-operation: "delete",
+    operation: "delete",
     type: "source"
 }, {
     operation: "go",
-    type:"source"
+    type: "source"
 }, {
     operation: "open",
     type: "open"
@@ -46,7 +46,7 @@ export const value = z.union([
     }),
     z.object({
         type: z.literal("mathDualExpression"),
-        operator: z.union(mathOperators.map(o => z.literal(o))]),
+        operator: z.union(mathOperators.map(o => z.literal(o))),
         get value1() { return value }, // get because of recursiveness
         get value2() { return value } // get because of recursiveness
     }),
@@ -58,19 +58,19 @@ export const value = z.union([
 ]);
 
 export const directReferenceContexts = [
-            "show",
-            "section",
-            "scene",
-            "cuelist",
-            "cue",
-            "speedGroup",
-            "variable",
-            "executingMacro",
-            "calledMacro",
-            "executingMacroCommand",
-            "collection",
-            "fixture",
-    ];
+    "show",
+    "section",
+    "scene",
+    "cuelist",
+    "cue",
+    "speedGroup",
+    "variable",
+    "executingMacro",
+    "calledMacro",
+    "executingMacroCommand",
+    "collection",
+    "fixture",
+];
 
 export const directReference = z.union([
     z.object({
@@ -80,7 +80,7 @@ export const directReference = z.union([
     }),
     z.object({
         type: z.literal("context"),
-        context: z.union(directReferenceContexts.map(c => z.literal(c)),
+        context: z.union(directReferenceContexts.map(c => z.literal(c))),
     })
 ]);
 
@@ -97,7 +97,7 @@ export const subReference = z.union([
 ]);
 
 export const sourceNumberCommand = z.object({
-    operation: z.union(operations.filter(o => o.type === "sourceNumber").map(o => o.operation)),
+    operation: z.union(operations.filter(o => o.type === "sourceNumber").map(o => z.literal(o.operation))),
     source: directReference,
     subSources: z.array(subReference),
     value,
@@ -105,7 +105,7 @@ export const sourceNumberCommand = z.object({
 });
 
 export const setCommand = z.object({
-    operation: z.union(operations.filter(o => o.type === "set").map(o => o.operation)),
+    operation: z.union(operations.filter(o => o.type === "set").map(o => z.literal(o.operation))),
     source: directReference,
     subSources: z.array(subReference),
     value,
@@ -113,14 +113,14 @@ export const setCommand = z.object({
 });
 
 export const sourceCommand = z.object({
-    operation: z.union(operations.filter(o => o.type === "source").map(o => o.operation)),
+    operation: z.union(operations.filter(o => o.type === "source").map(o => z.literal(o.operation))),
     source: directReference,
     subSources: z.array(subReference),
     options: z.object({}),
 });
 
 export const openCommand = z.object({
-    operation: z.union(operations.filter(o => o.type === "open").map(o => o.operation)),
+    operation: z.union(operations.filter(o => o.type === "open").map(o => z.literal(o.operation))),
     source: directReference,
     subSources: z.array(subReference),
     options: z.union([
@@ -135,14 +135,14 @@ export const openCommand = z.object({
 })
 
 export const destinationCommand = z.object({
-    operation: z.union(operations.filter(o => o.type === "destination").map(o => o.operation)),
+    operation: z.union(operations.filter(o => o.type === "destination").map(o => z.literal(o.operation))),
     destination: directReference,
     subDestinations: z.array(subReference),
     options: z.object({}),
 });
 
 export const sourceDestinationCommand = z.object({
-    operation: z.union(operations.filter(o => o.type === "sourceDestination").map(o => o.operation)),
+    operation: z.union(operations.filter(o => o.type === "sourceDestination").map(o => z.literal(o.operation))),
     source: directReference,
     subSources: z.array(subReference),
     destination: directReference,
@@ -151,7 +151,7 @@ export const sourceDestinationCommand = z.object({
 });
 
 export const getCommand = z.object({
-    operation: z.union(operations.filter(o => o.type === "get").map(o => o.operation)),
+    operation: z.union(operations.filter(o => o.type === "get").map(o => z.literal(o.operation))),
     source: directReference,
     subSources: z.array(subReference),
     options: z.object({}),
