@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const mathOperators = ["add", "subtract", "multiply", "divide", "mod", "exponent"]
+
 export const value = z.union([
     z.object({
         type: z.literal("value"),
@@ -13,7 +15,7 @@ export const value = z.union([
     }),
     z.object({
         type: z.literal("mathDualExpression"),
-        operator: z.union([z.literal("add"), z.literal("subtract"), z.literal("multiply"), z.literal("divide"), z.literal("mod"), z.literal("exponent")]),
+        operator: z.union(mathOperators.map(o => z.literal(o))]),
         get value1() { return value }, // get because of recursiveness
         get value2() { return value } // get because of recursiveness
     }),
@@ -24,6 +26,21 @@ export const value = z.union([
     })
 ]);
 
+export const directReferenceContexts = [
+            "show",
+            "section",
+            "scene",
+            "cuelist",
+            "cue",
+            "speedGroup",
+            "variable",
+            "executingMacro",
+            "calledMacro",
+            "executingMacroCommand",
+            "collection",
+            "fixture",
+    ];
+
 export const directReference = z.union([
     z.object({
         type: z.literal("reference"),
@@ -32,20 +49,7 @@ export const directReference = z.union([
     }),
     z.object({
         type: z.literal("context"),
-        context: z.union([
-            z.literal("show"),
-            z.literal("section"),
-            z.literal("scene"),
-            z.literal("cuelist"),
-            z.literal("cue"),
-            z.literal("speedGroup"),
-            z.literal("variable"),
-            z.literal("executingMacro"),
-            z.literal("calledMacro"),
-            z.literal("executingMacroCommand"),
-            z.literal("collection"),
-            z.literal("fixture"),
-        ]),
+        context: z.union(directReferenceContexts.map(c => z.literal(c)),
     })
 ]);
 
