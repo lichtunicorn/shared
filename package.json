@@ -1,6 +1,9 @@
 {
   "name": "shared",
   "private": true,
+  "exports": {
+    "./*": "./public/*"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^24.10.1"
