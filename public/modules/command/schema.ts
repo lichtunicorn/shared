@@ -1,15 +1,15 @@
 import { z } from "zod";
 
-export const noGetCommandOperations = [
-    "copy",
-    "move",
-    "set",
-    "delete",
-    "go",
-    "open",
-    "empty",
-    "record",
-    "assign"
+export const operations = [
+    { name: "copy", source: true, destination: false, value: true },
+    { name: "move", source: true, destination: false, value: true },
+    { name: "set", source: true, destination: false, value: true },
+    { name: "delete", source: true, destination: false, value: false },
+    { name: "go", source: true, destination: false, value: false },
+    { name: "open", source: true, destination: false, value: false },
+    { name: "empty", source: false, destination: true, value: false },
+    { name: "record", source: false, destination: true, value: false },
+    { name: "assign", source: true, destination: true, value: false }
 ];
 
 export const value = z.union([
