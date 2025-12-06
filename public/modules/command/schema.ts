@@ -1,5 +1,17 @@
 import { z } from "zod";
 
+export const noGetCommandOperations = [
+    "copy",
+    "move",
+    "set",
+    "delete",
+    "go",
+    "open",
+    "empty",
+    "record",
+    "assign"
+];
+
 export const value = z.union([
     z.object({
         type: z.literal("value"),
