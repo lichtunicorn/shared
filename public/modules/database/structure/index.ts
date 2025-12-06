@@ -80,7 +80,25 @@ function checkValidity() {
             }
         }
 
+        if (!model.properties.find(a => a.name === 'id')) {
+            throw new Error(`Model ${modelName} has no id property`);
+        }
+
         for (const property of model.properties) {
+            if (property.name === 'id') {
+                if (property.type !== 'string') {
+                    throw new Error(`Model ${modelName} has invalid id property type ${property.type}`);
+                }
+
+                if (property.optional) {
+                    throw new Error(`Model ${modelName} has optional id property`);
+                }
+
+                if (property.unique !== true) {
+                    throw new Error(`The id of model ${modelName} must be unique`);
+                }
+            }
+
             let checkType;
             if (property.type === 'array') {
                 checkType = property.valueType;
