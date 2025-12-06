@@ -1,8 +1,8 @@
 import type { model } from './types';
 
 export const effect: model = {
-    gettable: ['id', 'index', 'type', 'speedGroup', 'rate'],
-    settable: ['index', 'type', 'speedGroup', 'rate'],
+    gettable: ['id', 'index', 'type', 'speedGroup', 'multiplier'],
+    settable: ['index', 'type', 'speedGroup', 'multiplier'],
     move: 'index',
     deletable: true,
     properties: [
@@ -42,11 +42,11 @@ export const effect: model = {
             }
         },
         {
-            name: "rate",
+            name: "multiplier",
             type: "number",
             default: {
                 type: "value",
-                value: 60
+                value: 1
             }
         }
     ]
