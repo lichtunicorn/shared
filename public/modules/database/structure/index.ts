@@ -97,6 +97,10 @@ function checkValidity() {
                 if (property.unique !== true) {
                     throw new Error(`The id of model ${modelName} must be unique`);
                 }
+
+                if (!property.default || property.default.type !== 'cuid') {
+                    throw new Error(`Model ${modelName} must have id property with default type cuid`);
+                }
             }
 
             let checkType;
