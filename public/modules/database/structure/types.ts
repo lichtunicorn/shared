@@ -33,7 +33,7 @@ export type property = {
         } | {
             type: referencePropertyType;
             unique?: boolean;
-            parent?: string;
+            backReference?: boolean;
         } | {
             type: "array";
             valueType: referencePropertyType;

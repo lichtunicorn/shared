@@ -61,7 +61,7 @@ export const sectionSceneState: model = {
         },
         {
             name: "section",
-            parent: "section",
+            backReference: true,
             type: {
                 reference: "section"
             }
@@ -92,7 +92,7 @@ export const sectionCuelistState: model = {
         },
         {
             name: "section",
-            parent: "section",
+            backReference: true,
             type: {
                 reference: "section"
             }

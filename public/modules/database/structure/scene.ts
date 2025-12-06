@@ -69,7 +69,7 @@ export const sceneElement: model = {
         },
         {
             name: "scene",
-            parent: "scene",
+            backReference: true,
             type: {
                 reference: "scene"
             }
@@ -110,7 +110,7 @@ export const sceneElementContent: model = {
         },
         {
             name: "sceneElement",
-            parent: "sceneElement",
+            backReference: true,
             type: {
                 reference: "sceneElement"
             }

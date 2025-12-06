@@ -92,16 +92,16 @@ function checkValidity() {
                 throw new Error(`Model ${modelName} has invalid reference ${checkType.reference}`);
             }
 
-            if ('parent' in property && property.parent !== undefined) {
-                const otherModel = structure[property.parent];
+            if ('backReference' in property && property.backReference !== undefined) {
+                const otherModel = structure[property.type.reference];
 
                 if (!otherModel) {
-                    throw new Error(`Model ${modelName} has unknown parent ${property.parent}`);
+                    throw new Error(`Model ${modelName} has unknown back reference from ${property.type.reference}`);
                 }
 
                 const referenceAmount = otherModel.properties.filter(property => {
 
-                    if ('parent' in property && property.parent !== undefined) {
+                    if ('backReference' in property && property.backReference === true) {
                         return false;
                     }
 
@@ -114,11 +114,11 @@ function checkValidity() {
                 }).length;
 
                 if (referenceAmount === 0) {
-                    throw new Error(`Model ${modelName} has parent ${property.parent} but the parent does not have a reference back`);
+                    throw new Error(`Model ${modelName} has back reference from ${property.type.reference} but the back reference model does not have a reference back`);
                 }
 
                 if (referenceAmount > 1) {
-                    throw new Error(`Model ${modelName} has parent ${property.parent} but the parent has multiple references back`);
+                    throw new Error(`Model ${modelName} has back reference from ${property.type.reference} but the back reference model has multiple references back`);
                 }
             }
         }

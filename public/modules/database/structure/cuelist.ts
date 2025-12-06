@@ -54,7 +54,7 @@ export const cue: model = {
         },
         {
             name: "cuelist",
-            parent: "cuelist",
+            backReference: true,
             type: {
                 reference: "cuelist"
             }
@@ -102,7 +102,7 @@ export const cueElement: model = {
         },
         {
             name: "cue",
-            parent: "cue",
+            backReference: true,
             type: {
                 reference: "cue"
             }
@@ -143,7 +143,7 @@ export const cueElementContent: model = {
         },
         {
             name: "cueElement",
-            parent: "cueElement",
+            backReference: true,
             type: {
                 reference: "cueElement"
             }

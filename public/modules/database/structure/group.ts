@@ -49,7 +49,7 @@ export const groupElement: model = {
         },
         {
             name: "group",
-            parent: "group",
+            backReference: true,
             type: {
                 reference: "group"
             }

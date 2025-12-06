@@ -49,7 +49,7 @@ export const macroCommand: model = {
         },
         {
             name: "macro",
-            parent: "macro",
+            backReference: true,
             type: {
                 reference: "macro"
             }
