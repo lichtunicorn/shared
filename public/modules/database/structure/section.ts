@@ -8,6 +8,7 @@ export const section: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },
@@ -45,6 +46,7 @@ export const sectionSceneState: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             }
@@ -76,6 +78,7 @@ export const sectionCuelistState: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             }

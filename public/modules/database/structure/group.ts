@@ -9,6 +9,7 @@ export const group: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },
@@ -35,6 +36,7 @@ export const groupElement: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },

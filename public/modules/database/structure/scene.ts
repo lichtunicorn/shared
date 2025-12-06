@@ -10,6 +10,7 @@ export const scene: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },
@@ -36,6 +37,7 @@ export const sceneElement: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },
@@ -84,6 +86,7 @@ export const sceneElementContent: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },

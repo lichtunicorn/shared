@@ -9,6 +9,7 @@ export const effect: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },
@@ -58,6 +59,7 @@ export const speedGroup: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },

@@ -9,6 +9,7 @@ export const variable: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },

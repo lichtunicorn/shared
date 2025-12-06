@@ -10,6 +10,7 @@ export const cuelist: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },
@@ -36,6 +37,7 @@ export const cue: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },
@@ -69,6 +71,7 @@ export const cueElement: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },
@@ -117,6 +120,7 @@ export const cueElementContent: model = {
         {
             name: "id",
             type: "string",
+            unique: true,
             default: {
                 type: "cuid"
             },
