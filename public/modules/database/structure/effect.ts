@@ -4,6 +4,7 @@ export const effect: model = {
     gettable: ['id', 'index', 'type', 'speedGroup', 'rate'],
     settable: ['index', 'type', 'speedGroup', 'rate'],
     move: 'index',
+    deletable: true,
     properties: [
         {
             name: "id",

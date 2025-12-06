@@ -3,6 +3,9 @@ import type { model } from './types';
 export const cuelist: model = {
     gettable: ['id', 'name', 'cues'],
     settable: ['name'],
+    deletable: true,
+    goable: true,
+    canAssign: true,
     properties: [
         {
             name: "id",

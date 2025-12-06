@@ -3,6 +3,9 @@ import type { model } from './types';
 export const scene: model = {
     gettable: ['id', 'name', 'elements'],
     settable: ['name'],
+    deletable: true,
+    goable: true,
+    canAssign: true,
     properties: [
         {
             name: "id",

@@ -3,6 +3,7 @@ import type { model } from './types';
 export const section: model = {
     gettable: ['id', 'index', 'global', 'sceneStates', 'cuelistStates'],
     settable: ['index'],
+    goable: true,
     properties: [
         {
             name: "id",

@@ -3,6 +3,7 @@ import type { model } from './types';
 export const override: model = {
     gettable: ['id', 'fixture', 'attributes'],
     settable: [],
+    deletable: true,
     properties: [
         {
             name: "id",

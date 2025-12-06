@@ -4,6 +4,9 @@ export const collection: model = {
     gettable: ['id', 'index', 'name', 'scenes', 'cuelists'],
     settable: ['index', 'name'],
     move: 'index',
+    deletable: true,
+    goable: true,
+    canAssign: true,
     properties: [
         {
             name: "id",

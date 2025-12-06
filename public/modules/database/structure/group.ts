@@ -4,6 +4,7 @@ export const group: model = {
     gettable: ['id', 'index'],
     settable: ['index'],
     move: 'index',
+    deletable: true,
     properties: [
         {
             name: "id",
