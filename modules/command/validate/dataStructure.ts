@@ -1,22 +1,16 @@
 import { z } from "zod";
 
-import { structure as databaseStructure } from "../database/structure";
-import { directReference as directReferenceSchema, noGetCommand as noGetCommandSchema, subReference as subReferenceSchema, value as valueSchema } from "./schema";
+import { structure as databaseStructure } from "../../database/structure";
+import { directReference as directReferenceSchema, noGetCommand as noGetCommandSchema, getCommand as getCommandSchema, subReference as subReferenceSchema, value as valueSchema } from "../schema";
 
-import type { literalPropertyType, referencePropertyType } from "../database/structure/types";
-import type { property as databaseProperty, model as databaseModel } from "../database/structure/types";
-
-export function validateSyntax(command: unknown): boolean {
-    try {
-        noGetCommandSchema.parse(command);
-        return true;
-    } catch {
-        return false;
-    }
-}
+import type { literalPropertyType, referencePropertyType } from "../../database/structure/types";
+import type { property as databaseProperty, model as databaseModel } from "../../database/structure/types";
 
 type validateDataStructureReturn = {
     valid: true;
+} | {
+    valid: true;
+    type: literalPropertyType | "oneOf";
 } | {
     valid: false;
     part: 'operation' | 'options';
@@ -49,16 +43,28 @@ type validateDataStructureReturn = {
     path: validateDataStructureValuePath;
 };
 
+type validateDatStructureValueError = {
+    type: 'string';
+    error: string;
+} | {
+    type: 'type';
+
+    requiredType: literalPropertyType | referencePropertyType;
+    evaluatedType: literalPropertyType | referencePropertyType | "oneOf";
+};
+
 type validateDataStructureValuePath = {
     type: 'value';
-    error: string;
+    error: validateDatStructureValueError;
 } | {
     type: 'getCommand';
     command: validateDataStructureReturn;
 } | {
+    type: 'getCommand';
+    error: validateDatStructureValueError;
+} | {
     type: 'mathDualExpression';
-    isFirstValue: boolean;
-    error: string;
+    error: validateDatStructureValueError;
 } | {
     type: 'mathDualExpression';
     value1: validateDataStructureValuePath;
@@ -67,17 +73,25 @@ type validateDataStructureValuePath = {
     value2: validateDataStructureValuePath;
 } | {
     type: 'mathUnaryExpression';
-    error: string;
+    error: validateDatStructureValueError;
 } | {
     type: 'mathUnaryExpression';
     value: validateDataStructureValuePath;
 };
 
-export function validateDataStructure(command: z.infer<typeof noGetCommandSchema>): validateDataStructureReturn {
-    let sourceType: literalPropertyType | referencePropertyType | null = null;
+export function validateDataStructure(command: z.infer<typeof noGetCommandSchema | typeof getCommandSchema>, canBeGetCommand: boolean): validateDataStructureReturn {
+    if (command.operation === 'get' && !canBeGetCommand) {
+        return {
+            valid: false,
+            part: 'operation',
+            error: 'get command is not allowed'
+        }
+    }
+
+    let sourceType: literalPropertyType | referencePropertyType | "oneOf" | null = null;
 
     // source check
-    if (command.operation === 'move' || command.operation === 'copy' || command.operation === 'set' || command.operation === 'open' || command.operation === 'delete' || command.operation === 'assign' || command.operation === 'go') {
+    if (command.operation === 'move' || command.operation === 'copy' || command.operation === 'set' || command.operation === 'open' || command.operation === 'delete' || command.operation === 'assign' || command.operation === 'go' || command.operation === 'get') {
         const result = validateReferenceDataStructure(command.source, command.subSources);
 
         if (!result.valid) {
@@ -118,11 +132,22 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             }
         }
 
+        sourceType = foundType;
+
         if (['move', 'copy', 'open', 'delete', 'assign', 'go'].includes(command.operation) && !result.isModel) {
             return {
                 valid: false,
                 part: 'source',
                 error: `Can't perform ${command.operation} on an ${result.type}`,
+                isDirectReference: null
+            }
+        }
+
+        if (command.operation === 'get' && result.isModel) {
+            return {
+                valid: false,
+                part: 'source',
+                error: `Can't perform get on a model`,
                 isDirectReference: null
             }
         }
@@ -247,7 +272,10 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             // impossible to reach, but typescript doesn't believe that
             if (sourceType === null) throw new Error('sourceType should not be null');
 
-            requiredValueType = sourceType;
+            if (sourceType === 'oneOf')
+                requiredValueType = 'string';
+            else
+                requiredValueType = sourceType;
         } else
             throw new Error(`Unknown operation ${command.operation}`);
 
@@ -262,9 +290,19 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
         }
     }
 
-    return {
-        valid: true
-    };
+    if (command.operation === 'get') {
+        if (sourceType === null)
+            throw new Error('Get command, but sourceType is null');
+
+        return {
+            valid: true,
+            type: sourceType
+        }
+    } else {
+        return {
+            valid: true
+        };
+    }
 }
 
 export function validateReferenceDataStructure(directReference: z.infer<typeof directReferenceSchema>, subReferences: z.infer<typeof subReferenceSchema>[]): {
@@ -465,7 +503,10 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
                 }
             }
 
-            const result = validateValueDataStructure(subReference.value, searchProperty.type);
+            // @ts-ignore checked above it can't be a reference type
+            const searchPropertyType: Exclude<typeof searchProperty.type, referencePropertyType> = searchProperty.type;
+
+            const result = validateValueDataStructure(subReference.value, searchPropertyType);
 
             if (!result.valid) {
                 return {
@@ -545,17 +586,171 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     }
 }
 
-export function validateValueDataStructure(value: z.infer<typeof valueSchema>, requiredType: literalPropertyType | referencePropertyType): {
+export function validateValueDataStructure(value: z.infer<typeof valueSchema>, requiredType: literalPropertyType): {
     valid: true;
 } | {
     valid: false;
     path: validateDataStructureValuePath;
-} | {
-
 } {
+    if (value.type === 'value') {
+        if (!['string', 'number', 'boolean'].includes(typeof value)) {
+            return {
+                valid: false,
+                path: {
+                    type: 'value',
+                    error: {
+                        type: 'string',
+                        error: 'Literal value is not a string, number or boolean'
+                    }
+                }
+            }
+        }
 
-}
+        // @ts-ignore see above it can only be string number or boolean
+        const evaluatedType: "string" | "number" | "boolean" = typeof value;
 
-export function validateCurrentData(command: z.infer<typeof noGetCommandSchema>): boolean {
+        if (requiredType !== 'stringOrNumberOrBooleanOrNull' && requiredType !== evaluatedType) {
+            return {
+                valid: false,
+                path: {
+                    type: 'value',
+                    error: {
+                        type: 'type',
+                        requiredType,
+                        evaluatedType
+                    }
+                }
+            }
+        }
 
+        return {
+            valid: true
+        };
+    } else if (value.type === 'getCommand') {
+        if (value.command.operation !== 'get') {
+            return {
+                valid: false,
+                path: {
+                    type: 'getCommand',
+                    error: {
+                        type: 'string',
+                        error: 'getCommand value used, but command is not a get command'
+                    }
+                }
+            }
+        }
+
+        const result = validateDataStructure(value.command, true);
+
+        if (!result.valid) {
+            return {
+                valid: false,
+                path: {
+                    type: 'getCommand',
+                    command: result
+                }
+            }
+        }
+
+        if (!('type' in result))
+            throw new Error('validateDataStructure called with get command, but no type is returned');
+
+        const checkingResultType = result.type === 'oneOf' ? 'string' : result.type;
+
+        if (requiredType !== 'stringOrNumberOrBooleanOrNull' && result.type !== 'stringOrNumberOrBooleanOrNull' && requiredType !== checkingResultType) {
+            return {
+                valid: false,
+                path: {
+                    type: 'getCommand',
+                    error: {
+                        type: 'type',
+                        requiredType,
+                        evaluatedType: result.type
+                    }
+                }
+            }
+        }
+
+        return {
+            valid: true
+        };
+
+    } else if (value.type === 'mathDualExpression') {
+        if (requiredType !== 'number' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
+            return {
+                valid: false,
+                path: {
+                    type: 'mathDualExpression',
+                    error: {
+                        type: 'type',
+                        requiredType,
+                        evaluatedType: 'number'
+                    }
+                }
+            }
+        }
+
+        const value1result = validateValueDataStructure(value.value1, 'number');
+
+        if (!value1result.valid) {
+            return {
+                valid: false,
+                path: {
+                    type: 'mathDualExpression',
+                    value1: value1result.path
+                }
+            }
+        }
+
+        const value2result = validateValueDataStructure(value.value2, 'number');
+
+        if (!value2result.valid) {
+            return {
+                valid: false,
+                path: {
+                    type: 'mathDualExpression',
+                    value2: value2result.path
+                }
+            }
+        }
+
+        return {
+            valid: true
+        };
+    } else if (value.type === 'mathUnaryExpression') {
+        if (requiredType !== 'number' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
+            return {
+                valid: false,
+                path: {
+                    type: 'mathUnaryExpression',
+                    error: {
+                        type: 'type',
+                        requiredType,
+                        evaluatedType: 'number'
+                    }
+                }
+            }
+        }
+
+        const valueResult = validateValueDataStructure(value.value, 'number');
+
+        if (!valueResult.valid) {
+            return {
+                valid: false,
+                path: {
+                    type: 'mathUnaryExpression',
+                    value: valueResult.path
+                }
+            }
+        }
+
+        return {
+            valid: true
+        };
+    } else {
+        // typescript requires an else here, idk why
+
+        // @ts-ignore
+        throw new Error(`Unknown value type ${value.type}`);
+    }
 }
