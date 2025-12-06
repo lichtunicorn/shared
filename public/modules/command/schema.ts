@@ -1,15 +1,15 @@
 import { z } from "zod";
 
 export const operations = [
-    { name: "copy", source: true, destination: false, value: true },
-    { name: "move", source: true, destination: false, value: true },
-    { name: "set", source: true, destination: false, value: true },
-    { name: "delete", source: true, destination: false, value: false },
-    { name: "go", source: true, destination: false, value: false },
-    { name: "open", source: true, destination: false, value: false },
-    { name: "empty", source: false, destination: true, value: false },
-    { name: "record", source: false, destination: true, value: false },
-    { name: "assign", source: true, destination: true, value: false }
+    { name: "copy", source: true, destination: false, value: true, emptyOptions: true },
+    { name: "move", source: true, destination: false, value: true, emptyOptions: true },
+    { name: "set", source: true, destination: false, value: true, emptyOptions: true },
+    { name: "delete", source: true, destination: false, value: false, emptyOptions: true },
+    { name: "go", source: true, destination: false, value: false, emptyOptions: true },
+    { name: "open", source: true, destination: false, value: false, emptyOptions: false },
+    { name: "empty", source: false, destination: true, value: false, emptyOptions: true },
+    { name: "record", source: false, destination: true, value: false, emptyOptions: true },
+    { name: "assign", source: true, destination: true, value: false, emptyOptions: true }
 ];
 
 export const value = z.union([
