@@ -5,6 +5,7 @@ export type model = {
     goable?: boolean;
     canAssign?: boolean; // if this is a thing that can be assigned to something else
     isAssignable?: boolean; // if something else can assign to this
+    /** if this model gets deleted, recursively delete the models inside the references of these properties */
     recursiveDeleteProperties?: string[];
     gettable: string[];
     settable: string[];
