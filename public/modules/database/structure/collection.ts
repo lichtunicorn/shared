@@ -23,8 +23,7 @@ export const collection: model = {
         },
         {
             name: "name",
-            type: "string",
-            unique: true
+            type: "string"
         },
         {
             name: "scenes",

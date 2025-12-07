@@ -17,8 +17,7 @@ export const scene: model = {
         },
         {
             name: "name",
-            type: "string",
-            unique: true
+            type: "string"
         },
         {
             name: "elements",

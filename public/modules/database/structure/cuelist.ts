@@ -23,8 +23,7 @@ export const cuelist: model = {
         },
         {
             name: "name",
-            type: "string",
-            unique: true
+            type: "string"
         },
         {
             name: "cues",

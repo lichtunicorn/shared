@@ -43,8 +43,7 @@ export const preset: model = {
         },
         {
             name: "name",
-            type: "string",
-            unique: true
+            type: "string"
         },
         {
             name: "fixtures",
