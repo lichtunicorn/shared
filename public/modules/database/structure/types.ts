@@ -3,8 +3,10 @@ export type structure = Record<string, model>;
 export type model = {
     deletable?: boolean;
     goable?: boolean;
-    canAssign?: boolean; // if this is a thing that can be assigned to something else
-    isAssignable?: boolean; // if something else can assign to this
+    /** if this is a thing that can be assigned to something else */
+    canAssign?: boolean;
+    /** if something else can assign to this */
+    isAssignable?: boolean;
     /** if this model gets deleted, recursively delete the models inside the references of these properties */
     recursiveDeleteProperties?: string[];
     gettable: string[];
