@@ -307,20 +307,26 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
 
 export function validateReferenceDataStructure(directReference: z.infer<typeof directReferenceSchema>, subReferences: z.infer<typeof subReferenceSchema>[]): {
     valid: true;
-    canMove: boolean; // checks if there is a move, and the move is settable
+    /** checks if there is a move, and the move is settable */
+    canMove: boolean;
     canDelete: boolean;
     canGo: boolean;
-    canAssign: boolean; // check if this is a thing that can be assigned to something else
-    isAssignable: boolean; // check if something else can assign to this
+    /** check if this is a thing that can be assigned to something else */
+    canAssign: boolean;
+    /** check if something else can assign to this */
+    isAssignable: boolean;
     isSettable: boolean;
     isModel: true;
 } | {
     valid: true;
-    canMove: boolean; // checks if there is a move, and the move is settable
+    /** checks if there is a move, and the move is settable */
+    canMove: boolean;
     canDelete: boolean;
     canGo: boolean;
-    canAssign: boolean; // check if this is a thing that can be assigned to something else
-    isAssignable: boolean; // check if something else can assign to this
+    /** check if this is a thing that can be assigned to something else */
+    canAssign: boolean;
+    /** check if something else can assign to this */
+    isAssignable: boolean;
     isSettable: boolean;
     isModel: false;
     type: literalPropertyType | "array" | "oneOf";
