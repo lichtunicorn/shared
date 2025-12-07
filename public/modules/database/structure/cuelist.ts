@@ -4,6 +4,7 @@ export const cuelist: model = {
     gettable: ['id', 'index', 'name', 'cues'],
     settable: ['index', 'name'],
     move: 'index',
+    recursiveDeleteProperties: ['cues'],
     deletable: true,
     goable: true,
     canAssign: true,
@@ -38,6 +39,7 @@ export const cuelist: model = {
 export const cue: model = {
     gettable: ['id', 'index'],
     settable: ['index'],
+    recursiveDeleteProperties: ['elements'],
     properties: [
         {
             name: "id",
@@ -72,6 +74,7 @@ export const cue: model = {
 export const cueElement: model = {
     gettable: ['id', 'index', 'fixtures', 'group', 'contents'],
     settable: ['index'],
+    recursiveDeleteProperties: ['contents'],
     properties: [
         {
             name: "id",
@@ -121,6 +124,7 @@ export const cueElement: model = {
 export const cueElementContent: model = {
     gettable: ['id', 'index', 'preset', 'attributes'],
     settable: ['index'],
+    recursiveDeleteProperties: ['attributes'],
     properties: [
         {
             name: "id",

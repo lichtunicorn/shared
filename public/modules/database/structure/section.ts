@@ -4,6 +4,7 @@ export const section: model = {
     gettable: ['id', 'index', 'global', 'sceneStates', 'cuelistStates'],
     settable: ['index'],
     move: 'index',
+    recursiveDeleteProperties: ['sceneStates', 'cuelistStates'],
     goable: true,
     properties: [
         {

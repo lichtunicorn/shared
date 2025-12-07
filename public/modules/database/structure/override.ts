@@ -4,6 +4,7 @@ export const override: model = {
     gettable: ['id', 'fixture', 'attributes'],
     settable: [],
     deletable: true,
+    recursiveDeleteProperties: ['attributes'],
     properties: [
         {
             name: "id",

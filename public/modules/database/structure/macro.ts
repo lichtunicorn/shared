@@ -4,6 +4,7 @@ export const macro: model = {
     gettable: ['id', 'index', 'commands'],
     settable: ['index'],
     move: 'index',
+    recursiveDeleteProperties: ['commands'],
     deletable: true,
     goable: true,
     canAssign: true,

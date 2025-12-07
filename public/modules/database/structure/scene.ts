@@ -4,6 +4,7 @@ export const scene: model = {
     gettable: ['id', 'index', 'name', 'elements'],
     settable: ['index', 'name'],
     move: 'index',
+    recursiveDeleteProperties: ['elements'],
     deletable: true,
     goable: true,
     canAssign: true,
@@ -38,6 +39,7 @@ export const scene: model = {
 export const sceneElement: model = {
     gettable: ['id', 'index', 'fixtures', 'group', 'contents'],
     settable: ['index'],
+    recursiveDeleteProperties: ['contents'],
     properties: [
         {
             name: "id",
@@ -87,6 +89,7 @@ export const sceneElement: model = {
 export const sceneElementContent: model = {
     gettable: ['id', 'index', 'preset', 'attributes'],
     settable: ['index'],
+    recursiveDeleteProperties: ['attributes'],
     properties: [
         {
             name: "id",
