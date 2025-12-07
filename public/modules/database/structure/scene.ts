@@ -1,8 +1,9 @@
 import type { model } from './types';
 
 export const scene: model = {
-    gettable: ['id', 'name', 'elements'],
-    settable: ['name'],
+    gettable: ['id', 'index', 'name', 'elements'],
+    settable: ['index', 'name'],
+    move: 'index',
     deletable: true,
     goable: true,
     canAssign: true,
@@ -14,6 +15,11 @@ export const scene: model = {
             default: {
                 type: "cuid"
             },
+        },
+        {
+            name: "index",
+            type: "number",
+            unique: true
         },
         {
             name: "name",
