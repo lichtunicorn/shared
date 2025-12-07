@@ -1,8 +1,9 @@
 import type { model } from './types';
 
 export const cuelist: model = {
-    gettable: ['id', 'name', 'cues'],
-    settable: ['name'],
+    gettable: ['id', 'index', 'name', 'cues'],
+    settable: ['index', 'name'],
+    move: 'index',
     deletable: true,
     goable: true,
     canAssign: true,
@@ -14,6 +15,11 @@ export const cuelist: model = {
             default: {
                 type: "cuid"
             },
+        },
+        {
+            name: "index",
+            type: "number",
+            unique: true
         },
         {
             name: "name",
