@@ -84,6 +84,19 @@ function checkValidity() {
             throw new Error(`Model ${modelName} has no id property`);
         }
 
+        if (model.recursiveDeleteProperties) {
+            for (const propertyName of model.recursiveDeleteProperties) {
+                const property = model.properties.find(a => a.name === propertyName);
+
+                if (!property)
+                    throw new Error(`Model ${modelName} has invalid recursiveDeleteProperty ${propertyName}`);
+
+                if (property.type !== 'array' && !(typeof property.type !== 'string' && property.type.reference)) {
+                    throw new Error(`Model ${modelName} has recursiveDeleteProperty ${propertyName}, but that property is not a reference`);
+                }
+            }
+        }
+
         for (const property of model.properties) {
             if (property.name === 'id') {
                 if (property.type !== 'string') {
