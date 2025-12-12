@@ -55,6 +55,13 @@ export const cue: model = {
             unique: true
         },
         {
+            name: 'macros',
+            type: 'array',
+            valueType: {
+                reference: 'macro'
+            },
+        },
+        {
             name: "elements",
             type: "array",
             valueType: {

@@ -23,6 +23,14 @@ export const macro: model = {
             unique: true
         },
         {
+            name: 'cue',
+            type: {
+                reference: 'cue'
+            },
+            backReference: true,
+            optional: true
+        },
+        {
             name: "commands",
             type: "array",
             valueType: {
