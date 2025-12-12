@@ -5,6 +5,7 @@ export interface ServerToClientEvents {
     connect: () => void;
     clientId: (clientId: string) => void;
     showConnected: (showId: string | null) => void;
+    showNotFound: () => void;
 
     manyData<T extends modelName>(model: T, data: publicModelData<T>[]): void;
     specificData<T extends modelName>(model: T, id: string, data: publicModelData<T> | null): void;
