@@ -228,6 +228,24 @@ function generatePublicModelTypeContents(modelStructure: structureType[string]):
 
         let comment = property.comment;
 
+        if ('default' in property && property.default) {
+            let string;
+
+            if (property.default.type === 'value') {
+                string = `${property.default.value}`;
+            } else if (property.default.type === 'cuid') {
+                string = 'cuid()';
+            } else {
+                throw new Error(`Unknown default type ${(property.default as any).type}`);
+            }
+
+            if (comment) {
+                comment = `default ${string}, ${comment}`;
+            } else {
+                comment = `default ${string}`;
+            }
+        }
+
         if ('backReference' in property && property.backReference) {
             if (comment) {
                 comment = `back reference, ${comment}`;
