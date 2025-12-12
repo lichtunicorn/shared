@@ -190,12 +190,10 @@ function updateConstTypes() {
     }
 }
 
-function generateModelTypeContents(modelName: string, modelStructure: structureType[string], publicOnly: boolean): string {
+function generatePublicModelTypeContents(modelName: string, modelStructure: structureType[string]): string {
     let output = '';
 
     for (const property of modelStructure.properties) {
-        if (publicOnly && !modelStructure.gettable.includes(property.name)) continue;
-
         let typescriptType: string;
 
         if (property.type === 'array') {
@@ -232,11 +230,18 @@ function generateAutoTypes(structure: structureType): string {
     output += `export type modelName = ${Object.keys(structure).map(modelName => `"${modelName}"`).join(' | ')};\n`;
 
     for (const [modelName, modelStructure] of Object.entries(structure)) {
-        const publicModelOutput = generateModelTypeContents(modelName, modelStructure, true);
-        const privateModelOutput = generateModelTypeContents(modelName, modelStructure, false);
+        const publicModelOutput = generatePublicModelTypeContents(modelName, modelStructure);
 
-        output += `export type ${modelName} = {\n${privateModelOutput}};\n`;
         output += `export type public_${modelName} = {\n${publicModelOutput}};\n`;
+
+        const privateProperties = modelStructure.properties.filter(property => !modelStructure.gettable.includes(property.name));
+
+        if (privateProperties.length === 0) {
+            output += `export type ${modelName} = public_${modelName};\n`;
+        } else {
+            output += `export type ${modelName} = Omit<public_${modelName}, ${privateProperties.map(property => `"${property.name}"`).join(' | ')
+                }>;\n`;
+        }
     }
 
     output += `\nexport type modelData<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
