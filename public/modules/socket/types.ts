@@ -6,7 +6,7 @@ export interface ServerToClientEvents {
     connectReceived: () => void;
 
     manyData<T extends modelName>(model: T, data: publicModelData<T>[]): void;
-    specificData<T extends modelName>(model: T, id: string, data: publicModelData<T>): void;
+    specificData<T extends modelName>(model: T, id: string, data: publicModelData<T> | null): void;
 }
 
 export interface ClientToServerEvents {
