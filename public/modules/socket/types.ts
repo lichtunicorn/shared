@@ -3,6 +3,7 @@ import type { modelName, publicModelData } from '../database/structure/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
+    clientId: (clientId: string) => void;
     showConnected: (showId: string | null) => void;
 
     manyData<T extends modelName>(model: T, data: publicModelData<T>[]): void;
