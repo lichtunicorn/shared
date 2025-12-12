@@ -27,6 +27,7 @@ export const section: model = {
             valueType: {
                 reference: "sectionSceneState"
             },
+            comment: "this is where the actual section contents/state is stored"
         },
         {
             name: "cuelistStates",
@@ -34,6 +35,7 @@ export const section: model = {
             valueType: {
                 reference: "sectionCuelistState"
             },
+            comment: "this is where the actual section contents/state is stored",
         }
     ]
 };

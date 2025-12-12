@@ -18,7 +18,8 @@ export const attribute: model = {
         },
         {
             name: "value",
-            type: "string" //todo: better type
+            type: "string", //todo: better type
+            comment: "todo: better type"
         }
     ]
 };

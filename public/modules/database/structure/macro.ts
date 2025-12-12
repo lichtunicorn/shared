@@ -56,7 +56,11 @@ export const macroCommand: model = {
             type: {
                 reference: "macro"
             }
+        },
+        {
+            name: "contents",
+            type: "string", // todo: better type
+            comment: 'todo: better type'
         }
-        //todo: add command contents
     ]
 };
