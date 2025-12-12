@@ -580,7 +580,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         isOptional = currentProperty.optional === true;
     }
 
-    if (currentProperty && typeof currentProperty.type === 'string') { //todo: why is there a check if the type is a string?
+    if (currentProperty && typeof currentProperty.type === 'string') {
         return {
             valid: true,
             canMove,
