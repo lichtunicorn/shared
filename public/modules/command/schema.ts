@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const operations = [
-    { name: "copy", source: true, destination: false, value: true, emptyOptions: true },
+    { name: "copy", source: true, destination: true, value: false, emptyOptions: true },
     { name: "move", source: true, destination: false, value: true, emptyOptions: true },
     { name: "set", source: true, destination: false, value: true, emptyOptions: true },
     { name: "delete", source: true, destination: false, value: false, emptyOptions: true },
@@ -74,7 +74,7 @@ export const subReference = z.union([
 ]);
 
 export const sourceNumberCommand = z.object({
-    operation: z.union([z.literal("copy"), z.literal("move")]),
+    operation: z.literal("move"),
     source: directReference,
     subSources: z.array(subReference),
     value,
@@ -119,7 +119,8 @@ export const destinationCommand = z.object({
 });
 
 export const sourceDestinationCommand = z.object({
-    operation: z.literal("assign"),
+    // copy has destination (and not value), because you can for example copy from scene to cuelist
+    operation: z.union([z.literal("copy"), z.literal("assign")]),
     source: directReference,
     subSources: z.array(subReference),
     destination: directReference,
