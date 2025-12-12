@@ -57,174 +57,277 @@ export type property<name extends string> = {
 
 export type modelName = "show" | "section" | "sectionSceneState" | "sectionCuelistState" | "group" | "groupElement" | "scene" | "sceneElement" | "sceneElementContent" | "cuelist" | "cue" | "cueElement" | "cueElementContent" | "effect" | "speedGroup" | "override" | "variable" | "macro" | "macroCommand" | "collection" | "fixture" | "attribute" | "preset";
 export type public_show = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     name: string;
+    /** read only */
     sections: { reference: string; }[];
+    /** read only */
     scenes: { reference: string; }[];
+    /** read only */
     cuelists: { reference: string; }[];
+    /** read only */
     groups: { reference: string; }[];
+    /** read only */
     overrides: { reference: string; }[];
+    /** read only */
     macros: { reference: string; }[];
+    /** read only */
     effects: { reference: string; }[];
+    /** read only */
     collections: { reference: string; }[];
+    /** read only */
     variables: { reference: string; }[];
 };
 export type show = public_show;
 export type public_section = {
+    /** read only, unique, default cuid() */
     id: string;
-    index: number;
-    global: boolean;
+    /** read only, unique, null for global section */
+    index: null | number;
+    /** read only, this is where the actual section contents/state is stored */
     sceneStates: { reference: string; }[];
+    /** read only, this is where the actual section contents/state is stored */
     cuelistStates: { reference: string; }[];
 };
 export type section = public_section;
 export type public_sectionSceneState = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** read only */
     scene: { reference: string; };
+    /** settable */
     active: boolean;
+    /** read only, back reference */
     section: { reference: string; };
 };
 export type sectionSceneState = public_sectionSceneState;
 export type public_sectionCuelistState = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** read only */
     cue: { reference: string; };
+    /** settable */
     active: boolean;
+    /** read only, back reference */
     section: { reference: string; };
 };
 export type sectionCuelistState = public_sectionCuelistState;
 export type public_group = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** read only */
     elements: { reference: string; }[];
 };
 export type group = public_group;
 export type public_groupElement = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable */
     x: number;
+    /** settable */
     y: number;
+    /** read only, back reference */
     group: { reference: string; };
 };
 export type groupElement = public_groupElement;
 export type public_scene = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** settable */
     name: string;
+    /** read only */
     elements: { reference: string; }[];
 };
 export type scene = public_scene;
 export type public_sceneElement = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** read only */
     fixtures: null | { reference: string; }[];
+    /** read only */
     group: null | { reference: string; };
+    /** read only */
     contents: { reference: string; }[];
+    /** read only, back reference */
     scene: { reference: string; };
 };
 export type sceneElement = public_sceneElement;
 export type public_sceneElementContent = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** read only */
     preset: null | { reference: string; };
+    /** read only */
     attributes: null | { reference: string; }[];
+    /** read only, back reference */
     sceneElement: { reference: string; };
 };
 export type sceneElementContent = public_sceneElementContent;
 export type public_cuelist = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** settable */
     name: string;
+    /** read only */
     cues: { reference: string; }[];
 };
 export type cuelist = public_cuelist;
 export type public_cue = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** read only */
     elements: { reference: string; }[];
+    /** read only, back reference */
     cuelist: { reference: string; };
 };
 export type cue = public_cue;
 export type public_cueElement = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** read only */
     fixtures: null | { reference: string; }[];
+    /** read only */
     group: null | { reference: string; };
+    /** read only */
     contents: { reference: string; }[];
+    /** read only, back reference */
     cue: { reference: string; };
 };
 export type cueElement = public_cueElement;
 export type public_cueElementContent = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** read only */
     preset: null | { reference: string; };
+    /** read only */
     attributes: null | { reference: string; }[];
+    /** read only, back reference */
     cueElement: { reference: string; };
 };
 export type cueElementContent = public_cueElementContent;
 export type public_effect = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** settable, default sine */
     type: "sine" | "step" | "ramp" | "invRamp" | "linearBounce";
+    /** settable */
     speedGroup: null | { reference: string; };
+    /** settable, default 1 */
     multiplier: number;
 };
 export type effect = public_effect;
 export type public_speedGroup = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, default 60 */
     rate: number;
 };
 export type speedGroup = public_speedGroup;
 export type public_override = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** read only */
     fixture: { reference: string; };
+    /** read only */
     attributes: { reference: string; }[];
 };
 export type override = public_override;
 export type public_variable = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** settable, unique */
     name: string;
+    /** settable */
     value: string | number | boolean | null;
 };
 export type variable = public_variable;
 export type public_macro = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** read only */
     commands: { reference: string; }[];
 };
 export type macro = public_macro;
 export type public_macroCommand = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** read only, back reference */
     macro: { reference: string; };
+    /** read only, todo: better type */
+    contents: string;
 };
-export type macroCommand = public_macroCommand;
+export type macroCommand = Omit<public_macroCommand, "contents">;
 export type public_collection = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** settable */
     name: string;
+    /** read only */
     scenes: { reference: string; }[];
+    /** read only */
     cuelists: { reference: string; }[];
 };
 export type collection = public_collection;
 export type public_fixture = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     fixtureNumber: number;
+    /** settable, default 0 */
     universe: number;
+    /** settable, default 0 */
     address: number;
 };
 export type fixture = public_fixture;
 export type public_attribute = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** read only */
     kind: string;
+    /** settable, todo: better type */
     value: string;
 };
 export type attribute = public_attribute;
 export type public_preset = {
+    /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
     index: number;
+    /** settable */
     name: string;
+    /** read only */
     fixtures: null | { reference: string; }[];
+    /** read only */
     group: null | { reference: string; };
+    /** read only */
     attributes: { reference: string; }[];
 };
 export type preset = public_preset;
