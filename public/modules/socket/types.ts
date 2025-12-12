@@ -24,6 +24,7 @@ export interface InterServerEvents {
 }
 
 export interface SocketData {
+    clientId: string;
     showId: string | null;
     manySubscribedModels: modelName[];
     specificSubscribedModels: Partial<{
