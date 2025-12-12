@@ -41,7 +41,7 @@ export const macro: model = {
 };
 
 export const macroCommand: model = {
-    gettable: ['id', 'index', 'macro'],
+    gettable: ['id', 'index', 'macro', 'contents'],
     settable: ['index'],
     move: 'index',
     properties: [

@@ -1,7 +1,7 @@
 import type { model } from './types';
 
 export const scene: model = {
-    gettable: ['id', 'index', 'name', 'elements'],
+    gettable: ['id', 'index', 'name', 'masters', 'elements'],
     settable: ['index', 'name'],
     move: 'index',
     recursiveDeleteProperties: ['elements'],
