@@ -172,12 +172,12 @@ function checkValidity() {
 
 updateConstTypes();
 function updateConstTypes() {
-    const startString = '\n// <auto generated, do not edit>\n';
+    const startString = '\n// <auto generated, do not edit>';
     const endString = '\n// </auto generated, do not edit>';
 
     const typesContents = fs.readFileSync(path.join(__dirname, 'types.ts'), 'utf-8');
 
-    const beginIndex = typesContents.indexOf(startString);
+    const beginIndex = typesContents.indexOf(startString) + '\n'.length;
     const endIndex = typesContents.indexOf(endString);
 
     if (beginIndex === -1 || endIndex === -1) {

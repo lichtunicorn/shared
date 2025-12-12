@@ -52,7 +52,9 @@ export type property<name extends string> = {
         }
     );
 
+
 // <auto generated, do not edit>
+
 export type modelName = "show" | "section" | "sectionSceneState" | "sectionCuelistState" | "group" | "groupElement" | "scene" | "sceneElement" | "sceneElementContent" | "cuelist" | "cue" | "cueElement" | "cueElementContent" | "effect" | "speedGroup" | "override" | "variable" | "macro" | "macroCommand" | "collection" | "fixture" | "attribute" | "preset";
 export type public_show = {
     id: string;
