@@ -264,11 +264,14 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     }
 
     // value check
-    if (command.operation === 'move' || command.operation === 'set') {
+    if (command.operation === 'move' || command.operation === 'set' || command.operation === 'go') {
         let requiredValueType: literalPropertyType | referencePropertyType;
         let requiredOptional: boolean;
 
-        if (command.operation === 'move') {
+        if (command.operation === 'go') {
+            requiredValueType = 'number';
+            requiredOptional = true;
+        } else if (command.operation === 'move') {
             requiredValueType = 'number' as const;
             requiredOptional = false;
         } else if (command.operation === 'set') {
