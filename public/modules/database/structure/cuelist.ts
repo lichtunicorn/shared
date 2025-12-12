@@ -1,8 +1,8 @@
 import type { model } from './types';
 
 export const cuelist: model = {
-    gettable: ['id', 'index', 'name', 'masters', 'cues'],
-    settable: ['index', 'name', 'masters'],
+    gettable: ['id', 'index', 'name', 'masters', 'customButtons', 'cues'],
+    settable: ['index', 'name', 'masters', 'customButtons'],
     move: 'index',
     recursiveDeleteProperties: ['cues'],
     deletable: true,
@@ -31,6 +31,13 @@ export const cuelist: model = {
             type: 'array',
             valueType: {
                 reference: 'master'
+            }
+        },
+        {
+            name: 'customButtons',
+            type: 'array',
+            valueType: {
+                reference: 'customButton'
             }
         },
         {

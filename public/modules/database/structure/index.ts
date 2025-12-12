@@ -16,6 +16,7 @@ import { collection } from "./collection";
 import { fixture } from "./fixture";
 import { attribute, preset } from "./attribute";
 import { master } from "./master";
+import { customButton } from "./customButton";
 
 export const structure: structureType = {
     show,
@@ -41,7 +42,8 @@ export const structure: structureType = {
     fixture,
     attribute,
     preset,
-    master
+    master,
+    customButton
 };
 
 checkValidity();
