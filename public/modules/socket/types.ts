@@ -1,16 +1,18 @@
 import type { Server, Socket } from 'socket.io';
+import type { modelName, modelData } from '../database/structure/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
-    manyData: (data: any) => void;
+    manyData<T extends modelName>(model: T, data: modelData<T>[]): void;
+    specificData<T extends modelName>(model: T, data: modelData<T>): void;
 }
 
 export interface ClientToServerEvents {
     connect: () => void;
-    subscribeMany: (model: string) => void;
-    subscribeSpecific: (model: string, id: string) => void;
-    unsubscribeMany: (model: string) => void;
-    unsubscribeSpecific: (model: string, id: string) => void;
+    subscribeMany: (model: modelName) => void;
+    subscribeSpecific: (model: modelName, id: string) => void;
+    unsubscribeMany: (model: modelName) => void;
+    unsubscribeSpecific: (model: modelName, id: string) => void;
 }
 
 export interface InterServerEvents {
