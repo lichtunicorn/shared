@@ -236,7 +236,7 @@ function generatePublicModelTypeContents(modelStructure: structureType[string]):
 }
 
 function generateAutoTypes(structure: structureType): string {
-    let output = '';
+    let output = '\n\n';
 
     output += `export type modelName = ${Object.keys(structure).map(modelName => `"${modelName}"`).join(' | ')};\n`;
 
