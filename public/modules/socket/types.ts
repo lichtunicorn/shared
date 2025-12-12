@@ -3,6 +3,8 @@ import type { modelName, modelData } from '../database/structure/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
+    connectReceived: () => void;
+
     manyData<T extends modelName>(model: T, data: modelData<T>[]): void;
     specificData<T extends modelName>(model: T, id: string, data: modelData<T>): void;
 }
