@@ -3,7 +3,7 @@ import { z } from "zod";
 export const operations = [
     { name: "copy", source: true, destination: true, value: false, emptyOptions: true },
     { name: "move", source: true, destination: false, value: true, emptyOptions: true },
-    { name: "set", source: true, destination: false, value: true, emptyOptions: false },
+    { name: "set", source: true, destination: false, value: true, emptyOptions: true },
     { name: "delete", source: true, destination: false, value: false, emptyOptions: true },
     { name: "go", source: true, destination: false, value: true, emptyOptions: true },
     { name: "open", source: true, destination: false, value: false, emptyOptions: false },
@@ -86,9 +86,7 @@ export const setCommand = z.object({
     source: directReference,
     subSources: z.array(subReference),
     value,
-    options: z.object({
-        arrayOperation: z.union([z.null(), z.literal("addSingle"), z.literal("removeSingle"), z.literal("addMany"), z.literal("removeMany")]),
-    }),
+    options: z.object({}),
 });
 
 export const sourceCommand = z.object({
