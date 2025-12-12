@@ -198,7 +198,7 @@ function updateConstTypes() {
     }
 }
 
-function generatePublicModelTypeContents(modelName: string, modelStructure: structureType[string]): string {
+function generatePublicModelTypeContents(modelStructure: structureType[string]): string {
     let output = '';
 
     for (const property of modelStructure.properties) {
@@ -226,6 +226,9 @@ function generatePublicModelTypeContents(modelName: string, modelStructure: stru
             typescriptType = `null | ${typescriptType}`;
         }
 
+        if (property.comment) {
+            output += `    /** ${property.comment} */\n`;
+        }
         output += `    ${property.name}: ${typescriptType};\n`;
     }
 
@@ -238,7 +241,7 @@ function generateAutoTypes(structure: structureType): string {
     output += `export type modelName = ${Object.keys(structure).map(modelName => `"${modelName}"`).join(' | ')};\n`;
 
     for (const [modelName, modelStructure] of Object.entries(structure)) {
-        const publicModelOutput = generatePublicModelTypeContents(modelName, modelStructure);
+        const publicModelOutput = generatePublicModelTypeContents(modelStructure);
 
         output += `export type public_${modelName} = {\n${publicModelOutput}};\n`;
 

@@ -22,6 +22,7 @@ export type referencePropertyType = {
 
 export type property<name extends string> = {
     name: name;
+    comment?: string;
     optional?: boolean;
 } &
     (
