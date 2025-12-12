@@ -89,6 +89,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     }
 
     let sourceType: literalPropertyType | referencePropertyType | "oneOf" | null = null;
+    let sourceOptional: boolean | null = null;
 
     // source check
     if (command.operation === 'move' || command.operation === 'copy' || command.operation === 'set' || command.operation === 'open' || command.operation === 'delete' || command.operation === 'assign' || command.operation === 'go' || command.operation === 'get') {
@@ -133,6 +134,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
         }
 
         sourceType = foundType;
+        sourceOptional = result.isModel ? false : result.isOptional;
 
         if (['move', 'copy', 'open', 'delete', 'assign', 'go'].includes(command.operation) && !result.isModel) {
             return {
@@ -264,22 +266,27 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     // value check
     if (command.operation === 'move' || command.operation === 'copy' || command.operation === 'set') {
         let requiredValueType: literalPropertyType | referencePropertyType;
+        let requiredOptional: boolean;
 
-        if (command.operation === 'move' || command.operation === 'copy')
+        if (command.operation === 'move' || command.operation === 'copy') {
             requiredValueType = 'number' as const;
-        else if (command.operation === 'set') {
+            requiredOptional = false;
+        } else if (command.operation === 'set') {
 
             // impossible to reach, but typescript doesn't believe that
             if (sourceType === null) throw new Error('sourceType should not be null');
+            if (sourceOptional === null) throw new Error('sourceOptional should not be null');
 
             if (sourceType === 'oneOf')
                 requiredValueType = 'string';
             else
                 requiredValueType = sourceType;
+
+            requiredOptional = sourceOptional;
         } else
             throw new Error(`Unknown operation ${command.operation}`);
 
-        const result = validateValueDataStructure(command.value, requiredValueType);
+        const result = validateValueDataStructure(command.value, requiredValueType, requiredOptional);
 
         if (!result.valid) {
             return {
@@ -328,6 +335,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     /** check if something else can assign to this */
     isAssignable: boolean;
     isSettable: boolean;
+    isOptional: boolean;
     isModel: false;
     type: literalPropertyType | "array" | "oneOf";
 } | {
@@ -512,7 +520,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             // @ts-ignore checked above it can't be a reference type
             const searchPropertyType: Exclude<typeof searchProperty.type, referencePropertyType> = searchProperty.type;
 
-            const result = validateValueDataStructure(subReference.value, searchPropertyType);
+            const result = validateValueDataStructure(subReference.value, searchPropertyType, false);
 
             if (!result.valid) {
                 return {
@@ -566,7 +574,13 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         isSettable = currentModel.settable.includes(currentProperty.name);
     }
 
-    if (currentProperty && typeof currentProperty.type === 'string') {
+    let isOptional = false;
+
+    if (currentProperty) {
+        isOptional = currentProperty.optional === true;
+    }
+
+    if (currentProperty && typeof currentProperty.type === 'string') { //todo: why is there a check if the type is a string?
         return {
             valid: true,
             canMove,
@@ -575,6 +589,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             canAssign,
             isAssignable,
             isSettable,
+            isOptional,
             isModel: false,
             type: currentProperty.type
         }
@@ -592,7 +607,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     }
 }
 
-export function validateValueDataStructure(value: z.infer<typeof valueSchema>, requiredType: literalPropertyType): {
+export function validateValueDataStructure(value: z.infer<typeof valueSchema>, requiredType: literalPropertyType, optional: boolean): {
     valid: true;
 } | {
     valid: false;
@@ -696,7 +711,7 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
             }
         }
 
-        const value1result = validateValueDataStructure(value.value1, 'number');
+        const value1result = validateValueDataStructure(value.value1, 'number', false);
 
         if (!value1result.valid) {
             return {
@@ -708,7 +723,7 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
             }
         }
 
-        const value2result = validateValueDataStructure(value.value2, 'number');
+        const value2result = validateValueDataStructure(value.value2, 'number', false);
 
         if (!value2result.valid) {
             return {
@@ -738,7 +753,7 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
             }
         }
 
-        const valueResult = validateValueDataStructure(value.value, 'number');
+        const valueResult = validateValueDataStructure(value.value, 'number', false);
 
         if (!valueResult.valid) {
             return {
