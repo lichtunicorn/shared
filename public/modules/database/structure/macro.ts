@@ -1,8 +1,8 @@
 import type { model } from './types';
 
 export const macro: model = {
-    gettable: ['id', 'index', 'commands'],
-    settable: ['index'],
+    gettable: ['id', 'index', 'cue', 'commands'],
+    settable: ['index', 'cue'],
     move: 'index',
     recursiveDeleteProperties: ['commands'],
     deletable: true,
@@ -23,11 +23,11 @@ export const macro: model = {
             unique: true
         },
         {
-            name: 'cue',
-            type: {
+            name: 'cues',
+            type: 'array',
+            valueType: {
                 reference: 'cue'
             },
-            backReference: true,
             optional: true
         },
         {

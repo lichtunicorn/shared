@@ -37,8 +37,8 @@ export const cuelist: model = {
 };
 
 export const cue: model = {
-    gettable: ['id', 'index', 'elements', 'cuelist'],
-    settable: ['index'],
+    gettable: ['id', 'index', 'macros', 'elements', 'cuelist'],
+    settable: ['index', 'macros'],
     recursiveDeleteProperties: ['elements'],
     properties: [
         {
@@ -55,11 +55,12 @@ export const cue: model = {
             unique: true
         },
         {
-            name: 'macros',
-            type: 'array',
-            valueType: {
+            name: 'macro',
+            type: {
                 reference: 'macro'
             },
+            backReference: true,
+            optional: true,
         },
         {
             name: "elements",
