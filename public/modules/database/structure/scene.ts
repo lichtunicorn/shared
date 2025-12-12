@@ -27,6 +27,14 @@ export const scene: model = {
             type: "string"
         },
         {
+            name: 'masters',
+            type: 'array',
+            valueType: {
+                reference: 'master'
+            },
+            optional: true
+        },
+        {
             name: "elements",
             type: "array",
             valueType: {

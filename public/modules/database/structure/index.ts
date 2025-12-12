@@ -15,6 +15,7 @@ import { macro, macroCommand } from "./macro";
 import { collection } from "./collection";
 import { fixture } from "./fixture";
 import { attribute, preset } from "./attribute";
+import { master } from "./master";
 
 export const structure: structureType = {
     show,
@@ -39,7 +40,8 @@ export const structure: structureType = {
     collection,
     fixture,
     attribute,
-    preset
+    preset,
+    master
 };
 
 checkValidity();
