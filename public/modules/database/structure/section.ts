@@ -1,7 +1,7 @@
 import type { model } from './types';
 
 export const section: model = {
-    gettable: ['id', 'index', 'global', 'sceneStates', 'cuelistStates'],
+    gettable: ['id', 'index', 'sceneStates', 'cuelistStates'],
     settable: [],
     recursiveDeleteProperties: ['sceneStates', 'cuelistStates'],
     goable: true,
