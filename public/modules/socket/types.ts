@@ -1,12 +1,12 @@
 import type { Server, Socket } from 'socket.io';
-import type { modelName, modelData } from '../database/structure/types';
+import type { modelName, publicModelData } from '../database/structure/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
     connectReceived: () => void;
 
-    manyData<T extends modelName>(model: T, data: modelData<T>[]): void;
-    specificData<T extends modelName>(model: T, id: string, data: modelData<T>): void;
+    manyData<T extends modelName>(model: T, data: publicModelData<T>[]): void;
+    specificData<T extends modelName>(model: T, id: string, data: publicModelData<T>): void;
 }
 
 export interface ClientToServerEvents {
