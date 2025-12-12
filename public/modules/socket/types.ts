@@ -22,7 +22,8 @@ export interface InterServerEvents {
 }
 
 export interface SocketData {
-    // 
+    manySubscribedModels: modelName[];
+    specificSubscribedModels: [modelName, string][];
 }
 
 export type ioType = Server<ClientToServerEvents, ServerToClientEvents, InterServerEvents, SocketData>;
