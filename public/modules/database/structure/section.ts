@@ -17,11 +17,8 @@ export const section: model = {
         {
             name: "index",
             type: "number",
+            optional: true, // null if global
             unique: true
-        },
-        {
-            name: "global",
-            type: "boolean"
         },
         {
             name: "sceneStates",
