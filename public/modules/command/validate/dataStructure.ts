@@ -214,7 +214,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     }
 
     // destination check
-    if (command.operation === 'empty' || command.operation === 'record' || command.operation === 'assign') {
+    if (command.operation === 'empty' || command.operation === 'record' || command.operation === 'assign' || command.operation === 'copy') {
         const result = validateReferenceDataStructure(command.destination, command.subDestinations);
 
         if (!result.valid) {
@@ -264,11 +264,11 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     }
 
     // value check
-    if (command.operation === 'move' || command.operation === 'copy' || command.operation === 'set') {
+    if (command.operation === 'move' || command.operation === 'set') {
         let requiredValueType: literalPropertyType | referencePropertyType;
         let requiredOptional: boolean;
 
-        if (command.operation === 'move' || command.operation === 'copy') {
+        if (command.operation === 'move') {
             requiredValueType = 'number' as const;
             requiredOptional = false;
         } else if (command.operation === 'set') {
@@ -284,7 +284,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
 
             requiredOptional = sourceOptional;
         } else
-            throw new Error(`Unknown operation ${command.operation}`);
+            throw new Error(`Unknown operation ${(command as any).operation}`);
 
         const result = validateValueDataStructure(command.value, requiredValueType, requiredOptional);
 
