@@ -261,6 +261,15 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
                 isDirectReference: null
             };
         }
+
+        if (command.operation === 'empty' && !result.canCreate) {
+            return {
+                valid: false,
+                part: 'destination',
+                error: 'Command operation is empty, but this destination can\'t be created',
+                isDirectReference: null
+            };
+        }
     }
 
     // value check
@@ -320,6 +329,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     /** checks if there is a move, and the move is settable */
     canMove: boolean;
     canDelete: boolean;
+    canCreate: boolean;
     canGo: boolean;
     /** check if this is a thing that can be assigned to something else */
     canAssign: boolean;
@@ -332,6 +342,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     /** checks if there is a move, and the move is settable */
     canMove: boolean;
     canDelete: boolean;
+    canCreate: boolean;
     canGo: boolean;
     /** check if this is a thing that can be assigned to something else */
     canAssign: boolean;
@@ -559,6 +570,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
 
     let canMove = false;
     let canDelete = false;
+    let canCreate = false;
     let canGo = false;
     let canAssign = false;
     let isAssignable = false;
@@ -566,6 +578,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     if (nextModel) {
         canMove = nextModel.move !== undefined && nextModel.settable.includes(nextModel.move);
         canDelete = nextModel.deletable === true;
+        canCreate = nextModel.creatable === true;
         canGo = nextModel.goable === true;
         canAssign = nextModel.canAssign === true;
         isAssignable = nextModel.isAssignable === true;
@@ -588,6 +601,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             valid: true,
             canMove,
             canDelete,
+            canCreate,
             canGo,
             canAssign,
             isAssignable,
@@ -601,6 +615,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             valid: true,
             canMove,
             canDelete,
+            canCreate,
             canGo,
             canAssign,
             isAssignable,
