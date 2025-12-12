@@ -236,6 +236,14 @@ function generatePublicModelTypeContents(modelStructure: structureType[string]):
             }
         }
 
+        if ('unique' in property && property.unique) {
+            if (comment) {
+                comment = `unique, ${comment}`;
+            } else {
+                comment = 'unique';
+            }
+        }
+
         if (modelStructure.settable.includes(property.name)) {
             if (comment) {
                 comment = `settable, ${comment}`;
