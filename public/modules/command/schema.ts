@@ -5,7 +5,7 @@ export const operations = [
     { name: "move", source: true, destination: false, value: true, emptyOptions: true },
     { name: "set", source: true, destination: false, value: true, emptyOptions: true },
     { name: "delete", source: true, destination: false, value: false, emptyOptions: true },
-    { name: "go", source: true, destination: false, value: false, emptyOptions: true },
+    { name: "go", source: true, destination: false, value: true, emptyOptions: true },
     { name: "open", source: true, destination: false, value: false, emptyOptions: false },
     { name: "empty", source: false, destination: true, value: false, emptyOptions: true },
     { name: "record", source: false, destination: true, value: false, emptyOptions: true },
@@ -73,8 +73,8 @@ export const subReference = z.union([
     }),
 ]);
 
-export const sourceNumberCommand = z.object({
-    operation: z.literal("move"),
+export const sourceValueCommand = z.object({
+    operation: z.union([z.literal("move"), z.literal("go")]),
     source: directReference,
     subSources: z.array(subReference),
     value,
@@ -90,7 +90,7 @@ export const setCommand = z.object({
 });
 
 export const sourceCommand = z.object({
-    operation: z.union([z.literal("delete"), z.literal("go")]),
+    operation: z.literal("delete"),
     source: directReference,
     subSources: z.array(subReference),
     options: z.object({}),
@@ -136,7 +136,7 @@ export const getCommand = z.object({
 });
 
 export const noGetCommand = z.union([
-    sourceNumberCommand,
+    sourceValueCommand,
     setCommand,
     sourceCommand,
     openCommand,
