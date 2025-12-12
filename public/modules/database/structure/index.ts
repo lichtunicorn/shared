@@ -199,6 +199,8 @@ function generateConstTypes(structure: structureType): string {
         let modelOutput = `export type ${modelName} = {\n`;
 
         for (const property of modelStructure.properties) {
+            if (!modelStructure.gettable.includes(property.name)) continue;
+
             let typescriptType: string;
 
             if (property.type === 'array') {

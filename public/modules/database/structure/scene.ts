@@ -37,7 +37,7 @@ export const scene: model = {
 };
 
 export const sceneElement: model = {
-    gettable: ['id', 'index', 'fixtures', 'group', 'contents'],
+    gettable: ['id', 'index', 'fixtures', 'group', 'contents', 'scene'],
     settable: ['index'],
     recursiveDeleteProperties: ['contents'],
     properties: [
@@ -87,7 +87,7 @@ export const sceneElement: model = {
 };
 
 export const sceneElementContent: model = {
-    gettable: ['id', 'index', 'preset', 'attributes'],
+    gettable: ['id', 'index', 'preset', 'attributes', 'sceneElement'],
     settable: ['index'],
     recursiveDeleteProperties: ['attributes'],
     properties: [

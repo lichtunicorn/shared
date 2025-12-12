@@ -42,7 +42,7 @@ export const section: model = {
 };
 
 export const sectionSceneState: model = {
-    gettable: ['id', 'scene', 'active'],
+    gettable: ['id', 'scene', 'active', 'section'],
     settable: ['active'],
     properties: [
         {
@@ -74,7 +74,7 @@ export const sectionSceneState: model = {
 };
 
 export const sectionCuelistState: model = {
-    gettable: ['id', 'cue', 'active'],
+    gettable: ['id', 'cue', 'active', 'section'],
     settable: ['active'],
     properties: [
         {

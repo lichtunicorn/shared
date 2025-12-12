@@ -33,7 +33,7 @@ export const macro: model = {
 };
 
 export const macroCommand: model = {
-    gettable: ['id', 'index'],
+    gettable: ['id', 'index', 'macro'],
     settable: ['index'],
     move: 'index',
     properties: [

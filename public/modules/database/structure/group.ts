@@ -1,7 +1,7 @@
 import type { model } from './types';
 
 export const group: model = {
-    gettable: ['id', 'index'],
+    gettable: ['id', 'index', 'elements'],
     settable: ['index'],
     move: 'index',
     recursiveDeleteProperties: ['elements'],
@@ -31,7 +31,7 @@ export const group: model = {
 };
 
 export const groupElement: model = {
-    gettable: ['id', 'x', 'y'],
+    gettable: ['id', 'x', 'y', 'group'],
     settable: ['x', 'y'],
     properties: [
         {

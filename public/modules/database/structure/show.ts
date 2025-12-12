@@ -1,7 +1,17 @@
 import type { model } from './types';
 
+const manyModelNames = ["section",
+    "scene",
+    "cuelist",
+    "group",
+    "override",
+    "macro",
+    "effect",
+    "collection",
+    "variable"];
+
 export const show: model = {
-    gettable: ['id', 'name'],
+    gettable: ['id', 'name', ...manyModelNames.map(name => name + "s")],
     settable: ['name'],
     properties: [
         {
@@ -17,17 +27,7 @@ export const show: model = {
             type: "string",
             unique: true
         },
-        ...([
-            "section",
-            "scene",
-            "cuelist",
-            "group",
-            "override",
-            "macro",
-            "effect",
-            "collection",
-            "variable"
-        ].map(name => ({
+        ...(manyModelNames.map(name => ({
             name: name + "s",
             type: "array" as const,
             valueType: {

@@ -37,7 +37,7 @@ export const cuelist: model = {
 };
 
 export const cue: model = {
-    gettable: ['id', 'index'],
+    gettable: ['id', 'index', 'elements', 'cuelist'],
     settable: ['index'],
     recursiveDeleteProperties: ['elements'],
     properties: [
@@ -72,7 +72,7 @@ export const cue: model = {
 };
 
 export const cueElement: model = {
-    gettable: ['id', 'index', 'fixtures', 'group', 'contents'],
+    gettable: ['id', 'index', 'fixtures', 'group', 'contents', 'cue'],
     settable: ['index'],
     recursiveDeleteProperties: ['contents'],
     properties: [
@@ -122,7 +122,7 @@ export const cueElement: model = {
 };
 
 export const cueElementContent: model = {
-    gettable: ['id', 'index', 'preset', 'attributes'],
+    gettable: ['id', 'index', 'preset', 'attributes', 'cueElement'],
     settable: ['index'],
     recursiveDeleteProperties: ['attributes'],
     properties: [
