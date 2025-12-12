@@ -2,7 +2,7 @@ import type { Server, Socket } from 'socket.io';
 
 export interface ServerToClientEvents {
     connect: () => void;
-    manyData: (data: unknown) => void;
+    manyData: (data: any) => void;
 }
 
 export interface ClientToServerEvents {

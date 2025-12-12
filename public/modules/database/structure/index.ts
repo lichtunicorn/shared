@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 import type { structure as structureType } from "./types";
 
 import { show } from "./show";
@@ -12,7 +15,6 @@ import { macro, macroCommand } from "./macro";
 import { collection } from "./collection";
 import { fixture } from "./fixture";
 import { attribute, preset } from "./attribute";
-import { property } from "zod";
 
 export const structure: structureType = {
     show,
@@ -158,4 +160,81 @@ function checkValidity() {
             }
         }
     }
+}
+
+updateConstTypes();
+function updateConstTypes() {
+    const startString = '\n// <auto generated, do not edit>\n';
+    const endString = '\n// </auto generated, do not edit>';
+
+    const typesContents = fs.readFileSync(path.join(__dirname, 'types.ts'), 'utf-8');
+
+    const beginIndex = typesContents.indexOf(startString);
+    const endIndex = typesContents.indexOf(endString);
+
+    if (beginIndex === -1 || endIndex === -1) {
+        throw new Error('Could not find generated types in types.ts');
+    }
+
+    const fileStart = typesContents.substring(0, beginIndex);
+    const fileEnd = typesContents.substring(endIndex + endString.length);
+
+    const constTypes = generateConstTypes(structure);
+
+    const newTypesContents = `${fileStart}${startString}${constTypes}${endString}${fileEnd}`;
+
+    if (newTypesContents !== typesContents) {
+        console.warn('Database structure types have changed');
+
+        fs.writeFileSync(path.join(__dirname, 'types.ts'), newTypesContents);
+    }
+}
+
+function generateConstTypes(structure: structureType): string {
+    let output = '';
+
+    output += `export type modelName = ${Object.keys(structure).map(modelName => `"${modelName}"`).join(' | ')};\n`;
+
+    for (const [modelName, modelStructure] of Object.entries(structure)) {
+        let modelOutput = `export type ${modelName} = {\n`;
+
+        for (const property of modelStructure.properties) {
+            let typescriptType: string;
+
+            if (property.type === 'array') {
+                typescriptType = `{ reference: string; }[]`;
+            } else if (property.type === 'boolean') {
+                typescriptType = 'boolean';
+            } else if (property.type === 'string') {
+                typescriptType = 'string';
+            } else if (property.type === 'number') {
+                typescriptType = 'number';
+            } else if (property.type === 'oneOf') {
+                typescriptType = property.options.map(option => `"${option}"`).join(' | ');
+            } else if (property.type === 'stringOrNumberOrBooleanOrNull') {
+                typescriptType = 'string | number | boolean | null';
+            } else if (typeof property.type !== 'string' && property.type.reference) {
+                typescriptType = `{ reference: string; }`;
+            } else {
+                throw new Error(`Unknown property type ${property.type}`);
+            }
+
+            if (property.optional && property.type !== 'stringOrNumberOrBooleanOrNull') {
+                typescriptType = `null | ${typescriptType}`;
+            }
+
+            modelOutput += `    ${property.name}: ${typescriptType};\n`;
+        }
+
+        modelOutput += '};\n';
+
+        output += modelOutput;
+    }
+
+    output += `\nexport type modelData<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
+        `currentModelName extends "${modelName}" ? ${modelName}`
+    ).join(' : ')
+        } : never;\n`;
+
+    return output;
 }
