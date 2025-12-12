@@ -244,5 +244,10 @@ function generateAutoTypes(structure: structureType): string {
     ).join(' : ')
         } : never;\n`;
 
+    output += `export type publicModelData<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
+        `currentModelName extends "${modelName}" ? public_${modelName}`
+    ).join(' : ')
+        } : never;\n`;
+
     return output;
 }
