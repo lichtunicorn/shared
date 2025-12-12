@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const collection: model = {
+    creatable: true,
     gettable: ['id', 'index', 'name', 'scenes', 'cuelists'],
     settable: ['index', 'name'],
     move: 'index',

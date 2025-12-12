@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const effect: model = {
+    creatable: true,
     gettable: ['id', 'index', 'type', 'speedGroup', 'multiplier'],
     settable: ['index', 'type', 'speedGroup', 'multiplier'],
     move: 'index',

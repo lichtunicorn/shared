@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const macro: model = {
+    creatable: true,
     gettable: ['id', 'index', 'cues', 'commands', 'customButtons'],
     settable: ['index', 'cues', 'customButtons'],
     move: 'index',
@@ -48,6 +49,7 @@ export const macro: model = {
 };
 
 export const macroCommand: model = {
+    creatable: true,
     gettable: ['id', 'index', 'macro', 'contents'],
     settable: ['index'],
     move: 'index',

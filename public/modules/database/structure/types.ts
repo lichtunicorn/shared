@@ -1,6 +1,7 @@
 export type structure = Record<string, model>;
 
 export type model = {
+    creatable: boolean;
     deletable?: boolean;
     goable?: boolean;
     /** if this is a thing that can be assigned to something else */

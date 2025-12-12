@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const override: model = {
+    creatable: true,
     gettable: ['id', 'fixture', 'attributes'],
     settable: [],
     deletable: true,

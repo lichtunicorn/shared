@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const attribute: model = {
+    creatable: true,
     gettable: ['id', 'kind', 'value'],
     settable: ['value'],
     properties: [
@@ -25,6 +26,7 @@ export const attribute: model = {
 };
 
 export const preset: model = {
+    creatable: true,
     gettable: ['id', 'index', 'name', 'fixtures', 'group', 'attributes'],
     settable: ['index', 'name'],
     move: 'index',

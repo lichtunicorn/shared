@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const scene: model = {
+    creatable: true,
     gettable: ['id', 'index', 'name', 'masters', 'customButtons', 'elements'],
     settable: ['index', 'name', 'masters', 'customButtons'],
     move: 'index',
@@ -51,6 +52,7 @@ export const scene: model = {
 };
 
 export const sceneElement: model = {
+    creatable: true,
     gettable: ['id', 'index', 'fixtures', 'group', 'contents', 'scene'],
     settable: ['index'],
     recursiveDeleteProperties: ['contents'],
@@ -101,6 +103,7 @@ export const sceneElement: model = {
 };
 
 export const sceneElementContent: model = {
+    creatable: true,
     gettable: ['id', 'index', 'preset', 'attributes', 'sceneElement'],
     settable: ['index'],
     recursiveDeleteProperties: ['attributes'],

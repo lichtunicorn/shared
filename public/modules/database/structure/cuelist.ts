@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const cuelist: model = {
+    creatable: true,
     gettable: ['id', 'index', 'name', 'masters', 'customButtons', 'cues'],
     settable: ['index', 'name', 'masters', 'customButtons'],
     move: 'index',
@@ -51,6 +52,7 @@ export const cuelist: model = {
 };
 
 export const cue: model = {
+    creatable: true,
     gettable: ['id', 'index', 'macro', 'elements', 'cuelist'],
     settable: ['index', 'macro'],
     recursiveDeleteProperties: ['elements'],
@@ -94,6 +96,7 @@ export const cue: model = {
 };
 
 export const cueElement: model = {
+    creatable: true,
     gettable: ['id', 'index', 'fixtures', 'group', 'contents', 'cue'],
     settable: ['index'],
     recursiveDeleteProperties: ['contents'],
@@ -144,6 +147,7 @@ export const cueElement: model = {
 };
 
 export const cueElementContent: model = {
+    creatable: true,
     gettable: ['id', 'index', 'preset', 'attributes', 'cueElement'],
     settable: ['index'],
     recursiveDeleteProperties: ['attributes'],

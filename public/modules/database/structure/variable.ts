@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const variable: model = {
+    creatable: true,
     gettable: ['id', 'index', 'name', 'value'],
     settable: ['index', 'name', 'value'],
     deletable: true,

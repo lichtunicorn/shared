@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const section: model = {
+    creatable: false,
     gettable: ['id', 'index', 'sceneStates', 'cuelistStates'],
     settable: [],
     recursiveDeleteProperties: ['sceneStates', 'cuelistStates'],
@@ -41,6 +42,7 @@ export const section: model = {
 };
 
 export const sectionSceneState: model = {
+    creatable: true,
     gettable: ['id', 'scene', 'active', 'section'],
     settable: ['active'],
     properties: [
@@ -73,6 +75,7 @@ export const sectionSceneState: model = {
 };
 
 export const sectionCuelistState: model = {
+    creatable: true,
     gettable: ['id', 'cue', 'active', 'section'],
     settable: ['active'],
     properties: [

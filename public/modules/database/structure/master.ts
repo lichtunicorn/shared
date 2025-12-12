@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const master: model = {
+    creatable: false,
     gettable: ['id', 'index', 'scene', 'cuelist'],
     settable: ['scene', 'cuelist'],
     isAssignable: true,

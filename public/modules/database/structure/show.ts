@@ -11,6 +11,7 @@ const manyModelNames = ["section",
     "variable"];
 
 export const show: model = {
+    creatable: false,
     gettable: ['id', 'name', ...manyModelNames.map(name => name + "s")],
     settable: ['name'],
     properties: [

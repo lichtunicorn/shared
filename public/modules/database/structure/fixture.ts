@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const fixture: model = {
+    creatable: true,
     gettable: ['id', 'fixtureNumber', 'universe', 'address'],
     settable: ['fixtureNumber', 'universe', 'address'],
     deletable: true,

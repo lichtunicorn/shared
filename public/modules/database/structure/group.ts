@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const group: model = {
+    creatable: true,
     gettable: ['id', 'index', 'elements'],
     settable: ['index'],
     move: 'index',
@@ -31,6 +32,7 @@ export const group: model = {
 };
 
 export const groupElement: model = {
+    creatable: true,
     gettable: ['id', 'x', 'y', 'group'],
     settable: ['x', 'y'],
     properties: [
