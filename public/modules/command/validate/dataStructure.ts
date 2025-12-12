@@ -402,7 +402,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         }
     }
 
-    let currentProperty: databaseProperty | undefined;
+    let currentProperty: databaseProperty<string> | undefined;
 
     for (let iString in subReferences) {
         const i = parseInt(iString);
@@ -423,7 +423,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
                 }
             }
 
-            const property = currentModel.properties.find((searchProperty: databaseProperty) => searchProperty.name === subReference.key);
+            const property = currentModel.properties.find((searchProperty: databaseProperty<string>) => searchProperty.name === subReference.key);
 
             if (!property) {
                 return {
@@ -459,7 +459,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
 
             if (!foundModel) throw new Error(`Database reference to ${currentProperty.valueType.reference} not found`);
 
-            const searchProperty = foundModel.properties.find((searchProperty: databaseProperty) => searchProperty.name === subReference.key);
+            const searchProperty = foundModel.properties.find((searchProperty: databaseProperty<string>) => searchProperty.name === subReference.key);
             if (!searchProperty) {
                 return {
                     valid: false,
