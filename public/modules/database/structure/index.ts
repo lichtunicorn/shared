@@ -177,7 +177,7 @@ function updateConstTypes() {
 
     const typesContents = fs.readFileSync(path.join(__dirname, 'types.ts'), 'utf-8');
 
-    const beginIndex = typesContents.indexOf(startString) + '\n'.length;
+    const beginIndex = typesContents.indexOf(startString);
     const endIndex = typesContents.indexOf(endString);
 
     if (beginIndex === -1 || endIndex === -1) {
@@ -226,8 +226,32 @@ function generatePublicModelTypeContents(modelStructure: structureType[string]):
             typescriptType = `null | ${typescriptType}`;
         }
 
-        if (property.comment) {
-            output += `    /** ${property.comment} */\n`;
+        let comment = property.comment;
+
+        if ('backReference' in property && property.backReference) {
+            if (comment) {
+                comment = `back reference, ${comment}`;
+            } else {
+                comment = 'back reference';
+            }
+        }
+
+        if (modelStructure.settable.includes(property.name)) {
+            if (comment) {
+                comment = `settable, ${comment}`;
+            } else {
+                comment = 'settable';
+            }
+        } else {
+            if (comment) {
+                comment = `read only, ${comment}`;
+            } else {
+                comment = 'read only';
+            }
+        }
+
+        if (comment) {
+            output += `    /** ${comment} */\n`;
         }
         output += `    ${property.name}: ${typescriptType};\n`;
     }
