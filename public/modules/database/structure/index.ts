@@ -179,58 +179,64 @@ function updateConstTypes() {
     const fileStart = typesContents.substring(0, beginIndex);
     const fileEnd = typesContents.substring(endIndex + endString.length);
 
-    const constTypes = generateConstTypes(structure);
+    const constTypes = generateAutoTypes(structure);
 
     const newTypesContents = `${fileStart}${startString}${constTypes}${endString}${fileEnd}`;
 
     if (newTypesContents !== typesContents) {
-        console.warn('Database structure types have changed inside shared. Run public/modules/database/structure/index.ts inside shared and make a new commit');
+        console.warn('Database structure types have changed inside shared. Run "bun run update" inside shared and make a new commit');
 
         fs.writeFileSync(path.join(__dirname, 'types.ts'), newTypesContents);
     }
 }
 
-function generateConstTypes(structure: structureType): string {
+function generateModelTypeContents(modelName: string, modelStructure: structureType[string], publicOnly: boolean): string {
+    let output = '';
+
+    for (const property of modelStructure.properties) {
+        if (publicOnly && !modelStructure.gettable.includes(property.name)) continue;
+
+        let typescriptType: string;
+
+        if (property.type === 'array') {
+            typescriptType = `{ reference: string; }[]`;
+        } else if (property.type === 'boolean') {
+            typescriptType = 'boolean';
+        } else if (property.type === 'string') {
+            typescriptType = 'string';
+        } else if (property.type === 'number') {
+            typescriptType = 'number';
+        } else if (property.type === 'oneOf') {
+            typescriptType = property.options.map(option => `"${option}"`).join(' | ');
+        } else if (property.type === 'stringOrNumberOrBooleanOrNull') {
+            typescriptType = 'string | number | boolean | null';
+        } else if (typeof property.type !== 'string' && property.type.reference) {
+            typescriptType = `{ reference: string; }`;
+        } else {
+            throw new Error(`Unknown property type ${property.type}`);
+        }
+
+        if (property.optional && property.type !== 'stringOrNumberOrBooleanOrNull') {
+            typescriptType = `null | ${typescriptType}`;
+        }
+
+        output += `    ${property.name}: ${typescriptType};\n`;
+    }
+
+    return output;
+}
+
+function generateAutoTypes(structure: structureType): string {
     let output = '';
 
     output += `export type modelName = ${Object.keys(structure).map(modelName => `"${modelName}"`).join(' | ')};\n`;
 
     for (const [modelName, modelStructure] of Object.entries(structure)) {
-        let modelOutput = `export type ${modelName} = {\n`;
+        const publicModelOutput = generateModelTypeContents(modelName, modelStructure, true);
+        const privateModelOutput = generateModelTypeContents(modelName, modelStructure, false);
 
-        for (const property of modelStructure.properties) {
-            if (!modelStructure.gettable.includes(property.name)) continue;
-
-            let typescriptType: string;
-
-            if (property.type === 'array') {
-                typescriptType = `{ reference: string; }[]`;
-            } else if (property.type === 'boolean') {
-                typescriptType = 'boolean';
-            } else if (property.type === 'string') {
-                typescriptType = 'string';
-            } else if (property.type === 'number') {
-                typescriptType = 'number';
-            } else if (property.type === 'oneOf') {
-                typescriptType = property.options.map(option => `"${option}"`).join(' | ');
-            } else if (property.type === 'stringOrNumberOrBooleanOrNull') {
-                typescriptType = 'string | number | boolean | null';
-            } else if (typeof property.type !== 'string' && property.type.reference) {
-                typescriptType = `{ reference: string; }`;
-            } else {
-                throw new Error(`Unknown property type ${property.type}`);
-            }
-
-            if (property.optional && property.type !== 'stringOrNumberOrBooleanOrNull') {
-                typescriptType = `null | ${typescriptType}`;
-            }
-
-            modelOutput += `    ${property.name}: ${typescriptType};\n`;
-        }
-
-        modelOutput += '};\n';
-
-        output += modelOutput;
+        output += `export type ${modelName} = {\n${privateModelOutput}};\n`;
+        output += `export type public_${modelName} = {\n${publicModelOutput}};\n`;
     }
 
     output += `\nexport type modelData<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>

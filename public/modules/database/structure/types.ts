@@ -66,7 +66,27 @@ export type show = {
     collections: { reference: string; }[];
     variables: { reference: string; }[];
 };
+export type public_show = {
+    id: string;
+    name: string;
+    sections: { reference: string; }[];
+    scenes: { reference: string; }[];
+    cuelists: { reference: string; }[];
+    groups: { reference: string; }[];
+    overrides: { reference: string; }[];
+    macros: { reference: string; }[];
+    effects: { reference: string; }[];
+    collections: { reference: string; }[];
+    variables: { reference: string; }[];
+};
 export type section = {
+    id: string;
+    index: number;
+    global: boolean;
+    sceneStates: { reference: string; }[];
+    cuelistStates: { reference: string; }[];
+};
+export type public_section = {
     id: string;
     index: number;
     global: boolean;
@@ -79,7 +99,19 @@ export type sectionSceneState = {
     active: boolean;
     section: { reference: string; };
 };
+export type public_sectionSceneState = {
+    id: string;
+    scene: { reference: string; };
+    active: boolean;
+    section: { reference: string; };
+};
 export type sectionCuelistState = {
+    id: string;
+    cue: { reference: string; };
+    active: boolean;
+    section: { reference: string; };
+};
+export type public_sectionCuelistState = {
     id: string;
     cue: { reference: string; };
     active: boolean;
@@ -90,7 +122,18 @@ export type group = {
     index: number;
     elements: { reference: string; }[];
 };
+export type public_group = {
+    id: string;
+    index: number;
+    elements: { reference: string; }[];
+};
 export type groupElement = {
+    id: string;
+    x: number;
+    y: number;
+    group: { reference: string; };
+};
+export type public_groupElement = {
     id: string;
     x: number;
     y: number;
@@ -102,7 +145,21 @@ export type scene = {
     name: string;
     elements: { reference: string; }[];
 };
+export type public_scene = {
+    id: string;
+    index: number;
+    name: string;
+    elements: { reference: string; }[];
+};
 export type sceneElement = {
+    id: string;
+    index: number;
+    fixtures: null | { reference: string; }[];
+    group: null | { reference: string; };
+    contents: { reference: string; }[];
+    scene: { reference: string; };
+};
+export type public_sceneElement = {
     id: string;
     index: number;
     fixtures: null | { reference: string; }[];
@@ -117,7 +174,20 @@ export type sceneElementContent = {
     attributes: null | { reference: string; }[];
     sceneElement: { reference: string; };
 };
+export type public_sceneElementContent = {
+    id: string;
+    index: number;
+    preset: null | { reference: string; };
+    attributes: null | { reference: string; }[];
+    sceneElement: { reference: string; };
+};
 export type cuelist = {
+    id: string;
+    index: number;
+    name: string;
+    cues: { reference: string; }[];
+};
+export type public_cuelist = {
     id: string;
     index: number;
     name: string;
@@ -129,7 +199,21 @@ export type cue = {
     elements: { reference: string; }[];
     cuelist: { reference: string; };
 };
+export type public_cue = {
+    id: string;
+    index: number;
+    elements: { reference: string; }[];
+    cuelist: { reference: string; };
+};
 export type cueElement = {
+    id: string;
+    index: number;
+    fixtures: null | { reference: string; }[];
+    group: null | { reference: string; };
+    contents: { reference: string; }[];
+    cue: { reference: string; };
+};
+export type public_cueElement = {
     id: string;
     index: number;
     fixtures: null | { reference: string; }[];
@@ -144,7 +228,21 @@ export type cueElementContent = {
     attributes: null | { reference: string; }[];
     cueElement: { reference: string; };
 };
+export type public_cueElementContent = {
+    id: string;
+    index: number;
+    preset: null | { reference: string; };
+    attributes: null | { reference: string; }[];
+    cueElement: { reference: string; };
+};
 export type effect = {
+    id: string;
+    index: number;
+    type: "sine" | "step" | "ramp" | "invRamp" | "linearBounce";
+    speedGroup: null | { reference: string; };
+    multiplier: number;
+};
+export type public_effect = {
     id: string;
     index: number;
     type: "sine" | "step" | "ramp" | "invRamp" | "linearBounce";
@@ -155,7 +253,16 @@ export type speedGroup = {
     id: string;
     rate: number;
 };
+export type public_speedGroup = {
+    id: string;
+    rate: number;
+};
 export type override = {
+    id: string;
+    fixture: { reference: string; };
+    attributes: { reference: string; }[];
+};
+export type public_override = {
     id: string;
     fixture: { reference: string; };
     attributes: { reference: string; }[];
@@ -166,7 +273,18 @@ export type variable = {
     name: string;
     value: string | number | boolean | null;
 };
+export type public_variable = {
+    id: string;
+    index: number;
+    name: string;
+    value: string | number | boolean | null;
+};
 export type macro = {
+    id: string;
+    index: number;
+    commands: { reference: string; }[];
+};
+export type public_macro = {
     id: string;
     index: number;
     commands: { reference: string; }[];
@@ -176,7 +294,19 @@ export type macroCommand = {
     index: number;
     macro: { reference: string; };
 };
+export type public_macroCommand = {
+    id: string;
+    index: number;
+    macro: { reference: string; };
+};
 export type collection = {
+    id: string;
+    index: number;
+    name: string;
+    scenes: { reference: string; }[];
+    cuelists: { reference: string; }[];
+};
+export type public_collection = {
     id: string;
     index: number;
     name: string;
@@ -189,12 +319,31 @@ export type fixture = {
     universe: number;
     address: number;
 };
+export type public_fixture = {
+    id: string;
+    fixtureNumber: number;
+    universe: number;
+    address: number;
+};
 export type attribute = {
     id: string;
     kind: string;
     value: string;
 };
+export type public_attribute = {
+    id: string;
+    kind: string;
+    value: string;
+};
 export type preset = {
+    id: string;
+    index: number;
+    name: string;
+    fixtures: null | { reference: string; }[];
+    group: null | { reference: string; };
+    attributes: { reference: string; }[];
+};
+export type public_preset = {
     id: string;
     index: number;
     name: string;
