@@ -184,7 +184,7 @@ function updateConstTypes() {
     const newTypesContents = `${fileStart}${startString}${constTypes}${endString}${fileEnd}`;
 
     if (newTypesContents !== typesContents) {
-        console.warn('Database structure types have changed');
+        console.warn('Database structure types have changed inside shared. Run public/modules/database/structure/index.ts inside shared and make a new commit');
 
         fs.writeFileSync(path.join(__dirname, 'types.ts'), newTypesContents);
     }
