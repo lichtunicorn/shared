@@ -116,6 +116,14 @@ function checkValidity() {
                 if (!property.default || property.default.type !== 'cuid') {
                     throw new Error(`Model ${modelName} must have id property with default type cuid`);
                 }
+
+                if (!model.gettable.includes('id')) {
+                    throw new Error(`Model ${modelName} has id property, but that property is not gettable`);
+                }
+
+                if (model.settable.includes('id')) {
+                    throw new Error(`Model ${modelName} has id property, but that property is settable`);
+                }
             }
 
             let checkType;
