@@ -12,7 +12,7 @@ export type model = {
     gettable: string[];
     settable: string[];
     move?: string;
-    properties: property[];
+    properties: property<string>[];
 };
 
 export type literalPropertyType = "number" | "string" | "boolean" | "stringOrNumberOrBooleanOrNull";
@@ -20,8 +20,8 @@ export type referencePropertyType = {
     reference: string;
 };
 
-export type property = {
-    name: string;
+export type property<name extends string> = {
+    name: name;
     optional?: boolean;
 } &
     (
