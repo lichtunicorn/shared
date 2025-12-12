@@ -3,7 +3,7 @@ import type { modelName, publicModelData } from '../database/structure/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
-    connectReceived: () => void;
+    showConnected: (showId: string) => void;
 
     manyData<T extends modelName>(model: T, data: publicModelData<T>[]): void;
     specificData<T extends modelName>(model: T, id: string, data: publicModelData<T> | null): void;
@@ -11,6 +11,8 @@ export interface ServerToClientEvents {
 
 export interface ClientToServerEvents {
     connect: () => void;
+    connectShow: (showId: string) => void;
+
     subscribeMany: (model: modelName) => void;
     subscribeSpecific: (model: modelName, id: string) => void;
     unsubscribeMany: (model: modelName) => void;
