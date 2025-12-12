@@ -37,8 +37,8 @@ export const cuelist: model = {
 };
 
 export const cue: model = {
-    gettable: ['id', 'index', 'macros', 'elements', 'cuelist'],
-    settable: ['index', 'macros'],
+    gettable: ['id', 'index', 'macro', 'elements', 'cuelist'],
+    settable: ['index', 'macro'],
     recursiveDeleteProperties: ['elements'],
     properties: [
         {
