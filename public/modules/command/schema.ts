@@ -36,6 +36,21 @@ export const value = z.union([
     })
 ]);
 
+export const directReferenceContextTypes = [
+    "show",
+    "section",
+    "scene",
+    "cuelist",
+    "cue",
+    "speedGroup",
+    "variable",
+    "executingMacro",
+    "calledMacro",
+    "executingMacroCommand",
+    "collection",
+    "fixture",
+];
+
 export const directReference = z.union([
     z.object({
         type: z.literal("reference"),
@@ -44,20 +59,7 @@ export const directReference = z.union([
     }),
     z.object({
         type: z.literal("context"),
-        context: z.union([
-            z.literal("show"),
-            z.literal("section"),
-            z.literal("scene"),
-            z.literal("cuelist"),
-            z.literal("cue"),
-            z.literal("speedGroup"),
-            z.literal("variable"),
-            z.literal("executingMacro"),
-            z.literal("calledMacro"),
-            z.literal("executingMacroCommand"),
-            z.literal("collection"),
-            z.literal("fixture"),
-        ]),
+        context: z.union(directReferenceContextTypes.map(contextType => z.literal(contextType))),
     })
 ]);
 
