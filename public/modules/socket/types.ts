@@ -5,7 +5,7 @@ import type { showData } from '../show/types';
 export interface ServerToClientEvents {
     connect: () => void;
     clientId: (clientId: string) => void;
-    showConnected: (showId: string | null) => void;
+    showJoined: (showId: string | null) => void;
     showNotFound: () => void;
 
     manyData<T extends modelName>(model: T, data: publicModelData<T>[]): void;
@@ -16,7 +16,7 @@ export interface ServerToClientEvents {
 
 export interface ClientToServerEvents {
     connect: () => void;
-    connectShow: (showId: string | null) => void;
+    joinShow: (showId: string | null) => void;
 
     subscribeMany: (model: modelName) => void;
     subscribeSpecific: (model: modelName, id: string) => void;
