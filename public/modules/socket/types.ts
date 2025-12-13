@@ -12,7 +12,7 @@ export interface ServerToClientEvents {
     manyData<T extends modelName>(model: T, data: publicModelData<T>[]): void;
     specificData<T extends modelName>(model: T, id: string, data: publicModelData<T> | null): void;
 
-    shows(): z.infer<typeof showData>[];
+    shows(shows: z.infer<typeof showData>[]): void;
 }
 
 export interface ClientToServerEvents {
