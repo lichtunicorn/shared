@@ -49,7 +49,7 @@ export const directReferenceContextTypes = [
     "executingMacroCommand",
     "collection",
     "fixture",
-];
+] as const;
 
 export const directReference = z.union([
     z.object({
