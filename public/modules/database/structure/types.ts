@@ -56,6 +56,33 @@ export type property<name extends string> = {
 
 // <auto generated, do not edit>
 
+export type database = {
+    show: show[];
+    section: section[];
+    sectionSceneState: sectionSceneState[];
+    sectionCuelistState: sectionCuelistState[];
+    group: group[];
+    groupElement: groupElement[];
+    scene: scene[];
+    sceneElement: sceneElement[];
+    sceneElementContent: sceneElementContent[];
+    cuelist: cuelist[];
+    cue: cue[];
+    cueElement: cueElement[];
+    cueElementContent: cueElementContent[];
+    effect: effect[];
+    speedGroup: speedGroup[];
+    override: override[];
+    variable: variable[];
+    macro: macro[];
+    macroCommand: macroCommand[];
+    collection: collection[];
+    fixture: fixture[];
+    attribute: attribute[];
+    preset: preset[];
+    master: master[];
+    customButton: customButton[];
+};
 export type modelName = "show" | "section" | "sectionSceneState" | "sectionCuelistState" | "group" | "groupElement" | "scene" | "sceneElement" | "sceneElementContent" | "cuelist" | "cue" | "cueElement" | "cueElementContent" | "effect" | "speedGroup" | "override" | "variable" | "macro" | "macroCommand" | "collection" | "fixture" | "attribute" | "preset" | "master" | "customButton";
 export type public_show = {
     /** read only, unique, default cuid() */

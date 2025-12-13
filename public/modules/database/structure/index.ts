@@ -292,6 +292,12 @@ function generatePublicModelTypeContents(modelStructure: structureType[string]):
 function generateAutoTypes(structure: structureType): string {
     let output = '\n\n';
 
+    output += `export type database = {\n`;
+    for (const [modelName, modelStructure] of Object.entries(structure)) {
+        output += `    ${modelName}: ${modelName}[];\n`;
+    }
+    output += `};\n`;
+
     output += `export type modelName = ${Object.keys(structure).map(modelName => `"${modelName}"`).join(' | ')};\n`;
 
     for (const [modelName, modelStructure] of Object.entries(structure)) {
