@@ -10,7 +10,7 @@ type validateDataStructureReturn = {
     valid: true;
 } | {
     valid: true;
-    type: literalPropertyType | "oneOf";
+    type: literalPropertyType | referencePropertyType | "oneOf";
 } | {
     valid: false;
     part: 'operation' | 'options';
@@ -122,9 +122,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             }
         }
 
-        const foundType = result.isModel ? null : result.type;
-
-        if (foundType === 'array') {
+        if (result.type === 'array') {
             return {
                 valid: false,
                 part: 'source',
@@ -133,7 +131,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             }
         }
 
-        sourceType = foundType;
+        sourceType = result.type;
         sourceOptional = result.isModel ? false : result.isOptional;
 
         if (['move', 'copy', 'open', 'delete', 'assign', 'go'].includes(command.operation) && !result.isModel) {
@@ -141,15 +139,6 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
                 valid: false,
                 part: 'source',
                 error: `Can't perform ${command.operation} on an ${result.type}`,
-                isDirectReference: null
-            }
-        }
-
-        if (command.operation === 'get' && result.isModel) {
-            return {
-                valid: false,
-                part: 'source',
-                error: `Can't perform get on a model`,
                 isDirectReference: null
             }
         }
@@ -337,6 +326,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     isAssignable: boolean;
     isSettable: boolean;
     isModel: true;
+    type: referencePropertyType;
 } | {
     valid: true;
     /** checks if there is a move, and the move is settable */
@@ -368,6 +358,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     value: validateDataStructureValuePath;
 } {
     let currentModel: databaseModel;
+    let currentModelName: string;
 
     if (directReference.type === 'reference') {
         const foundModel = databaseStructure[directReference.reference];
@@ -381,6 +372,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         }
 
         currentModel = foundModel;
+        currentModelName = directReference.reference;
     } else if (directReference.type === 'context') {
         let modelName;
 
@@ -415,6 +407,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         }
 
         currentModel = foundModel;
+        currentModelName = modelName;
 
     } else {
         return {
@@ -441,6 +434,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
                     if (!foundModel) throw new Error(`Database reference to ${currentProperty.type.reference} not found`);
 
                     currentModel = foundModel;
+                    currentModelName = currentProperty.type.reference;
                     currentProperty = undefined;
                 }
             }
@@ -546,6 +540,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             }
 
             currentModel = foundModel;
+            currentModelName = currentProperty.valueType.reference;
             currentProperty = undefined;
 
         } else {
@@ -620,12 +615,15 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             canAssign,
             isAssignable,
             isSettable,
-            isModel: true
+            isModel: true,
+            type: {
+                reference: currentProperty ? currentProperty.type.reference : currentModelName
+            }
         }
     }
 }
 
-export function validateValueDataStructure(value: z.infer<typeof valueSchema>, requiredType: literalPropertyType, optional: boolean): {
+export function validateValueDataStructure(value: z.infer<typeof valueSchema>, requiredType: literalPropertyType | referencePropertyType, optional: boolean): {
     valid: true;
 } | {
     valid: false;
@@ -694,20 +692,40 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
         if (!('type' in result))
             throw new Error('validateDataStructure called with get command, but no type is returned');
 
-        const checkingResultType = result.type === 'oneOf' ? 'string' : result.type;
+        if (typeof result.type !== 'string' && result.type.reference) {
 
-        if (requiredType !== 'stringOrNumberOrBooleanOrNull' && result.type !== 'stringOrNumberOrBooleanOrNull' && requiredType !== checkingResultType) {
-            return {
-                valid: false,
-                path: {
-                    type: 'getCommand',
-                    error: {
-                        type: 'type',
-                        requiredType,
-                        evaluatedType: result.type
+            if (!(typeof requiredType !== 'string' && requiredType.reference)) {
+                return {
+                    valid: false,
+                    path: {
+                        type: 'getCommand',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            evaluatedType: result.type
+                        }
                     }
                 }
             }
+
+        } else {
+
+            const checkingResultType = result.type === 'oneOf' ? 'string' : result.type;
+
+            if (requiredType !== 'stringOrNumberOrBooleanOrNull' && result.type !== 'stringOrNumberOrBooleanOrNull' && requiredType !== checkingResultType) {
+                return {
+                    valid: false,
+                    path: {
+                        type: 'getCommand',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            evaluatedType: result.type
+                        }
+                    }
+                }
+            }
+
         }
 
         return {
