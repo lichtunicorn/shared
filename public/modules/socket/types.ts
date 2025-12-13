@@ -1,6 +1,7 @@
 import type { Server, Socket } from 'socket.io';
 import type { modelName, publicModelData } from '../database/structure/types';
-import type { showData } from '../show/types';
+import type { showData, showDataInput } from '../show/types';
+import type { z } from 'zod';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -11,7 +12,7 @@ export interface ServerToClientEvents {
     manyData<T extends modelName>(model: T, data: publicModelData<T>[]): void;
     specificData<T extends modelName>(model: T, id: string, data: publicModelData<T> | null): void;
 
-    shows(): showData[];
+    shows(): z.infer<typeof showData>[];
 }
 
 export interface ClientToServerEvents {
@@ -25,7 +26,7 @@ export interface ClientToServerEvents {
 
     subscribeShows: () => void;
     unsubscribeShows: () => void;
-    createShow: (showData: Omit<showData, 'id'>) => void;
+    createShow: (showData: z.infer<typeof showDataInput>) => void;
 }
 
 export interface InterServerEvents {
