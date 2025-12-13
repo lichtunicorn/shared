@@ -13,6 +13,8 @@ export interface ServerToClientEvents {
     specificData<T extends modelName>(model: T, id: string, data: publicModelData<T> | null): void;
 
     shows(shows: z.infer<typeof showData>[]): void;
+
+    debugSocketUrl: (url: string) => void;
 }
 
 export interface ClientToServerEvents {
