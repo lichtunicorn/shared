@@ -79,7 +79,7 @@ type validateDataStructureValuePath = {
     value: validateDataStructureValuePath;
 };
 
-export function validateDataStructure(command: z.infer<typeof noGetCommandSchema | typeof getCommandSchema>, canBeGetCommand: boolean): validateDataStructureReturn {
+export function validateDataStructure(command: z.infer<typeof noGetCommandSchema | typeof getCommandSchema>, canBeGetCommand: boolean = false): validateDataStructureReturn {
     if (command.operation === 'get' && !canBeGetCommand) {
         return {
             valid: false,
@@ -132,7 +132,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
         }
 
         sourceType = result.type;
-        sourceOptional = result.isModel ? false : result.isOptional;
+        sourceOptional = result.isOptional;
 
         if (['move', 'copy', 'open', 'delete', 'assign', 'go'].includes(command.operation) && !result.isModel) {
             return {
@@ -325,6 +325,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     /** check if something else can assign to this */
     isAssignable: boolean;
     isSettable: boolean;
+    isOptional: boolean;
     isModel: true;
     type: referencePropertyType;
 } | {
@@ -615,6 +616,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             canAssign,
             isAssignable,
             isSettable,
+            isOptional,
             isModel: true,
             type: {
                 reference: currentProperty ? currentProperty.type.reference : currentModelName
@@ -630,7 +632,7 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
     path: validateDataStructureValuePath;
 } {
     if (value.type === 'value') {
-        if (!['string', 'number', 'boolean'].includes(typeof value)) {
+        if (!['string', 'number', 'boolean'].includes(typeof value.value)) {
             return {
                 valid: false,
                 path: {
@@ -644,7 +646,7 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
         }
 
         // @ts-ignore see above it can only be string number or boolean
-        const evaluatedType: "string" | "number" | "boolean" = typeof value;
+        const evaluatedType: "string" | "number" | "boolean" = typeof value.value;
 
         if (requiredType !== 'stringOrNumberOrBooleanOrNull' && requiredType !== evaluatedType) {
             return {
@@ -695,6 +697,20 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
         if (typeof result.type !== 'string' && result.type.reference) {
 
             if (!(typeof requiredType !== 'string' && requiredType.reference)) {
+                return {
+                    valid: false,
+                    path: {
+                        type: 'getCommand',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            evaluatedType: result.type
+                        }
+                    }
+                }
+            }
+
+            if (requiredType.reference !== result.type.reference) {
                 return {
                     valid: false,
                     path: {
