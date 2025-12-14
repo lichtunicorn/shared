@@ -55,6 +55,8 @@ export const cue: model = {
     creatable: true,
     gettable: ['id', 'index', 'macro', 'elements', 'cuelist'],
     settable: ['index', 'macro'],
+    deletable: true,
+    goable: true,
     recursiveDeleteProperties: ['elements'],
     properties: [
         {
