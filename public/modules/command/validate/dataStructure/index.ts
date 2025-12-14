@@ -232,9 +232,20 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
         if (sourceType === null)
             throw new Error('Get command, but sourceType is null');
 
-        return {
-            valid: true,
-            type: sourceType
+        if (sourceType === 'array') {
+            if (sourceValueType === null)
+                throw new Error('sourceType is array, but sourceValueType is null');
+
+            return {
+                valid: true,
+                type: sourceType,
+                valueType: sourceValueType
+            }
+        } else {
+            return {
+                valid: true,
+                type: sourceType
+            }
         }
     } else {
         return {
