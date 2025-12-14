@@ -187,6 +187,7 @@ export function validateValueDataStructure(
             }
 
             if (result.type !== 'array') throw new Error('result.type is not array');
+            if (!result.valueType) throw new Error('result.valueType is null');
             if (requiredType !== 'array') throw new Error('requiredType is not array');
 
             if (requiredValueType === null) throw new Error('requiredValueType is null');
