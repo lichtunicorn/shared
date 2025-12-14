@@ -3,7 +3,7 @@ import path from "path";
 
 import type { structure as structureType } from "./types";
 
-import { show } from "./show";
+import { show } from "public/modules/database/structure/show";
 import { section, sectionSceneState, sectionCuelistState } from "./section";
 import { group, groupElement } from "./group";
 import { scene, sceneElement, sceneElementContent } from "./scene";
