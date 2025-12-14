@@ -337,7 +337,6 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     }
 }
 
-//todo: isSettable should be false when using directReference type references
 export function validateReferenceDataStructure(directReference: z.infer<typeof directReferenceSchema>, subReferences: z.infer<typeof subReferenceSchema>[]): {
     valid: true;
     /** checks if there is a move, and the move is settable */
@@ -369,7 +368,6 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     isModel: false;
     type: "array";
 
-    // todo: implement in this function
     // todo: implement in uses of this function
     valueType: referencePropertyType;
 } | {
@@ -404,10 +402,9 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
 } {
     let currentModel: databaseModel;
     let currentModelName: string;
+    let isDirectArray = false;
 
-    // todo: implement directReference.type === 'references'
-
-    if (directReference.type === 'reference') {
+    if (directReference.type === 'reference' || directReference.type === 'references') {
         const foundModel = databaseStructure[directReference.reference];
 
         if (!foundModel) {
@@ -420,6 +417,10 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
 
         currentModel = foundModel;
         currentModelName = directReference.reference;
+
+        if (directReference.type === 'references') {
+            isDirectArray = true;
+        }
     } else if (directReference.type === 'context') {
         let modelName;
 
@@ -486,6 +487,15 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
                 }
             }
 
+            if (isDirectArray) {
+                return {
+                    valid: false,
+                    error: 'Key used on a direct array',
+                    isDirectReference: false,
+                    subReferenceIndex: i
+                }
+            }
+
             const property = currentModel.properties.find((searchProperty: databaseProperty<string>) => searchProperty.name === subReference.key);
 
             if (!property) {
@@ -509,18 +519,29 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             currentProperty = property;
 
         } else if (subReference.type === 'getUniqueFromArray') {
-            if (currentProperty === undefined || currentProperty.type !== 'array') {
-                return {
-                    valid: false,
-                    error: 'Get unique from array used on a non array',
-                    isDirectReference: false,
-                    subReferenceIndex: i
+            let foundModel;
+            let foundModelName;
+
+            if (isDirectArray) {
+                foundModel = currentModel;
+                foundModelName = currentModelName;
+            } else {
+
+                if (currentProperty === undefined || currentProperty.type !== 'array') {
+                    return {
+                        valid: false,
+                        error: 'Get unique from array used on a non array',
+                        isDirectReference: false,
+                        subReferenceIndex: i
+                    }
                 }
+
+                foundModel = databaseStructure[currentProperty.valueType.reference];
+                foundModelName = currentProperty.valueType.reference;
+
+                if (!foundModel) throw new Error(`Database reference to ${currentProperty.valueType.reference} not found`);
+
             }
-
-            const foundModel = databaseStructure[currentProperty.valueType.reference];
-
-            if (!foundModel) throw new Error(`Database reference to ${currentProperty.valueType.reference} not found`);
 
             const searchProperty = foundModel.properties.find((searchProperty: databaseProperty<string>) => searchProperty.name === subReference.key);
             if (!searchProperty) {
@@ -587,8 +608,9 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             }
 
             currentModel = foundModel;
-            currentModelName = currentProperty.valueType.reference;
+            currentModelName = foundModelName;
             currentProperty = undefined;
+            isDirectArray = false;
 
         } else {
             return {
@@ -638,7 +660,39 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         isOptional = currentProperty.optional === true;
     }
 
-    if (currentProperty && typeof currentProperty.type === 'string') {
+    if (currentProperty && currentProperty.type === 'array') {
+        return {
+            valid: true,
+            canMove,
+            canDelete,
+            canCreate,
+            canGo,
+            canAssign,
+            isAssignable,
+            isSettable,
+            isOptional,
+            isModel: false,
+            type: currentProperty.type,
+            valueType: currentProperty.valueType
+        }
+    } else if (isDirectArray) {
+        return {
+            valid: true,
+            canMove,
+            canDelete,
+            canCreate,
+            canGo,
+            canAssign,
+            isAssignable,
+            isSettable,
+            isOptional,
+            isModel: false,
+            type: 'array',
+            valueType: {
+                reference: currentModelName
+            }
+        }
+    } else if (currentProperty && typeof currentProperty.type === 'string') {
         return {
             valid: true,
             canMove,
