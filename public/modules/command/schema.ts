@@ -58,6 +58,11 @@ export const directReference = z.union([
         id: z.string(),
     }),
     z.object({
+        type: z.literal("references"),
+        reference: z.string(),
+        ids: z.array(z.string()),
+    }),
+    z.object({
         type: z.literal("context"),
         context: z.union(directReferenceContextTypes.map(contextType => z.literal(contextType))),
     })
