@@ -15,7 +15,7 @@ type validateDataStructureReturn = {
     type: literalPropertyType | referencePropertyType | "oneOf";
 } | {
     valid: true;
-    type: "array"; // todo: implement this everywhere
+    type: "array";
     valueType: referencePropertyType;
 } | {
     valid: false;
@@ -59,7 +59,6 @@ type validateDatStructureValueError = {
             {
                 requiredType: literalPropertyType | referencePropertyType;
             } | {
-                // todo: implement this everywhere
                 requiredType: "array";
                 requiredValueType: referencePropertyType;
             }
@@ -67,7 +66,6 @@ type validateDatStructureValueError = {
             {
                 evaluatedType: literalPropertyType | referencePropertyType | "oneOf";
             } | {
-                // todo: implement this everywhere
                 evaluatedType: "array";
                 evaluatedValueType: referencePropertyType;
             }
@@ -367,8 +365,6 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     isOptional: boolean;
     isModel: false;
     type: "array";
-
-    // todo: implement in uses of this function
     valueType: referencePropertyType;
 } | {
     valid: true;
@@ -729,8 +725,6 @@ export function validateValueDataStructure(
     value: z.infer<typeof valueSchema>,
     requiredType: literalPropertyType | referencePropertyType | "array",
     optional: boolean,
-
-    // todo: update this function
     requiredValueType: referencePropertyType | null
 ): {
     valid: true;
@@ -1063,7 +1057,7 @@ export function validateValueDataStructure(
             valid: true
         };
     } else {
-        // todo: typescript requires an else here, idk why
+        // typescript requires an else here, idk why
 
         // @ts-ignore
         throw new Error(`Unknown value type ${value.type}`);
