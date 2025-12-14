@@ -34,7 +34,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     isAssignable: boolean;
     isSettable: boolean;
     isOptional: boolean;
-    isModel: false;
+    isModel: true;
     type: "array";
     valueType: referencePropertyType;
 } | {
@@ -345,7 +345,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             isAssignable,
             isSettable,
             isOptional,
-            isModel: false,
+            isModel: true,
             type: currentProperty.type,
             valueType: currentProperty.valueType
         }
@@ -360,7 +360,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             isAssignable,
             isSettable,
             isOptional,
-            isModel: false,
+            isModel: true,
             type: 'array',
             valueType: {
                 reference: currentModelName
