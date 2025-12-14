@@ -1,6 +1,6 @@
 import type { Server, Socket } from 'socket.io';
-import type { modelName, publicModelData } from '../database/structure/types';
-import type { showData, showDataInput } from '../show/schema';
+import type { modelName, publicModelData } from 'public/modules/database/structure/types';
+import type { showData, showDataInput } from 'public/modules/show/schema';
 import type { z } from 'zod';
 
 export interface ServerToClientEvents {

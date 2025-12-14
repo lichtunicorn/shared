@@ -2,11 +2,11 @@
 
 import { z } from "zod";
 
-import { structure as databaseStructure } from "../../database/structure";
-import { directReference as directReferenceSchema, noGetCommand as noGetCommandSchema, getCommand as getCommandSchema, subReference as subReferenceSchema, value as valueSchema } from "../schema";
+import { structure as databaseStructure } from "public/modules/database/structure";
+import { directReference as directReferenceSchema, noGetCommand as noGetCommandSchema, getCommand as getCommandSchema, subReference as subReferenceSchema, value as valueSchema } from "public/modules/command/schema";
 
-import type { literalPropertyType, referencePropertyType } from "../../database/structure/types";
-import type { property as databaseProperty, model as databaseModel } from "../../database/structure/types";
+import type { literalPropertyType, referencePropertyType } from "public/modules/database/structure/types";
+import type { property as databaseProperty, model as databaseModel } from "public/modules/database/structure/types";
 
 type validateDataStructureReturn = {
     valid: true;
