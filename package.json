@@ -2,8 +2,8 @@
   "name": "shared",
   "private": true,
   "scripts": {
-    "update": "bun public/modules/database/structure/index",
-    "updateWatch": "bun --watch public/modules/database/structure/index"
+    "u": "bun public/modules/database/structure/index",
+    "wu": "bun --watch public/modules/database/structure/index"
   },
   "exports": {
     "./*": "./public/*"
