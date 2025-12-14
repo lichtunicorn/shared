@@ -1,3 +1,5 @@
+// todo: split the functions in this file into multiple files
+
 import { z } from "zod";
 
 import { structure as databaseStructure } from "../../database/structure";
@@ -11,6 +13,10 @@ type validateDataStructureReturn = {
 } | {
     valid: true;
     type: literalPropertyType | referencePropertyType | "oneOf";
+} | {
+    valid: true;
+    type: "array"; // todo: implement this everywhere
+    valueType: referencePropertyType;
 } | {
     valid: false;
     part: 'operation' | 'options';
@@ -46,12 +52,27 @@ type validateDataStructureReturn = {
 type validateDatStructureValueError = {
     type: 'string';
     error: string;
-} | {
-    type: 'type';
-
-    requiredType: literalPropertyType | referencePropertyType;
-    evaluatedType: literalPropertyType | referencePropertyType | "oneOf";
-};
+} | (
+        {
+            type: 'type';
+        } & (
+            {
+                requiredType: literalPropertyType | referencePropertyType;
+            } | {
+                // todo: implement this everywhere
+                requiredType: "array";
+                requiredValueType: referencePropertyType;
+            }
+        ) & (
+            {
+                evaluatedType: literalPropertyType | referencePropertyType | "oneOf";
+            } | {
+                // todo: implement this everywhere
+                evaluatedType: "array";
+                evaluatedValueType: referencePropertyType;
+            }
+        )
+    );
 
 type validateDataStructureValuePath = {
     type: 'value';
@@ -88,7 +109,8 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
         }
     }
 
-    let sourceType: literalPropertyType | referencePropertyType | "oneOf" | null = null;
+    let sourceType: literalPropertyType | referencePropertyType | "oneOf" | "array" | null = null;
+    let sourceValueType: referencePropertyType | null = null;
     let sourceOptional: boolean | null = null;
 
     // source check
@@ -122,17 +144,12 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             }
         }
 
-        if (result.type === 'array') {
-            return {
-                valid: false,
-                part: 'source',
-                error: `Can't perform ${command.operation} on an array`,
-                isDirectReference: null
-            }
-        }
-
         sourceType = result.type;
         sourceOptional = result.isOptional;
+
+        if (result.type === 'array') {
+            sourceValueType = result.valueType;
+        }
 
         if (['move', 'copy', 'open', 'delete', 'assign', 'go'].includes(command.operation) && !result.isModel) {
             return {
@@ -189,19 +206,6 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
         }
     }
 
-    // options check
-    if (command.operation === 'open') {
-        if (!command.options.all) {
-            if (command.options.clients.length === 0) {
-                return {
-                    valid: false,
-                    part: 'options',
-                    error: 'Command operation is open, but no clients are specified',
-                };
-            }
-        }
-    }
-
     // destination check
     if (command.operation === 'empty' || command.operation === 'record' || command.operation === 'assign' || command.operation === 'copy') {
         const result = validateReferenceDataStructure(command.destination, command.subDestinations);
@@ -237,7 +241,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             return {
                 valid: false,
                 part: 'destination',
-                error: `Can't ${command.operation} to a ${result.type}`,
+                error: `Can't perform ${command.operation} on a ${result.type}`,
                 isDirectReference: null
             }
         }
@@ -263,7 +267,8 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
 
     // value check
     if (command.operation === 'move' || command.operation === 'set' || command.operation === 'go') {
-        let requiredValueType: literalPropertyType | referencePropertyType;
+        let requiredValueType: literalPropertyType | referencePropertyType | "array";
+        let requiredValueValueType: referencePropertyType | null = null;
         let requiredOptional: boolean;
 
         if (command.operation === 'go') {
@@ -278,22 +283,41 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             if (sourceType === null) throw new Error('sourceType should not be null');
             if (sourceOptional === null) throw new Error('sourceOptional should not be null');
 
-            if (sourceType === 'oneOf')
+            if (sourceType === 'array') {
+                if (sourceValueType === null) throw new Error('sourceValueType should not be null');
+
+                requiredValueType = 'array';
+                requiredValueValueType = sourceValueType;
+            } else if (sourceType === 'oneOf') {
                 requiredValueType = 'string';
-            else
+            } else {
                 requiredValueType = sourceType;
+            }
 
             requiredOptional = sourceOptional;
         } else
             throw new Error(`Unknown operation ${(command as any).operation}`);
 
-        const result = validateValueDataStructure(command.value, requiredValueType, requiredOptional);
+        const result = validateValueDataStructure(command.value, requiredValueType, requiredOptional, requiredValueValueType);
 
         if (!result.valid) {
             return {
                 valid: false,
                 part: 'value',
                 path: result.path
+            }
+        }
+    }
+
+    // options check
+    if (command.operation === 'open') {
+        if (!command.options.all) {
+            if (command.options.clients.length === 0) {
+                return {
+                    valid: false,
+                    part: 'options',
+                    error: 'Command operation is open, but no clients are specified',
+                };
             }
         }
     }
@@ -313,6 +337,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     }
 }
 
+//todo: isSettable should be false when using directReference type references
 export function validateReferenceDataStructure(directReference: z.infer<typeof directReferenceSchema>, subReferences: z.infer<typeof subReferenceSchema>[]): {
     valid: true;
     /** checks if there is a move, and the move is settable */
@@ -342,7 +367,26 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     isSettable: boolean;
     isOptional: boolean;
     isModel: false;
-    type: literalPropertyType | "array" | "oneOf";
+    type: "array";
+
+    // todo: implement in this function
+    // todo: implement in uses of this function
+    valueType: referencePropertyType;
+} | {
+    valid: true;
+    /** checks if there is a move, and the move is settable */
+    canMove: boolean;
+    canDelete: boolean;
+    canCreate: boolean;
+    canGo: boolean;
+    /** check if this is a thing that can be assigned to something else */
+    canAssign: boolean;
+    /** check if something else can assign to this */
+    isAssignable: boolean;
+    isSettable: boolean;
+    isOptional: boolean;
+    isModel: false;
+    type: literalPropertyType | "oneOf";
 } | {
     valid: false;
     error: string;
@@ -360,6 +404,8 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
 } {
     let currentModel: databaseModel;
     let currentModelName: string;
+
+    // todo: implement directReference.type === 'references'
 
     if (directReference.type === 'reference') {
         const foundModel = databaseStructure[directReference.reference];
@@ -529,7 +575,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             // @ts-ignore checked above it can't be a reference type
             const searchPropertyType: Exclude<typeof searchProperty.type, referencePropertyType> = searchProperty.type;
 
-            const result = validateValueDataStructure(subReference.value, searchPropertyType, false);
+            const result = validateValueDataStructure(subReference.value, searchPropertyType, false, null);
 
             if (!result.valid) {
                 return {
@@ -625,12 +671,23 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     }
 }
 
-export function validateValueDataStructure(value: z.infer<typeof valueSchema>, requiredType: literalPropertyType | referencePropertyType, optional: boolean): {
+export function validateValueDataStructure(
+    value: z.infer<typeof valueSchema>,
+    requiredType: literalPropertyType | referencePropertyType | "array",
+    optional: boolean,
+
+    // todo: update this function
+    requiredValueType: referencePropertyType | null
+): {
     valid: true;
 } | {
     valid: false;
     path: validateDataStructureValuePath;
 } {
+    if (requiredType === 'array' && !requiredValueType) {
+        throw new Error('requiredType is array, but not requiredValueType given');
+    }
+
     if (value.type === 'value') {
         if (!['string', 'number', 'boolean'].includes(typeof value.value)) {
             return {
@@ -649,14 +706,33 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
         const evaluatedType: "string" | "number" | "boolean" = typeof value.value;
 
         if (requiredType !== 'stringOrNumberOrBooleanOrNull' && requiredType !== evaluatedType) {
-            return {
-                valid: false,
-                path: {
-                    type: 'value',
-                    error: {
-                        type: 'type',
-                        requiredType,
-                        evaluatedType
+            if (requiredType === 'array') {
+
+                if (requiredValueType === null)
+                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
+
+                return {
+                    valid: false,
+                    path: {
+                        type: 'value',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            requiredValueType,
+                            evaluatedType
+                        }
+                    }
+                }
+            } else {
+                return {
+                    valid: false,
+                    path: {
+                        type: 'value',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            evaluatedType
+                        }
                     }
                 }
             }
@@ -697,14 +773,33 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
         if (typeof result.type !== 'string' && result.type.reference) {
 
             if (!(typeof requiredType !== 'string' && requiredType.reference)) {
-                return {
-                    valid: false,
-                    path: {
-                        type: 'getCommand',
-                        error: {
-                            type: 'type',
-                            requiredType,
-                            evaluatedType: result.type
+                if (requiredType === 'array') {
+
+                    if (requiredValueType === null)
+                        throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
+
+                    return {
+                        valid: false,
+                        path: {
+                            type: 'getCommand',
+                            error: {
+                                type: 'type',
+                                requiredType,
+                                requiredValueType,
+                                evaluatedType: result.type
+                            }
+                        }
+                    }
+                } else {
+                    return {
+                        valid: false,
+                        path: {
+                            type: 'getCommand',
+                            error: {
+                                type: 'type',
+                                requiredType,
+                                evaluatedType: result.type
+                            }
                         }
                     }
                 }
@@ -724,6 +819,61 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
                 }
             }
 
+        } else if (result.type === 'array' || requiredType === 'array') {
+            if (result.type !== 'array' && requiredType === 'array') {
+
+                if (requiredValueType === null)
+                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
+
+                return {
+                    valid: false,
+                    path: {
+                        type: 'getCommand',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            requiredValueType,
+                            evaluatedType: result.type
+                        }
+                    }
+                }
+            }
+
+            if (requiredType !== 'array' && result.type === 'array') {
+                return {
+                    valid: false,
+                    path: {
+                        type: 'getCommand',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            evaluatedType: result.type,
+                            evaluatedValueType: result.valueType
+                        }
+                    }
+                }
+            }
+
+            if (result.type !== 'array') throw new Error('result.type is not array');
+            if (requiredType !== 'array') throw new Error('requiredType is not array');
+
+            if (requiredValueType === null) throw new Error('requiredValueType is null');
+
+            if (result.valueType.reference !== requiredValueType.reference) {
+                return {
+                    valid: false,
+                    path: {
+                        type: 'getCommand',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            requiredValueType,
+                            evaluatedType: result.type,
+                            evaluatedValueType: result.valueType
+                        }
+                    }
+                }
+            }
         } else {
 
             const checkingResultType = result.type === 'oneOf' ? 'string' : result.type;
@@ -750,20 +900,39 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
 
     } else if (value.type === 'mathDualExpression') {
         if (requiredType !== 'number' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
-            return {
-                valid: false,
-                path: {
-                    type: 'mathDualExpression',
-                    error: {
-                        type: 'type',
-                        requiredType,
-                        evaluatedType: 'number'
+            if (requiredType === 'array') {
+
+                if (requiredValueType === null)
+                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
+
+                return {
+                    valid: false,
+                    path: {
+                        type: 'mathDualExpression',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            requiredValueType,
+                            evaluatedType: 'number'
+                        }
+                    }
+                }
+            } else {
+                return {
+                    valid: false,
+                    path: {
+                        type: 'mathDualExpression',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            evaluatedType: 'number'
+                        }
                     }
                 }
             }
         }
 
-        const value1result = validateValueDataStructure(value.value1, 'number', false);
+        const value1result = validateValueDataStructure(value.value1, 'number', false, null);
 
         if (!value1result.valid) {
             return {
@@ -775,7 +944,7 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
             }
         }
 
-        const value2result = validateValueDataStructure(value.value2, 'number', false);
+        const value2result = validateValueDataStructure(value.value2, 'number', false, null);
 
         if (!value2result.valid) {
             return {
@@ -792,20 +961,39 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
         };
     } else if (value.type === 'mathUnaryExpression') {
         if (requiredType !== 'number' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
-            return {
-                valid: false,
-                path: {
-                    type: 'mathUnaryExpression',
-                    error: {
-                        type: 'type',
-                        requiredType,
-                        evaluatedType: 'number'
+            if (requiredType === 'array') {
+
+                if (requiredValueType === null)
+                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
+
+                return {
+                    valid: false,
+                    path: {
+                        type: 'mathUnaryExpression',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            requiredValueType,
+                            evaluatedType: 'number'
+                        }
+                    }
+                }
+            } else {
+                return {
+                    valid: false,
+                    path: {
+                        type: 'mathUnaryExpression',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            evaluatedType: 'number'
+                        }
                     }
                 }
             }
         }
 
-        const valueResult = validateValueDataStructure(value.value, 'number', false);
+        const valueResult = validateValueDataStructure(value.value, 'number', false, null);
 
         if (!valueResult.valid) {
             return {
@@ -821,7 +1009,7 @@ export function validateValueDataStructure(value: z.infer<typeof valueSchema>, r
             valid: true
         };
     } else {
-        // typescript requires an else here, idk why
+        // todo: typescript requires an else here, idk why
 
         // @ts-ignore
         throw new Error(`Unknown value type ${value.type}`);
