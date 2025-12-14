@@ -313,6 +313,13 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         canGo = nextModel.goable === true;
         canAssign = nextModel.canAssign === true;
         isAssignable = nextModel.isAssignable === true;
+    } else {
+        canMove = currentModel.move !== undefined && currentModel.settable.includes(currentModel.move);
+        canDelete = currentModel.deletable === true;
+        canCreate = currentModel.creatable === true;
+        canGo = currentModel.goable === true;
+        canAssign = currentModel.canAssign === true;
+        isAssignable = currentModel.isAssignable === true;
     }
 
     let isSettable = false;
