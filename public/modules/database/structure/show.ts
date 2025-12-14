@@ -1,6 +1,7 @@
 import type { model } from './types';
 
-const manyModelNames = ["section",
+const manyModelNames = [
+    "section",
     "scene",
     "cuelist",
     "group",
@@ -8,7 +9,8 @@ const manyModelNames = ["section",
     "macro",
     "effect",
     "collection",
-    "variable"];
+    "variable"
+];
 
 export const show: model = {
     creatable: false,

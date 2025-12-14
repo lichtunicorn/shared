@@ -54,6 +54,7 @@ export const effect: model = {
 };
 
 export const speedGroup: model = {
+    creatable: true,
     gettable: ['id', 'rate'],
     settable: ['rate'],
     properties: [

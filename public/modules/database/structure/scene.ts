@@ -54,7 +54,7 @@ export const scene: model = {
 export const sceneElement: model = {
     creatable: true,
     gettable: ['id', 'index', 'fixtures', 'group', 'contents', 'scene'],
-    settable: ['index'],
+    settable: ['index', 'fixtures', 'group'],
     recursiveDeleteProperties: ['contents'],
     properties: [
         {
@@ -105,7 +105,7 @@ export const sceneElement: model = {
 export const sceneElementContent: model = {
     creatable: true,
     gettable: ['id', 'index', 'preset', 'attributes', 'sceneElement'],
-    settable: ['index'],
+    settable: ['index', 'preset', 'attributes'],
     recursiveDeleteProperties: ['attributes'],
     properties: [
         {

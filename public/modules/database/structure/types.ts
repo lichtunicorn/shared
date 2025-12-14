@@ -182,9 +182,9 @@ export type public_sceneElement = {
     id: string;
     /** settable, unique */
     index: number;
-    /** read only */
+    /** settable */
     fixtures: null | { reference: string; }[];
-    /** read only */
+    /** settable */
     group: null | { reference: string; };
     /** read only */
     contents: { reference: string; }[];
@@ -197,9 +197,9 @@ export type public_sceneElementContent = {
     id: string;
     /** settable, unique */
     index: number;
-    /** read only */
+    /** settable */
     preset: null | { reference: string; };
-    /** read only */
+    /** settable */
     attributes: null | { reference: string; }[];
     /** read only, back reference */
     sceneElement: { reference: string; };
@@ -216,7 +216,7 @@ export type public_cuelist = {
     masters: { reference: string; }[];
     /** settable */
     customButtons: { reference: string; }[];
-    /** read only */
+    /** settable */
     cues: { reference: string; }[];
 };
 export type cuelist = public_cuelist;
@@ -284,7 +284,7 @@ export type speedGroup = public_speedGroup;
 export type public_override = {
     /** read only, unique, default cuid() */
     id: string;
-    /** read only */
+    /** settable */
     fixture: { reference: string; };
     /** read only */
     attributes: { reference: string; }[];
@@ -332,9 +332,9 @@ export type public_collection = {
     index: number;
     /** settable */
     name: string;
-    /** read only */
+    /** settable */
     scenes: { reference: string; }[];
-    /** read only */
+    /** settable */
     cuelists: { reference: string; }[];
 };
 export type collection = public_collection;
@@ -365,9 +365,9 @@ export type public_preset = {
     index: number;
     /** settable */
     name: string;
-    /** read only */
+    /** settable */
     fixtures: null | { reference: string; }[];
-    /** read only */
+    /** settable */
     group: null | { reference: string; };
     /** read only */
     attributes: { reference: string; }[];

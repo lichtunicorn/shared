@@ -3,7 +3,7 @@ import type { model } from './types';
 export const collection: model = {
     creatable: true,
     gettable: ['id', 'index', 'name', 'scenes', 'cuelists'],
-    settable: ['index', 'name'],
+    settable: ['index', 'name', 'scenes', 'cuelists'],
     move: 'index',
     deletable: true,
     goable: true,
