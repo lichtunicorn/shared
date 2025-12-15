@@ -21,23 +21,29 @@ export function validateValueDataStructure(
     }
 
     if (value.type === 'value') {
-        if (!['string', 'number', 'boolean'].includes(typeof value.value)) {
+        const evaluatedType = value.value === null ? 'null' : typeof value.value;
+
+        if (evaluatedType !== 'null' && evaluatedType !== 'string' && evaluatedType !== 'number' && evaluatedType !== 'boolean') {
             return {
                 valid: false,
                 path: {
                     type: 'value',
                     error: {
                         type: 'string',
-                        error: 'Literal value is not a string, number or boolean'
+                        error: 'Literal value is not a string, number, boolean or null'
                     }
                 }
             }
         }
 
-        // @ts-ignore see above it can only be string number or boolean
-        const evaluatedType: "string" | "number" | "boolean" = typeof value.value;
+        let wrongType = false;
+        if (evaluatedType === 'null') {
+            wrongType = requiredType !== 'stringOrNumberOrBooleanOrNull' && !optional;
+        } else {
+            wrongType = requiredType !== 'stringOrNumberOrBooleanOrNull' && requiredType !== evaluatedType;
+        }
 
-        if (requiredType !== 'stringOrNumberOrBooleanOrNull' && requiredType !== evaluatedType) {
+        if (wrongType) {
             if (requiredType === 'array') {
 
                 if (requiredValueType === null)
