@@ -56,7 +56,7 @@ export type validateDatStructureValueError = {
             }
         ) & (
             {
-                evaluatedType: literalPropertyType | referencePropertyType | "oneOf";
+                evaluatedType: literalPropertyType | referencePropertyType | "oneOf" | "null";
             } | {
                 evaluatedType: "array";
                 evaluatedValueType: referencePropertyType;
