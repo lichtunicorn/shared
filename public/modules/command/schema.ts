@@ -15,7 +15,7 @@ export const operations = [
 export const value = z.union([
     z.object({
         type: z.literal("value"),
-        value: z.union([z.string(), z.number(), z.boolean()]),
+        value: z.union([z.string(), z.number(), z.boolean(), z.null()]),
     }),
     z.object({
         type: z.literal("getCommand"),
