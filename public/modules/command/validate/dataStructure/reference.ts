@@ -263,7 +263,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             // @ts-ignore checked above it can't be a reference type
             const searchPropertyType: Exclude<typeof searchProperty.type, referencePropertyType> = searchProperty.type;
 
-            const result = validateValueDataStructure(subReference.value, searchPropertyType, false, null);
+            const result = validateValueDataStructure(subReference.value, searchPropertyType, searchProperty.optional === true, null);
 
             if (!result.valid) {
                 return {
