@@ -112,8 +112,8 @@ export type show = public_show;
 export type public_sequence = {
     /** read only, unique, default cuid() */
     id: string;
-    /** read only, unique, null for global sequence */
-    index: null | number;
+    /** read only, unique */
+    index: number;
     /** read only, this is where the actual sequence contents/state is stored */
     sceneStates: { reference: string; }[];
     /** read only, this is where the actual sequence contents/state is stored */

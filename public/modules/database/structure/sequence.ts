@@ -18,9 +18,7 @@ export const sequence: model = {
         {
             name: "index",
             type: "number",
-            optional: true,
             unique: true,
-            comment: "null for global sequence"
         },
         {
             name: "sceneStates",
