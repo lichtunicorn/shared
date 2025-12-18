@@ -38,7 +38,7 @@ export const value = z.union([
 
 export const directReferenceContextTypes = [
     "show",
-    "section",
+    "sequence",
     "scene",
     "cuelist",
     "cue",

@@ -58,9 +58,9 @@ export type property<name extends string> = {
 
 export type database = {
     show: show[];
-    section: section[];
-    sectionSceneState: sectionSceneState[];
-    sectionCuelistState: sectionCuelistState[];
+    sequence: sequence[];
+    sequenceSceneState: sequenceSceneState[];
+    sequenceCuelistState: sequenceCuelistState[];
     group: group[];
     groupElement: groupElement[];
     scene: scene[];
@@ -83,14 +83,14 @@ export type database = {
     master: master[];
     customButton: customButton[];
 };
-export type modelName = "show" | "section" | "sectionSceneState" | "sectionCuelistState" | "group" | "groupElement" | "scene" | "sceneElement" | "sceneElementContent" | "cuelist" | "cue" | "cueElement" | "cueElementContent" | "effect" | "speedGroup" | "override" | "variable" | "macro" | "macroCommand" | "collection" | "fixture" | "attribute" | "preset" | "master" | "customButton";
+export type modelName = "show" | "sequence" | "sequenceSceneState" | "sequenceCuelistState" | "group" | "groupElement" | "scene" | "sceneElement" | "sceneElementContent" | "cuelist" | "cue" | "cueElement" | "cueElementContent" | "effect" | "speedGroup" | "override" | "variable" | "macro" | "macroCommand" | "collection" | "fixture" | "attribute" | "preset" | "master" | "customButton";
 export type public_show = {
     /** read only, unique, default cuid() */
     id: string;
     /** settable, unique */
     name: string;
     /** read only */
-    sections: { reference: string; }[];
+    sequences: { reference: string; }[];
     /** read only */
     scenes: { reference: string; }[];
     /** read only */
@@ -109,18 +109,18 @@ export type public_show = {
     variables: { reference: string; }[];
 };
 export type show = public_show;
-export type public_section = {
+export type public_sequence = {
     /** read only, unique, default cuid() */
     id: string;
-    /** read only, unique, null for global section */
+    /** read only, unique, null for global sequence */
     index: null | number;
-    /** read only, this is where the actual section contents/state is stored */
+    /** read only, this is where the actual sequence contents/state is stored */
     sceneStates: { reference: string; }[];
-    /** read only, this is where the actual section contents/state is stored */
+    /** read only, this is where the actual sequence contents/state is stored */
     cuelistStates: { reference: string; }[];
 };
-export type section = public_section;
-export type public_sectionSceneState = {
+export type sequence = public_sequence;
+export type public_sequenceSceneState = {
     /** read only, unique, default cuid() */
     id: string;
     /** read only */
@@ -128,10 +128,10 @@ export type public_sectionSceneState = {
     /** settable */
     active: boolean;
     /** read only, back reference */
-    section: { reference: string; };
+    sequence: { reference: string; };
 };
-export type sectionSceneState = public_sectionSceneState;
-export type public_sectionCuelistState = {
+export type sequenceSceneState = public_sequenceSceneState;
+export type public_sequenceCuelistState = {
     /** read only, unique, default cuid() */
     id: string;
     /** read only */
@@ -139,9 +139,9 @@ export type public_sectionCuelistState = {
     /** settable */
     active: boolean;
     /** read only, back reference */
-    section: { reference: string; };
+    sequence: { reference: string; };
 };
-export type sectionCuelistState = public_sectionCuelistState;
+export type sequenceCuelistState = public_sequenceCuelistState;
 export type public_group = {
     /** read only, unique, default cuid() */
     id: string;
@@ -398,7 +398,7 @@ export type public_customButton = {
 };
 export type customButton = public_customButton;
 
-export type modelData<currentModelName extends modelName> = currentModelName extends "show" ? show : currentModelName extends "section" ? section : currentModelName extends "sectionSceneState" ? sectionSceneState : currentModelName extends "sectionCuelistState" ? sectionCuelistState : currentModelName extends "group" ? group : currentModelName extends "groupElement" ? groupElement : currentModelName extends "scene" ? scene : currentModelName extends "sceneElement" ? sceneElement : currentModelName extends "sceneElementContent" ? sceneElementContent : currentModelName extends "cuelist" ? cuelist : currentModelName extends "cue" ? cue : currentModelName extends "cueElement" ? cueElement : currentModelName extends "cueElementContent" ? cueElementContent : currentModelName extends "effect" ? effect : currentModelName extends "speedGroup" ? speedGroup : currentModelName extends "override" ? override : currentModelName extends "variable" ? variable : currentModelName extends "macro" ? macro : currentModelName extends "macroCommand" ? macroCommand : currentModelName extends "collection" ? collection : currentModelName extends "fixture" ? fixture : currentModelName extends "attribute" ? attribute : currentModelName extends "preset" ? preset : currentModelName extends "master" ? master : currentModelName extends "customButton" ? customButton : never;
-export type publicModelData<currentModelName extends modelName> = currentModelName extends "show" ? public_show : currentModelName extends "section" ? public_section : currentModelName extends "sectionSceneState" ? public_sectionSceneState : currentModelName extends "sectionCuelistState" ? public_sectionCuelistState : currentModelName extends "group" ? public_group : currentModelName extends "groupElement" ? public_groupElement : currentModelName extends "scene" ? public_scene : currentModelName extends "sceneElement" ? public_sceneElement : currentModelName extends "sceneElementContent" ? public_sceneElementContent : currentModelName extends "cuelist" ? public_cuelist : currentModelName extends "cue" ? public_cue : currentModelName extends "cueElement" ? public_cueElement : currentModelName extends "cueElementContent" ? public_cueElementContent : currentModelName extends "effect" ? public_effect : currentModelName extends "speedGroup" ? public_speedGroup : currentModelName extends "override" ? public_override : currentModelName extends "variable" ? public_variable : currentModelName extends "macro" ? public_macro : currentModelName extends "macroCommand" ? public_macroCommand : currentModelName extends "collection" ? public_collection : currentModelName extends "fixture" ? public_fixture : currentModelName extends "attribute" ? public_attribute : currentModelName extends "preset" ? public_preset : currentModelName extends "master" ? public_master : currentModelName extends "customButton" ? public_customButton : never;
+export type modelData<currentModelName extends modelName> = currentModelName extends "show" ? show : currentModelName extends "sequence" ? sequence : currentModelName extends "sequenceSceneState" ? sequenceSceneState : currentModelName extends "sequenceCuelistState" ? sequenceCuelistState : currentModelName extends "group" ? group : currentModelName extends "groupElement" ? groupElement : currentModelName extends "scene" ? scene : currentModelName extends "sceneElement" ? sceneElement : currentModelName extends "sceneElementContent" ? sceneElementContent : currentModelName extends "cuelist" ? cuelist : currentModelName extends "cue" ? cue : currentModelName extends "cueElement" ? cueElement : currentModelName extends "cueElementContent" ? cueElementContent : currentModelName extends "effect" ? effect : currentModelName extends "speedGroup" ? speedGroup : currentModelName extends "override" ? override : currentModelName extends "variable" ? variable : currentModelName extends "macro" ? macro : currentModelName extends "macroCommand" ? macroCommand : currentModelName extends "collection" ? collection : currentModelName extends "fixture" ? fixture : currentModelName extends "attribute" ? attribute : currentModelName extends "preset" ? preset : currentModelName extends "master" ? master : currentModelName extends "customButton" ? customButton : never;
+export type publicModelData<currentModelName extends modelName> = currentModelName extends "show" ? public_show : currentModelName extends "sequence" ? public_sequence : currentModelName extends "sequenceSceneState" ? public_sequenceSceneState : currentModelName extends "sequenceCuelistState" ? public_sequenceCuelistState : currentModelName extends "group" ? public_group : currentModelName extends "groupElement" ? public_groupElement : currentModelName extends "scene" ? public_scene : currentModelName extends "sceneElement" ? public_sceneElement : currentModelName extends "sceneElementContent" ? public_sceneElementContent : currentModelName extends "cuelist" ? public_cuelist : currentModelName extends "cue" ? public_cue : currentModelName extends "cueElement" ? public_cueElement : currentModelName extends "cueElementContent" ? public_cueElementContent : currentModelName extends "effect" ? public_effect : currentModelName extends "speedGroup" ? public_speedGroup : currentModelName extends "override" ? public_override : currentModelName extends "variable" ? public_variable : currentModelName extends "macro" ? public_macro : currentModelName extends "macroCommand" ? public_macroCommand : currentModelName extends "collection" ? public_collection : currentModelName extends "fixture" ? public_fixture : currentModelName extends "attribute" ? public_attribute : currentModelName extends "preset" ? public_preset : currentModelName extends "master" ? public_master : currentModelName extends "customButton" ? public_customButton : never;
 
 // </auto generated, do not edit>
