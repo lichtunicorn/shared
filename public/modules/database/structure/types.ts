@@ -118,6 +118,8 @@ export type public_sequence = {
     sceneStates: { reference: string; }[];
     /** read only, this is where the actual sequence contents/state is stored */
     cuelistStates: { reference: string; }[];
+    /** settable */
+    customButtons: { reference: string; }[];
 };
 export type sequence = public_sequence;
 export type public_sequenceSceneState = {
@@ -411,6 +413,8 @@ export type public_customButton = {
     cuelist: null | { reference: string; };
     /** settable, back reference */
     collection: null | { reference: string; };
+    /** settable, back reference */
+    sequence: null | { reference: string; };
 };
 export type customButton = public_customButton;
 
