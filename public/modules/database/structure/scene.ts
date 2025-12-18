@@ -2,8 +2,8 @@ import type { model } from './types';
 
 export const scene: model = {
     creatable: true,
-    gettable: ['id', 'index', 'name', 'active', 'masters', 'customButtons', 'elements'],
-    settable: ['index', 'name', 'active', 'masters', 'customButtons'],
+    gettable: ['id', 'index', 'name', 'active', 'executors', 'customButtons', 'elements'],
+    settable: ['index', 'name', 'active', 'executors', 'customButtons'],
     move: 'index',
     recursiveDeleteProperties: ['elements'],
     deletable: true,
@@ -36,10 +36,10 @@ export const scene: model = {
             }
         },
         {
-            name: 'masters',
+            name: 'executors',
             type: 'array',
             valueType: {
-                reference: 'master'
+                reference: 'executor'
             },
         },
         {

@@ -1,8 +1,8 @@
 import type { model } from './types';
 
-export const master: model = {
+export const executor: model = {
     creatable: false,
-    gettable: ['id', 'index', 'scene', 'cuelist'],
+    gettable: ['id', 'index', 'scene', 'cuelist', 'collection'],
     settable: ['scene', 'cuelist'],
     isAssignable: true,
     properties: [
@@ -34,6 +34,14 @@ export const master: model = {
             },
             backReference: true,
             optional: true,
+        },
+        {
+            name: 'collection',
+            type: {
+                reference: 'collection'
+            },
+            backReference: true,
+            optional: true
         }
     ]
 };

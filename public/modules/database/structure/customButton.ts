@@ -43,6 +43,14 @@ export const customButton: model = {
             },
             backReference: true,
             optional: true,
+        },
+        {
+            name: 'collection',
+            type: {
+                reference: 'collection'
+            },
+            backReference: true,
+            optional: true
         }
     ]
 };
