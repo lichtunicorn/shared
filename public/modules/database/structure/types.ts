@@ -169,6 +169,8 @@ export type public_scene = {
     index: number;
     /** settable */
     name: string;
+    /** settable, default false */
+    active: boolean;
     /** settable */
     masters: { reference: string; }[];
     /** settable */
@@ -212,6 +214,10 @@ export type public_cuelist = {
     index: number;
     /** settable */
     name: string;
+    /** settable */
+    currentCue: null | number;
+    /** settable, default false */
+    active: boolean;
     /** settable */
     masters: { reference: string; }[];
     /** settable */
