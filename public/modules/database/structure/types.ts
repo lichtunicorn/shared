@@ -394,7 +394,7 @@ export type public_executor = {
     scene: null | { reference: string; };
     /** settable, back reference */
     cuelist: null | { reference: string; };
-    /** read only, back reference */
+    /** settable, back reference */
     collection: null | { reference: string; };
 };
 export type executor = public_executor;
@@ -409,10 +409,10 @@ export type public_customButton = {
     scene: null | { reference: string; };
     /** settable, back reference */
     cuelist: null | { reference: string; };
-    /** read only, back reference */
+    /** settable, back reference */
     collection: null | { reference: string; };
 };
-export type customButton = Omit<public_customButton, "collection">;
+export type customButton = public_customButton;
 
 export type modelData<currentModelName extends modelName> = currentModelName extends "show" ? show : currentModelName extends "sequence" ? sequence : currentModelName extends "sequenceSceneState" ? sequenceSceneState : currentModelName extends "sequenceCuelistState" ? sequenceCuelistState : currentModelName extends "group" ? group : currentModelName extends "groupElement" ? groupElement : currentModelName extends "scene" ? scene : currentModelName extends "sceneElement" ? sceneElement : currentModelName extends "sceneElementContent" ? sceneElementContent : currentModelName extends "cuelist" ? cuelist : currentModelName extends "cue" ? cue : currentModelName extends "cueElement" ? cueElement : currentModelName extends "cueElementContent" ? cueElementContent : currentModelName extends "effect" ? effect : currentModelName extends "speedGroup" ? speedGroup : currentModelName extends "override" ? override : currentModelName extends "variable" ? variable : currentModelName extends "macro" ? macro : currentModelName extends "macroCommand" ? macroCommand : currentModelName extends "collection" ? collection : currentModelName extends "fixture" ? fixture : currentModelName extends "attribute" ? attribute : currentModelName extends "preset" ? preset : currentModelName extends "executor" ? executor : currentModelName extends "customButton" ? customButton : never;
 export type publicModelData<currentModelName extends modelName> = currentModelName extends "show" ? public_show : currentModelName extends "sequence" ? public_sequence : currentModelName extends "sequenceSceneState" ? public_sequenceSceneState : currentModelName extends "sequenceCuelistState" ? public_sequenceCuelistState : currentModelName extends "group" ? public_group : currentModelName extends "groupElement" ? public_groupElement : currentModelName extends "scene" ? public_scene : currentModelName extends "sceneElement" ? public_sceneElement : currentModelName extends "sceneElementContent" ? public_sceneElementContent : currentModelName extends "cuelist" ? public_cuelist : currentModelName extends "cue" ? public_cue : currentModelName extends "cueElement" ? public_cueElement : currentModelName extends "cueElementContent" ? public_cueElementContent : currentModelName extends "effect" ? public_effect : currentModelName extends "speedGroup" ? public_speedGroup : currentModelName extends "override" ? public_override : currentModelName extends "variable" ? public_variable : currentModelName extends "macro" ? public_macro : currentModelName extends "macroCommand" ? public_macroCommand : currentModelName extends "collection" ? public_collection : currentModelName extends "fixture" ? public_fixture : currentModelName extends "attribute" ? public_attribute : currentModelName extends "preset" ? public_preset : currentModelName extends "executor" ? public_executor : currentModelName extends "customButton" ? public_customButton : never;

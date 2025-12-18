@@ -2,8 +2,8 @@ import type { model } from './types';
 
 export const customButton: model = {
     creatable: true,
-    gettable: ['id', 'index', 'macro', 'scene', 'cuelist'],
-    settable: ['index', 'macro', 'scene', 'cuelist'],
+    gettable: ['id', 'index', 'macro', 'scene', 'cuelist', 'collection'],
+    settable: ['index', 'macro', 'scene', 'cuelist', 'collection'],
     isAssignable: true,
     move: 'index',
     properties: [

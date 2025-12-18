@@ -3,7 +3,7 @@ import type { model } from './types';
 export const executor: model = {
     creatable: false,
     gettable: ['id', 'index', 'scene', 'cuelist', 'collection'],
-    settable: ['scene', 'cuelist'],
+    settable: ['scene', 'cuelist', 'collection'],
     isAssignable: true,
     properties: [
         {
