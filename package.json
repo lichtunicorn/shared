@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "u": "bun public/modules/database/structure/index",
-    "wu": "bun --watch public/modules/database/structure/index"
+    "dev": "bun --watch public/modules/database/structure/index"
   },
   "exports": {
     "./*": "./public/*"
