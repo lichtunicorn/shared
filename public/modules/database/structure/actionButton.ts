@@ -1,6 +1,6 @@
 import type { model } from './types';
 
-export const customButton: model = {
+export const actionButton: model = {
     creatable: true,
     gettable: ['id', 'index', 'macro', 'scene', 'cuelist', 'collection', 'sequence'],
     settable: ['index', 'macro', 'scene', 'cuelist', 'collection', 'sequence'],

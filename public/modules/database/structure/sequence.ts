@@ -2,8 +2,8 @@ import type { model } from './types';
 
 export const sequence: model = {
     creatable: false,
-    gettable: ['id', 'index', 'sceneStates', 'cuelistStates', 'customButtons'],
-    settable: ['customButtons'],
+    gettable: ['id', 'index', 'sceneStates', 'cuelistStates', 'actionButtons'],
+    settable: ['actionButtons'],
     recursiveDeleteProperties: ['sceneStates', 'cuelistStates'],
     goable: true,
     properties: [
@@ -37,10 +37,10 @@ export const sequence: model = {
             comment: "this is where the actual sequence contents/state is stored",
         },
         {
-            name: "customButtons",
+            name: "actionButtons",
             type: "array",
             valueType: {
-                reference: "customButton"
+                reference: "actionButton"
             }
         }
     ]

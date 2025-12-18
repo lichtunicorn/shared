@@ -2,8 +2,8 @@ import type { model } from './types';
 
 export const collection: model = {
     creatable: true,
-    gettable: ['id', 'index', 'name', 'scenes', 'cuelists', 'executors', 'customButtons'],
-    settable: ['index', 'name', 'scenes', 'cuelists', 'executors', 'customButtons'],
+    gettable: ['id', 'index', 'name', 'scenes', 'cuelists', 'executors', 'actionButtons'],
+    settable: ['index', 'name', 'scenes', 'cuelists', 'executors', 'actionButtons'],
     move: 'index',
     deletable: true,
     goable: true,
@@ -48,10 +48,10 @@ export const collection: model = {
             },
         },
         {
-            name: 'customButtons',
+            name: 'actionButtons',
             type: 'array',
             valueType: {
-                reference: 'customButton'
+                reference: 'actionButton'
             },
         },
     ]
