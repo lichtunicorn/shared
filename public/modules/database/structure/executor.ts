@@ -1,10 +1,12 @@
 import type { model } from './types';
+import { actionButton } from './actionButton';
 
 export const executor: model = {
     creatable: false,
-    gettable: ['id', 'index', 'scene', 'cuelist', 'collection'],
-    settable: ['scene', 'cuelist', 'collection'],
+    gettable: ['id', 'index', 'scene', 'cuelist', 'collection', 'executorButtons'],
+    settable: ['scene', 'cuelist', 'collection', 'executorButtons'],
     isAssignable: true,
+    recursiveDeleteProperties: ['executorButtons'],
     properties: [
         {
             name: "id",
@@ -42,6 +44,29 @@ export const executor: model = {
             },
             backReference: true,
             optional: true
+        },
+        {
+            name: 'executorButtons',
+            type: 'array',
+            valueType: {
+                reference: 'executorButton'
+            }
+        }
+    ]
+};
+
+export const executorButton: model = {
+    creatable: true,
+    gettable: [...actionButton.gettable],
+    settable: [...actionButton.settable],
+    properties: [
+        ...actionButton.properties,
+        {
+            name: 'executor',
+            type: {
+                reference: 'executor'
+            },
+            backReference: true
         }
     ]
 };

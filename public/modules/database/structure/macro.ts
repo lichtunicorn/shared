@@ -2,8 +2,8 @@ import type { model } from './types';
 
 export const macro: model = {
     creatable: true,
-    gettable: ['id', 'index', 'cues', 'commands', 'actionButtons'],
-    settable: ['index', 'cues', 'actionButtons'],
+    gettable: ['id', 'index', 'cues', 'commands', 'actionButtons', 'executorButtons'],
+    settable: ['index', 'cues', 'actionButtons', 'executorButtons'],
     move: 'index',
     recursiveDeleteProperties: ['commands'],
     deletable: true,
@@ -28,6 +28,13 @@ export const macro: model = {
             type: 'array',
             valueType: {
                 reference: 'actionButton'
+            },
+        },
+        {
+            name: 'executorButtons',
+            type: 'array',
+            valueType: {
+                reference: 'executorButton'
             },
         },
         {

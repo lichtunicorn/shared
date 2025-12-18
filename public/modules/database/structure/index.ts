@@ -15,7 +15,7 @@ import { macro, macroCommand } from "./macro";
 import { collection } from "./collection";
 import { fixture } from "./fixture";
 import { attribute, preset } from "./attribute";
-import { executor } from "./executor";
+import { executor, executorButton } from "./executor";
 import { actionButton } from "./actionButton";
 
 export const structure: structureType = {
@@ -43,7 +43,8 @@ export const structure: structureType = {
     attribute,
     preset,
     executor,
-    actionButton
+    actionButton,
+    executorButton
 };
 
 checkValidity();
