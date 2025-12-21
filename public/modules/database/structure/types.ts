@@ -298,36 +298,36 @@ export type public_effect = {
     groups: number;
     /** settable, default 0 */
     blocks: number;
-    /** read only, default true, If true, effect works for any amount of fixtures. If false, effect works for specific amount of fixtures */
+    /** settable, default true, If true, effect works for any amount of fixtures. If false, effect works for specific amount of fixtures */
     template: boolean;
-    /** read only, percentage 0 (no offset) to 50 (half offset) to 100 (full offset, so no offset). Null if template is false */
+    /** settable, percentage 0 (no offset) to 50 (half offset) to 100 (full offset, so no offset). Null if template is false */
     templateOffsetBase: null | number;
-    /** read only, If true, use selection grid. If false, use fixture numbers. Null if template is false */
+    /** settable, If true, use selection grid. If false, use fixture numbers. Null if template is false */
     templateOffsetSelectionGrid: null | boolean;
-    /** read only, How much the offset increases per fixture. Null if template is false or templateOffsetSelectionGrid is true */
+    /** settable, How much the offset increases per fixture. Null if template is false or templateOffsetSelectionGrid is true */
     templateOffsetIncrease: null | number;
-    /** read only, How much the offset increases per x on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    /** settable, How much the offset increases per x on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
     templateOffsetXIncrease: null | number;
-    /** read only, If the offset is symmetrical on x on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    /** settable, If the offset is symmetrical on x on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
     templateOffsetXSymmetrical: null | boolean;
-    /** read only, How much the offset increases per y on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    /** settable, How much the offset increases per y on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
     templateOffsetYIncrease: null | number;
-    /** read only, If the offset is symmetrical on y on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    /** settable, If the offset is symmetrical on y on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
     templateOffsetYSymmetrical: null | number;
-    /** read only, The offset per fixture if template = false. Null if template = true */
+    /** settable, The offset per fixture if template = false. Null if template = true */
     nonTemplateOffsets: null | { reference: string; }[];
-    /** read only, Where to use the current value. If null, don't use current value */
+    /** settable, Where to use the current value. If null, don't use current value */
     currentValue: null | "lowValue" | "middleValue" | "highValue";
-    /** read only, The low value of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
+    /** settable, The low value of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
     lowValue: null | { reference: string; };
-    /** read only, The low preset of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
+    /** settable, The low preset of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
     lowPreset: null | { reference: string; };
-    /** read only, The high value of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
+    /** settable, The high value of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
     highValue: null | { reference: string; };
-    /** read only, The high preset of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
+    /** settable, The high preset of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
     highPreset: null | { reference: string; };
 };
-export type effect = Omit<public_effect, "template" | "templateOffsetBase" | "templateOffsetSelectionGrid" | "templateOffsetIncrease" | "templateOffsetXIncrease" | "templateOffsetXSymmetrical" | "templateOffsetYIncrease" | "templateOffsetYSymmetrical" | "nonTemplateOffsets" | "currentValue" | "lowValue" | "lowPreset" | "highValue" | "highPreset">;
+export type effect = public_effect;
 export type public_effectOffset = {
     /** read only, unique, default cuid() */
     id: string;
@@ -336,7 +336,7 @@ export type public_effectOffset = {
     /** read only, back reference */
     effect: { reference: string; };
 };
-export type effectOffset = Omit<public_effectOffset, "effect">;
+export type effectOffset = public_effectOffset;
 export type public_speedGroup = {
     /** read only, unique, default cuid() */
     id: string;

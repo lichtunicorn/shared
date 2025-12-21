@@ -1,11 +1,9 @@
 import type { model } from './types';
 
-// todo: update gettable and settable
-
 export const effect: model = {
     creatable: true,
-    gettable: ['id', 'index', 'type', 'speedGroup', 'multiplier', 'wings', 'groups', 'blocks'],
-    settable: ['index', 'type', 'speedGroup', 'multiplier', 'wings', 'groups', 'blocks'],
+    gettable: ['id', 'index', 'type', 'speedGroup', 'multiplier', 'wings', 'groups', 'blocks', 'template', 'templateOffsetBase', 'templateOffsetSelectionGrid', 'templateOffsetIncrease', 'templateOffsetXIncrease', 'templateOffsetXSymmetrical', 'templateOffsetYIncrease', 'templateOffsetYSymmetrical', 'nonTemplateOffsets', 'currentValue', 'lowValue', 'lowPreset', 'highValue', 'highPreset'],
+    settable: ['index', 'type', 'speedGroup', 'multiplier', 'wings', 'groups', 'blocks', 'template', 'templateOffsetBase', 'templateOffsetSelectionGrid', 'templateOffsetIncrease', 'templateOffsetXIncrease', 'templateOffsetXSymmetrical', 'templateOffsetYIncrease', 'templateOffsetYSymmetrical', 'nonTemplateOffsets', 'currentValue', 'lowValue', 'lowPreset', 'highValue', 'highPreset'],
     move: 'index',
     deletable: true,
     selectable: true,
@@ -181,7 +179,7 @@ export const effect: model = {
 };
 
 export const effectOffset: model = {
-    gettable: ['id', 'offset'],
+    gettable: ['id', 'offset', 'effect'],
     settable: ['offset'],
     creatable: true,
     properties: [
