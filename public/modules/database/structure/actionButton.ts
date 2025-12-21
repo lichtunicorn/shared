@@ -7,17 +7,17 @@ export const generalFunctionNames = [
     'previous',
     'all',
     'next',
-    'arrowLeft',
-    'arrowRight',
-    'arrowUp',
-    'arrowDown',
+    'uni',
+
     'kindIntensity',
     'kindPosition',
     'kindColor',
     'kindBeam',
+
     'group',
     'scene',
     'cuelist',
+
     'delete',
     'move',
     'copy',
@@ -26,7 +26,11 @@ export const generalFunctionNames = [
     'record',
     'go',
     'empty',
-    'uni',
+
+    'arrowLeft',
+    'arrowRight',
+    'arrowUp',
+    'arrowDown',
 
     'number0',
     'number1',

@@ -429,7 +429,7 @@ export type public_actionButton = {
     /** settable, back reference */
     section: null | { reference: string; };
     /** settable */
-    generalFunction: null | "clear" | "blind" | "highlight" | "previous" | "all" | "next" | "arrowLeft" | "arrowRight" | "arrowUp" | "arrowDown" | "kindIntensity" | "kindPosition" | "kindColor" | "kindBeam" | "group" | "scene" | "cuelist" | "delete" | "move" | "copy" | "open" | "assign" | "record" | "go" | "empty" | "uni" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "dot" | "at" | "thru" | "plus" | "enter" | "backspace" | "set";
+    generalFunction: null | "clear" | "blind" | "highlight" | "previous" | "all" | "next" | "uni" | "kindIntensity" | "kindPosition" | "kindColor" | "kindBeam" | "group" | "scene" | "cuelist" | "delete" | "move" | "copy" | "open" | "assign" | "record" | "go" | "empty" | "arrowLeft" | "arrowRight" | "arrowUp" | "arrowDown" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "dot" | "at" | "thru" | "plus" | "enter" | "backspace" | "set";
 };
 export type actionButton = public_actionButton;
 export type public_executorButton = {
@@ -448,7 +448,7 @@ export type public_executorButton = {
     /** settable, back reference */
     section: null | { reference: string; };
     /** settable */
-    generalFunction: null | "clear" | "blind" | "highlight" | "previous" | "all" | "next" | "arrowLeft" | "arrowRight" | "arrowUp" | "arrowDown" | "kindIntensity" | "kindPosition" | "kindColor" | "kindBeam" | "group" | "scene" | "cuelist" | "delete" | "move" | "copy" | "open" | "assign" | "record" | "go" | "empty" | "uni" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "dot" | "at" | "thru" | "plus" | "enter" | "backspace" | "set";
+    generalFunction: null | "clear" | "blind" | "highlight" | "previous" | "all" | "next" | "uni" | "kindIntensity" | "kindPosition" | "kindColor" | "kindBeam" | "group" | "scene" | "cuelist" | "delete" | "move" | "copy" | "open" | "assign" | "record" | "go" | "empty" | "arrowLeft" | "arrowRight" | "arrowUp" | "arrowDown" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "dot" | "at" | "thru" | "plus" | "enter" | "backspace" | "set";
     /** read only, back reference */
     executor: { reference: string; };
 };
