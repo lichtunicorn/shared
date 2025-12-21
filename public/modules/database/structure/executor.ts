@@ -9,10 +9,16 @@ export const executorButtonFunctionNames = [
     'release'
 ];
 
+export const faderFunctionNames = [
+    'intensity',
+    'release',
+    'crossfade'
+];
+
 export const executor: model = {
     creatable: false,
-    gettable: ['id', 'index', 'scene', 'cuelist', 'collection', 'executorButtons'],
-    settable: ['scene', 'cuelist', 'collection', 'executorButtons'],
+    gettable: ['id', 'index', 'scene', 'cuelist', 'collection', 'executorButtons', 'faders'],
+    settable: ['scene', 'cuelist', 'collection', 'executorButtons', 'faders'],
     isAssignable: true,
     recursiveDeleteProperties: ['executorButtons'],
     properties: [
@@ -28,6 +34,12 @@ export const executor: model = {
             name: 'index',
             type: 'number',
             unique: true
+        },
+        {
+            name: 'faders',
+            type: {
+                reference: 'executorFader'
+            },
         },
         {
             name: 'scene',
@@ -62,6 +74,33 @@ export const executor: model = {
         }
     ]
 };
+
+export const executorFader: model = {
+    creatable: true,
+    gettable: ['id', 'physicalButtonIndex', 'function'],
+    settable: ['physicalButtonIndex', 'function'],
+    properties: [
+        {
+            name: "id",
+            type: "string",
+            unique: true,
+            default: {
+                type: "cuid"
+            },
+        },
+        {
+            name: 'physicalButtonIndex',
+            type: 'number',
+            unique: true,
+            optional: true
+        },
+        {
+            name: 'function',
+            type: 'oneOf',
+            options: faderFunctionNames
+        }
+    ]
+}
 
 export const executorButton: model = {
     creatable: true,
