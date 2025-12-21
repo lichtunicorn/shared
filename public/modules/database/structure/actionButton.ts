@@ -61,7 +61,6 @@ export const actionButton: model = {
     creatable: true,
     gettable: ['id', 'index', 'macro', 'scene', 'cuelist', 'collection', 'section', 'generalFunction', 'physicalButtonIndex'],
     settable: ['index', 'macro', 'scene', 'cuelist', 'collection', 'section', 'generalFunction', 'physicalButtonIndex'],
-    isAssignable: true,
     move: 'index',
     properties: [
         {
