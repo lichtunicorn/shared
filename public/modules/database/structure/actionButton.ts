@@ -1,9 +1,56 @@
 import type { model } from './types';
 
+export const generalFunctionNames = [
+    'clear',
+    'blind',
+    'highlight',
+    'previous',
+    'all',
+    'next',
+    'arrowLeft',
+    'arrowRight',
+    'arrowUp',
+    'arrowDown',
+    'kindIntensity',
+    'kindPosition',
+    'kindColor',
+    'kindBeam',
+    'group',
+    'scene',
+    'cuelist',
+    'delete',
+    'move',
+    'copy',
+    'open',
+    'assign',
+    'record',
+    'go',
+    'empty',
+    'uni',
+
+    'number0',
+    'number1',
+    'number2',
+    'number3',
+    'number4',
+    'number5',
+    'number6',
+    'number7',
+    'number8',
+    'number9',
+    'dot',
+    'at',
+    'thru',
+    'plus',
+    'enter',
+    'backspace',
+    'set'
+];
+
 export const actionButton: model = {
     creatable: true,
-    gettable: ['id', 'index', 'macro', 'scene', 'cuelist', 'collection', 'section'],
-    settable: ['index', 'macro', 'scene', 'cuelist', 'collection', 'section'],
+    gettable: ['id', 'index', 'macro', 'scene', 'cuelist', 'collection', 'section', 'generalFunction'],
+    settable: ['index', 'macro', 'scene', 'cuelist', 'collection', 'section', 'generalFunction'],
     isAssignable: true,
     move: 'index',
     properties: [
@@ -59,6 +106,12 @@ export const actionButton: model = {
             },
             backReference: true,
             optional: true
+        },
+        {
+            name: 'generalFunction',
+            type: 'oneOf',
+            options: generalFunctionNames,
+            optional: true,
         }
     ]
 };
