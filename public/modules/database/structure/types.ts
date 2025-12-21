@@ -72,6 +72,7 @@ export type database = {
     cueElement: cueElement[];
     cueElementContent: cueElementContent[];
     effect: effect[];
+    effectOffset: effectOffset[];
     speedGroup: speedGroup[];
     override: override[];
     variable: variable[];
@@ -88,7 +89,7 @@ export type database = {
     programmerElement: programmerElement[];
     programmerElementContents: programmerElementContents[];
 };
-export type modelName = "show" | "section" | "sectionSceneState" | "sectionCuelistState" | "group" | "groupElement" | "scene" | "sceneElement" | "sceneElementContent" | "cuelist" | "cue" | "cueElement" | "cueElementContent" | "effect" | "speedGroup" | "override" | "variable" | "macro" | "macroCommand" | "collection" | "fixture" | "attribute" | "preset" | "executor" | "actionButton" | "executorButton" | "executorFader" | "programmerElement" | "programmerElementContents";
+export type modelName = "show" | "section" | "sectionSceneState" | "sectionCuelistState" | "group" | "groupElement" | "scene" | "sceneElement" | "sceneElementContent" | "cuelist" | "cue" | "cueElement" | "cueElementContent" | "effect" | "effectOffset" | "speedGroup" | "override" | "variable" | "macro" | "macroCommand" | "collection" | "fixture" | "attribute" | "preset" | "executor" | "actionButton" | "executorButton" | "executorFader" | "programmerElement" | "programmerElementContents";
 export type public_show = {
     /** read only, unique, default cuid() */
     id: string;
@@ -297,8 +298,45 @@ export type public_effect = {
     groups: number;
     /** settable, default 0 */
     blocks: number;
+    /** read only, default true, If true, effect works for any amount of fixtures. If false, effect works for specific amount of fixtures */
+    template: boolean;
+    /** read only, percentage 0 (no offset) to 50 (half offset) to 100 (full offset, so no offset). Null if template is false */
+    templateOffsetBase: null | number;
+    /** read only, If true, use selection grid. If false, use fixture numbers. Null if template is false */
+    templateOffsetSelectionGrid: null | boolean;
+    /** read only, How much the offset increases per fixture. Null if template is false or templateOffsetSelectionGrid is true */
+    templateOffsetIncrease: null | number;
+    /** read only, How much the offset increases per x on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    templateOffsetXIncrease: null | number;
+    /** read only, If the offset is symmetrical on x on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    templateOffsetXSymmetrical: null | boolean;
+    /** read only, How much the offset increases per y on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    templateOffsetYIncrease: null | number;
+    /** read only, If the offset is symmetrical on y on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    templateOffsetYSymmetrical: null | number;
+    /** read only, The offset per fixture if template = false. Null if template = true */
+    nonTemplateOffsets: null | { reference: string; }[];
+    /** read only, Where to use the current value. If null, don't use current value */
+    currentValue: null | "lowValue" | "middleValue" | "highValue";
+    /** read only, The low value of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
+    lowValue: null | { reference: string; };
+    /** read only, The low preset of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
+    lowPreset: null | { reference: string; };
+    /** read only, The high value of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
+    highValue: null | { reference: string; };
+    /** read only, The high preset of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
+    highPreset: null | { reference: string; };
 };
-export type effect = public_effect;
+export type effect = Omit<public_effect, "template" | "templateOffsetBase" | "templateOffsetSelectionGrid" | "templateOffsetIncrease" | "templateOffsetXIncrease" | "templateOffsetXSymmetrical" | "templateOffsetYIncrease" | "templateOffsetYSymmetrical" | "nonTemplateOffsets" | "currentValue" | "lowValue" | "lowPreset" | "highValue" | "highPreset">;
+export type public_effectOffset = {
+    /** read only, unique, default cuid() */
+    id: string;
+    /** settable */
+    offset: number;
+    /** read only, back reference */
+    effect: { reference: string; };
+};
+export type effectOffset = Omit<public_effectOffset, "effect">;
 export type public_speedGroup = {
     /** read only, unique, default cuid() */
     id: string;
@@ -501,7 +539,7 @@ export type public_programmerElementContents = {
 };
 export type programmerElementContents = public_programmerElementContents;
 
-export type modelData<currentModelName extends modelName> = currentModelName extends "show" ? show : currentModelName extends "section" ? section : currentModelName extends "sectionSceneState" ? sectionSceneState : currentModelName extends "sectionCuelistState" ? sectionCuelistState : currentModelName extends "group" ? group : currentModelName extends "groupElement" ? groupElement : currentModelName extends "scene" ? scene : currentModelName extends "sceneElement" ? sceneElement : currentModelName extends "sceneElementContent" ? sceneElementContent : currentModelName extends "cuelist" ? cuelist : currentModelName extends "cue" ? cue : currentModelName extends "cueElement" ? cueElement : currentModelName extends "cueElementContent" ? cueElementContent : currentModelName extends "effect" ? effect : currentModelName extends "speedGroup" ? speedGroup : currentModelName extends "override" ? override : currentModelName extends "variable" ? variable : currentModelName extends "macro" ? macro : currentModelName extends "macroCommand" ? macroCommand : currentModelName extends "collection" ? collection : currentModelName extends "fixture" ? fixture : currentModelName extends "attribute" ? attribute : currentModelName extends "preset" ? preset : currentModelName extends "executor" ? executor : currentModelName extends "actionButton" ? actionButton : currentModelName extends "executorButton" ? executorButton : currentModelName extends "executorFader" ? executorFader : currentModelName extends "programmerElement" ? programmerElement : currentModelName extends "programmerElementContents" ? programmerElementContents : never;
-export type publicModelData<currentModelName extends modelName> = currentModelName extends "show" ? public_show : currentModelName extends "section" ? public_section : currentModelName extends "sectionSceneState" ? public_sectionSceneState : currentModelName extends "sectionCuelistState" ? public_sectionCuelistState : currentModelName extends "group" ? public_group : currentModelName extends "groupElement" ? public_groupElement : currentModelName extends "scene" ? public_scene : currentModelName extends "sceneElement" ? public_sceneElement : currentModelName extends "sceneElementContent" ? public_sceneElementContent : currentModelName extends "cuelist" ? public_cuelist : currentModelName extends "cue" ? public_cue : currentModelName extends "cueElement" ? public_cueElement : currentModelName extends "cueElementContent" ? public_cueElementContent : currentModelName extends "effect" ? public_effect : currentModelName extends "speedGroup" ? public_speedGroup : currentModelName extends "override" ? public_override : currentModelName extends "variable" ? public_variable : currentModelName extends "macro" ? public_macro : currentModelName extends "macroCommand" ? public_macroCommand : currentModelName extends "collection" ? public_collection : currentModelName extends "fixture" ? public_fixture : currentModelName extends "attribute" ? public_attribute : currentModelName extends "preset" ? public_preset : currentModelName extends "executor" ? public_executor : currentModelName extends "actionButton" ? public_actionButton : currentModelName extends "executorButton" ? public_executorButton : currentModelName extends "executorFader" ? public_executorFader : currentModelName extends "programmerElement" ? public_programmerElement : currentModelName extends "programmerElementContents" ? public_programmerElementContents : never;
+export type modelData<currentModelName extends modelName> = currentModelName extends "show" ? show : currentModelName extends "section" ? section : currentModelName extends "sectionSceneState" ? sectionSceneState : currentModelName extends "sectionCuelistState" ? sectionCuelistState : currentModelName extends "group" ? group : currentModelName extends "groupElement" ? groupElement : currentModelName extends "scene" ? scene : currentModelName extends "sceneElement" ? sceneElement : currentModelName extends "sceneElementContent" ? sceneElementContent : currentModelName extends "cuelist" ? cuelist : currentModelName extends "cue" ? cue : currentModelName extends "cueElement" ? cueElement : currentModelName extends "cueElementContent" ? cueElementContent : currentModelName extends "effect" ? effect : currentModelName extends "effectOffset" ? effectOffset : currentModelName extends "speedGroup" ? speedGroup : currentModelName extends "override" ? override : currentModelName extends "variable" ? variable : currentModelName extends "macro" ? macro : currentModelName extends "macroCommand" ? macroCommand : currentModelName extends "collection" ? collection : currentModelName extends "fixture" ? fixture : currentModelName extends "attribute" ? attribute : currentModelName extends "preset" ? preset : currentModelName extends "executor" ? executor : currentModelName extends "actionButton" ? actionButton : currentModelName extends "executorButton" ? executorButton : currentModelName extends "executorFader" ? executorFader : currentModelName extends "programmerElement" ? programmerElement : currentModelName extends "programmerElementContents" ? programmerElementContents : never;
+export type publicModelData<currentModelName extends modelName> = currentModelName extends "show" ? public_show : currentModelName extends "section" ? public_section : currentModelName extends "sectionSceneState" ? public_sectionSceneState : currentModelName extends "sectionCuelistState" ? public_sectionCuelistState : currentModelName extends "group" ? public_group : currentModelName extends "groupElement" ? public_groupElement : currentModelName extends "scene" ? public_scene : currentModelName extends "sceneElement" ? public_sceneElement : currentModelName extends "sceneElementContent" ? public_sceneElementContent : currentModelName extends "cuelist" ? public_cuelist : currentModelName extends "cue" ? public_cue : currentModelName extends "cueElement" ? public_cueElement : currentModelName extends "cueElementContent" ? public_cueElementContent : currentModelName extends "effect" ? public_effect : currentModelName extends "effectOffset" ? public_effectOffset : currentModelName extends "speedGroup" ? public_speedGroup : currentModelName extends "override" ? public_override : currentModelName extends "variable" ? public_variable : currentModelName extends "macro" ? public_macro : currentModelName extends "macroCommand" ? public_macroCommand : currentModelName extends "collection" ? public_collection : currentModelName extends "fixture" ? public_fixture : currentModelName extends "attribute" ? public_attribute : currentModelName extends "preset" ? public_preset : currentModelName extends "executor" ? public_executor : currentModelName extends "actionButton" ? public_actionButton : currentModelName extends "executorButton" ? public_executorButton : currentModelName extends "executorFader" ? public_executorFader : currentModelName extends "programmerElement" ? public_programmerElement : currentModelName extends "programmerElementContents" ? public_programmerElementContents : never;
 
 // </auto generated, do not edit>
