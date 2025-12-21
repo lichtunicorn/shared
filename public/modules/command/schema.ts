@@ -9,8 +9,9 @@ export const operations = [
     { name: "open", source: true, destination: false, value: false, emptyOptions: false },
     { name: "empty", source: false, destination: true, value: false, emptyOptions: true },
     { name: "record", source: false, destination: true, value: false, emptyOptions: true },
-    { name: "assign", source: true, destination: true, value: false, emptyOptions: true }
-];
+    { name: "assign", source: true, destination: true, value: false, emptyOptions: true },
+    { name: "select", source: true, destination: false, value: false, emptyOptions: true }
+] as const;
 
 export const value = z.union([
     z.object({
@@ -81,7 +82,7 @@ export const subReference = z.union([
 ]);
 
 export const sourceValueCommand = z.object({
-    operation: z.union([z.literal("move"), z.literal("go")]),
+    operation: z.literal("move"),
     source: directReference,
     subSources: z.array(subReference),
     value,
@@ -97,7 +98,7 @@ export const setCommand = z.object({
 });
 
 export const sourceCommand = z.object({
-    operation: z.literal("delete"),
+    operation: z.union([z.literal("delete"), z.literal("select"), z.literal("go")]),
     source: directReference,
     subSources: z.array(subReference),
     options: z.object({}),
