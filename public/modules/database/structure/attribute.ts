@@ -1,7 +1,7 @@
 import type { model } from './types';
 
 export const attribute: model = {
-    creatable: true,
+    creatable: false,
     gettable: ['id', 'kind', 'subKind', 'value'],
     settable: ['value'],
     properties: [
@@ -58,7 +58,10 @@ export const preset: model = {
         },
         {
             name: "name",
-            type: "string"
+            type: "string",
+            default: {
+                type: "name"
+            }
         },
         {
             name: "fixtures",

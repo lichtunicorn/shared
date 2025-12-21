@@ -25,7 +25,10 @@ export const cuelist: model = {
         },
         {
             name: "name",
-            type: "string"
+            type: "string",
+            default: {
+                type: "name"
+            }
         },
         {
             name: 'currentCue',
@@ -90,7 +93,6 @@ export const cue: model = {
         {
             name: "index",
             type: "number",
-            unique: true
         },
         {
             name: 'macro',
@@ -134,7 +136,6 @@ export const cueElement: model = {
         {
             name: "index",
             type: "number",
-            unique: true
         },
         {
             name: "fixtures",
@@ -185,7 +186,6 @@ export const cueElementContent: model = {
         {
             name: "index",
             type: 'number',
-            unique: true
         },
         {
             name: "preset",

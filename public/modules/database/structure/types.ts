@@ -36,6 +36,8 @@ export type property<name extends string> = {
             } | {
                 type: "value";
                 value: any;
+            } | {
+                type: "name";
             };
         } | {
             type: referencePropertyType;
@@ -224,7 +226,7 @@ export type public_cuelist = {
     id: string;
     /** settable, unique */
     index: number;
-    /** settable */
+    /** settable, default name() */
     name: string;
     /** settable */
     currentCue: null | number;
@@ -243,7 +245,7 @@ export type cuelist = public_cuelist;
 export type public_cue = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable */
     index: number;
     /** settable, back reference */
     macro: null | { reference: string; };
@@ -256,7 +258,7 @@ export type cue = public_cue;
 export type public_cueElement = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable */
     index: number;
     /** read only */
     fixtures: null | { reference: string; }[];
@@ -271,7 +273,7 @@ export type cueElement = public_cueElement;
 export type public_cueElementContent = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable */
     index: number;
     /** read only */
     preset: null | { reference: string; };
@@ -300,11 +302,11 @@ export type public_effect = {
     blocks: number;
     /** settable, default true, If true, effect works for any amount of fixtures. If false, effect works for specific amount of fixtures */
     template: boolean;
-    /** settable, percentage 0 (no offset) to 50 (half offset) to 100 (full offset, so no offset). Null if template is false */
+    /** settable, default 0, percentage 0 (no offset) to 50 (half offset) to 100 (full offset, so no offset). Null if template is false */
     templateOffsetBase: null | number;
-    /** settable, If true, use selection grid. If false, use fixture numbers. Null if template is false */
+    /** settable, default false, If true, use selection grid. If false, use fixture numbers. Null if template is false */
     templateOffsetSelectionGrid: null | boolean;
-    /** settable, How much the offset increases per fixture. Null if template is false or templateOffsetSelectionGrid is true */
+    /** settable, default 0, How much the offset increases per fixture. Null if template is false or templateOffsetSelectionGrid is true */
     templateOffsetIncrease: null | number;
     /** settable, How much the offset increases per x on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
     templateOffsetXIncrease: null | number;
@@ -397,7 +399,7 @@ export type public_collection = {
     id: string;
     /** settable, unique */
     index: number;
-    /** settable */
+    /** settable, default name() */
     name: string;
     /** settable */
     scenes: { reference: string; }[];
@@ -440,7 +442,7 @@ export type public_preset = {
     id: string;
     /** settable, unique */
     index: number;
-    /** settable */
+    /** settable, default name() */
     name: string;
     /** settable */
     fixtures: null | { reference: string; }[];
@@ -497,7 +499,7 @@ export type public_executorButton = {
     physicalButtonIndex: null | number;
     /** read only, back reference */
     executor: { reference: string; };
-    /** settable */
+    /** settable, default flashFull */
     function: "flashFull" | "flashZero" | "flashActive" | "go" | "goBack" | "release";
 };
 export type executorButton = public_executorButton;
@@ -506,7 +508,7 @@ export type public_executorFader = {
     id: string;
     /** settable, unique */
     physicalButtonIndex: null | number;
-    /** settable */
+    /** settable, default intensity */
     function: "intensity" | "release" | "crossfade";
 };
 export type executorFader = public_executorFader;

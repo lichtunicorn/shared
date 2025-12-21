@@ -1,5 +1,6 @@
 import type { model } from './types';
 
+// first one is the default
 export const executorButtonFunctionNames = [
     'flashFull',
     'flashZero',
@@ -7,13 +8,14 @@ export const executorButtonFunctionNames = [
     'go',
     'goBack',
     'release'
-];
+] as const;
 
+// first one is the default
 export const faderFunctionNames = [
     'intensity',
     'release',
     'crossfade'
-];
+] as const;
 
 export const executor: model = {
     creatable: false,
@@ -97,7 +99,11 @@ export const executorFader: model = {
         {
             name: 'function',
             type: 'oneOf',
-            options: faderFunctionNames
+            options: faderFunctionNames as unknown as string[],
+            default: {
+                type: 'value',
+                value: faderFunctionNames[0]
+            }
         }
     ]
 }
@@ -137,7 +143,11 @@ export const executorButton: model = {
         {
             name: 'function',
             type: 'oneOf',
-            options: executorButtonFunctionNames
+            options: executorButtonFunctionNames as unknown as string[],
+            default: {
+                type: 'value',
+                value: executorButtonFunctionNames[0]
+            }
         }
     ]
 };

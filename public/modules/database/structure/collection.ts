@@ -24,7 +24,10 @@ export const collection: model = {
         },
         {
             name: "name",
-            type: "string"
+            type: "string",
+            default: {
+                type: "name"
+            }
         },
         {
             name: "scenes",

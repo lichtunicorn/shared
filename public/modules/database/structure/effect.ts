@@ -88,18 +88,30 @@ export const effect: model = {
         {
             name: "templateOffsetBase",
             type: "number",
+            default: {
+                type: "value",
+                value: 0
+            },
             optional: true,
             comment: "percentage 0 (no offset) to 50 (half offset) to 100 (full offset, so no offset). Null if template is false"
         },
         {
             name: "templateOffsetSelectionGrid",
             type: "boolean",
+            default: {
+                type: "value",
+                value: false
+            },
             optional: true,
             comment: "If true, use selection grid. If false, use fixture numbers. Null if template is false"
         },
         {
             name: "templateOffsetIncrease",
             type: "number",
+            default: {
+                type: "value",
+                value: 0
+            },
             optional: true,
             comment: "How much the offset increases per fixture. Null if template is false or templateOffsetSelectionGrid is true"
         },
