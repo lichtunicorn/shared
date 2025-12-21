@@ -418,6 +418,8 @@ export type public_actionButton = {
     id: string;
     /** settable, unique */
     index: number;
+    /** settable, unique */
+    physicalButtonIndex: null | number;
     /** settable, back reference */
     macro: null | { reference: string; };
     /** settable, back reference */
@@ -437,6 +439,8 @@ export type public_executorButton = {
     id: string;
     /** settable, unique */
     index: number;
+    /** settable, unique */
+    physicalButtonIndex: null | number;
     /** settable, back reference */
     macro: null | { reference: string; };
     /** settable, back reference */

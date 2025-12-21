@@ -59,8 +59,8 @@ export const generalFunctionNames = [
 
 export const actionButton: model = {
     creatable: true,
-    gettable: ['id', 'index', 'macro', 'scene', 'cuelist', 'collection', 'section', 'generalFunction'],
-    settable: ['index', 'macro', 'scene', 'cuelist', 'collection', 'section', 'generalFunction'],
+    gettable: ['id', 'index', 'macro', 'scene', 'cuelist', 'collection', 'section', 'generalFunction', 'physicalButtonIndex'],
+    settable: ['index', 'macro', 'scene', 'cuelist', 'collection', 'section', 'generalFunction', 'physicalButtonIndex'],
     isAssignable: true,
     move: 'index',
     properties: [
@@ -76,6 +76,12 @@ export const actionButton: model = {
             name: 'index',
             type: 'number',
             unique: true
+        },
+        {
+            name: 'physicalButtonIndex',
+            type: 'number',
+            unique: true,
+            optional: true
         },
         {
             name: 'macro',
