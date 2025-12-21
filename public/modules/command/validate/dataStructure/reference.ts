@@ -188,7 +188,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
 
             currentProperty = property;
 
-        } else if (subReference.type === 'getUniqueFromArray') {
+        } else if (subReference.type === 'getUniqueFromArray' || subReference.type === 'filter') {
             let foundModel;
             let foundModelName;
 
@@ -200,7 +200,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
                 if (currentProperty === undefined || currentProperty.type !== 'array') {
                     return {
                         valid: false,
-                        error: 'Get unique from array used on a non array',
+                        error: `${subReference.type} used on a non array`,
                         isDirectReference: false,
                         subReferenceIndex: i
                     }
@@ -217,7 +217,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             if (!searchProperty) {
                 return {
                     valid: false,
-                    error: 'Unknown search key',
+                    error: 'Unknown key',
                     isDirectReference: false,
                     subReferenceIndex: i
                 }
@@ -225,7 +225,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             if (!foundModel.gettable.includes(subReference.key)) {
                 return {
                     valid: false,
-                    error: 'Search key is not gettable',
+                    error: 'Key is not gettable',
                     isDirectReference: false,
                     subReferenceIndex: i
                 }
@@ -233,7 +233,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             if (typeof searchProperty.type !== 'string' && searchProperty.type.reference !== undefined) {
                 return {
                     valid: false,
-                    error: 'Can\'t search a reference',
+                    error: 'Can\'t use a reference as key',
                     isDirectReference: false,
                     subReferenceIndex: i
                 }
@@ -241,32 +241,39 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             if (searchProperty.type === 'array') {
                 return {
                     valid: false,
-                    error: 'Can\'t search an array',
+                    error: 'Can\'t use an array as key',
                     isDirectReference: false,
                     subReferenceIndex: i
                 }
             }
-            if (searchProperty.type === 'oneOf') {
-                return {
-                    valid: false,
-                    error: 'Can\'t search an oneOf property',
-                    isDirectReference: false,
-                    subReferenceIndex: i
+            if (subReference.type === 'getUniqueFromArray') {
+                if (searchProperty.type === 'oneOf') {
+                    return {
+                        valid: false,
+                        error: 'Can\'t search an oneOf property',
+                        isDirectReference: false,
+                        subReferenceIndex: i
+                    }
                 }
-            }
-            if (searchProperty.unique !== true) {
-                return {
-                    valid: false,
-                    error: 'Search key is not unique',
-                    isDirectReference: false,
-                    subReferenceIndex: i
+                if (searchProperty.unique !== true) {
+                    return {
+                        valid: false,
+                        error: 'Search key is not unique',
+                        isDirectReference: false,
+                        subReferenceIndex: i
+                    }
                 }
             }
 
             // @ts-ignore checked above it can't be a reference type
             const searchPropertyType: Exclude<typeof searchProperty.type, referencePropertyType> = searchProperty.type;
 
-            const result = validateValueDataStructure(subReference.value, searchPropertyType, searchProperty.optional === true, null);
+            const result = validateValueDataStructure(
+                subReference.value,
+                searchPropertyType === "oneOf" ? "string" : searchPropertyType,
+                searchProperty.optional === true,
+                null
+            );
 
             if (!result.valid) {
                 return {
@@ -277,11 +284,45 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
                 }
             }
 
+            if (subReference.type === 'getUniqueFromArray') {
+                currentModel = foundModel;
+                currentModelName = foundModelName;
+                currentProperty = undefined;
+                isDirectArray = false;
+            } else {
+                // filter
+                // nothing changes
+            }
+
+        } else if (subReference.type === 'every') {
+            let foundModel;
+            let foundModelName;
+
+            if (isDirectArray) {
+                foundModel = currentModel;
+                foundModelName = currentModelName;
+            } else {
+
+                if (currentProperty === undefined || currentProperty.type !== 'array') {
+                    return {
+                        valid: false,
+                        error: 'every used on a non array',
+                        isDirectReference: false,
+                        subReferenceIndex: i
+                    }
+                }
+
+                foundModel = databaseStructure[currentProperty.valueType.reference];
+                foundModelName = currentProperty.valueType.reference;
+
+                if (!foundModel) throw new Error(`Database reference to ${currentProperty.valueType.reference} not found`);
+
+            }
+
             currentModel = foundModel;
             currentModelName = foundModelName;
             currentProperty = undefined;
             isDirectArray = false;
-
         } else {
             return {
                 valid: false,
