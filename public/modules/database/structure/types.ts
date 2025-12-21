@@ -4,6 +4,7 @@ export type model = {
     creatable: boolean;
     deletable?: boolean;
     goable?: boolean;
+    selectable?: boolean;
     /** if this is a thing that can be assigned to something else */
     canAssign?: boolean;
     /** if something else can assign to this */

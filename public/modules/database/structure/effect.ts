@@ -6,6 +6,7 @@ export const effect: model = {
     settable: ['index', 'type', 'speedGroup', 'multiplier', 'wings', 'groups', 'blocks'],
     move: 'index',
     deletable: true,
+    selectable: true,
     properties: [
         {
             name: "id",

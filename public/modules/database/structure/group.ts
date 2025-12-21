@@ -7,6 +7,7 @@ export const group: model = {
     move: 'index',
     recursiveDeleteProperties: ['elements'],
     deletable: true,
+    selectable: true,
     properties: [
         {
             name: "id",

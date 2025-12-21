@@ -20,7 +20,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     let sourceOptional: boolean | null = null;
 
     // source check
-    if (command.operation === 'move' || command.operation === 'copy' || command.operation === 'set' || command.operation === 'open' || command.operation === 'delete' || command.operation === 'assign' || command.operation === 'go' || command.operation === 'get') {
+    if (command.operation === 'move' || command.operation === 'copy' || command.operation === 'set' || command.operation === 'open' || command.operation === 'delete' || command.operation === 'assign' || command.operation === 'go' || command.operation === 'get' || command.operation === 'select') {
         const result = validateReferenceDataStructure(command.source, command.subSources);
 
         if (!result.valid) {
@@ -57,7 +57,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             sourceValueType = result.valueType;
         }
 
-        if (['move', 'copy', 'open', 'delete', 'assign', 'go'].includes(command.operation) && !result.isModel) {
+        if (['move', 'copy', 'open', 'delete', 'assign', 'go', 'select'].includes(command.operation) && !result.isModel) {
             return {
                 valid: false,
                 part: 'source',
@@ -109,6 +109,15 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
                 error: 'Command operation is set, but this source can\'t be set',
                 isDirectReference: null
             };
+        }
+
+        if (command.operation === 'select' && !result.canSelect) {
+            return {
+                valid: false,
+                part: 'source',
+                error: 'Command operation is select, but this source can\'t be selected',
+                isDirectReference: null
+            }
         }
     }
 

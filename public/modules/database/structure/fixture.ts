@@ -5,6 +5,7 @@ export const fixture: model = {
     gettable: ['id', 'fixtureNumber', 'universe', 'address', 'fixtureType'],
     settable: ['fixtureNumber', 'universe', 'address'],
     deletable: true,
+    selectable: true,
     properties: [
         {
             name: "id",

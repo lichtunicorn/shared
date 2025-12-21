@@ -41,6 +41,7 @@ export const preset: model = {
     settable: ['index', 'name', 'fixtures', 'group'],
     move: 'index',
     recursiveDeleteProperties: ['attributes'],
+    selectable: true,
     properties: [
         {
             name: "id",
