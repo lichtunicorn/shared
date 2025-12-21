@@ -1,5 +1,13 @@
 import type { model } from './types';
-import { actionButton } from './actionButton';
+
+export const executorButtonFunctionNames = [
+    'flashFull',
+    'flashZero',
+    'flashActive',
+    'go',
+    'goBack',
+    'release'
+];
 
 export const executor: model = {
     creatable: false,
@@ -57,16 +65,40 @@ export const executor: model = {
 
 export const executorButton: model = {
     creatable: true,
-    gettable: [...actionButton.gettable],
-    settable: [...actionButton.settable],
+    gettable: ['id', 'index', 'physicalButtonIndex', 'executor', 'function'],
+    settable: ['index', 'physicalButtonIndex', 'function'],
+    move: 'index',
     properties: [
-        ...actionButton.properties,
+        {
+            name: "id",
+            type: "string",
+            unique: true,
+            default: {
+                type: "cuid"
+            },
+        },
+        {
+            name: 'index',
+            type: 'number',
+            unique: true
+        },
+        {
+            name: 'physicalButtonIndex',
+            type: 'number',
+            unique: true,
+            optional: true
+        },
         {
             name: 'executor',
             type: {
                 reference: 'executor'
             },
             backReference: true
+        },
+        {
+            name: 'function',
+            type: 'oneOf',
+            options: executorButtonFunctionNames
         }
     ]
 };

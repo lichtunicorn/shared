@@ -441,22 +441,12 @@ export type public_executorButton = {
     index: number;
     /** settable, unique */
     physicalButtonIndex: null | number;
-    /** settable, back reference */
-    macro: null | { reference: string; };
-    /** settable, back reference */
-    scene: null | { reference: string; };
-    /** settable, back reference */
-    cuelist: null | { reference: string; };
-    /** settable, back reference */
-    collection: null | { reference: string; };
-    /** settable, back reference */
-    section: null | { reference: string; };
-    /** settable */
-    generalFunction: null | "clear" | "blind" | "highlight" | "previous" | "all" | "next" | "uni" | "section-1" | "section-2" | "section-3" | "section-4" | "section-5" | "kindIntensity" | "kindPosition" | "kindColor" | "kindBeam" | "group" | "scene" | "cuelist" | "delete" | "move" | "copy" | "open" | "assign" | "record" | "go" | "empty" | "arrowLeft" | "arrowRight" | "arrowUp" | "arrowDown" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "dot" | "at" | "thru" | "plus" | "enter" | "backspace" | "set";
     /** read only, back reference */
     executor: { reference: string; };
+    /** settable */
+    function: "flashFull" | "flashZero" | "flashActive" | "go" | "goBack" | "release";
 };
-export type executorButton = Omit<public_executorButton, "executor">;
+export type executorButton = public_executorButton;
 
 export type modelData<currentModelName extends modelName> = currentModelName extends "show" ? show : currentModelName extends "section" ? section : currentModelName extends "sectionSceneState" ? sectionSceneState : currentModelName extends "sectionCuelistState" ? sectionCuelistState : currentModelName extends "group" ? group : currentModelName extends "groupElement" ? groupElement : currentModelName extends "scene" ? scene : currentModelName extends "sceneElement" ? sceneElement : currentModelName extends "sceneElementContent" ? sceneElementContent : currentModelName extends "cuelist" ? cuelist : currentModelName extends "cue" ? cue : currentModelName extends "cueElement" ? cueElement : currentModelName extends "cueElementContent" ? cueElementContent : currentModelName extends "effect" ? effect : currentModelName extends "speedGroup" ? speedGroup : currentModelName extends "override" ? override : currentModelName extends "variable" ? variable : currentModelName extends "macro" ? macro : currentModelName extends "macroCommand" ? macroCommand : currentModelName extends "collection" ? collection : currentModelName extends "fixture" ? fixture : currentModelName extends "attribute" ? attribute : currentModelName extends "preset" ? preset : currentModelName extends "executor" ? executor : currentModelName extends "actionButton" ? actionButton : currentModelName extends "executorButton" ? executorButton : never;
 export type publicModelData<currentModelName extends modelName> = currentModelName extends "show" ? public_show : currentModelName extends "section" ? public_section : currentModelName extends "sectionSceneState" ? public_sectionSceneState : currentModelName extends "sectionCuelistState" ? public_sectionCuelistState : currentModelName extends "group" ? public_group : currentModelName extends "groupElement" ? public_groupElement : currentModelName extends "scene" ? public_scene : currentModelName extends "sceneElement" ? public_sceneElement : currentModelName extends "sceneElementContent" ? public_sceneElementContent : currentModelName extends "cuelist" ? public_cuelist : currentModelName extends "cue" ? public_cue : currentModelName extends "cueElement" ? public_cueElement : currentModelName extends "cueElementContent" ? public_cueElementContent : currentModelName extends "effect" ? public_effect : currentModelName extends "speedGroup" ? public_speedGroup : currentModelName extends "override" ? public_override : currentModelName extends "variable" ? public_variable : currentModelName extends "macro" ? public_macro : currentModelName extends "macroCommand" ? public_macroCommand : currentModelName extends "collection" ? public_collection : currentModelName extends "fixture" ? public_fixture : currentModelName extends "attribute" ? public_attribute : currentModelName extends "preset" ? public_preset : currentModelName extends "executor" ? public_executor : currentModelName extends "actionButton" ? public_actionButton : currentModelName extends "executorButton" ? public_executorButton : never;
