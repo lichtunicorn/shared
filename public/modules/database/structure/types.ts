@@ -287,6 +287,12 @@ export type public_effect = {
     speedGroup: null | { reference: string; };
     /** settable, default 1 */
     multiplier: number;
+    /** settable, default 0 */
+    wings: number;
+    /** settable, default 0 */
+    groups: number;
+    /** settable, default 0 */
+    blocks: number;
 };
 export type effect = public_effect;
 export type public_speedGroup = {
