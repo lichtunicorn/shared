@@ -79,6 +79,14 @@ export const subReference = z.union([
         key: z.string(),
         value
     }),
+    z.object({
+        type: z.literal("filter"),
+        key: z.string(),
+        value
+    }),
+    z.object({
+        type: z.literal("every"),
+    })
 ]);
 
 export const sourceValueCommand = z.object({
