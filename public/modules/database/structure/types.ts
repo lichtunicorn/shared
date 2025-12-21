@@ -385,9 +385,11 @@ export type public_attribute = {
     /** read only, unique, default cuid() */
     id: string;
     /** read only */
-    kind: string;
-    /** settable, todo: better type */
-    value: string;
+    kind: "intensity" | "position" | "color" | "beam" | "control";
+    /** read only */
+    subKind: string;
+    /** settable */
+    value: string | number | boolean | null;
 };
 export type attribute = public_attribute;
 export type public_preset = {

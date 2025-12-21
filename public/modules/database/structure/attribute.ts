@@ -2,7 +2,7 @@ import type { model } from './types';
 
 export const attribute: model = {
     creatable: true,
-    gettable: ['id', 'kind', 'value'],
+    gettable: ['id', 'kind', 'subKind', 'value'],
     settable: ['value'],
     properties: [
         {
@@ -15,12 +15,22 @@ export const attribute: model = {
         },
         {
             name: "kind",
+            type: "oneOf",
+            options: [
+                "intensity",
+                "position",
+                "color",
+                "beam",
+                "control"
+            ]
+        },
+        {
+            name: "subKind",
             type: "string"
         },
         {
             name: "value",
-            type: "string", //todo: better type
-            comment: "todo: better type"
+            type: "stringOrNumberOrBooleanOrNull"
         }
     ]
 };
