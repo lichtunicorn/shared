@@ -1,6 +1,6 @@
 import type { model } from './types';
 
-export const sequence: model = {
+export const section: model = {
     creatable: false,
     gettable: ['id', 'index', 'sceneStates', 'cuelistStates', 'actionButtons', 'executorButtons'],
     settable: ['actionButtons', 'executorButtons'],
@@ -24,17 +24,17 @@ export const sequence: model = {
             name: "sceneStates",
             type: "array",
             valueType: {
-                reference: "sequenceSceneState"
+                reference: "sectionSceneState"
             },
-            comment: "this is where the actual sequence contents/state is stored"
+            comment: "this is where the actual section contents/state is stored"
         },
         {
             name: "cuelistStates",
             type: "array",
             valueType: {
-                reference: "sequenceCuelistState"
+                reference: "sectionCuelistState"
             },
-            comment: "this is where the actual sequence contents/state is stored",
+            comment: "this is where the actual section contents/state is stored",
         },
         {
             name: "actionButtons",
@@ -53,9 +53,9 @@ export const sequence: model = {
     ]
 };
 
-export const sequenceSceneState: model = {
+export const sectionSceneState: model = {
     creatable: true,
-    gettable: ['id', 'scene', 'active', 'sequence'],
+    gettable: ['id', 'scene', 'active', 'section'],
     settable: ['active'],
     properties: [
         {
@@ -77,18 +77,18 @@ export const sequenceSceneState: model = {
             type: "boolean"
         },
         {
-            name: "sequence",
+            name: "section",
             backReference: true,
             type: {
-                reference: "sequence"
+                reference: "section"
             }
         }
     ]
 };
 
-export const sequenceCuelistState: model = {
+export const sectionCuelistState: model = {
     creatable: true,
-    gettable: ['id', 'cue', 'active', 'sequence'],
+    gettable: ['id', 'cue', 'active', 'section'],
     settable: ['active'],
     properties: [
         {
@@ -110,10 +110,10 @@ export const sequenceCuelistState: model = {
             type: "boolean"
         },
         {
-            name: "sequence",
+            name: "section",
             backReference: true,
             type: {
-                reference: "sequence"
+                reference: "section"
             }
         }
     ]

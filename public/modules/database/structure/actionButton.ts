@@ -2,8 +2,8 @@ import type { model } from './types';
 
 export const actionButton: model = {
     creatable: true,
-    gettable: ['id', 'index', 'macro', 'scene', 'cuelist', 'collection', 'sequence'],
-    settable: ['index', 'macro', 'scene', 'cuelist', 'collection', 'sequence'],
+    gettable: ['id', 'index', 'macro', 'scene', 'cuelist', 'collection', 'section'],
+    settable: ['index', 'macro', 'scene', 'cuelist', 'collection', 'section'],
     isAssignable: true,
     move: 'index',
     properties: [
@@ -53,9 +53,9 @@ export const actionButton: model = {
             optional: true
         },
         {
-            name: 'sequence',
+            name: 'section',
             type: {
-                reference: 'sequence'
+                reference: 'section'
             },
             backReference: true,
             optional: true

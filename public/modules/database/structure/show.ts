@@ -1,7 +1,7 @@
 import type { model } from './types';
 
 const manyModelNames = [
-    "sequence",
+    "section",
     "scene",
     "cuelist",
     "group",

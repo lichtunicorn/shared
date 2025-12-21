@@ -93,7 +93,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
 
         if ([
             'show',
-            'sequence',
+            'section',
             'scene',
             'cuelist',
             'cue',

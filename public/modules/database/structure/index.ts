@@ -4,7 +4,7 @@ import path from "path";
 import type { structure as structureType } from "./types";
 
 import { show } from "./show";
-import { sequence, sequenceSceneState, sequenceCuelistState } from "./sequence";
+import { section, sectionSceneState, sectionCuelistState } from "./section";
 import { group, groupElement } from "./group";
 import { scene, sceneElement, sceneElementContent } from "./scene";
 import { cuelist, cue, cueElement, cueElementContent } from "./cuelist";
@@ -20,9 +20,9 @@ import { actionButton } from "./actionButton";
 
 export const structure: structureType = {
     show,
-    sequence,
-    sequenceSceneState,
-    sequenceCuelistState,
+    section,
+    sectionSceneState,
+    sectionCuelistState,
     group,
     groupElement,
     scene,
