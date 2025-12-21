@@ -476,6 +476,8 @@ export type public_programmerElement = {
     id: string;
     /** settable, unique */
     index: number;
+    /** read only, default false */
+    selected: boolean;
     /** settable */
     fixtures: null | { reference: string; }[];
     /** settable */

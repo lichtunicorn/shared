@@ -2,7 +2,7 @@ import type { model } from "./types";
 
 export const programmerElement: model = {
     creatable: true,
-    gettable: ['id', 'index', 'fixtures', 'group', 'contents'],
+    gettable: ['id', 'index', 'fixtures', 'group', 'contents', 'selected'],
     settable: ['index', 'fixtures', 'group'],
     recursiveDeleteProperties: [],
     deletable: true,
@@ -19,6 +19,14 @@ export const programmerElement: model = {
             name: "index",
             type: "number",
             unique: true
+        },
+        {
+            name: "selected",
+            type: "boolean",
+            default: {
+                type: "value",
+                value: false
+            }
         },
         {
             name: "fixtures",
