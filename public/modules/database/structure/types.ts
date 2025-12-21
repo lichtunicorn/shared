@@ -377,6 +377,8 @@ export type public_fixture = {
     id: string;
     /** settable, unique */
     fixtureNumber: number;
+    /** read only */
+    fixtureType: string;
     /** settable, default 0 */
     universe: number;
     /** settable, default 0 */

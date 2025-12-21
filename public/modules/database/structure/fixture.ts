@@ -2,7 +2,7 @@ import type { model } from './types';
 
 export const fixture: model = {
     creatable: true,
-    gettable: ['id', 'fixtureNumber', 'universe', 'address'],
+    gettable: ['id', 'fixtureNumber', 'universe', 'address', 'fixtureType'],
     settable: ['fixtureNumber', 'universe', 'address'],
     deletable: true,
     properties: [
@@ -19,7 +19,10 @@ export const fixture: model = {
             type: "number",
             unique: true
         },
-        //todo: fixture builder
+        {
+            name: "fixtureType",
+            type: "string"
+        },
         {
             name: "universe",
             type: "number",
