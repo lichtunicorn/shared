@@ -98,21 +98,29 @@ export type public_show = {
     /** settable, unique */
     name: string;
     /** read only */
-    sections: { reference: string; }[];
+    actionButtons: { reference: string; }[];
     /** read only */
-    scenes: { reference: string; }[];
+    collections: { reference: string; }[];
     /** read only */
     cuelists: { reference: string; }[];
     /** read only */
-    groups: { reference: string; }[];
+    effects: { reference: string; }[];
     /** read only */
-    overrides: { reference: string; }[];
+    executors: { reference: string; }[];
+    /** read only */
+    fixtures: { reference: string; }[];
+    /** read only */
+    groups: { reference: string; }[];
     /** read only */
     macros: { reference: string; }[];
     /** read only */
-    effects: { reference: string; }[];
+    overrides: { reference: string; }[];
     /** read only */
-    collections: { reference: string; }[];
+    programmerElements: { reference: string; }[];
+    /** read only */
+    scenes: { reference: string; }[];
+    /** read only */
+    sections: { reference: string; }[];
     /** read only */
     variables: { reference: string; }[];
 };

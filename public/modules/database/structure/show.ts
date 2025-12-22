@@ -1,15 +1,19 @@
 import type { model } from './types';
 
 const manyModelNames = [
-    "section",
-    "scene",
-    "cuelist",
-    "group",
-    "override",
-    "macro",
-    "effect",
+    "actionButton",
     "collection",
-    "variable"
+    "cuelist",
+    "effect",
+    "executor",
+    "fixture",
+    "group",
+    "macro",
+    "override",
+    "programmerElement",
+    "scene",
+    "section",
+    "variable",
 ];
 
 export const show: model = {
