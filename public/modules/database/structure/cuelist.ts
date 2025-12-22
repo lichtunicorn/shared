@@ -2,8 +2,8 @@ import type { model } from './types';
 
 export const cuelist: model = {
     creatable: true,
-    gettable: ['id', 'index', 'name', 'currentCue', 'active', 'executors', 'actionButtons', 'executorButtons', 'cues'],
-    settable: ['index', 'name', 'currentCue', 'active', 'executors', 'actionButtons', 'executorButtons', 'cues'],
+    gettable: ['id', 'index', 'name', 'currentCue', 'active', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'cues'],
+    settable: ['index', 'name', 'currentCue', 'active', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'cues'],
     move: 'index',
     recursiveDeleteProperties: ['cues'],
     deletable: true,
@@ -42,6 +42,15 @@ export const cuelist: model = {
                 type: 'value',
                 value: false
             }
+        },
+        {
+            name: 'intensity',
+            type: 'number',
+            default: {
+                type: 'value',
+                value: 100
+            },
+            comment: 'From 0 to 100'
         },
         {
             name: 'executors',
