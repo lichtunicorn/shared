@@ -29,11 +29,12 @@ export const scene: model = {
         },
         {
             name: 'active',
-            type: 'boolean',
+            type: 'number',
             default: {
                 type: 'value',
-                value: false
-            }
+                value: 0
+            },
+            comment: "0 if not active. 100 if active. In between if active is crossfading."
         },
         {
             name: 'intensity',
