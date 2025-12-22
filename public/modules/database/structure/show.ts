@@ -18,8 +18,8 @@ const manyModelNames = [
 
 export const show: model = {
     creatable: false,
-    gettable: ['id', 'name', ...manyModelNames.map(name => name + "s")],
-    settable: ['name'],
+    gettable: ['id', 'name', 'blind', ...manyModelNames.map(name => name + "s")],
+    settable: ['name', 'blind'],
     properties: [
         {
             name: "id",
@@ -33,6 +33,14 @@ export const show: model = {
             name: "name",
             type: "string",
             unique: true
+        },
+        {
+            name: "blind",
+            type: "boolean",
+            default: {
+                type: "value",
+                value: false
+            }
         },
         ...(manyModelNames.map(name => ({
             name: name + "s",
