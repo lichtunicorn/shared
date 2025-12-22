@@ -1,5 +1,13 @@
 import type { model } from './types';
 
+export const kinds = [
+    "intensity",
+    "position",
+    "color",
+    "beam",
+    "control"
+] as const;
+
 export const attribute: model = {
     creatable: false,
     gettable: ['id', 'kind', 'subKind', 'value'],
@@ -16,13 +24,7 @@ export const attribute: model = {
         {
             name: "kind",
             type: "oneOf",
-            options: [
-                "intensity",
-                "position",
-                "color",
-                "beam",
-                "control"
-            ]
+            options: kinds as unknown as string[]
         },
         {
             name: "subKind",
