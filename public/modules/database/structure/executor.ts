@@ -13,8 +13,8 @@ export const executorButtonFunctionNames = [
 // first one is the default
 export const faderFunctionNames = [
     'intensity',
-    'release',
-    'crossfade'
+    'activeCrossfade',
+    'cueCrossfade'
 ] as const;
 
 export const executor: model = {
