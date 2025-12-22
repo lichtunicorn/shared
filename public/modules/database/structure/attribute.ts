@@ -24,7 +24,7 @@ export const attribute: model = {
         {
             name: "kind",
             type: "oneOf",
-            options: kinds as unknown as string[]
+            options: [...kinds]
         },
         {
             name: "subKind",

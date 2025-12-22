@@ -99,7 +99,7 @@ export const executorFader: model = {
         {
             name: 'function',
             type: 'oneOf',
-            options: faderFunctionNames as unknown as string[],
+            options: [...faderFunctionNames],
             default: {
                 type: 'value',
                 value: faderFunctionNames[0]
@@ -143,7 +143,7 @@ export const executorButton: model = {
         {
             name: 'function',
             type: 'oneOf',
-            options: executorButtonFunctionNames as unknown as string[],
+            options: [...executorButtonFunctionNames],
             default: {
                 type: 'value',
                 value: executorButtonFunctionNames[0]

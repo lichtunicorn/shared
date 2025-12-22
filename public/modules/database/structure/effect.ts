@@ -37,7 +37,7 @@ export const effect: model = {
                 type: "value",
                 value: "sine"
             },
-            options: effectTypes as unknown as string[]
+            options: [...effectTypes]
         },
         {
             name: "speedGroup",
