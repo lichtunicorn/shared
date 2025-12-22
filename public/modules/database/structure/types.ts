@@ -193,6 +193,8 @@ export type public_scene = {
     name: string;
     /** settable, default false */
     active: boolean;
+    /** settable, default 100, From 0 to 100 */
+    intensity: number;
     /** settable */
     executors: { reference: string; }[];
     /** settable */
