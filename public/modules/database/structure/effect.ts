@@ -1,5 +1,13 @@
 import type { model } from './types';
 
+export const effectTypes = [
+    "sine",
+    "step",
+    "ramp",
+    "invRamp",
+    "linearBounce"
+] as const;
+
 export const effect: model = {
     creatable: true,
     gettable: ['id', 'index', 'type', 'speedGroup', 'multiplier', 'wings', 'groups', 'blocks', 'template', 'templateOffsetBase', 'templateOffsetSelectionGrid', 'templateOffsetIncrease', 'templateOffsetXIncrease', 'templateOffsetXSymmetrical', 'templateOffsetYIncrease', 'templateOffsetYSymmetrical', 'nonTemplateOffsets', 'currentValue', 'lowValue', 'lowPreset', 'highValue', 'highPreset'],
@@ -29,13 +37,7 @@ export const effect: model = {
                 type: "value",
                 value: "sine"
             },
-            options: [
-                "sine",
-                "step",
-                "ramp",
-                "invRamp",
-                "linearBounce"
-            ]
+            options: effectTypes as unknown as string[]
         },
         {
             name: "speedGroup",
