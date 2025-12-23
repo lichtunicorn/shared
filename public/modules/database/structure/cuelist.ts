@@ -63,6 +63,14 @@ export const cuelist: model = {
             comment: "0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values."
         },
         {
+            name: 'activatedAt',
+            type: 'number',
+            optional: true,
+            gettable: true,
+            settable: false,
+            comment: "dateTime when activated last went of 0. Used for latest takes priority"
+        },
+        {
             name: 'releaseStartTime',
             type: 'number',
             optional: true,
