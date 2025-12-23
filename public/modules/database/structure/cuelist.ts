@@ -2,8 +2,8 @@ import type { model } from './types';
 
 export const cuelist: model = {
     creatable: true,
-    gettable: ['id', 'index', 'name', 'currentCue', 'active', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'cues'],
-    settable: ['index', 'name', 'currentCue', 'active', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'cues'],
+    gettable: ['id', 'index', 'name', 'currentCue', 'active', 'releaseStartTime', 'activeStartTime', 'cueStartTime', 'transitionFromCue', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'cues'],
+    settable: ['index', 'name', 'currentCue', 'active', 'releaseStartTime', 'activeStartTime', 'cueStartTime', 'transitionFromCue', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'cues'],
     move: 'index',
     recursiveDeleteProperties: ['cues'],
     deletable: true,
@@ -42,7 +42,31 @@ export const cuelist: model = {
                 type: 'value',
                 value: 0
             },
-            comment: "0 if not active. 100 if active. In between if active is crossfading."
+            comment: "0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values."
+        },
+        {
+            name: 'releaseStartTime',
+            type: 'number',
+            optional: true,
+            comment: "dateTime when the cuelist started a release. Used for fading. Null if not releasing, or in crossfade"
+        },
+        {
+            name: 'activeStartTime',
+            type: 'number',
+            optional: true,
+            comment: "dateTime when the cuelist started to become active. Used for fading. Null if not active, or in crossfade"
+        },
+        {
+            name: 'cueStartTime',
+            type: 'number',
+            optional: true,
+            comment: "dateTime when the transition from one cue to another started. Used for fading. Null if not transitioning, or in crossfade (between cues)"
+        },
+        {
+            name: 'transitionFromCue',
+            type: 'number',
+            optional: true,
+            comment: "The cue the transition started from. Null if not transitioning between cues, or in crossfade (between cues)"
         },
         {
             name: 'intensity',

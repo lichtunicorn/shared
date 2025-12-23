@@ -191,8 +191,12 @@ export type public_scene = {
     index: number;
     /** settable */
     name: string;
-    /** settable, default 0, 0 if not active. 100 if active. In between if active is crossfading. */
+    /** settable, default 0, 0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values. */
     active: number;
+    /** read only, dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade */
+    releaseStartTime: null | number;
+    /** read only, dateTime when the scene started to become active. Used for fading. Null if not active, or in crossfade */
+    activeStartTime: null | number;
     /** settable, default 100, From 0 to 100 */
     intensity: number;
     /** settable */
@@ -242,8 +246,16 @@ export type public_cuelist = {
     name: string;
     /** settable */
     currentCue: null | number;
-    /** settable, default 0, 0 if not active. 100 if active. In between if active is crossfading. */
+    /** settable, default 0, 0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values. */
     active: number;
+    /** settable, dateTime when the cuelist started a release. Used for fading. Null if not releasing, or in crossfade */
+    releaseStartTime: null | number;
+    /** settable, dateTime when the cuelist started to become active. Used for fading. Null if not active, or in crossfade */
+    activeStartTime: null | number;
+    /** settable, dateTime when the transition from one cue to another started. Used for fading. Null if not transitioning, or in crossfade (between cues) */
+    cueStartTime: null | number;
+    /** settable, The cue the transition started from. Null if not transitioning between cues, or in crossfade (between cues) */
+    transitionFromCue: null | number;
     /** settable, default 100, From 0 to 100 */
     intensity: number;
     /** settable */

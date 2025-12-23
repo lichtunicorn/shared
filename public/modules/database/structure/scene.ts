@@ -2,7 +2,7 @@ import type { model } from './types';
 
 export const scene: model = {
     creatable: true,
-    gettable: ['id', 'index', 'name', 'active', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'elements'],
+    gettable: ['id', 'index', 'name', 'active', 'releaseStartTime', 'activeStartTime', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'elements'],
     settable: ['index', 'name', 'active', 'intensity', 'executors', 'actionButtons', 'executorButtons'],
     move: 'index',
     recursiveDeleteProperties: ['elements'],
@@ -34,7 +34,19 @@ export const scene: model = {
                 type: 'value',
                 value: 0
             },
-            comment: "0 if not active. 100 if active. In between if active is crossfading."
+            comment: "0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values."
+        },
+        {
+            name: 'releaseStartTime',
+            type: 'number',
+            optional: true,
+            comment: "dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade"
+        },
+        {
+            name: 'activeStartTime',
+            type: 'number',
+            optional: true,
+            comment: "dateTime when the scene started to become active. Used for fading. Null if not active, or in crossfade"
         },
         {
             name: 'intensity',
