@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const override: model = {
+    canSetAttribute: true,
     creatable: true,
     deletable: true,
     recursiveDeleteProperties: ['attributes'],

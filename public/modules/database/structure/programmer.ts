@@ -1,6 +1,7 @@
 import type { model } from "./types";
 
 export const programmerElement: model = {
+    canSetAttribute: true,
     creatable: true,
     recursiveDeleteProperties: [],
     deletable: true,
@@ -64,6 +65,7 @@ export const programmerElement: model = {
 };
 
 export const programmerElementContents: model = {
+    canSetAttribute: true,
     creatable: true,
     recursiveDeleteProperties: ['attributes'],
     properties: [

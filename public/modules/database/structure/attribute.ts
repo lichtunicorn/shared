@@ -9,6 +9,7 @@ export const kinds = [
 ] as const;
 
 export const attribute: model = {
+    canSetAttribute: true,
     creatable: false,
     properties: [
         {
@@ -44,6 +45,7 @@ export const attribute: model = {
 };
 
 export const preset: model = {
+    canSetAttribute: true,
     creatable: true,
     move: 'index',
     recursiveDeleteProperties: ['attributes'],

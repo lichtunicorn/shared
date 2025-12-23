@@ -179,6 +179,7 @@ export const cue: model = {
 };
 
 export const cueElement: model = {
+    canSetAttribute: true,
     creatable: true,
     recursiveDeleteProperties: ['contents'],
     properties: [
@@ -239,6 +240,7 @@ export const cueElement: model = {
 };
 
 export const cueElementContent: model = {
+    canSetAttribute: true,
     creatable: true,
     recursiveDeleteProperties: ['attributes'],
     properties: [
