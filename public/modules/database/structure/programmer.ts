@@ -56,7 +56,7 @@ export const programmerElement: model = {
             name: "contents",
             type: "array",
             valueType: {
-                reference: "programmerElementContents"
+                reference: "programmerElementContent"
             },
             gettable: true,
             settable: false,
@@ -64,7 +64,7 @@ export const programmerElement: model = {
     ]
 };
 
-export const programmerElementContents: model = {
+export const programmerElementContent: model = {
     canSetAttribute: true,
     creatable: true,
     recursiveDeleteProperties: ['attributes'],

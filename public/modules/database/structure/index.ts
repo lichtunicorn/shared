@@ -17,7 +17,7 @@ import { fixture } from "./fixture";
 import { attribute, preset } from "./attribute";
 import { executor, executorButton, executorFader } from "./executor";
 import { actionButton } from "./actionButton";
-import { programmerElement, programmerElementContents } from "./programmer";
+import { programmerElement, programmerElementContent } from "./programmer";
 
 export const structure: structureType = {
     show,
@@ -49,7 +49,7 @@ export const structure: structureType = {
     executorButton,
     executorFader,
     programmerElement,
-    programmerElementContents
+    programmerElementContent
 };
 
 checkValidity();
