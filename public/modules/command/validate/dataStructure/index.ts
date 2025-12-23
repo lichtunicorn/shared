@@ -5,6 +5,7 @@ import type { validateDataStructureReturn } from "./types";
 import { noGetCommand as noGetCommandSchema, getCommand as getCommandSchema } from "public/modules/command/schema";
 import { validateReferenceDataStructure } from "./reference";
 import { validateValueDataStructure } from "./value";
+import { kinds } from "public/modules/database/structure/attribute";
 
 export function validateDataStructure(command: z.infer<typeof noGetCommandSchema | typeof getCommandSchema>, canBeGetCommand: boolean = false): validateDataStructureReturn {
     if (command.operation === 'get' && !canBeGetCommand) {
@@ -20,7 +21,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     let sourceOptional: boolean | null = null;
 
     // source check
-    if (command.operation === 'move' || command.operation === 'copy' || command.operation === 'set' || command.operation === 'open' || command.operation === 'delete' || command.operation === 'assign' || command.operation === 'go' || command.operation === 'get' || command.operation === 'select') {
+    if (command.operation === 'move' || command.operation === 'copy' || command.operation === 'set' || command.operation === 'open' || command.operation === 'delete' || command.operation === 'assign' || command.operation === 'go' || command.operation === 'get' || command.operation === 'select' || command.operation === 'setAttribute') {
         const result = validateReferenceDataStructure(command.source, command.subSources);
 
         if (!result.valid) {
@@ -63,6 +64,28 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
                 part: 'source',
                 error: `Can't perform ${command.operation} on an ${result.type}`,
                 isDirectReference: null
+            }
+        }
+
+        if (command.operation === 'setAttribute') {
+            if (!result.isModel) {
+                return {
+                    valid: false,
+                    part: 'source',
+                    error: `Can't perform setAttribute on an ${result.type}`,
+                    isDirectReference: null
+                }
+            }
+
+            const modelName = result.type === 'array' ? result.valueType.reference : result.type.reference;
+
+            if (modelName !== 'fixture' && modelName !== 'group' && modelName !== 'attributes') {
+                return {
+                    valid: false,
+                    part: 'source',
+                    error: `Can't perform setAttribute on a ${modelName}. Can only perform on attribute, fixture model or group model`,
+                    isDirectReference: null
+                }
             }
         }
 
@@ -181,13 +204,13 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     }
 
     // value check
-    if (command.operation === 'move' || command.operation === 'set') {
+    if (command.operation === 'move' || command.operation === 'set' || command.operation === 'setAttribute') {
         let requiredValueType: literalPropertyType | referencePropertyType | "array";
         let requiredValueValueType: referencePropertyType | null = null;
         let requiredOptional: boolean;
 
         if (command.operation === 'move') {
-            requiredValueType = 'number' as const;
+            requiredValueType = 'number';
             requiredOptional = false;
         } else if (command.operation === 'set') {
 
@@ -207,6 +230,9 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             }
 
             requiredOptional = sourceOptional;
+        } else if (command.operation === 'setAttribute') {
+            requiredValueType = 'stringOrNumberOrBooleanOrNull';
+            requiredOptional = true;
         } else
             throw new Error(`Unknown operation ${(command as any).operation}`);
 
@@ -232,6 +258,22 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
                 };
             }
         }
+    } else if (command.operation === 'setAttribute') {
+        if (!kinds.includes(command.options.kind)) {
+            return {
+                valid: false,
+                part: 'options',
+                error: `Unknown kind. Must be one of ${kinds.join(' ')}`
+            };
+        };
+
+        if (!command.options.subKind) {
+            return {
+                valid: false,
+                part: 'options',
+                error: 'No subKind provided'
+            };
+        };
     }
 
     if (command.operation === 'get') {
