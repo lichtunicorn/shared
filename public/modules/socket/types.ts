@@ -2,6 +2,7 @@ import type { Server, Socket } from 'socket.io';
 import type { modelName, publicModelData } from 'public/modules/database/structure/types';
 import type { showData, showDataInput } from 'public/modules/show/schema';
 import type { z } from 'zod';
+import type { errorInfo } from '../error/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -13,6 +14,7 @@ export interface ServerToClientEvents {
     specificData<T extends modelName>(model: T, id: string, data: publicModelData<T> | null): void;
 
     shows(shows: z.infer<typeof showData>[]): void;
+    errors(errors: errorInfo[]): void;
 
     debugSocketUrl: (url: string) => void;
 }
