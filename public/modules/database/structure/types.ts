@@ -5,6 +5,8 @@ export type model = {
     deletable?: boolean;
     goable?: boolean;
     selectable?: boolean;
+    /** If setAttribute should be allowed on this model */
+    canSetAttribute?: boolean;
     /** if this is a thing that can be assigned to something else */
     canAssign?: boolean;
     /** if something else can assign to this */

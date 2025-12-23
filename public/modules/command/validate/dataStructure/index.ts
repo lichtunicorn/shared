@@ -58,34 +58,12 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             sourceValueType = result.valueType;
         }
 
-        if (['move', 'copy', 'open', 'delete', 'assign', 'go', 'select'].includes(command.operation) && !result.isModel) {
+        if (['move', 'copy', 'open', 'delete', 'assign', 'go', 'select', 'setAttribute'].includes(command.operation) && !result.isModel) {
             return {
                 valid: false,
                 part: 'source',
                 error: `Can't perform ${command.operation} on an ${result.type}`,
                 isDirectReference: null
-            }
-        }
-
-        if (command.operation === 'setAttribute') {
-            if (!result.isModel) {
-                return {
-                    valid: false,
-                    part: 'source',
-                    error: `Can't perform setAttribute on an ${result.type}`,
-                    isDirectReference: null
-                }
-            }
-
-            const modelName = result.type === 'array' ? result.valueType.reference : result.type.reference;
-
-            if (modelName !== 'fixture' && modelName !== 'group' && modelName !== 'attributes') {
-                return {
-                    valid: false,
-                    part: 'source',
-                    error: `Can't perform setAttribute on a ${modelName}. Can only perform on attribute, fixture model or group model`,
-                    isDirectReference: null
-                }
             }
         }
 
@@ -139,6 +117,15 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
                 valid: false,
                 part: 'source',
                 error: 'Command operation is select, but this source can\'t be selected',
+                isDirectReference: null
+            }
+        }
+
+        if (command.operation === 'setAttribute' && !result.canSetAttribute) {
+            return {
+                valid: false,
+                part: 'source',
+                error: 'Command operation is setAttribute, but setAttribute can\'t be performed on this source',
                 isDirectReference: null
             }
         }
