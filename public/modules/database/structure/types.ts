@@ -138,8 +138,6 @@ export type public_section = {
     cuelistStates: { reference: string; }[];
     /** settable */
     actionButtons: { reference: string; }[];
-    /** settable */
-    executorButtons: { reference: string; }[];
 };
 export type section = public_section;
 export type public_sectionSceneState = {
@@ -203,8 +201,6 @@ export type public_scene = {
     executors: { reference: string; }[];
     /** settable */
     actionButtons: { reference: string; }[];
-    /** settable */
-    executorButtons: { reference: string; }[];
     /** read only */
     elements: { reference: string; }[];
 };
@@ -262,8 +258,6 @@ export type public_cuelist = {
     executors: { reference: string; }[];
     /** settable */
     actionButtons: { reference: string; }[];
-    /** settable */
-    executorButtons: { reference: string; }[];
     /** settable */
     cues: { reference: string; }[];
 };
@@ -402,8 +396,6 @@ export type public_macro = {
     /** settable */
     actionButtons: { reference: string; }[];
     /** settable */
-    executorButtons: { reference: string; }[];
-    /** settable */
     cues: null | { reference: string; }[];
     /** read only */
     commands: { reference: string; }[];
@@ -435,8 +427,6 @@ export type public_collection = {
     executors: { reference: string; }[];
     /** settable */
     actionButtons: { reference: string; }[];
-    /** settable */
-    executorButtons: { reference: string; }[];
 };
 export type collection = public_collection;
 export type public_fixture = {

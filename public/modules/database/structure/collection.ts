@@ -69,14 +69,5 @@ export const collection: model = {
             gettable: true,
             settable: true,
         },
-        {
-            name: 'executorButtons',
-            type: 'array',
-            valueType: {
-                reference: 'executorButton'
-            },
-            gettable: true,
-            settable: true,
-        },
     ]
 };

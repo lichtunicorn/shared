@@ -88,15 +88,6 @@ export const scene: model = {
             settable: true,
         },
         {
-            name: 'executorButtons',
-            type: 'array',
-            valueType: {
-                reference: 'executorButton'
-            },
-            gettable: true,
-            settable: true,
-        },
-        {
             name: "elements",
             type: "array",
             valueType: {

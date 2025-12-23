@@ -114,15 +114,6 @@ export const cuelist: model = {
             settable: true,
         },
         {
-            name: 'executorButtons',
-            type: 'array',
-            valueType: {
-                reference: 'executorButton'
-            },
-            gettable: true,
-            settable: true,
-        },
-        {
             name: "cues",
             type: "array",
             valueType: {
