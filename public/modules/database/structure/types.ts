@@ -195,7 +195,7 @@ export type public_scene = {
     priority: number;
     /** settable, default 0, 0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values. */
     active: number;
-    /** read only, dateTime when activated last went of 0. Used for latest takes priority */
+    /** read only, dateTime when activated last went of 0. Used for latest takes priority.  If active goes back to 0, activatedAt stays the same. */
     activatedAt: null | number;
     /** read only, dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade */
     releaseStartTime: null | number;
@@ -252,7 +252,7 @@ export type public_cuelist = {
     currentCue: null | number;
     /** settable, default 0, 0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values. */
     active: number;
-    /** read only, dateTime when activated last went of 0. Used for latest takes priority */
+    /** read only, dateTime when activated last went of 0. Used for latest takes priority. If active goes back to 0, activatedAt stays the same. */
     activatedAt: null | number;
     /** settable, dateTime when the cuelist started a release. Used for fading. Null if not releasing, or in crossfade */
     releaseStartTime: null | number;

@@ -68,7 +68,7 @@ export const cuelist: model = {
             optional: true,
             gettable: true,
             settable: false,
-            comment: "dateTime when activated last went of 0. Used for latest takes priority"
+            comment: "dateTime when activated last went of 0. Used for latest takes priority. If active goes back to 0, activatedAt stays the same."
         },
         {
             name: 'releaseStartTime',
