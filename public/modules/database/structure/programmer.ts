@@ -101,7 +101,7 @@ export const programmerElementContents: model = {
                 reference: "attribute"
             },
             gettable: true,
-            settable: true,
+            settable: false,
         },
         {
             name: "programmerElement",

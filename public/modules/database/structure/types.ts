@@ -227,7 +227,7 @@ export type public_sceneElementContent = {
     index: number;
     /** settable */
     preset: null | { reference: string; };
-    /** settable */
+    /** read only */
     attributes: null | { reference: string; }[];
     /** read only, back reference */
     sceneElement: { reference: string; };
@@ -340,12 +340,12 @@ export type public_effect = {
     nonTemplateOffsets: null | { reference: string; }[];
     /** settable, Where to use the current value. If null, don't use current value */
     currentValue: null | "lowValue" | "middleValue" | "highValue";
-    /** settable, The low value of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
-    lowValue: null | { reference: string; };
+    /** read only, The low value of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
+    lowValue: null | { reference: string; }[];
     /** settable, The low preset of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
     lowPreset: null | { reference: string; };
-    /** settable, The high value of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
-    highValue: null | { reference: string; };
+    /** read only, The high value of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
+    highValue: null | { reference: string; }[];
     /** settable, The high preset of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
     highPreset: null | { reference: string; };
 };
@@ -550,7 +550,7 @@ export type public_programmerElementContents = {
     index: number;
     /** settable */
     preset: null | { reference: string; };
-    /** settable */
+    /** read only */
     attributes: null | { reference: string; }[];
     /** read only, back reference */
     programmerElement: { reference: string; };

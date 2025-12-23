@@ -198,7 +198,7 @@ export const sceneElementContent: model = {
                 reference: "attribute"
             },
             gettable: true,
-            settable: true,
+            settable: false,
         },
         {
             name: "sceneElement",
