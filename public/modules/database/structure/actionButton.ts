@@ -61,8 +61,6 @@ export const generalFunctionNames = [
 
 export const actionButton: model = {
     creatable: true,
-    gettable: ['id', 'index', 'macro', 'scene', 'cuelist', 'collection', 'section', 'generalFunction', 'physicalButtonIndex'],
-    settable: ['index', 'macro', 'scene', 'cuelist', 'collection', 'section', 'generalFunction', 'physicalButtonIndex'],
     move: 'index',
     properties: [
         {
@@ -72,17 +70,23 @@ export const actionButton: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: 'index',
             type: 'number',
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'physicalButtonIndex',
             type: 'number',
             unique: true,
-            optional: true
+            optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'macro',
@@ -91,6 +95,8 @@ export const actionButton: model = {
             },
             backReference: true,
             optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'scene',
@@ -99,6 +105,8 @@ export const actionButton: model = {
             },
             backReference: true,
             optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'cuelist',
@@ -107,6 +115,8 @@ export const actionButton: model = {
             },
             backReference: true,
             optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'collection',
@@ -114,7 +124,9 @@ export const actionButton: model = {
                 reference: 'collection'
             },
             backReference: true,
-            optional: true
+            optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'section',
@@ -122,13 +134,17 @@ export const actionButton: model = {
                 reference: 'section'
             },
             backReference: true,
-            optional: true
+            optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'generalFunction',
             type: 'oneOf',
             options: generalFunctionNames,
             optional: true,
+            gettable: true,
+            settable: true,
         }
     ]
 };

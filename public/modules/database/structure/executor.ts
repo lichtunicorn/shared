@@ -19,8 +19,6 @@ export const faderFunctionNames = [
 
 export const executor: model = {
     creatable: false,
-    gettable: ['id', 'index', 'scene', 'cuelist', 'collection', 'executorButtons', 'faders'],
-    settable: ['scene', 'cuelist', 'collection', 'executorButtons', 'faders'],
     isAssignable: true,
     recursiveDeleteProperties: ['executorButtons'],
     properties: [
@@ -31,17 +29,23 @@ export const executor: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: 'index',
             type: 'number',
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'faders',
             type: {
                 reference: 'executorFader'
             },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'scene',
@@ -49,6 +53,8 @@ export const executor: model = {
                 reference: 'scene'
             },
             backReference: true,
+            gettable: true,
+            settable: true,
             optional: true,
         },
         {
@@ -57,6 +63,8 @@ export const executor: model = {
                 reference: 'cuelist'
             },
             backReference: true,
+            gettable: true,
+            settable: true,
             optional: true,
         },
         {
@@ -65,6 +73,8 @@ export const executor: model = {
                 reference: 'collection'
             },
             backReference: true,
+            gettable: true,
+            settable: true,
             optional: true
         },
         {
@@ -72,15 +82,15 @@ export const executor: model = {
             type: 'array',
             valueType: {
                 reference: 'executorButton'
-            }
+            },
+            gettable: true,
+            settable: true,
         }
     ]
 };
 
 export const executorFader: model = {
     creatable: true,
-    gettable: ['id', 'physicalButtonIndex', 'function'],
-    settable: ['physicalButtonIndex', 'function'],
     properties: [
         {
             name: "id",
@@ -89,12 +99,16 @@ export const executorFader: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: 'physicalButtonIndex',
             type: 'number',
             unique: true,
-            optional: true
+            optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'function',
@@ -103,15 +117,15 @@ export const executorFader: model = {
             default: {
                 type: 'value',
                 value: faderFunctionNames[0]
-            }
+            },
+            gettable: true,
+            settable: true,
         }
     ]
 }
 
 export const executorButton: model = {
     creatable: true,
-    gettable: ['id', 'index', 'physicalButtonIndex', 'executor', 'function'],
-    settable: ['index', 'physicalButtonIndex', 'function'],
     move: 'index',
     properties: [
         {
@@ -121,24 +135,32 @@ export const executorButton: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: 'index',
             type: 'number',
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'physicalButtonIndex',
             type: 'number',
             unique: true,
-            optional: true
+            optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'executor',
             type: {
                 reference: 'executor'
             },
-            backReference: true
+            backReference: true,
+            gettable: true,
+            settable: false,
         },
         {
             name: 'function',
@@ -147,7 +169,9 @@ export const executorButton: model = {
             default: {
                 type: 'value',
                 value: executorButtonFunctionNames[0]
-            }
+            },
+            gettable: true,
+            settable: true,
         }
     ]
 };

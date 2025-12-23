@@ -2,8 +2,6 @@ import type { model } from './types';
 
 export const group: model = {
     creatable: true,
-    gettable: ['id', 'index', 'elements'],
-    settable: ['index'],
     move: 'index',
     recursiveDeleteProperties: ['elements'],
     deletable: true,
@@ -16,11 +14,15 @@ export const group: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "elements",
@@ -28,14 +30,14 @@ export const group: model = {
             valueType: {
                 reference: "groupElement"
             },
+            gettable: true,
+            settable: false,
         }
     ]
 };
 
 export const groupElement: model = {
     creatable: true,
-    gettable: ['id', 'x', 'y', 'group'],
-    settable: ['x', 'y'],
     properties: [
         {
             name: "id",
@@ -44,21 +46,29 @@ export const groupElement: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "x",
-            type: "number"
+            type: "number",
+            gettable: true,
+            settable: true,
         },
         {
             name: "y",
-            type: "number"
+            type: "number",
+            gettable: true,
+            settable: true,
         },
         {
             name: "group",
             backReference: true,
             type: {
                 reference: "group"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 };

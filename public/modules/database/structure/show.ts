@@ -18,8 +18,6 @@ const manyModelNames = [
 
 export const show: model = {
     creatable: false,
-    gettable: ['id', 'name', 'blind', ...manyModelNames.map(name => name + "s")],
-    settable: ['name', 'blind'],
     properties: [
         {
             name: "id",
@@ -28,11 +26,15 @@ export const show: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "name",
             type: "string",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "blind",
@@ -40,7 +42,9 @@ export const show: model = {
             default: {
                 type: "value",
                 value: false
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         ...(manyModelNames.map(name => ({
             name: name + "s",
@@ -48,6 +52,8 @@ export const show: model = {
             valueType: {
                 reference: name
             },
+            gettable: true,
+            settable: false,
         })))
     ]
 };

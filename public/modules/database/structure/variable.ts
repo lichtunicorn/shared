@@ -2,8 +2,6 @@ import type { model } from './types';
 
 export const variable: model = {
     creatable: true,
-    gettable: ['id', 'index', 'name', 'value', 'executors'],
-    settable: ['index', 'name', 'value', 'executors'],
     deletable: true,
     canAssign: true,
     properties: [
@@ -14,27 +12,37 @@ export const variable: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "name",
             type: "string",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "value",
-            type: "stringOrNumberOrBooleanOrNull"
+            type: "stringOrNumberOrBooleanOrNull",
+            gettable: true,
+            settable: true,
         },
         {
             name: "executors",
             type: "array",
             valueType: {
                 reference: "executor"
-            }
+            },
+            gettable: true,
+            settable: true,
         }
     ]
 };

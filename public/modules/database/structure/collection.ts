@@ -2,8 +2,6 @@ import type { model } from './types';
 
 export const collection: model = {
     creatable: true,
-    gettable: ['id', 'index', 'name', 'scenes', 'cuelists', 'executors', 'actionButtons', 'executorButtons'],
-    settable: ['index', 'name', 'scenes', 'cuelists', 'executors', 'actionButtons', 'executorButtons'],
     move: 'index',
     deletable: true,
     goable: true,
@@ -16,32 +14,42 @@ export const collection: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "name",
             type: "string",
             default: {
                 type: "name"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "scenes",
             type: "array",
             valueType: {
                 reference: "scene"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "cuelists",
             type: "array",
             valueType: {
                 reference: "cuelist"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'executors',
@@ -49,6 +57,8 @@ export const collection: model = {
             valueType: {
                 reference: 'executor'
             },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'actionButtons',
@@ -56,6 +66,8 @@ export const collection: model = {
             valueType: {
                 reference: 'actionButton'
             },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'executorButtons',
@@ -63,6 +75,8 @@ export const collection: model = {
             valueType: {
                 reference: 'executorButton'
             },
+            gettable: true,
+            settable: true,
         },
     ]
 };

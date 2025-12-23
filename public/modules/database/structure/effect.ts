@@ -10,8 +10,6 @@ export const effectTypes = [
 
 export const effect: model = {
     creatable: true,
-    gettable: ['id', 'index', 'type', 'speedGroup', 'multiplier', 'wings', 'groups', 'blocks', 'template', 'templateOffsetBase', 'templateOffsetSelectionGrid', 'templateOffsetIncrease', 'templateOffsetXIncrease', 'templateOffsetXSymmetrical', 'templateOffsetYIncrease', 'templateOffsetYSymmetrical', 'nonTemplateOffsets', 'currentValue', 'lowValue', 'lowPreset', 'highValue', 'highPreset'],
-    settable: ['index', 'type', 'speedGroup', 'multiplier', 'wings', 'groups', 'blocks', 'template', 'templateOffsetBase', 'templateOffsetSelectionGrid', 'templateOffsetIncrease', 'templateOffsetXIncrease', 'templateOffsetXSymmetrical', 'templateOffsetYIncrease', 'templateOffsetYSymmetrical', 'nonTemplateOffsets', 'currentValue', 'lowValue', 'lowPreset', 'highValue', 'highPreset'],
     move: 'index',
     deletable: true,
     selectable: true,
@@ -24,11 +22,15 @@ export const effect: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "type",
@@ -37,14 +39,18 @@ export const effect: model = {
                 type: "value",
                 value: "sine"
             },
-            options: [...effectTypes]
+            options: [...effectTypes],
+            gettable: true,
+            settable: true,
         },
         {
             name: "speedGroup",
             optional: true,
             type: {
                 reference: "speedGroup"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "multiplier",
@@ -52,7 +58,9 @@ export const effect: model = {
             default: {
                 type: "value",
                 value: 1
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "wings",
@@ -60,7 +68,9 @@ export const effect: model = {
             default: {
                 type: "value",
                 value: 0
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "groups",
@@ -68,7 +78,9 @@ export const effect: model = {
             default: {
                 type: "value",
                 value: 0
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "blocks",
@@ -76,7 +88,9 @@ export const effect: model = {
             default: {
                 type: "value",
                 value: 0
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "template",
@@ -85,6 +99,8 @@ export const effect: model = {
                 type: "value",
                 value: true
             },
+            gettable: true,
+            settable: true,
             comment: "If true, effect works for any amount of fixtures. If false, effect works for specific amount of fixtures"
         },
         {
@@ -95,6 +111,8 @@ export const effect: model = {
                 value: 0
             },
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "percentage 0 (no offset) to 50 (half offset) to 100 (full offset, so no offset). Null if template is false"
         },
         {
@@ -105,6 +123,8 @@ export const effect: model = {
                 value: false
             },
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "If true, use selection grid. If false, use fixture numbers. Null if template is false"
         },
         {
@@ -115,30 +135,40 @@ export const effect: model = {
                 value: 0
             },
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "How much the offset increases per fixture. Null if template is false or templateOffsetSelectionGrid is true"
         },
         {
             name: "templateOffsetXIncrease",
             type: "number",
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "How much the offset increases per x on selection grid. Null if template is false or templateOffsetSelectionGrid is false"
         },
         {
             name: "templateOffsetXSymmetrical",
             type: "boolean",
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "If the offset is symmetrical on x on selection grid. Null if template is false or templateOffsetSelectionGrid is false"
         },
         {
             name: "templateOffsetYIncrease",
             type: "number",
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "How much the offset increases per y on selection grid. Null if template is false or templateOffsetSelectionGrid is false"
         },
         {
             name: "templateOffsetYSymmetrical",
             type: "number",
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "If the offset is symmetrical on y on selection grid. Null if template is false or templateOffsetSelectionGrid is false"
         },
         {
@@ -148,6 +178,8 @@ export const effect: model = {
                 reference: "effectOffset"
             },
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "The offset per fixture if template = false. Null if template = true"
         },
         {
@@ -155,6 +187,8 @@ export const effect: model = {
             type: "oneOf",
             options: ["lowValue", "middleValue", "highValue"],
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "Where to use the current value. If null, don't use current value"
         },
         {
@@ -163,6 +197,8 @@ export const effect: model = {
                 reference: "attribute"
             },
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "The low value of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null"
         },
         {
@@ -171,6 +207,8 @@ export const effect: model = {
                 reference: "preset"
             },
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "The low preset of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null"
         },
         {
@@ -179,6 +217,8 @@ export const effect: model = {
                 reference: "attribute"
             },
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "The high value of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null"
         },
         {
@@ -187,14 +227,14 @@ export const effect: model = {
                 reference: "preset"
             },
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "The high preset of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null"
         },
     ]
 };
 
 export const effectOffset: model = {
-    gettable: ['id', 'offset', 'effect'],
-    settable: ['offset'],
     creatable: true,
     properties: [
         {
@@ -204,25 +244,29 @@ export const effectOffset: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "offset",
-            type: "number"
+            type: "number",
+            gettable: true,
+            settable: true,
         },
         {
             name: "effect",
             type: {
                 reference: "effect"
             },
-            backReference: true
+            backReference: true,
+            gettable: true,
+            settable: false,
         }
     ]
 };
 
 export const speedGroup: model = {
     creatable: true,
-    gettable: ['id', 'rate'],
-    settable: ['rate'],
     properties: [
         {
             name: "id",
@@ -231,6 +275,8 @@ export const speedGroup: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "bpm",
@@ -238,7 +284,9 @@ export const speedGroup: model = {
             default: {
                 type: "value",
                 value: 60
-            }
+            },
+            gettable: true,
+            settable: true,
         }
     ]
 };

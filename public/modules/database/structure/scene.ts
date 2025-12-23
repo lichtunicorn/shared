@@ -2,8 +2,6 @@ import type { model } from './types';
 
 export const scene: model = {
     creatable: true,
-    gettable: ['id', 'index', 'name', 'active', 'releaseStartTime', 'activeStartTime', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'elements'],
-    settable: ['index', 'name', 'active', 'intensity', 'executors', 'actionButtons', 'executorButtons'],
     move: 'index',
     recursiveDeleteProperties: ['elements'],
     deletable: true,
@@ -17,15 +15,21 @@ export const scene: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "name",
-            type: "string"
+            type: "string",
+            gettable: true,
+            settable: true,
         },
         {
             name: 'active',
@@ -34,18 +38,24 @@ export const scene: model = {
                 type: 'value',
                 value: 0
             },
+            gettable: true,
+            settable: true,
             comment: "0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values."
         },
         {
             name: 'releaseStartTime',
             type: 'number',
             optional: true,
-            comment: "dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade"
+            gettable: true,
+            settable: false,
+            comment: "dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade",
         },
         {
             name: 'activeStartTime',
             type: 'number',
             optional: true,
+            gettable: true,
+            settable: false,
             comment: "dateTime when the scene started to become active. Used for fading. Null if not active, or in crossfade"
         },
         {
@@ -55,6 +65,8 @@ export const scene: model = {
                 type: 'value',
                 value: 100
             },
+            gettable: true,
+            settable: true,
             comment: "From 0 to 100"
         },
         {
@@ -63,6 +75,8 @@ export const scene: model = {
             valueType: {
                 reference: 'executor'
             },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'actionButtons',
@@ -70,6 +84,8 @@ export const scene: model = {
             valueType: {
                 reference: 'actionButton'
             },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'executorButtons',
@@ -77,6 +93,8 @@ export const scene: model = {
             valueType: {
                 reference: 'executorButton'
             },
+            gettable: true,
+            settable: true,
         },
         {
             name: "elements",
@@ -84,14 +102,14 @@ export const scene: model = {
             valueType: {
                 reference: "sceneElement"
             },
+            gettable: true,
+            settable: false,
         }
     ]
 };
 
 export const sceneElement: model = {
     creatable: true,
-    gettable: ['id', 'index', 'fixtures', 'group', 'contents', 'scene'],
-    settable: ['index', 'fixtures', 'group'],
     recursiveDeleteProperties: ['contents'],
     properties: [
         {
@@ -101,11 +119,15 @@ export const sceneElement: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "fixtures",
@@ -113,36 +135,42 @@ export const sceneElement: model = {
             type: "array",
             valueType: {
                 reference: "fixture"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "group",
             optional: true,
             type: {
                 reference: "group"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "contents",
             type: "array",
             valueType: {
                 reference: "sceneElementContent"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "scene",
             backReference: true,
             type: {
                 reference: "scene"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
     ]
 };
 
 export const sceneElementContent: model = {
     creatable: true,
-    gettable: ['id', 'index', 'preset', 'attributes', 'sceneElement'],
-    settable: ['index', 'preset', 'attributes'],
     recursiveDeleteProperties: ['attributes'],
     properties: [
         {
@@ -152,18 +180,24 @@ export const sceneElementContent: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: 'number',
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "preset",
             optional: true,
             type: {
                 reference: "preset"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "attributes",
@@ -171,14 +205,18 @@ export const sceneElementContent: model = {
             type: "array",
             valueType: {
                 reference: "attribute"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "sceneElement",
             backReference: true,
             type: {
                 reference: "sceneElement"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 }

@@ -369,7 +369,7 @@ export type public_speedGroup = {
     /** read only, unique, default cuid() */
     id: string;
     /** settable, default 60 */
-    rate: number;
+    bpm: number;
 };
 export type speedGroup = public_speedGroup;
 export type public_override = {
@@ -481,7 +481,7 @@ export type preset = public_preset;
 export type public_executor = {
     /** read only, unique, default cuid() */
     id: string;
-    /** read only, unique */
+    /** settable, unique */
     index: number;
     /** settable */
     faders: { reference: string; };

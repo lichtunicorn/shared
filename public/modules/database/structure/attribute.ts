@@ -10,8 +10,6 @@ export const kinds = [
 
 export const attribute: model = {
     creatable: false,
-    gettable: ['id', 'kind', 'subKind', 'value'],
-    settable: ['value'],
     properties: [
         {
             name: "id",
@@ -20,27 +18,33 @@ export const attribute: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "kind",
             type: "oneOf",
-            options: [...kinds]
+            options: [...kinds],
+            gettable: true,
+            settable: false,
         },
         {
             name: "subKind",
-            type: "string"
+            type: "string",
+            gettable: true,
+            settable: false,
         },
         {
             name: "value",
-            type: "stringOrNumberOrBooleanOrNull"
+            type: "stringOrNumberOrBooleanOrNull",
+            gettable: true,
+            settable: true,
         }
     ]
 };
 
 export const preset: model = {
     creatable: true,
-    gettable: ['id', 'index', 'name', 'fixtures', 'group', 'attributes'],
-    settable: ['index', 'name', 'fixtures', 'group'],
     move: 'index',
     recursiveDeleteProperties: ['attributes'],
     selectable: true,
@@ -52,18 +56,24 @@ export const preset: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "name",
             type: "string",
             default: {
                 type: "name"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "fixtures",
@@ -71,21 +81,27 @@ export const preset: model = {
             optional: true,
             valueType: {
                 reference: "fixture"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "group",
             optional: true,
             type: {
                 reference: "group"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "attributes",
             type: "array",
             valueType: {
                 reference: "attribute"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 };

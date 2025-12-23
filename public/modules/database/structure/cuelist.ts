@@ -2,8 +2,6 @@ import type { model } from './types';
 
 export const cuelist: model = {
     creatable: true,
-    gettable: ['id', 'index', 'name', 'currentCue', 'active', 'releaseStartTime', 'activeStartTime', 'cueStartTime', 'transitionFromCue', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'cues'],
-    settable: ['index', 'name', 'currentCue', 'active', 'releaseStartTime', 'activeStartTime', 'cueStartTime', 'transitionFromCue', 'intensity', 'executors', 'actionButtons', 'executorButtons', 'cues'],
     move: 'index',
     recursiveDeleteProperties: ['cues'],
     deletable: true,
@@ -17,23 +15,31 @@ export const cuelist: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "name",
             type: "string",
             default: {
                 type: "name"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'currentCue',
             type: 'number',
             optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'active',
@@ -42,30 +48,40 @@ export const cuelist: model = {
                 type: 'value',
                 value: 0
             },
+            gettable: true,
+            settable: true,
             comment: "0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values."
         },
         {
             name: 'releaseStartTime',
             type: 'number',
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "dateTime when the cuelist started a release. Used for fading. Null if not releasing, or in crossfade"
         },
         {
             name: 'activeStartTime',
             type: 'number',
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "dateTime when the cuelist started to become active. Used for fading. Null if not active, or in crossfade"
         },
         {
             name: 'cueStartTime',
             type: 'number',
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "dateTime when the transition from one cue to another started. Used for fading. Null if not transitioning, or in crossfade (between cues)"
         },
         {
             name: 'transitionFromCue',
             type: 'number',
             optional: true,
+            gettable: true,
+            settable: true,
             comment: "The cue the transition started from. Null if not transitioning between cues, or in crossfade (between cues)"
         },
         {
@@ -75,6 +91,8 @@ export const cuelist: model = {
                 type: 'value',
                 value: 100
             },
+            gettable: true,
+            settable: true,
             comment: 'From 0 to 100'
         },
         {
@@ -82,36 +100,42 @@ export const cuelist: model = {
             type: 'array',
             valueType: {
                 reference: 'executor'
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'actionButtons',
             type: 'array',
             valueType: {
                 reference: 'actionButton'
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'executorButtons',
             type: 'array',
             valueType: {
                 reference: 'executorButton'
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "cues",
             type: "array",
             valueType: {
                 reference: "cue"
-            }
+            },
+            gettable: true,
+            settable: true,
         }
     ]
 };
 
 export const cue: model = {
     creatable: true,
-    gettable: ['id', 'index', 'macro', 'elements', 'cuelist'],
-    settable: ['index', 'macro'],
     deletable: true,
     goable: true,
     recursiveDeleteProperties: ['elements'],
@@ -123,10 +147,14 @@ export const cue: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
+            gettable: true,
+            settable: true,
         },
         {
             name: 'macro',
@@ -135,6 +163,8 @@ export const cue: model = {
             },
             backReference: true,
             optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "elements",
@@ -142,21 +172,23 @@ export const cue: model = {
             valueType: {
                 reference: "cueElement"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "cuelist",
             backReference: true,
             type: {
                 reference: "cuelist"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 };
 
 export const cueElement: model = {
     creatable: true,
-    gettable: ['id', 'index', 'fixtures', 'group', 'contents', 'cue'],
-    settable: ['index'],
     recursiveDeleteProperties: ['contents'],
     properties: [
         {
@@ -166,10 +198,14 @@ export const cueElement: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
+            gettable: true,
+            settable: true,
         },
         {
             name: "fixtures",
@@ -177,36 +213,42 @@ export const cueElement: model = {
             type: "array",
             valueType: {
                 reference: "fixture"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "group",
             optional: true,
             type: {
                 reference: "group"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "contents",
             type: "array",
             valueType: {
                 reference: "cueElementContent"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "cue",
             backReference: true,
             type: {
                 reference: "cue"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 };
 
 export const cueElementContent: model = {
     creatable: true,
-    gettable: ['id', 'index', 'preset', 'attributes', 'cueElement'],
-    settable: ['index'],
     recursiveDeleteProperties: ['attributes'],
     properties: [
         {
@@ -216,17 +258,23 @@ export const cueElementContent: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: 'number',
+            gettable: true,
+            settable: true,
         },
         {
             name: "preset",
             optional: true,
             type: {
                 reference: "preset"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "attributes",
@@ -234,14 +282,18 @@ export const cueElementContent: model = {
             type: "array",
             valueType: {
                 reference: "attribute"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "cueElement",
             backReference: true,
             type: {
                 reference: "cueElement"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 }

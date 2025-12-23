@@ -2,8 +2,6 @@ import type { model } from "./types";
 
 export const programmerElement: model = {
     creatable: true,
-    gettable: ['id', 'index', 'fixtures', 'group', 'contents', 'selected'],
-    settable: ['index', 'fixtures', 'group'],
     recursiveDeleteProperties: [],
     deletable: true,
     properties: [
@@ -14,11 +12,15 @@ export const programmerElement: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "selected",
@@ -26,7 +28,9 @@ export const programmerElement: model = {
             default: {
                 type: "value",
                 value: false
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "fixtures",
@@ -34,29 +38,33 @@ export const programmerElement: model = {
             type: "array",
             valueType: {
                 reference: "fixture"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "group",
             optional: true,
             type: {
                 reference: "group"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "contents",
             type: "array",
             valueType: {
                 reference: "programmerElementContents"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
     ]
 };
 
 export const programmerElementContents: model = {
     creatable: true,
-    gettable: ['id', 'index', 'preset', 'attributes', 'programmerElement'],
-    settable: ['index', 'preset', 'attributes'],
     recursiveDeleteProperties: ['attributes'],
     properties: [
         {
@@ -66,18 +74,24 @@ export const programmerElementContents: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: 'number',
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "preset",
             optional: true,
             type: {
                 reference: "preset"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "attributes",
@@ -85,14 +99,18 @@ export const programmerElementContents: model = {
             type: "array",
             valueType: {
                 reference: "attribute"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "programmerElement",
             backReference: true,
             type: {
                 reference: "programmerElement"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 };

@@ -2,8 +2,6 @@ import type { model } from './types';
 
 export const section: model = {
     creatable: false,
-    gettable: ['id', 'index', 'sceneStates', 'cuelistStates', 'actionButtons', 'executorButtons'],
-    settable: ['actionButtons', 'executorButtons'],
     recursiveDeleteProperties: ['sceneStates', 'cuelistStates'],
     goable: true,
     properties: [
@@ -14,11 +12,15 @@ export const section: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
             unique: true,
+            gettable: true,
+            settable: false,
         },
         {
             name: "sceneStates",
@@ -26,6 +28,8 @@ export const section: model = {
             valueType: {
                 reference: "sectionSceneState"
             },
+            gettable: true,
+            settable: false,
             comment: "this is where the actual section contents/state is stored"
         },
         {
@@ -34,6 +38,8 @@ export const section: model = {
             valueType: {
                 reference: "sectionCuelistState"
             },
+            gettable: true,
+            settable: false,
             comment: "this is where the actual section contents/state is stored",
         },
         {
@@ -41,22 +47,24 @@ export const section: model = {
             type: "array",
             valueType: {
                 reference: "actionButton"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "executorButtons",
             type: "array",
             valueType: {
                 reference: "executorButton"
-            }
+            },
+            gettable: true,
+            settable: true,
         }
     ]
 };
 
 export const sectionSceneState: model = {
     creatable: true,
-    gettable: ['id', 'scene', 'active', 'section'],
-    settable: ['active'],
     properties: [
         {
             name: "id",
@@ -64,32 +72,38 @@ export const sectionSceneState: model = {
             unique: true,
             default: {
                 type: "cuid"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "scene",
             type: {
                 reference: "scene"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "active",
-            type: "boolean"
+            type: "boolean",
+            gettable: true,
+            settable: true,
         },
         {
             name: "section",
             backReference: true,
             type: {
                 reference: "section"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 };
 
 export const sectionCuelistState: model = {
     creatable: true,
-    gettable: ['id', 'cue', 'active', 'section'],
-    settable: ['active'],
     properties: [
         {
             name: "id",
@@ -97,24 +111,32 @@ export const sectionCuelistState: model = {
             unique: true,
             default: {
                 type: "cuid"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "cue",
             type: {
                 reference: "cue"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "active",
-            type: "boolean"
+            type: "boolean",
+            gettable: true,
+            settable: true,
         },
         {
             name: "section",
             backReference: true,
             type: {
                 reference: "section"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 };

@@ -2,8 +2,6 @@ import type { model } from './types';
 
 export const override: model = {
     creatable: true,
-    gettable: ['id', 'fixture', 'attributes'],
-    settable: ['fixture'],
     deletable: true,
     recursiveDeleteProperties: ['attributes'],
     properties: [
@@ -14,19 +12,25 @@ export const override: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "fixture",
             type: {
                 reference: "fixture"
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "attributes",
             type: "array",
             valueType: {
                 reference: "attribute"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 };

@@ -2,8 +2,6 @@ import type { model } from './types';
 
 export const fixture: model = {
     creatable: true,
-    gettable: ['id', 'fixtureNumber', 'universe', 'address', 'fixtureType'],
-    settable: ['fixtureNumber', 'universe', 'address'],
     deletable: true,
     selectable: true,
     properties: [
@@ -14,15 +12,21 @@ export const fixture: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "fixtureNumber",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "fixtureType",
-            type: "string"
+            type: "string",
+            gettable: true,
+            settable: false,
         },
         {
             name: "universe",
@@ -30,7 +34,9 @@ export const fixture: model = {
             default: {
                 type: "value",
                 value: 0
-            }
+            },
+            gettable: true,
+            settable: true,
         },
         {
             name: "address",
@@ -38,7 +44,9 @@ export const fixture: model = {
             default: {
                 type: "value",
                 value: 0
-            }
+            },
+            gettable: true,
+            settable: true,
         }
     ]
 };

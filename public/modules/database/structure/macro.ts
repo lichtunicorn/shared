@@ -2,8 +2,6 @@ import type { model } from './types';
 
 export const macro: model = {
     creatable: true,
-    gettable: ['id', 'index', 'cues', 'commands', 'actionButtons', 'executorButtons'],
-    settable: ['index', 'cues', 'actionButtons', 'executorButtons'],
     move: 'index',
     recursiveDeleteProperties: ['commands'],
     deletable: true,
@@ -17,11 +15,15 @@ export const macro: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: 'actionButtons',
@@ -29,6 +31,8 @@ export const macro: model = {
             valueType: {
                 reference: 'actionButton'
             },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'executorButtons',
@@ -36,6 +40,8 @@ export const macro: model = {
             valueType: {
                 reference: 'executorButton'
             },
+            gettable: true,
+            settable: true,
         },
         {
             name: 'cues',
@@ -43,6 +49,8 @@ export const macro: model = {
             valueType: {
                 reference: 'cue'
             },
+            gettable: true,
+            settable: true,
             optional: true
         },
         {
@@ -50,15 +58,15 @@ export const macro: model = {
             type: "array",
             valueType: {
                 reference: "macroCommand"
-            }
+            },
+            gettable: true,
+            settable: false,
         }
     ]
 };
 
 export const macroCommand: model = {
     creatable: true,
-    gettable: ['id', 'index', 'macro', 'contents'],
-    settable: ['index'],
     move: 'index',
     properties: [
         {
@@ -68,22 +76,30 @@ export const macroCommand: model = {
             default: {
                 type: "cuid"
             },
+            gettable: true,
+            settable: false,
         },
         {
             name: "index",
             type: "number",
-            unique: true
+            unique: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "macro",
             backReference: true,
             type: {
                 reference: "macro"
-            }
+            },
+            gettable: true,
+            settable: false,
         },
         {
             name: "contents",
             type: "string", // todo: better type
+            gettable: true,
+            settable: false,
             comment: 'todo: better type'
         }
     ]
