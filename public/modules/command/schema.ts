@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { kinds } from "public/modules/database/structure/attribute";
 
 export const operations = [
     { name: "copy", source: true, destination: true, value: false, emptyOptions: true },
@@ -10,7 +11,8 @@ export const operations = [
     { name: "empty", source: false, destination: true, value: false, emptyOptions: true },
     { name: "record", source: false, destination: true, value: false, emptyOptions: true },
     { name: "assign", source: true, destination: true, value: false, emptyOptions: true },
-    { name: "select", source: true, destination: false, value: false, emptyOptions: true }
+    { name: "select", source: true, destination: false, value: false, emptyOptions: true },
+    { name: "setAttribute", source: true, destination: false, value: true, emptyOptions: false },
 ] as const;
 
 export const value = z.union([
@@ -105,6 +107,17 @@ export const setCommand = z.object({
     options: z.object({}),
 });
 
+export const setAttributeCommand = z.object({
+    operation: z.literal("setAttribute"),
+    source: directReference,
+    subSources: z.array(subReference),
+    value,
+    options: z.object({
+        kind: z.union(kinds.map(kind => z.literal(kind))),
+        subKind: z.string(),
+    }),
+});
+
 export const sourceCommand = z.object({
     operation: z.union([z.literal("delete"), z.literal("select"), z.literal("go")]),
     source: directReference,
@@ -154,6 +167,7 @@ export const getCommand = z.object({
 export const noGetCommand = z.union([
     sourceValueCommand,
     setCommand,
+    setAttributeCommand,
     sourceCommand,
     openCommand,
     destinationCommand,
