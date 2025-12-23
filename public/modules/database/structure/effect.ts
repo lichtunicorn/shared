@@ -233,7 +233,7 @@ export const speedGroup: model = {
             },
         },
         {
-            name: "rate",
+            name: "bpm",
             type: "number",
             default: {
                 type: "value",
