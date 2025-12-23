@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { kinds } from "public/modules/database/structure/attribute";
+import { kinds } from "../database/structure/attribute";
 
 export const operations = [
     { name: "copy", source: true, destination: true, value: false, emptyOptions: true },
