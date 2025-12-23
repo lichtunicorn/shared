@@ -177,7 +177,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
                 }
             }
 
-            if (!currentModel.gettable.includes(property.name)) {
+            if (property.gettable !== true) {
                 return {
                     valid: false,
                     error: 'Property is not gettable',
@@ -222,7 +222,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
                     subReferenceIndex: i
                 }
             }
-            if (!foundModel.gettable.includes(subReference.key)) {
+            if (searchProperty.gettable !== true) {
                 return {
                     valid: false,
                     error: 'Key is not gettable',
@@ -352,7 +352,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     let isAssignable = false;
 
     if (nextModel) {
-        canMove = nextModel.move !== undefined && nextModel.settable.includes(nextModel.move);
+        canMove = nextModel.move !== undefined;
         canDelete = nextModel.deletable === true;
         canCreate = nextModel.creatable === true;
         canGo = nextModel.goable === true;
@@ -360,7 +360,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         canAssign = nextModel.canAssign === true;
         isAssignable = nextModel.isAssignable === true;
     } else {
-        canMove = currentModel.move !== undefined && currentModel.settable.includes(currentModel.move);
+        canMove = currentModel.move !== undefined;
         canDelete = currentModel.deletable === true;
         canCreate = currentModel.creatable === true;
         canGo = currentModel.goable === true;
@@ -372,7 +372,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     let isSettable = false;
 
     if (currentProperty) {
-        isSettable = currentModel.settable.includes(currentProperty.name);
+        isSettable = currentProperty.settable === true;
     }
 
     let isOptional = false;

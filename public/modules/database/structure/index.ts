@@ -58,36 +58,14 @@ function checkValidity() {
 
     for (const [modelName, model] of Object.entries(structure)) {
 
-        if (!model.gettable || !Array.isArray(model.gettable)) {
-            throw new Error(`Model ${modelName} must have array gettable`);
-        }
-
-        if (!model.settable || !Array.isArray(model.settable)) {
-            throw new Error(`Model ${modelName} must have array settable`);
-        }
-
-        if (model.gettable.some(name =>
-            !model.properties.find(property => property.name === name)
-        )) {
-            throw new Error(`Model ${modelName} has invalid gettable property ${model.gettable.find(name =>
-                !model.properties.find(property => property.name === name)
-            )}`);
-        }
-
-        if (model.settable.some(name =>
-            !model.properties.find(property => property.name === name)
-        )) {
-            throw new Error(`Model ${modelName} has invalid settable property ${model.settable.find(name =>
-                !model.properties.find(property => property.name === name)
-            )}`);
-        }
-
         if (model.move) {
-            if (!model.properties.find(property => property.name === model.move)) {
+            const property = model.properties.find(property => property.name === model.move);
+
+            if (!property) {
                 throw new Error(`Model ${modelName} has invalid move property ${model.move}`);
             }
 
-            if (!model.settable.includes(model.move)) {
+            if (property.settable !== true) {
                 throw new Error(`Model ${modelName} has move property ${model.move}, but that property is not settable`);
             }
         }
@@ -127,11 +105,11 @@ function checkValidity() {
                     throw new Error(`Model ${modelName} must have id property with default type cuid`);
                 }
 
-                if (!model.gettable.includes('id')) {
+                if (property.gettable !== true) {
                     throw new Error(`Model ${modelName} has id property, but that property is not gettable`);
                 }
 
-                if (model.settable.includes('id')) {
+                if (property.settable === true) {
                     throw new Error(`Model ${modelName} has id property, but that property is settable`);
                 }
             }
@@ -274,7 +252,7 @@ function generatePublicModelTypeContents(modelStructure: structureType[string]):
             }
         }
 
-        if (modelStructure.settable.includes(property.name)) {
+        if (property.settable) {
             if (comment) {
                 comment = `settable, ${comment}`;
             } else {
@@ -313,7 +291,7 @@ function generateAutoTypes(structure: structureType): string {
 
         output += `export type public_${modelName} = {\n${publicModelOutput}};\n`;
 
-        const privateProperties = modelStructure.properties.filter(property => !modelStructure.gettable.includes(property.name));
+        const privateProperties = modelStructure.properties.filter(property => property.gettable !== true);
 
         if (privateProperties.length === 0) {
             output += `export type ${modelName} = public_${modelName};\n`;
