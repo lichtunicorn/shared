@@ -31,6 +31,9 @@ export interface ClientToServerEvents {
     subscribeShows: () => void;
     unsubscribeShows: () => void;
     createShow: (showData: z.infer<typeof showDataInput>) => void;
+
+    subscribeErrors: () => void;
+    unsubscribeErrors: () => void;
 }
 
 export interface InterServerEvents {
