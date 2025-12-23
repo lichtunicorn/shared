@@ -32,6 +32,16 @@ export const scene: model = {
             settable: true,
         },
         {
+            name: "priority",
+            type: "number",
+            default: {
+                type: "value",
+                value: 0
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
             name: 'active',
             type: 'number',
             default: {

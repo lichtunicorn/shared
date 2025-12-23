@@ -191,6 +191,8 @@ export type public_scene = {
     index: number;
     /** settable */
     name: string;
+    /** settable, default 0 */
+    priority: number;
     /** settable, default 0, 0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values. */
     active: number;
     /** read only, dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade */
@@ -242,6 +244,8 @@ export type public_cuelist = {
     index: number;
     /** settable, default name() */
     name: string;
+    /** settable, default 0 */
+    priority: number;
     /** settable */
     currentCue: null | number;
     /** settable, default 0, 0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values. */
