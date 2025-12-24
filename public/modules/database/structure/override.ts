@@ -30,8 +30,18 @@ export const override: model = {
             valueType: {
                 reference: "attribute"
             },
+            optional: true,
             gettable: true,
             settable: false,
-        }
+        },
+        {
+            name: "effect",
+            type: {
+                reference: "effect"
+            },
+            optional: true,
+            gettable: true,
+            settable: false,
+        },
     ]
 };
