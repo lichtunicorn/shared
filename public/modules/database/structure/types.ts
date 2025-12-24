@@ -234,7 +234,7 @@ export type public_sceneElementContent = {
     /** settable */
     preset: null | { reference: string; };
     /** settable */
-    effect: null | { reference: string; };
+    effects: null | { reference: string; }[];
     /** read only */
     attributes: null | { reference: string; }[];
     /** read only, back reference */
@@ -310,7 +310,7 @@ export type public_cueElementContent = {
     /** read only */
     preset: null | { reference: string; };
     /** read only */
-    effect: null | { reference: string; };
+    effects: null | { reference: string; }[];
     /** read only */
     attributes: null | { reference: string; }[];
     /** read only, back reference */
@@ -370,7 +370,7 @@ export type public_effectOffset = {
     /** settable */
     offset: number;
     /** read only, back reference */
-    effect: { reference: string; };
+    effects: { reference: string; };
 };
 export type effectOffset = public_effectOffset;
 export type public_speedGroup = {
@@ -388,7 +388,7 @@ export type public_override = {
     /** read only */
     attributes: null | { reference: string; }[];
     /** read only */
-    effect: null | { reference: string; };
+    effects: null | { reference: string; }[];
 };
 export type override = public_override;
 export type public_variable = {
@@ -565,7 +565,7 @@ export type public_programmerElementContent = {
     /** settable, unique */
     index: number;
     /** read only */
-    effect: null | { reference: string; };
+    effects: null | { reference: string; }[];
     /** read only */
     preset: null | { reference: string; };
     /** read only */

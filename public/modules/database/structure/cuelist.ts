@@ -288,9 +288,10 @@ export const cueElementContent: model = {
             settable: false,
         },
         {
-            name: "effect",
+            name: "effects",
             optional: true,
-            type: {
+            type: "array",
+            valueType: {
                 reference: "effect"
             },
             gettable: true,

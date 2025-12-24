@@ -256,7 +256,7 @@ export const effectOffset: model = {
             settable: true,
         },
         {
-            name: "effect",
+            name: "effects",
             type: {
                 reference: "effect"
             },

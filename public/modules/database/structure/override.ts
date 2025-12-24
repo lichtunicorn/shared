@@ -35,8 +35,9 @@ export const override: model = {
             settable: false,
         },
         {
-            name: "effect",
-            type: {
+            name: "effects",
+            type: "array",
+            valueType: {
                 reference: "effect"
             },
             optional: true,
