@@ -87,13 +87,22 @@ export const programmerElementContent: model = {
             settable: true,
         },
         {
+            name: "effect",
+            optional: true,
+            type: {
+                reference: "effect"
+            },
+            gettable: true,
+            settable: false,
+        },
+        {
             name: "preset",
             optional: true,
             type: {
                 reference: "preset"
             },
             gettable: true,
-            settable: true,
+            settable: false,
         },
         {
             name: "attributes",

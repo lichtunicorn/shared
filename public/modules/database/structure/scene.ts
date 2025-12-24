@@ -211,6 +211,15 @@ export const sceneElementContent: model = {
             settable: true,
         },
         {
+            name: "effect",
+            optional: true,
+            type: {
+                reference: "effect"
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
             name: "attributes",
             optional: true,
             type: "array",

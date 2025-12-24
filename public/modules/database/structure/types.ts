@@ -233,6 +233,8 @@ export type public_sceneElementContent = {
     index: number;
     /** settable */
     preset: null | { reference: string; };
+    /** settable */
+    effect: null | { reference: string; };
     /** read only */
     attributes: null | { reference: string; }[];
     /** read only, back reference */
@@ -307,6 +309,8 @@ export type public_cueElementContent = {
     index: number;
     /** read only */
     preset: null | { reference: string; };
+    /** read only */
+    effect: null | { reference: string; };
     /** read only */
     attributes: null | { reference: string; }[];
     /** read only, back reference */
@@ -558,7 +562,9 @@ export type public_programmerElementContent = {
     id: string;
     /** settable, unique */
     index: number;
-    /** settable */
+    /** read only */
+    effect: null | { reference: string; };
+    /** read only */
     preset: null | { reference: string; };
     /** read only */
     attributes: null | { reference: string; }[];

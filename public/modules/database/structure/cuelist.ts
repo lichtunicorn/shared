@@ -288,6 +288,15 @@ export const cueElementContent: model = {
             settable: false,
         },
         {
+            name: "effect",
+            optional: true,
+            type: {
+                reference: "effect"
+            },
+            gettable: true,
+            settable: false,
+        },
+        {
             name: "attributes",
             optional: true,
             type: "array",
