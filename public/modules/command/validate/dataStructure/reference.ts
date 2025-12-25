@@ -384,7 +384,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     let isSettable = false;
 
     if (currentProperty) {
-        isSettable = currentProperty.settable === true;
+        isSettable = currentProperty.settable === true && currentProperty.type !== 'attributes';
     }
 
     let isOptional = false;
