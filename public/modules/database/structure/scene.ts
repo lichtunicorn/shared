@@ -66,7 +66,7 @@ export const scene: model = {
             optional: true,
             gettable: true,
             settable: false,
-            comment: "dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade",
+            comment: "dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade. Active is original value if this is used",
         },
         {
             name: 'activeStartTime',
@@ -74,7 +74,7 @@ export const scene: model = {
             optional: true,
             gettable: true,
             settable: false,
-            comment: "dateTime when the scene started to become active. Used for fading. Null if not active, or in crossfade"
+            comment: "dateTime when the scene started to become active. Used for fading. Null if not active, or in crossfade. Active is new value if this is used"
         },
         {
             name: 'intensity',

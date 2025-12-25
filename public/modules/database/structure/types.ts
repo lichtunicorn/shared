@@ -203,9 +203,9 @@ export type public_scene = {
     active: number;
     /** read only, dateTime when activated last went of 0. Used for latest takes priority.  If active goes back to 0, activatedAt stays the same. */
     activatedAt: null | number;
-    /** read only, dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade */
+    /** read only, dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade. Active is original value if this is used */
     releaseStartTime: null | number;
-    /** read only, dateTime when the scene started to become active. Used for fading. Null if not active, or in crossfade */
+    /** read only, dateTime when the scene started to become active. Used for fading. Null if not active, or in crossfade. Active is new value if this is used */
     activeStartTime: null | number;
     /** settable, default 100, From 0 to 100 */
     intensity: number;
