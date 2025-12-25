@@ -361,18 +361,24 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         canCreate = nextModel.creatable === true;
         canGo = nextModel.goable === true;
         canSelect = nextModel.selectable === true;
-        canSetAttribute = nextModel.canSetAttribute === true;
         canAssign = nextModel.canAssign === true;
         isAssignable = nextModel.isAssignable === true;
+
+        if (nextModel.properties.some(property => property.type === 'attributes' && property.settable === true)) {
+            canSetAttribute = true;
+        }
     } else {
         canMove = currentModel.move !== undefined;
         canDelete = currentModel.deletable === true;
         canCreate = currentModel.creatable === true;
         canGo = currentModel.goable === true;
         canSelect = currentModel.selectable === true;
-        canSetAttribute = currentModel.canSetAttribute === true;
         canAssign = currentModel.canAssign === true;
         isAssignable = currentModel.isAssignable === true;
+
+        if (currentModel.properties.some(property => property.type === 'attributes' && property.settable === true)) {
+            canSetAttribute = true;
+        }
     }
 
     let isSettable = false;

@@ -1,54 +1,8 @@
 import type { model } from './types';
 
-export const kinds = [
-    "intensity",
-    "position",
-    "color",
-    "beam",
-    "control"
-] as const;
-
-export const attribute: model = {
-    canSetAttribute: true,
-    creatable: false,
-    properties: [
-        {
-            name: "id",
-            type: "string",
-            unique: true,
-            default: {
-                type: "cuid"
-            },
-            gettable: true,
-            settable: false,
-        },
-        {
-            name: "kind",
-            type: "oneOf",
-            options: [...kinds],
-            gettable: true,
-            settable: false,
-        },
-        {
-            name: "subKind",
-            type: "string",
-            gettable: true,
-            settable: false,
-        },
-        {
-            name: "value",
-            type: "stringOrNumberOrBooleanOrNull",
-            gettable: true,
-            settable: true,
-        }
-    ]
-};
-
 export const preset: model = {
-    canSetAttribute: true,
     creatable: true,
     move: 'index',
-    recursiveDeleteProperties: ['attributes'],
     selectable: true,
     properties: [
         {
@@ -98,10 +52,7 @@ export const preset: model = {
         },
         {
             name: "attributes",
-            type: "array",
-            valueType: {
-                reference: "attribute"
-            },
+            type: "attributes",
             gettable: true,
             settable: false,
         }

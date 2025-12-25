@@ -13,7 +13,7 @@ export const effect: model = {
     move: 'index',
     deletable: true,
     selectable: true,
-    recursiveDeleteProperties: ['nonTemplateOffsets', 'lowValue', 'highValue'],
+    recursiveDeleteProperties: ['nonTemplateOffsets'],
     properties: [
         {
             name: "id",
@@ -193,10 +193,7 @@ export const effect: model = {
         },
         {
             name: "lowValue",
-            type: "array",
-            valueType: {
-                reference: "attribute"
-            },
+            type: "attributes",
             optional: true,
             gettable: true,
             settable: false,
@@ -214,10 +211,7 @@ export const effect: model = {
         },
         {
             name: "highValue",
-            type: "array",
-            valueType: {
-                reference: "attribute"
-            },
+            type: "attributes",
             optional: true,
             gettable: true,
             settable: false,

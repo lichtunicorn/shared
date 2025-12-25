@@ -14,7 +14,7 @@ import { variable } from "./variable";
 import { macro, macroCommand } from "./macro";
 import { collection } from "./collection";
 import { fixture } from "./fixture";
-import { attribute, preset } from "./attribute";
+import { preset } from "./preset";
 import { executor, executorButton, executorFader } from "./executor";
 import { actionButton } from "./actionButton";
 import { programmerElement, programmerElementContent } from "./programmer";
@@ -42,7 +42,6 @@ export const structure: structureType = {
     macroCommand,
     collection,
     fixture,
-    attribute,
     preset,
     executor,
     actionButton,
@@ -206,6 +205,8 @@ function generatePublicModelTypeContents(modelStructure: structureType[string]):
             typescriptType = 'string | number | boolean | null';
         } else if (typeof property.type !== 'string' && property.type.reference) {
             typescriptType = `{ reference: string; }`;
+        } else if (property.type === 'attributes') {
+            typescriptType = 'attributesType';
         } else {
             throw new Error(`Unknown property type ${property.type}`);
         }

@@ -1,10 +1,8 @@
 import type { model } from './types';
 
 export const override: model = {
-    canSetAttribute: true,
     creatable: true,
     deletable: true,
-    recursiveDeleteProperties: ['attributes'],
     properties: [
         {
             name: "id",
@@ -26,10 +24,7 @@ export const override: model = {
         },
         {
             name: "attributes",
-            type: "array",
-            valueType: {
-                reference: "attribute"
-            },
+            type: "attributes",
             optional: true,
             gettable: true,
             settable: false,

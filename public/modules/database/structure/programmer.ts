@@ -1,7 +1,6 @@
 import type { model } from "./types";
 
 export const programmerElement: model = {
-    canSetAttribute: true,
     creatable: true,
     recursiveDeleteProperties: [],
     deletable: true,
@@ -65,9 +64,7 @@ export const programmerElement: model = {
 };
 
 export const programmerElementContent: model = {
-    canSetAttribute: true,
     creatable: true,
-    recursiveDeleteProperties: ['attributes'],
     properties: [
         {
             name: "id",
@@ -108,10 +105,7 @@ export const programmerElementContent: model = {
         {
             name: "attributes",
             optional: true,
-            type: "array",
-            valueType: {
-                reference: "attribute"
-            },
+            type: "attributes",
             gettable: true,
             settable: false,
         },

@@ -118,7 +118,6 @@ export const scene: model = {
 };
 
 export const sceneElement: model = {
-    canSetAttribute: true,
     creatable: true,
     recursiveDeleteProperties: ['contents'],
     properties: [
@@ -180,9 +179,7 @@ export const sceneElement: model = {
 };
 
 export const sceneElementContent: model = {
-    canSetAttribute: true,
     creatable: true,
-    recursiveDeleteProperties: ['attributes'],
     properties: [
         {
             name: "id",
@@ -223,10 +220,7 @@ export const sceneElementContent: model = {
         {
             name: "attributes",
             optional: true,
-            type: "array",
-            valueType: {
-                reference: "attribute"
-            },
+            type: "attributes",
             gettable: true,
             settable: false,
         },

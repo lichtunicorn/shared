@@ -5,7 +5,7 @@ import type { validateDataStructureReturn } from "./types";
 import { noGetCommand as noGetCommandSchema, getCommand as getCommandSchema } from "public/modules/command/schema";
 import { validateReferenceDataStructure } from "./reference";
 import { validateValueDataStructure } from "./value";
-import { kinds } from "public/modules/database/structure/attribute";
+import { kinds } from "public/kinds";
 
 export function validateDataStructure(command: z.infer<typeof noGetCommandSchema | typeof getCommandSchema>, canBeGetCommand: boolean = false): validateDataStructureReturn {
     if (command.operation === 'get' && !canBeGetCommand) {
