@@ -107,6 +107,8 @@ export type public_show = {
     name: string;
     /** settable, default false */
     blind: boolean;
+    /** settable, default false */
+    highlight: boolean;
     /** read only */
     actionButtons: { reference: string; }[];
     /** read only */

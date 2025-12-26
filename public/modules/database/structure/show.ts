@@ -46,6 +46,16 @@ export const show: model = {
             gettable: true,
             settable: true,
         },
+        {
+            name: "highlight",
+            type: "boolean",
+            default: {
+                type: "value",
+                value: false
+            },
+            gettable: true,
+            settable: true
+        },
         ...(manyModelNames.map(name => ({
             name: name + "s",
             type: "array" as const,
