@@ -23,10 +23,21 @@ export type referencePropertyType = {
 };
 
 export type attributesType = {
-    [key in kind]?: {
+    [key in kind]?: ({
         subKind: string;
-        value: string | number | boolean;
-    }[];
+        value: string | boolean;
+    } | {
+        subKind: string;
+        value: number;
+        /** How much the value increases per x on the selection grid */
+        xIncrease: number;
+        /** If the xIncrease is symmetrical on the selection grid */
+        xSymmetrical: boolean;
+        /** How much the value increases per y on the selection grid */
+        yIncrease: number;
+        /** If the yIncrease is symmetrical on the selection grid */
+        ySymmetrical: boolean;
+    })[];
 };
 
 export type property<name extends string> = {
