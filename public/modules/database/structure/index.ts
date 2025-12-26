@@ -226,6 +226,8 @@ function generatePublicModelTypeContents(modelStructure: structureType[string]):
                 string = 'cuid()';
             } else if (property.default.type === 'name') {
                 string = 'name()';
+            } else if (property.default.type === 'now') {
+                string = 'now()';
             } else {
                 throw new Error(`Unknown default type ${(property.default as any).type}`);
             }

@@ -47,6 +47,8 @@ export type property<name extends string> = {
                 value: any;
             } | {
                 type: "name";
+            } | {
+                type: "now";
             };
         } | {
             type: referencePropertyType;
@@ -388,6 +390,8 @@ export type public_speedGroup = {
     id: string;
     /** settable, default 60 */
     bpm: number;
+    /** settable, default now() */
+    firstHitTime: number;
 };
 export type speedGroup = public_speedGroup;
 export type public_override = {
