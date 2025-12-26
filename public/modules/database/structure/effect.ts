@@ -283,6 +283,15 @@ export const speedGroup: model = {
             },
             gettable: true,
             settable: true,
+        },
+        {
+            name: "firstHitTime",
+            type: "number",
+            default: {
+                type: "now"
+            },
+            gettable: true,
+            settable: true,
         }
     ]
 };
