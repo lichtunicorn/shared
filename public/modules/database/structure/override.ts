@@ -25,17 +25,6 @@ export const override: model = {
         {
             name: "attributes",
             type: "attributes",
-            optional: true,
-            gettable: true,
-            settable: false,
-        },
-        {
-            name: "effects",
-            type: "array",
-            valueType: {
-                reference: "effect"
-            },
-            optional: true,
             gettable: true,
             settable: false,
         },

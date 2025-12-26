@@ -392,9 +392,7 @@ export type public_override = {
     /** settable */
     fixture: { reference: string; };
     /** read only */
-    attributes: null | attributesType;
-    /** read only */
-    effects: null | { reference: string; }[];
+    attributes: attributesType;
 };
 export type override = public_override;
 export type public_variable = {
