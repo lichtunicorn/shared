@@ -188,6 +188,8 @@ export type public_groupElement = {
     x: number;
     /** settable */
     y: number;
+    /** settable */
+    fixture: { reference: string; };
     /** read only, back reference */
     group: { reference: string; };
 };

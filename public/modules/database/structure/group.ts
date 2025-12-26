@@ -62,6 +62,14 @@ export const groupElement: model = {
             settable: true,
         },
         {
+            name: "fixture",
+            type: {
+                reference: "fixture"
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
             name: "group",
             backReference: true,
             type: {
