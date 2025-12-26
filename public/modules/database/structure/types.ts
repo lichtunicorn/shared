@@ -241,7 +241,7 @@ export type public_sceneElementContent = {
     preset: null | { reference: string; };
     /** settable */
     effects: null | { reference: string; }[];
-    /** read only */
+    /** settable */
     attributes: null | attributesType;
     /** read only, back reference */
     sceneElement: { reference: string; };
@@ -317,7 +317,7 @@ export type public_cueElementContent = {
     preset: null | { reference: string; };
     /** read only */
     effects: null | { reference: string; }[];
-    /** read only */
+    /** settable */
     attributes: null | attributesType;
     /** read only, back reference */
     cueElement: { reference: string; };
@@ -360,11 +360,11 @@ export type public_effect = {
     nonTemplateOffsets: null | { reference: string; }[];
     /** settable, Where to use the current value. If null, don't use current value */
     currentValue: null | "lowValue" | "middleValue" | "highValue";
-    /** read only, The low value of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
+    /** settable, The low value of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
     lowValue: null | attributesType;
     /** settable, The low preset of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null */
     lowPreset: null | { reference: string; };
-    /** read only, The high value of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
+    /** settable, The high value of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
     highValue: null | attributesType;
     /** settable, The high preset of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null */
     highPreset: null | { reference: string; };
@@ -391,7 +391,7 @@ export type public_override = {
     id: string;
     /** settable */
     fixture: { reference: string; };
-    /** read only */
+    /** settable */
     attributes: attributesType;
 };
 export type override = public_override;
@@ -473,7 +473,7 @@ export type public_preset = {
     fixtures: null | { reference: string; }[];
     /** settable */
     group: null | { reference: string; };
-    /** read only */
+    /** settable */
     attributes: attributesType;
 };
 export type preset = public_preset;
@@ -561,7 +561,7 @@ export type public_programmerElementContent = {
     effects: null | { reference: string; }[];
     /** read only */
     preset: null | { reference: string; };
-    /** read only */
+    /** settable */
     attributes: null | attributesType;
     /** read only, back reference */
     programmerElement: { reference: string; };

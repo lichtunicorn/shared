@@ -222,7 +222,7 @@ export const sceneElementContent: model = {
             optional: true,
             type: "attributes",
             gettable: true,
-            settable: false,
+            settable: true,
         },
         {
             name: "sceneElement",

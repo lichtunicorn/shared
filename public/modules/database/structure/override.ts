@@ -26,7 +26,7 @@ export const override: model = {
             name: "attributes",
             type: "attributes",
             gettable: true,
-            settable: false,
+            settable: true,
         },
     ]
 };

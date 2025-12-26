@@ -196,7 +196,7 @@ export const effect: model = {
             type: "attributes",
             optional: true,
             gettable: true,
-            settable: false,
+            settable: true,
             comment: "The low value of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null"
         },
         {
@@ -214,7 +214,7 @@ export const effect: model = {
             type: "attributes",
             optional: true,
             gettable: true,
-            settable: false,
+            settable: true,
             comment: "The high value of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null"
         },
         {

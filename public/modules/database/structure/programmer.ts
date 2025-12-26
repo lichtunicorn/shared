@@ -107,7 +107,7 @@ export const programmerElementContent: model = {
             optional: true,
             type: "attributes",
             gettable: true,
-            settable: false,
+            settable: true,
         },
         {
             name: "programmerElement",
