@@ -254,6 +254,10 @@ export type public_sceneElementContent = {
     id: string;
     /** settable, unique */
     index: number;
+    /** settable, default 0 */
+    activeFade: number;
+    /** settable, default 0 */
+    releaseFade: number;
     /** settable */
     preset: null | { reference: string; };
     /** settable */

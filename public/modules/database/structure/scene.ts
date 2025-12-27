@@ -199,6 +199,26 @@ export const sceneElementContent: model = {
             settable: true,
         },
         {
+            name: "activeFade",
+            type: 'number',
+            default: {
+                type: 'value',
+                value: 0
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
+            name: "releaseFade",
+            type: 'number',
+            default: {
+                type: 'value',
+                value: 0
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
             name: "preset",
             optional: true,
             type: {
