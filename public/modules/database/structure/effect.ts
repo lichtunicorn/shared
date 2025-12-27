@@ -86,24 +86,12 @@ export const effect: model = {
             comment: "percentage 0 (no offset) to 50 (half offset) to 100 (full offset, so no offset). Null if template is false"
         },
         {
-            name: "templateOffsetSelectionGrid",
-            type: "boolean",
-            default: {
-                type: "value",
-                value: false
-            },
-            optional: true,
-            gettable: true,
-            settable: true,
-            comment: "If true, use selection grid. If false, use fixture numbers. Null if template is false"
-        },
-        {
             name: "xWings",
             type: "number",
             gettable: true,
             settable: true,
             optional: true,
-            comment: "Wings for this effect. This is also used if templateOffsetSelectionGrid is false"
+            comment: "Wings for this effect. If template is true, this is only for the x axis",
         },
         {
             name: "xGroups",
@@ -111,7 +99,7 @@ export const effect: model = {
             gettable: true,
             settable: true,
             optional: true,
-            comment: "Groups for this effect. This is also used if templateOffsetSelectionGrid is false"
+            comment: "Groups for this effect. If template is true, this is only for the x axis",
         },
         {
             name: "xBlocks",
@@ -119,7 +107,7 @@ export const effect: model = {
             gettable: true,
             settable: true,
             optional: true,
-            comment: "Blocks for this effect. This is also used if templateOffsetSelectionGrid is false"
+            comment: "Blocks for this effect. If template is true, this is only for the x axis",
         },
         {
             name: "yWings",
@@ -127,7 +115,7 @@ export const effect: model = {
             gettable: true,
             settable: true,
             optional: true,
-            comment: "Wings for this effect on y axis. This is only set if template is true and templateOffsetSelectionGrid is true"
+            comment: "Wings for this effect on the y axis. This is null if template is false",
         },
         {
             name: "yGroups",
@@ -135,7 +123,7 @@ export const effect: model = {
             gettable: true,
             settable: true,
             optional: true,
-            comment: "Groups for this effect on y axis. This is only set if template is true and templateOffsetSelectionGrid is true"
+            comment: "Groups for this effect on the y axis. This is null if template is false",
         },
         {
             name: "yBlocks",
@@ -143,7 +131,7 @@ export const effect: model = {
             gettable: true,
             settable: true,
             optional: true,
-            comment: "Blocks for this effect on y axis. This is only set if template is true and templateOffsetSelectionGrid is true"
+            comment: "Blocks for this effect on the y axis. This is null if template is false",
         },
         {
             name: "templateOffsetXIncrease",
@@ -151,7 +139,7 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
-            comment: "How much the offset increases per x on selection grid. If template is false this is null. This is also used if templateOffsetSelectionGrid is false"
+            comment: "How much the offset increases per x on selection grid. If template is false this is null"
         },
         {
             name: "templateOffsetXSymmetrical",
@@ -159,7 +147,7 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
-            comment: "If the offset is symmetrical on x on selection grid. If template is false this is null. This is also used if templateOffsetSelectionGrid is false"
+            comment: "If the offset is symmetrical on x on selection grid. If template is false this is null"
         },
         {
             name: "templateOffsetYIncrease",
@@ -167,7 +155,7 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
-            comment: "How much the offset increases per y on selection grid. If template is false or templateOffsetSelectionGrid is false, this is null"
+            comment: "How much the offset increases per y on selection grid. If template is false this is null"
         },
         {
             name: "templateOffsetYSymmetrical",
@@ -175,7 +163,7 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
-            comment: "If the offset is symmetrical on y on selection grid. If template is false or templateOffsetSelectionGrid is false, this is null"
+            comment: "If the offset is symmetrical on y on selection grid. If template is false this is null"
         },
         {
             name: "nonTemplateOffsets",
