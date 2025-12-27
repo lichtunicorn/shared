@@ -355,27 +355,31 @@ export type public_effect = {
     speedGroup: null | { reference: string; };
     /** settable, default 1 */
     multiplier: number;
-    /** settable, default 0 */
-    wings: number;
-    /** settable, default 0 */
-    groups: number;
-    /** settable, default 0 */
-    blocks: number;
     /** settable, default true, If true, effect works for any amount of fixtures. If false, effect works for specific amount of fixtures */
     template: boolean;
     /** settable, default 0, percentage 0 (no offset) to 50 (half offset) to 100 (full offset, so no offset). Null if template is false */
     templateOffsetBase: null | number;
     /** settable, default false, If true, use selection grid. If false, use fixture numbers. Null if template is false */
     templateOffsetSelectionGrid: null | boolean;
-    /** settable, default 0, How much the offset increases per fixture. Null if template is false or templateOffsetSelectionGrid is true */
-    templateOffsetIncrease: null | number;
-    /** settable, How much the offset increases per x on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    /** settable, Wings for this effect. This is also used if templateOffsetSelectionGrid is false */
+    xWings: null | number;
+    /** settable, Groups for this effect. This is also used if templateOffsetSelectionGrid is false */
+    xGroups: null | number;
+    /** settable, Blocks for this effect. This is also used if templateOffsetSelectionGrid is false */
+    xBlocks: null | number;
+    /** settable, Wings for this effect on y axis. This is only set if template is true and templateOffsetSelectionGrid is true */
+    yWings: null | number;
+    /** settable, Groups for this effect on y axis. This is only set if template is true and templateOffsetSelectionGrid is true */
+    yGroups: null | number;
+    /** settable, Blocks for this effect on y axis. This is only set if template is true and templateOffsetSelectionGrid is true */
+    yBlocks: null | number;
+    /** settable, How much the offset increases per x on selection grid. If template is false this is null. This is also used if templateOffsetSelectionGrid is false */
     templateOffsetXIncrease: null | number;
-    /** settable, If the offset is symmetrical on x on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    /** settable, If the offset is symmetrical on x on selection grid. If template is false this is null. This is also used if templateOffsetSelectionGrid is false */
     templateOffsetXSymmetrical: null | boolean;
-    /** settable, How much the offset increases per y on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    /** settable, How much the offset increases per y on selection grid. If template is false or templateOffsetSelectionGrid is false, this is null */
     templateOffsetYIncrease: null | number;
-    /** settable, If the offset is symmetrical on y on selection grid. Null if template is false or templateOffsetSelectionGrid is false */
+    /** settable, If the offset is symmetrical on y on selection grid. If template is false or templateOffsetSelectionGrid is false, this is null */
     templateOffsetYSymmetrical: null | number;
     /** settable, The offset per fixture if template = false. Null if template = true */
     nonTemplateOffsets: null | { reference: string; }[];

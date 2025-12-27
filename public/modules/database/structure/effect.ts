@@ -63,36 +63,6 @@ export const effect: model = {
             settable: true,
         },
         {
-            name: "wings",
-            type: "number",
-            default: {
-                type: "value",
-                value: 0
-            },
-            gettable: true,
-            settable: true,
-        },
-        {
-            name: "groups",
-            type: "number",
-            default: {
-                type: "value",
-                value: 0
-            },
-            gettable: true,
-            settable: true,
-        },
-        {
-            name: "blocks",
-            type: "number",
-            default: {
-                type: "value",
-                value: 0
-            },
-            gettable: true,
-            settable: true,
-        },
-        {
             name: "template",
             type: "boolean",
             default: {
@@ -128,16 +98,52 @@ export const effect: model = {
             comment: "If true, use selection grid. If false, use fixture numbers. Null if template is false"
         },
         {
-            name: "templateOffsetIncrease",
+            name: "xWings",
             type: "number",
-            default: {
-                type: "value",
-                value: 0
-            },
-            optional: true,
             gettable: true,
             settable: true,
-            comment: "How much the offset increases per fixture. Null if template is false or templateOffsetSelectionGrid is true"
+            optional: true,
+            comment: "Wings for this effect. This is also used if templateOffsetSelectionGrid is false"
+        },
+        {
+            name: "xGroups",
+            type: "number",
+            gettable: true,
+            settable: true,
+            optional: true,
+            comment: "Groups for this effect. This is also used if templateOffsetSelectionGrid is false"
+        },
+        {
+            name: "xBlocks",
+            type: "number",
+            gettable: true,
+            settable: true,
+            optional: true,
+            comment: "Blocks for this effect. This is also used if templateOffsetSelectionGrid is false"
+        },
+        {
+            name: "yWings",
+            type: "number",
+            gettable: true,
+            settable: true,
+            optional: true,
+            comment: "Wings for this effect on y axis. This is only set if template is true and templateOffsetSelectionGrid is true"
+        },
+        {
+            name: "yGroups",
+            type: "number",
+            gettable: true,
+            settable: true,
+            optional: true,
+            comment: "Groups for this effect on y axis. This is only set if template is true and templateOffsetSelectionGrid is true"
+        },
+        {
+            name: "yBlocks",
+            type: "number",
+            gettable: true,
+            settable: true,
+            optional: true,
+            comment: "Blocks for this effect on y axis. This is only set if template is true and templateOffsetSelectionGrid is true"
         },
         {
             name: "templateOffsetXIncrease",
@@ -145,7 +151,7 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
-            comment: "How much the offset increases per x on selection grid. Null if template is false or templateOffsetSelectionGrid is false"
+            comment: "How much the offset increases per x on selection grid. If template is false this is null. This is also used if templateOffsetSelectionGrid is false"
         },
         {
             name: "templateOffsetXSymmetrical",
@@ -153,7 +159,7 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
-            comment: "If the offset is symmetrical on x on selection grid. Null if template is false or templateOffsetSelectionGrid is false"
+            comment: "If the offset is symmetrical on x on selection grid. If template is false this is null. This is also used if templateOffsetSelectionGrid is false"
         },
         {
             name: "templateOffsetYIncrease",
@@ -161,7 +167,7 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
-            comment: "How much the offset increases per y on selection grid. Null if template is false or templateOffsetSelectionGrid is false"
+            comment: "How much the offset increases per y on selection grid. If template is false or templateOffsetSelectionGrid is false, this is null"
         },
         {
             name: "templateOffsetYSymmetrical",
@@ -169,7 +175,7 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
-            comment: "If the offset is symmetrical on y on selection grid. Null if template is false or templateOffsetSelectionGrid is false"
+            comment: "If the offset is symmetrical on y on selection grid. If template is false or templateOffsetSelectionGrid is false, this is null"
         },
         {
             name: "nonTemplateOffsets",
