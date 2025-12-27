@@ -37,6 +37,14 @@ export type attributesType = {
         yIncrease: number;
         /** If the yIncrease is symmetrical on the selection grid */
         ySymmetrical: boolean;
+
+        xWings: null | number;
+        xGroups: null | number;
+        xBlocks: null | number;
+
+        yWings: null | number;
+        yGroups: null | number;
+        yBlocks: null | number;
     })[];
 };
 
