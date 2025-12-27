@@ -56,7 +56,6 @@ export const effect: model = {
         },
         {
             name: "speedGroup",
-            optional: true,
             type: {
                 reference: "speedGroup"
             },

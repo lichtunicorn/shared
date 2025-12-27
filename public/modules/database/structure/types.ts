@@ -355,7 +355,7 @@ export type public_effect = {
     /** settable, default sine */
     type: "sine" | "step" | "ramp" | "invRamp" | "linearBounce";
     /** settable */
-    speedGroup: null | { reference: string; };
+    speedGroup: { reference: string; };
     /** settable, default 1 */
     multiplier: number;
     /** settable, default true, If true, effect works for any amount of fixtures. If false, effect works for specific amount of fixtures */
