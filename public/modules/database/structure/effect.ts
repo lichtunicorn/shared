@@ -1,5 +1,7 @@
 import type { model } from './types';
 
+import { kinds } from 'public/kinds';
+
 export const effectTypes = [
     "sine",
     "step",
@@ -31,6 +33,15 @@ export const effect: model = {
             unique: true,
             gettable: true,
             settable: true,
+        },
+        {
+            name: "kinds",
+            type: "array",
+            valueType: {
+                reference: "effectKind"
+            },
+            gettable: true,
+            settable: true
         },
         {
             name: "type",
@@ -221,6 +232,44 @@ export const effect: model = {
             settable: true,
             comment: "The high preset of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null"
         },
+    ]
+};
+
+export const effectKind: model = {
+    creatable: true,
+    properties: [
+        {
+            name: "id",
+            type: "string",
+            unique: true,
+            default: {
+                type: "cuid"
+            },
+            gettable: true,
+            settable: false,
+        },
+        {
+            name: "kind",
+            type: "oneOf",
+            options: [...kinds],
+            gettable: true,
+            settable: true,
+        },
+        {
+            name: "subKind",
+            type: "string",
+            gettable: true,
+            settable: true,
+        },
+        {
+            name: "effects",
+            type: {
+                reference: "effect"
+            },
+            backReference: true,
+            gettable: true,
+            settable: false,
+        }
     ]
 };
 
