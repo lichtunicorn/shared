@@ -171,7 +171,7 @@ export const effect: model = {
         },
         {
             name: "templateOffsetYSymmetrical",
-            type: "number",
+            type: "boolean",
             optional: true,
             gettable: true,
             settable: true,

@@ -380,7 +380,7 @@ export type public_effect = {
     /** settable, How much the offset increases per y on selection grid. If template is false or templateOffsetSelectionGrid is false, this is null */
     templateOffsetYIncrease: null | number;
     /** settable, If the offset is symmetrical on y on selection grid. If template is false or templateOffsetSelectionGrid is false, this is null */
-    templateOffsetYSymmetrical: null | number;
+    templateOffsetYSymmetrical: null | boolean;
     /** settable, The offset per fixture if template = false. Null if template = true */
     nonTemplateOffsets: null | { reference: string; }[];
     /** settable, Where to use the current value. If null, don't use current value */
