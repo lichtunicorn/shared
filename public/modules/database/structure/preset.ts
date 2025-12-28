@@ -23,6 +23,13 @@ export const preset: model = {
             settable: true,
         },
         {
+            name: "usePresetSelectionGrid",
+            type: "boolean",
+            gettable: true,
+            settable: true,
+            comment: "If true, uses the selection grid stored in the preset. If false, uses the selection grid of the model referencing the preset",
+        },
+        {
             name: "name",
             type: "string",
             default: {

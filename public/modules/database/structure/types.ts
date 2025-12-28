@@ -515,6 +515,8 @@ export type public_preset = {
     id: string;
     /** settable, unique */
     index: number;
+    /** settable, If true, uses the selection grid stored in the preset. If false, uses the selection grid of the model referencing the preset */
+    usePresetSelectionGrid: boolean;
     /** settable, default name() */
     name: string;
     /** settable */
