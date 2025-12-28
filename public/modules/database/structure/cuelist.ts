@@ -166,6 +166,16 @@ export const cue: model = {
             settable: true,
         },
         {
+            name: "cueFade",
+            type: 'number',
+            default: {
+                type: 'value',
+                value: 0
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
             name: 'macro',
             type: {
                 reference: 'macro'
@@ -272,6 +282,26 @@ export const cueElementContent: model = {
         {
             name: "index",
             type: 'number',
+            gettable: true,
+            settable: true,
+        },
+        {
+            name: "activeFade",
+            type: 'number',
+            default: {
+                type: 'value',
+                value: 0
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
+            name: "releaseFade",
+            type: 'number',
+            default: {
+                type: 'value',
+                value: 0
+            },
             gettable: true,
             settable: true,
         },

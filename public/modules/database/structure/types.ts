@@ -316,6 +316,8 @@ export type public_cue = {
     id: string;
     /** settable */
     index: number;
+    /** settable, default 0 */
+    cueFade: number;
     /** settable, back reference */
     macro: null | { reference: string; };
     /** read only */
@@ -344,6 +346,10 @@ export type public_cueElementContent = {
     id: string;
     /** settable */
     index: number;
+    /** settable, default 0 */
+    activeFade: number;
+    /** settable, default 0 */
+    releaseFade: number;
     /** read only */
     preset: null | { reference: string; };
     /** read only */
