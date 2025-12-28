@@ -63,6 +63,14 @@ export const cuelist: model = {
             comment: "0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values."
         },
         {
+            name: 'cueCrossfade',
+            type: 'number',
+            optional: true,
+            gettable: true,
+            settable: true,
+            comment: "From 0 to 100. 0 if at transitionFromCue. 100 if at currentCue. Null if not transitioning between cues"
+        },
+        {
             name: 'activatedAt',
             type: 'number',
             optional: true,
