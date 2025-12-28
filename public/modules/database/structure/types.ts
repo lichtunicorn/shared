@@ -299,7 +299,7 @@ export type public_cuelist = {
     activeStartTime: null | number;
     /** settable, dateTime when the transition from one cue to another started. Used for fading. Null if not transitioning, or in crossfade (between cues) */
     cueStartTime: null | number;
-    /** settable, The cue the transition started from. Null if not transitioning between cues, or in crossfade (between cues) */
+    /** settable, The cue the transition started from. Null if not transitioning between cues */
     transitionFromCue: null | number;
     /** settable, default 100, From 0 to 100 */
     intensity: number;

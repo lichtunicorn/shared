@@ -100,7 +100,7 @@ export const cuelist: model = {
             optional: true,
             gettable: true,
             settable: true,
-            comment: "The cue the transition started from. Null if not transitioning between cues, or in crossfade (between cues)"
+            comment: "The cue the transition started from. Null if not transitioning between cues"
         },
         {
             name: 'intensity',
