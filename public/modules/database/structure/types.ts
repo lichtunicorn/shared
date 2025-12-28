@@ -3,7 +3,7 @@ import type { kind } from "public/kinds";
 export type structure = Record<string, model>;
 
 export type model = {
-    canInfluenceOutput: boolean;
+    canInfluenceOutput?: boolean;
     creatable: boolean;
     deletable?: boolean;
     goable?: boolean;
