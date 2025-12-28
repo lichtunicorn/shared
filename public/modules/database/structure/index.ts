@@ -136,7 +136,7 @@ function checkValidity() {
 
                 if ((property as any).canInfluenceThisOutput === true) {
                     if (model.canInfluenceOutput !== true) {
-                        throw new Error(`Model ${modelName} has property ${property.name} with canInfluenceThisOutput=true, but that model does not have canInfluenceOutput=true`);
+                        throw new Error(`Model ${modelName} has a property with canInfluenceThisOutput=true, but model ${modelName} does not have canInfluenceOutput=true`);
                     }
 
                     const referenceModelStructure = structure[(checkType as any).reference as modelName];
