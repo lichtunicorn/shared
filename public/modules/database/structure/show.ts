@@ -64,6 +64,7 @@ export const show: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         })))
     ]
 };

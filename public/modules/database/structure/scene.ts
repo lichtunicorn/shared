@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const scene: model = {
+    canInfluenceOutput: true,
     creatable: true,
     move: 'index',
     recursiveDeleteProperties: ['elements'],
@@ -95,6 +96,7 @@ export const scene: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'actionButtons',
@@ -104,6 +106,7 @@ export const scene: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: "elements",
@@ -113,11 +116,13 @@ export const scene: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true
         }
     ]
 };
 
 export const sceneElement: model = {
+    canInfluenceOutput: true,
     creatable: true,
     recursiveDeleteProperties: ['contents'],
     properties: [
@@ -146,6 +151,7 @@ export const sceneElement: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true
         },
         {
             name: "group",
@@ -155,6 +161,7 @@ export const sceneElement: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true
         },
         {
             name: "contents",
@@ -164,6 +171,7 @@ export const sceneElement: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true
         },
         {
             name: "scene",
@@ -173,11 +181,13 @@ export const sceneElement: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         },
     ]
 };
 
 export const sceneElementContent: model = {
+    canInfluenceOutput: true,
     creatable: true,
     properties: [
         {
@@ -224,6 +234,7 @@ export const sceneElementContent: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true
         },
         {
             name: "effects",
@@ -234,6 +245,7 @@ export const sceneElementContent: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true
         },
         {
             name: "attributes",
@@ -250,6 +262,7 @@ export const sceneElementContent: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         }
     ]
 }

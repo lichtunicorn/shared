@@ -1,6 +1,7 @@
 import type { model } from "./types";
 
 export const programmerElement: model = {
+    canInfluenceOutput: true,
     creatable: true,
     recursiveDeleteProperties: [],
     deletable: true,
@@ -41,6 +42,7 @@ export const programmerElement: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
         },
         {
             name: "group",
@@ -50,6 +52,7 @@ export const programmerElement: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
         },
         {
             name: "contents",
@@ -59,11 +62,13 @@ export const programmerElement: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         },
     ]
 };
 
 export const programmerElementContent: model = {
+    canInfluenceOutput: true,
     creatable: true,
     properties: [
         {
@@ -91,6 +96,7 @@ export const programmerElementContent: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "preset",
@@ -100,6 +106,7 @@ export const programmerElementContent: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "attributes",
@@ -116,6 +123,7 @@ export const programmerElementContent: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         }
     ]
 };

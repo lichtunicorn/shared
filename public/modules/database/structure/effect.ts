@@ -11,6 +11,7 @@ export const effectTypes = [
 ] as const;
 
 export const effect: model = {
+    canInfluenceOutput: true,
     creatable: true,
     move: 'index',
     deletable: true,
@@ -41,6 +42,7 @@ export const effect: model = {
                 reference: "effectKind"
             },
             gettable: true,
+            canInfluenceThisOutput: true,
             settable: true
         },
         {
@@ -61,6 +63,7 @@ export const effect: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
         },
         {
             name: "multiplier",
@@ -184,6 +187,7 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
             comment: "The offset per fixture if template = false. Null if template = true"
         },
         {
@@ -211,6 +215,7 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
             comment: "The low preset of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null"
         },
         {
@@ -229,12 +234,14 @@ export const effect: model = {
             optional: true,
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
             comment: "The high preset of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null"
         },
     ]
 };
 
 export const effectKind: model = {
+    canInfluenceOutput: true,
     creatable: true,
     properties: [
         {
@@ -268,11 +275,13 @@ export const effectKind: model = {
             backReference: true,
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         }
     ]
 };
 
 export const effectOffset: model = {
+    canInfluenceOutput: true,
     creatable: true,
     properties: [
         {
@@ -299,11 +308,13 @@ export const effectOffset: model = {
             backReference: true,
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         }
     ]
 };
 
 export const speedGroup: model = {
+    canInfluenceOutput: true,
     creatable: true,
     properties: [
         {

@@ -33,6 +33,7 @@ export const macro: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'cues',
@@ -42,6 +43,7 @@ export const macro: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
             optional: true
         },
         {
@@ -52,6 +54,7 @@ export const macro: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         }
     ]
 };
@@ -84,6 +87,7 @@ export const macroCommand: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         },
         {
             name: "contents",

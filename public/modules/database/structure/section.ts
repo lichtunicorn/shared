@@ -30,6 +30,7 @@ export const section: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
             comment: "this is where the actual section contents/state is stored"
         },
         {
@@ -40,6 +41,7 @@ export const section: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
             comment: "this is where the actual section contents/state is stored",
         },
         {
@@ -50,6 +52,7 @@ export const section: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
     ]
 };
@@ -74,6 +77,7 @@ export const sectionSceneState: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         },
         {
             name: "active",
@@ -89,6 +93,7 @@ export const sectionSceneState: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         }
     ]
 };
@@ -113,6 +118,7 @@ export const sectionCuelistState: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         },
         {
             name: "active",
@@ -128,6 +134,7 @@ export const sectionCuelistState: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         }
     ]
 };

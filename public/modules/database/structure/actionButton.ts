@@ -97,6 +97,7 @@ export const actionButton: model = {
             optional: true,
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false
         },
         {
             name: 'scene',
@@ -107,6 +108,7 @@ export const actionButton: model = {
             optional: true,
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'cuelist',
@@ -117,6 +119,7 @@ export const actionButton: model = {
             optional: true,
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'collection',
@@ -127,6 +130,7 @@ export const actionButton: model = {
             optional: true,
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'section',
@@ -137,6 +141,7 @@ export const actionButton: model = {
             optional: true,
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'generalFunction',

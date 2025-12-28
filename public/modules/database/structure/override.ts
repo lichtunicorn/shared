@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const override: model = {
+    canInfluenceOutput: true,
     creatable: true,
     deletable: true,
     properties: [
@@ -21,6 +22,7 @@ export const override: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
         },
         {
             name: "attributes",

@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const preset: model = {
+    canInfluenceOutput: true,
     creatable: true,
     move: 'index',
     selectable: true,
@@ -46,11 +47,13 @@ export const preset: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
         }
     ]
 };
 
 export const presetElement: model = {
+    canInfluenceOutput: true,
     creatable: true,
     move: 'index',
     selectable: true,
@@ -80,6 +83,7 @@ export const presetElement: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
         },
         {
             name: "group",
@@ -89,6 +93,7 @@ export const presetElement: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
         },
         {
             name: "attributes",

@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const cuelist: model = {
+    canInfluenceOutput: true,
     creatable: true,
     move: 'index',
     recursiveDeleteProperties: ['cues'],
@@ -129,6 +130,7 @@ export const cuelist: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'actionButtons',
@@ -138,6 +140,7 @@ export const cuelist: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: "cues",
@@ -147,11 +150,13 @@ export const cuelist: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
         }
     ]
 };
 
 export const cue: model = {
+    canInfluenceOutput: true,
     creatable: true,
     deletable: true,
     goable: true,
@@ -192,6 +197,7 @@ export const cue: model = {
             optional: true,
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: "elements",
@@ -201,6 +207,7 @@ export const cue: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "cuelist",
@@ -210,11 +217,13 @@ export const cue: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         }
     ]
 };
 
 export const cueElement: model = {
+    canInfluenceOutput: true,
     creatable: true,
     recursiveDeleteProperties: ['contents'],
     properties: [
@@ -243,6 +252,7 @@ export const cueElement: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "group",
@@ -252,6 +262,7 @@ export const cueElement: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "contents",
@@ -261,6 +272,7 @@ export const cueElement: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "cue",
@@ -270,11 +282,13 @@ export const cueElement: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         }
     ]
 };
 
 export const cueElementContent: model = {
+    canInfluenceOutput: true,
     creatable: true,
     properties: [
         {
@@ -321,6 +335,7 @@ export const cueElementContent: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "effects",
@@ -331,6 +346,7 @@ export const cueElementContent: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "attributes",
@@ -347,6 +363,7 @@ export const cueElementContent: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         }
     ]
 }

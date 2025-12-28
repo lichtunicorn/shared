@@ -43,6 +43,7 @@ export const variable: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         }
     ]
 };

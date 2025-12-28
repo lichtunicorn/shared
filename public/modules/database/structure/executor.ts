@@ -46,6 +46,7 @@ export const executor: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'scene',
@@ -56,6 +57,7 @@ export const executor: model = {
             gettable: true,
             settable: true,
             optional: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'cuelist',
@@ -66,6 +68,7 @@ export const executor: model = {
             gettable: true,
             settable: true,
             optional: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'collection',
@@ -75,6 +78,7 @@ export const executor: model = {
             backReference: true,
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
             optional: true
         },
         {
@@ -85,6 +89,7 @@ export const executor: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         }
     ]
 };
@@ -161,6 +166,7 @@ export const executorButton: model = {
             backReference: true,
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'function',

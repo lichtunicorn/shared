@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const group: model = {
+    canInfluenceOutput: true,
     creatable: true,
     move: 'index',
     recursiveDeleteProperties: ['elements'],
@@ -32,11 +33,13 @@ export const group: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         }
     ]
 };
 
 export const groupElement: model = {
+    canInfluenceOutput: true,
     creatable: true,
     properties: [
         {
@@ -68,6 +71,7 @@ export const groupElement: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: true,
         },
         {
             name: "group",
@@ -77,6 +81,7 @@ export const groupElement: model = {
             },
             gettable: true,
             settable: false,
+            canInfluenceThisOutput: true,
         }
     ]
 };

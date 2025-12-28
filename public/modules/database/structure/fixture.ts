@@ -1,6 +1,7 @@
 import type { model } from './types';
 
 export const fixture: model = {
+    canInfluenceOutput: true,
     creatable: true,
     deletable: true,
     selectable: true,

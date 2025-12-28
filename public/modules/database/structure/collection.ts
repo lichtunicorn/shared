@@ -41,6 +41,7 @@ export const collection: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: "cuelists",
@@ -50,6 +51,7 @@ export const collection: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'executors',
@@ -59,6 +61,7 @@ export const collection: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
         {
             name: 'actionButtons',
@@ -68,6 +71,7 @@ export const collection: model = {
             },
             gettable: true,
             settable: true,
+            canInfluenceThisOutput: false,
         },
     ]
 };
