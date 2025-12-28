@@ -3,6 +3,7 @@ import type { modelName, publicModelData } from 'public/modules/database/structu
 import type { showData, showDataInput } from 'public/modules/show/schema';
 import type { z } from 'zod';
 import type { errorInfo } from '../error/types';
+import type { renderOptions } from '../output/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -15,6 +16,8 @@ export interface ServerToClientEvents {
 
     shows(shows: z.infer<typeof showData>[]): void;
     errors(errors: errorInfo[]): void;
+    outputShowId(showId: string | null): void;
+    outputOptions(options: renderOptions): void;
 
     debugSocketUrl: (url: string) => void;
 }
@@ -34,6 +37,14 @@ export interface ClientToServerEvents {
 
     subscribeErrors: () => void;
     unsubscribeErrors: () => void;
+
+    subscribeOutputShowId: () => void;
+    unsubscribeOutputShowId: () => void;
+    setOutputShowId: (showId: string | null) => void;
+
+    subscribeOutputOptions: () => void;
+    unsubscribeOutputOptions: () => void;
+    setOutputOptions: (options: renderOptions) => void;
 }
 
 export interface InterServerEvents {
