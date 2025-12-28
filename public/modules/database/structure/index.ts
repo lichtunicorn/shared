@@ -134,14 +134,20 @@ function checkValidity() {
                     throw new Error(`Model ${modelName} has property ${property.name} without canInfluenceThisOutput`);
                 }
 
-                const referenceModelStructure = structure[(checkType as any).reference as modelName];
+                if ((property as any).canInfluenceThisOutput === true) {
+                    if (model.canInfluenceOutput !== true) {
+                        throw new Error(`Model ${modelName} has property ${property.name} with canInfluenceThisOutput=true, but that model does not have canInfluenceOutput=true`);
+                    }
 
-                if (!referenceModelStructure) {
-                    throw new Error(`Model ${modelName} has property ${property.name} with invalid reference ${(checkType as any).reference}`);
-                }
+                    const referenceModelStructure = structure[(checkType as any).reference as modelName];
 
-                if (referenceModelStructure.canInfluenceOutput !== true) {
-                    throw new Error(`Model ${modelName} has property ${property.name} with canInfluenceThisOutput=true with reference ${(checkType as any).reference}, but that model does not have canInfluenceOutput=true`);
+                    if (!referenceModelStructure) {
+                        throw new Error(`Model ${modelName} has property ${property.name} with invalid reference ${(checkType as any).reference}`);
+                    }
+
+                    if (referenceModelStructure.canInfluenceOutput !== true) {
+                        throw new Error(`Model ${modelName} has property ${property.name} with canInfluenceThisOutput=true with reference ${(checkType as any).reference}, but that model does not have canInfluenceOutput=true`);
+                    }
                 }
             }
 
