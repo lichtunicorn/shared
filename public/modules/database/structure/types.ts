@@ -247,7 +247,7 @@ export type scene = public_scene;
 export type public_sceneElement = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable */
     index: number;
     /** settable */
     fixtures: null | { reference: string; }[];
@@ -262,7 +262,7 @@ export type sceneElement = public_sceneElement;
 export type public_sceneElementContent = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable */
     index: number;
     /** settable, default 0 */
     activeFade: number;
@@ -472,7 +472,7 @@ export type macro = public_macro;
 export type public_macroCommand = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable */
     index: number;
     /** read only, back reference */
     macro: { reference: string; };
@@ -524,7 +524,7 @@ export type preset = public_preset;
 export type public_presetElement = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable */
     index: number;
     /** settable */
     fixtures: null | { reference: string; }[];
@@ -612,7 +612,7 @@ export type programmerElement = public_programmerElement;
 export type public_programmerElementContent = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable */
     index: number;
     /** read only */
     effects: null | { reference: string; }[];

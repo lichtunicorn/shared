@@ -134,7 +134,6 @@ export const sceneElement: model = {
         {
             name: "index",
             type: "number",
-            unique: true,
             gettable: true,
             settable: true,
         },
@@ -194,7 +193,6 @@ export const sceneElementContent: model = {
         {
             name: "index",
             type: 'number',
-            unique: true,
             gettable: true,
             settable: true,
         },

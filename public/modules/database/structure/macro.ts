@@ -73,7 +73,6 @@ export const macroCommand: model = {
         {
             name: "index",
             type: "number",
-            unique: true,
             gettable: true,
             settable: true,
         },
