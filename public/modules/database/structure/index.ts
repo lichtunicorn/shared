@@ -14,7 +14,7 @@ import { variable } from "./variable";
 import { macro, macroCommand } from "./macro";
 import { collection } from "./collection";
 import { fixture } from "./fixture";
-import { preset } from "./preset";
+import { preset, presetElement } from "./preset";
 import { executor, executorButton, executorFader } from "./executor";
 import { actionButton } from "./actionButton";
 import { programmerElement, programmerElementContent } from "./programmer";
@@ -44,6 +44,7 @@ export const structure: structureType = {
     collection,
     fixture,
     preset,
+    presetElement,
     executor,
     actionButton,
     executorButton,

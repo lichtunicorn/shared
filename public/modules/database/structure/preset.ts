@@ -32,6 +32,40 @@ export const preset: model = {
             settable: true,
         },
         {
+            name: "elements",
+            type: "array",
+            valueType: {
+                reference: "presetElement"
+            },
+            gettable: true,
+            settable: true,
+        }
+    ]
+};
+
+export const presetElement: model = {
+    creatable: true,
+    move: 'index',
+    selectable: true,
+    properties: [
+        {
+            name: "id",
+            type: "string",
+            unique: true,
+            default: {
+                type: "cuid"
+            },
+            gettable: true,
+            settable: false,
+        },
+        {
+            name: "index",
+            type: "number",
+            unique: true,
+            gettable: true,
+            settable: true,
+        },
+        {
             name: "fixtures",
             type: "array",
             optional: true,
