@@ -341,5 +341,7 @@ function generateAutoTypes(structure: structureType): string {
     ).join(' : ')
         } : never;\n`;
 
+    output += `\nexport type canInfluenceOutputModelName = ${Object.entries(structure).filter(([modelName, modelStructure]) => modelStructure.canInfluenceOutput === true).map(([modelName]) => `"${modelName}"`).join(' | ')};\n`;
+
     return output;
 }
