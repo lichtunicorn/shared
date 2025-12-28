@@ -3,6 +3,7 @@ import type { kind } from "public/kinds";
 export type structure = Record<string, model>;
 
 export type model = {
+    canInfluenceOutput: boolean;
     creatable: boolean;
     deletable?: boolean;
     goable?: boolean;
@@ -73,9 +74,11 @@ export type property<name extends string> = {
             type: referencePropertyType;
             unique?: boolean;
             backReference?: boolean;
+            canInfluenceThisOutput: boolean;
         } | {
             type: "array";
             valueType: referencePropertyType;
+            canInfluenceThisOutput: boolean;
         } | {
             type: "oneOf";
             options: string[];

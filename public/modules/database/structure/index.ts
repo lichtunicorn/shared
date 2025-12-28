@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-import type { structure as structureType } from "./types";
+import type { modelName, structure as structureType } from "./types";
 
 import { show } from "./show";
 import { section, sectionSceneState, sectionCuelistState } from "./section";
@@ -124,6 +124,25 @@ function checkValidity() {
 
             if (typeof checkType !== 'string' && 'reference' in checkType && checkType.reference && !modelNames.includes(checkType.reference)) {
                 throw new Error(`Model ${modelName} has invalid reference ${checkType.reference}`);
+            }
+
+            if (
+                property.type === 'array' ||
+                (typeof checkType !== 'string' && 'reference' in checkType)
+            ) {
+                if (typeof (property as any).canInfluenceThisOutput !== 'boolean') {
+                    throw new Error(`Model ${modelName} has property ${property.name} without canInfluenceThisOutput`);
+                }
+
+                const referenceModelStructure = structure[(checkType as any).reference as modelName];
+
+                if (!referenceModelStructure) {
+                    throw new Error(`Model ${modelName} has property ${property.name} with invalid reference ${(checkType as any).reference}`);
+                }
+
+                if (referenceModelStructure.canInfluenceOutput !== true) {
+                    throw new Error(`Model ${modelName} has property ${property.name} with canInfluenceThisOutput=true with reference ${(checkType as any).reference}, but that model does not have canInfluenceOutput=true`);
+                }
             }
 
             if ('backReference' in property && property.backReference !== undefined) {
