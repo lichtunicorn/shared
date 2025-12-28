@@ -57,6 +57,8 @@ export interface SocketData {
     showId: string | null;
     showsSubscribed: boolean;
     errorsSubscribed: boolean;
+    outputShowIdSubscribed: boolean;
+    outputOptionsSubscribed: boolean;
 
     manySubscribedModels: modelName[];
     specificSubscribedModels: Partial<{
