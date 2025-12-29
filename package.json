@@ -6,7 +6,7 @@
     "dev": "bun --watch public/modules/database/structure/index"
   },
   "exports": {
-    "./*": "./public/*"
+    "./*": "./*"
   },
   "devDependencies": {
     "@types/bun": "latest",
