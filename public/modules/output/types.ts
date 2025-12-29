@@ -8,7 +8,7 @@ export type artnetOptions = {
     universes: number;
 };
 
-export type renderOptions = {
+export type outputOptions = {
     artnetOptions: artnetOptions;
     fps: number;
     /** How much to offset the render output */
