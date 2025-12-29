@@ -8,7 +8,7 @@ import { section, sectionSceneState, sectionCuelistState } from "./section";
 import { group, groupElement } from "./group";
 import { scene, sceneElement, sceneElementContent } from "./scene";
 import { cuelist, cue, cueElement, cueElementContent } from "./cuelist";
-import { effect, speedGroup, effectKind, effectOffset } from "./effect";
+import { effect, effectContent, speedGroup, effectKind, effectOffset } from "./effect";
 import { override } from "./override";
 import { variable } from "./variable";
 import { macro, macroCommand } from "./macro";
@@ -34,6 +34,7 @@ export const structure: structureType = {
     cueElement,
     cueElementContent,
     effect,
+    effectContent,
     effectOffset,
     effectKind,
     speedGroup,

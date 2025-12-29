@@ -16,7 +16,7 @@ export const effect: model = {
     move: 'index',
     deletable: true,
     selectable: true,
-    recursiveDeleteProperties: ['nonTemplateOffsets'],
+    recursiveDeleteProperties: ['contents'],
     properties: [
         {
             name: "id",
@@ -34,6 +34,52 @@ export const effect: model = {
             unique: true,
             gettable: true,
             settable: true,
+        },
+        {
+            name: "contents",
+            type: "array",
+            valueType: {
+                reference: "effectContent"
+            },
+            canInfluenceThisOutput: true,
+            gettable: true,
+            settable: true
+        }
+    ]
+}
+
+export const effectContent: model = {
+    canInfluenceOutput: true,
+    creatable: true,
+    deletable: true,
+    selectable: true,
+    recursiveDeleteProperties: ['nonTemplateOffsets'],
+    properties: [
+        {
+            name: "id",
+            type: "string",
+            unique: true,
+            default: {
+                type: "cuid"
+            },
+            gettable: true,
+            settable: false,
+        },
+        {
+            name: "index",
+            type: "number",
+            gettable: true,
+            settable: true,
+        },
+        {
+            name: "effect",
+            type: {
+                reference: "effect"
+            },
+            backReference: true,
+            gettable: true,
+            settable: false,
+            canInfluenceThisOutput: false
         },
         {
             name: "kinds",
@@ -268,9 +314,9 @@ export const effectKind: model = {
             settable: true,
         },
         {
-            name: "effect",
+            name: "effectContent",
             type: {
-                reference: "effect"
+                reference: "effectContent"
             },
             backReference: true,
             gettable: true,
@@ -301,9 +347,9 @@ export const effectOffset: model = {
             settable: true,
         },
         {
-            name: "effects",
+            name: "effectContent",
             type: {
-                reference: "effect"
+                reference: "effectContent"
             },
             backReference: true,
             gettable: true,
