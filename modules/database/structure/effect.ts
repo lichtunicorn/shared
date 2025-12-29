@@ -39,7 +39,7 @@ export const effect: model = {
             name: "contents",
             type: "array",
             valueType: {
-                reference: "effectContent"
+                reference: "effectElement"
             },
             canInfluenceThisOutput: true,
             gettable: true,
@@ -48,7 +48,7 @@ export const effect: model = {
     ]
 }
 
-export const effectContent: model = {
+export const effectElement: model = {
     canInfluenceOutput: true,
     creatable: true,
     deletable: true,
@@ -314,9 +314,9 @@ export const effectKind: model = {
             settable: true,
         },
         {
-            name: "effectContent",
+            name: "effectElement",
             type: {
-                reference: "effectContent"
+                reference: "effectElement"
             },
             backReference: true,
             gettable: true,
@@ -347,9 +347,9 @@ export const effectOffset: model = {
             settable: true,
         },
         {
-            name: "effectContent",
+            name: "effectElement",
             type: {
-                reference: "effectContent"
+                reference: "effectElement"
             },
             backReference: true,
             gettable: true,
