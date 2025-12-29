@@ -433,7 +433,7 @@ export type public_effectKind = {
     /** settable */
     subKind: string;
     /** read only, back reference */
-    effects: { reference: string; };
+    effect: { reference: string; };
 };
 export type effectKind = public_effectKind;
 export type public_speedGroup = {

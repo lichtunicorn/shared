@@ -268,7 +268,7 @@ export const effectKind: model = {
             settable: true,
         },
         {
-            name: "effects",
+            name: "effect",
             type: {
                 reference: "effect"
             },
