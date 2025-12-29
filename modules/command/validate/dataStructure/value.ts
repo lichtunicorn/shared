@@ -1,7 +1,7 @@
 import type { z } from "zod";
 
-import { value as valueSchema } from "public/modules/command/schema";
-import type { literalPropertyType, referencePropertyType } from "public/modules/database/structure/types";
+import { value as valueSchema } from "modules/command/schema";
+import type { literalPropertyType, referencePropertyType } from "modules/database/structure/types";
 import type { validateDataStructureValuePath } from "./types";
 import { validateDataStructure } from ".";
 

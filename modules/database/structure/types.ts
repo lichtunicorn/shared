@@ -1,4 +1,4 @@
-import type { kind } from "public/kinds";
+import type { kind } from "kinds";
 
 export type structure = Record<string, model>;
 

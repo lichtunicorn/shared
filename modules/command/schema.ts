@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { kinds } from "public/kinds";
+import { kinds } from "kinds";
 
 export const operations = [
     { name: "copy", source: true, destination: true, value: false, emptyOptions: true },

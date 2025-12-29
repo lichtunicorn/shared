@@ -1,11 +1,11 @@
 import type { z } from "zod";
-import type { literalPropertyType, referencePropertyType } from "public/modules/database/structure/types";
+import type { literalPropertyType, referencePropertyType } from "modules/database/structure/types";
 import type { validateDataStructureReturn } from "./types";
 
-import { noGetCommand as noGetCommandSchema, getCommand as getCommandSchema } from "public/modules/command/schema";
+import { noGetCommand as noGetCommandSchema, getCommand as getCommandSchema } from "modules/command/schema";
 import { validateReferenceDataStructure } from "./reference";
 import { validateValueDataStructure } from "./value";
-import { kinds } from "public/kinds";
+import { kinds } from "kinds";
 
 export function validateDataStructure(command: z.infer<typeof noGetCommandSchema | typeof getCommandSchema>, canBeGetCommand: boolean = false): validateDataStructureReturn {
     if (command.operation === 'get' && !canBeGetCommand) {
