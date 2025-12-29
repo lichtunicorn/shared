@@ -11,4 +11,6 @@ export type artnetOptions = {
 export type renderOptions = {
     artnetOptions: artnetOptions;
     fps: number;
+    /** How much to offset the render output */
+    renderTimeOffset: number;
 };
