@@ -1,4 +1,4 @@
-import type { literalPropertyType, referencePropertyType } from "modules/database/structure/types";
+import type { literalPropertyType, referencePropertyType } from "../../../../modules/database/structure/types";
 
 export type validateDataStructureReturn = {
     valid: true;

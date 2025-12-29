@@ -1,9 +1,9 @@
 import type { z } from "zod";
-import type { literalPropertyType, referencePropertyType, property as databaseProperty, model as databaseModel } from "modules/database/structure/types";
+import type { literalPropertyType, referencePropertyType, property as databaseProperty, model as databaseModel } from "../../../../modules/database/structure/types";
 import type { validateDataStructureValuePath } from "./types";
 
-import { directReference as directReferenceSchema, subReference as subReferenceSchema } from "modules/command/schema";
-import { structure as databaseStructure } from "modules/database/structure";
+import { directReference as directReferenceSchema, subReference as subReferenceSchema } from "../../../../modules/command/schema";
+import { structure as databaseStructure } from "../../../../modules/database/structure";
 import { validateValueDataStructure } from "./value";
 
 export function validateReferenceDataStructure(directReference: z.infer<typeof directReferenceSchema>, subReferences: z.infer<typeof subReferenceSchema>[]): {

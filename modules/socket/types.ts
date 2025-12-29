@@ -1,6 +1,6 @@
 import type { Server, Socket } from 'socket.io';
-import type { modelName, publicModelData } from 'modules/database/structure/types';
-import type { showData, showDataInput } from 'modules/show/schema';
+import type { modelName, publicModelData } from '../../modules/database/structure/types';
+import type { showData, showDataInput } from '../../modules/show/schema';
 import type { z } from 'zod';
 import type { errorInfo } from '../error/types';
 import type { outputOptions } from '../output/types';

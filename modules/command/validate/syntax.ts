@@ -1,4 +1,4 @@
-import { noGetCommand as noGetCommandSchema } from "modules/command/schema";
+import { noGetCommand as noGetCommandSchema } from "../../../modules/command/schema";
 
 export function validateSyntax(command: unknown): boolean {
     try {
