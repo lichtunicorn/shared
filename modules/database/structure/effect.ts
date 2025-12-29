@@ -1,6 +1,6 @@
 import type { model } from './types';
 
-import { kinds } from 'kinds';
+import { kinds } from '../../../kinds';
 
 export const effectTypes = [
     "sine",
