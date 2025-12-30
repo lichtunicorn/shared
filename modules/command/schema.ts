@@ -40,18 +40,18 @@ export const value = z.union([
 ]);
 
 export const directReferenceContextTypes = [
-    "show",
-    "section",
-    "scene",
-    "cuelist",
-    "cue",
-    "speedGroup",
-    "variable",
-    "executingMacro",
-    "calledMacro",
-    "executingMacroCommand",
-    "collection",
-    "fixture",
+    { name: "show", displayName: "Show" },
+    { name: "section", displayName: "Section" },
+    { name: "scene", displayName: "Scene" },
+    { name: "cuelist", displayName: "Cuelist" },
+    { name: "cue", displayName: "Cue" },
+    { name: "speedGroup", displayName: "Speed group" },
+    { name: "variable", displayName: "Variable" },
+    { name: "executingMacro", displayName: "Executing macro" },
+    { name: "calledMacro", displayName: "Called macro" },
+    { name: "executingMacroCommand", displayName: "Executing macro command" },
+    { name: "collection", displayName: "Collection" },
+    { name: "fixture", displayName: "Fixture" },
 ] as const;
 
 export const directReference = z.union([
@@ -67,7 +67,7 @@ export const directReference = z.union([
     }),
     z.object({
         type: z.literal("context"),
-        context: z.union(directReferenceContextTypes.map(contextType => z.literal(contextType))),
+        context: z.enum(directReferenceContextTypes.map(contextType => contextType.name)),
     })
 ]);
 
