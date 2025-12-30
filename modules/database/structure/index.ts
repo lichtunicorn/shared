@@ -192,7 +192,7 @@ function checkDatabaseStructure() {
 updateConstTypes();
 function updateConstTypes() {
     // @ts-ignore
-    if (typeof window !== 'undefined') return;
+    if (typeof window !== 'undefined' || typeof __dirname === 'undefined') return;
 
     const startString = '\n// <auto generated, do not edit>';
     const endString = '\n// </auto generated, do not edit>';
