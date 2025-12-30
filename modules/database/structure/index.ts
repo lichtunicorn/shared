@@ -54,8 +54,8 @@ export const structure: structureType = {
     programmerElementContent
 };
 
-checkValidity();
-function checkValidity() {
+checkDatabaseStructure();
+function checkDatabaseStructure() {
     const modelNames = Object.keys(structure);
 
     for (const [modelName, model] of Object.entries(structure)) {
@@ -69,6 +69,10 @@ function checkValidity() {
 
             if (property.settable !== true) {
                 throw new Error(`Model ${modelName} has move property ${model.move}, but that property is not settable`);
+            }
+
+            if (property.type !== 'string' && property.type !== 'number' && property.type !== 'boolean') {
+                throw new Error(`Model ${modelName} has move property ${model.move}, but that property is not a string, number or boolean`);
             }
         }
 
