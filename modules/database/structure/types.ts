@@ -374,6 +374,8 @@ export type cueElementContent = public_cueElementContent;
 export type public_effect = {
     /** read only, unique, default cuid() */
     id: string;
+    /** settable */
+    name: string;
     /** settable, unique */
     index: number;
     /** settable */

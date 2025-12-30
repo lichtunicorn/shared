@@ -31,6 +31,12 @@ export const effect: model = {
             settable: false,
         },
         {
+            name: "name",
+            type: "string",
+            gettable: true,
+            settable: true,
+        },
+        {
             name: "index",
             type: "number",
             unique: true,
