@@ -2,17 +2,17 @@ import { z } from "zod";
 import { kinds } from "../../kinds";
 
 export const operations = [
-    { name: "copy", source: true, destination: true, value: false, emptyOptions: true },
-    { name: "move", source: true, destination: false, value: true, emptyOptions: true },
-    { name: "set", source: true, destination: false, value: true, emptyOptions: true },
-    { name: "delete", source: true, destination: false, value: false, emptyOptions: true },
-    { name: "go", source: true, destination: false, value: false, emptyOptions: true }, // no value for go, because you can also go a specific cue from a cuelist
-    { name: "open", source: true, destination: false, value: false, emptyOptions: false },
-    { name: "empty", source: false, destination: true, value: false, emptyOptions: true },
-    { name: "record", source: false, destination: true, value: false, emptyOptions: true },
-    { name: "assign", source: true, destination: true, value: false, emptyOptions: true },
-    { name: "select", source: true, destination: false, value: false, emptyOptions: true },
-    { name: "setAttribute", source: true, destination: false, value: true, emptyOptions: false },
+    { name: "copy", displayName: "Copy", source: true, destination: true, value: false, emptyOptions: true },
+    { name: "move", displayName: "Move", source: true, destination: false, value: true, emptyOptions: true },
+    { name: "set", displayName: "Set", source: true, destination: false, value: true, emptyOptions: true },
+    { name: "delete", displayName: "Delete", source: true, destination: false, value: false, emptyOptions: true },
+    { name: "go", displayName: "Go", source: true, destination: false, value: false, emptyOptions: true }, // no value for go, because you can also go a specific cue from a cuelist
+    { name: "open", displayName: "Open", source: true, destination: false, value: false, emptyOptions: false },
+    { name: "empty", displayName: "Empty", source: false, destination: true, value: false, emptyOptions: true },
+    { name: "record", displayName: "Record", source: false, destination: true, value: false, emptyOptions: true },
+    { name: "assign", displayName: "Assign", source: true, destination: true, value: false, emptyOptions: true },
+    { name: "select", displayName: "Select", source: true, destination: false, value: false, emptyOptions: true },
+    { name: "setAttribute", displayName: "Set attribute", source: true, destination: false, value: true, emptyOptions: false },
 ] as const;
 
 export const value = z.union([
