@@ -60,6 +60,8 @@ export const generalFunctionNames = [
 ];
 
 export const actionButton: model = {
+    displayName: "Action button",
+    common: true,
     creatable: true,
     move: 'index',
     properties: [

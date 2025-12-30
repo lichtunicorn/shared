@@ -1,6 +1,8 @@
 import type { model } from './types';
 
 export const scene: model = {
+    displayName: "Scene",
+    common: true,
     canInfluenceOutput: true,
     creatable: true,
     move: 'index',
@@ -122,6 +124,7 @@ export const scene: model = {
 };
 
 export const sceneElement: model = {
+    displayName: "Scene element",
     canInfluenceOutput: true,
     creatable: true,
     recursiveDeleteProperties: ['contents'],
@@ -187,6 +190,7 @@ export const sceneElement: model = {
 };
 
 export const sceneElementContent: model = {
+    displayName: "Scene element content",
     canInfluenceOutput: true,
     creatable: true,
     properties: [

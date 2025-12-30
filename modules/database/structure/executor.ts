@@ -18,6 +18,8 @@ export const faderFunctionNames = [
 ] as const;
 
 export const executor: model = {
+    displayName: "Executor",
+    common: true,
     creatable: false,
     isAssignable: true,
     recursiveDeleteProperties: ['executorButtons'],
@@ -95,6 +97,7 @@ export const executor: model = {
 };
 
 export const executorFader: model = {
+    displayName: "Executor fader",
     creatable: true,
     properties: [
         {
@@ -130,6 +133,7 @@ export const executorFader: model = {
 }
 
 export const executorButton: model = {
+    displayName: "Executor button",
     creatable: true,
     move: 'index',
     properties: [

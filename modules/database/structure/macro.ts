@@ -1,6 +1,8 @@
 import type { model } from './types';
 
 export const macro: model = {
+    displayName: "Macro",
+    common: true,
     creatable: true,
     move: 'index',
     recursiveDeleteProperties: ['commands'],
@@ -60,6 +62,7 @@ export const macro: model = {
 };
 
 export const macroCommand: model = {
+    displayName: "Macro command",
     creatable: true,
     move: 'index',
     properties: [

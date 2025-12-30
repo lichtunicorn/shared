@@ -1,6 +1,8 @@
 import type { model } from './types';
 
 export const cuelist: model = {
+    displayName: "Cuelist",
+    common: true,
     canInfluenceOutput: true,
     creatable: true,
     move: 'index',
@@ -156,6 +158,7 @@ export const cuelist: model = {
 };
 
 export const cue: model = {
+    displayName: "Cue",
     canInfluenceOutput: true,
     creatable: true,
     deletable: true,
@@ -223,6 +226,7 @@ export const cue: model = {
 };
 
 export const cueElement: model = {
+    displayName: "Cue element",
     canInfluenceOutput: true,
     creatable: true,
     recursiveDeleteProperties: ['contents'],
@@ -288,6 +292,7 @@ export const cueElement: model = {
 };
 
 export const cueElementContent: model = {
+    displayName: "Cue element content",
     canInfluenceOutput: true,
     creatable: true,
     properties: [

@@ -8,6 +8,9 @@ export type model = {
     deletable?: boolean;
     goable?: boolean;
     selectable?: boolean;
+    /** Whether this model shows up on the client in the common section */
+    common?: boolean;
+    displayName: string;
     /** if this is a thing that can be assigned to something else */
     canAssign?: boolean;
     /** if something else can assign to this */

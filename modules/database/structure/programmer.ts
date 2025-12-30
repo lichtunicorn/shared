@@ -1,6 +1,7 @@
 import type { model } from "./types";
 
 export const programmerElement: model = {
+    displayName: "Programmer element",
     canInfluenceOutput: true,
     creatable: true,
     recursiveDeleteProperties: [],
@@ -68,6 +69,7 @@ export const programmerElement: model = {
 };
 
 export const programmerElementContent: model = {
+    displayName: "Programmer element content",
     canInfluenceOutput: true,
     creatable: true,
     properties: [

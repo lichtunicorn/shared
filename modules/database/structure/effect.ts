@@ -11,6 +11,8 @@ export const effectTypes = [
 ] as const;
 
 export const effect: model = {
+    displayName: "Effect",
+    common: true,
     canInfluenceOutput: true,
     creatable: true,
     move: 'index',
@@ -49,6 +51,7 @@ export const effect: model = {
 }
 
 export const effectElement: model = {
+    displayName: "Effect element",
     canInfluenceOutput: true,
     creatable: true,
     deletable: true,
@@ -287,6 +290,7 @@ export const effectElement: model = {
 };
 
 export const effectKind: model = {
+    displayName: "Effect kind",
     canInfluenceOutput: true,
     creatable: true,
     properties: [
@@ -327,6 +331,7 @@ export const effectKind: model = {
 };
 
 export const effectOffset: model = {
+    displayName: "Effect offset",
     canInfluenceOutput: true,
     creatable: true,
     properties: [
@@ -360,6 +365,8 @@ export const effectOffset: model = {
 };
 
 export const speedGroup: model = {
+    displayName: "Speed group",
+    common: true,
     canInfluenceOutput: true,
     creatable: true,
     properties: [

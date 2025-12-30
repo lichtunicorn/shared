@@ -1,6 +1,8 @@
 import type { model } from './types';
 
 export const section: model = {
+    displayName: "Section",
+    common: true,
     creatable: false,
     recursiveDeleteProperties: ['sceneStates', 'cuelistStates'],
     goable: true,
@@ -58,6 +60,7 @@ export const section: model = {
 };
 
 export const sectionSceneState: model = {
+    displayName: "Section scene state",
     creatable: true,
     properties: [
         {
@@ -99,6 +102,7 @@ export const sectionSceneState: model = {
 };
 
 export const sectionCuelistState: model = {
+    displayName: "Section scene state",
     creatable: true,
     properties: [
         {

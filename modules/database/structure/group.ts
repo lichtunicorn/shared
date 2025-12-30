@@ -1,6 +1,8 @@
 import type { model } from './types';
 
 export const group: model = {
+    displayName: "Group",
+    common: true,
     canInfluenceOutput: true,
     creatable: true,
     move: 'index',
@@ -39,6 +41,7 @@ export const group: model = {
 };
 
 export const groupElement: model = {
+    displayName: "Group element",
     canInfluenceOutput: true,
     creatable: true,
     properties: [
