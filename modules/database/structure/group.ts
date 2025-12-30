@@ -28,6 +28,12 @@ export const group: model = {
             settable: true,
         },
         {
+            name: "name",
+            type: "string",
+            gettable: true,
+            settable: true,
+        },
+        {
             name: "elements",
             type: "array",
             valueType: {

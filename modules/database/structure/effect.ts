@@ -381,6 +381,19 @@ export const speedGroup: model = {
             settable: false,
         },
         {
+            name: "index",
+            type: "number",
+            unique: true,
+            gettable: true,
+            settable: true,
+        },
+        {
+            name: "name",
+            type: "string",
+            gettable: true,
+            settable: true,
+        },
+        {
             name: "bpm",
             type: "number",
             default: {

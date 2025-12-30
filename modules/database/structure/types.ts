@@ -207,6 +207,8 @@ export type public_group = {
     id: string;
     /** settable, unique */
     index: number;
+    /** settable */
+    name: string;
     /** read only */
     elements: { reference: string; }[];
 };
@@ -454,6 +456,10 @@ export type effectKind = public_effectKind;
 export type public_speedGroup = {
     /** read only, unique, default cuid() */
     id: string;
+    /** settable, unique */
+    index: number;
+    /** settable */
+    name: string;
     /** settable, default 60 */
     bpm: number;
     /** settable, default now() */
