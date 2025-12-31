@@ -33,6 +33,9 @@ export const group: model = {
             name: "name",
             displayName: "Name",
             type: "string",
+            default: {
+                type: "name"
+            },
             gettable: true,
             settable: true,
         },

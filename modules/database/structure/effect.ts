@@ -35,6 +35,9 @@ export const effect: model = {
             name: "name",
             displayName: "Name",
             type: "string",
+            default: {
+                type: "name"
+            },
             gettable: true,
             settable: true,
         },
@@ -435,6 +438,9 @@ export const speedGroup: model = {
             name: "name",
             displayName: "Name",
             type: "string",
+            default: {
+                type: "name"
+            },
             gettable: true,
             settable: true,
         },

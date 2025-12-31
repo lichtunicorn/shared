@@ -34,6 +34,9 @@ export const scene: model = {
             name: "name",
             displayName: "Name",
             type: "string",
+            default: {
+                type: "name"
+            },
             gettable: true,
             settable: true,
         },

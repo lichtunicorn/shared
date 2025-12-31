@@ -36,7 +36,9 @@ export const show: model = {
             name: "name",
             displayName: "Name",
             type: "string",
-            unique: true,
+            default: {
+                type: "name"
+            },
             gettable: true,
             settable: true,
         },

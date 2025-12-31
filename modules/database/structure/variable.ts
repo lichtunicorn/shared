@@ -31,6 +31,9 @@ export const variable: model = {
             displayName: "Name",
             type: "string",
             unique: true,
+            default: {
+                type: "name"
+            },
             gettable: true,
             settable: true,
         },
