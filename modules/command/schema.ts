@@ -1,3 +1,5 @@
+import type { modelName } from "../database/structure/types";
+
 import { z } from "zod";
 import { kinds } from "../../kinds";
 
@@ -49,20 +51,26 @@ export const value = z.union([
     })
 ]);
 
+type directReferenceContextType = {
+    name: string;
+    modelName: modelName;
+    displayName: string;
+}
+
 export const directReferenceContextTypes = [
-    { name: "show", displayName: "Show" },
-    { name: "section", displayName: "Section" },
-    { name: "scene", displayName: "Scene" },
-    { name: "cuelist", displayName: "Cuelist" },
-    { name: "cue", displayName: "Cue" },
-    { name: "speedGroup", displayName: "Speed group" },
-    { name: "variable", displayName: "Variable" },
-    { name: "executingMacro", displayName: "Executing macro" },
-    { name: "calledMacro", displayName: "Called macro" },
-    { name: "executingMacroCommand", displayName: "Executing macro command" },
-    { name: "collection", displayName: "Collection" },
-    { name: "fixture", displayName: "Fixture" },
-] as const;
+    { name: "show", modelName: "show", displayName: "Show" },
+    { name: "section", modelName: "section", displayName: "Section" },
+    { name: "scene", modelName: "scene", displayName: "Scene" },
+    { name: "cuelist", modelName: "cuelist", displayName: "Cuelist" },
+    { name: "cue", modelName: "cue", displayName: "Cue" },
+    { name: "speedGroup", modelName: "speedGroup", displayName: "Speed group" },
+    { name: "variable", modelName: "variable", displayName: "Variable" },
+    { name: "executingMacro", modelName: "macro", displayName: "Executing macro" },
+    { name: "calledMacro", modelName: "macro", displayName: "Called macro" },
+    { name: "executingMacroCommand", modelName: "macroCommand", displayName: "Executing macro command" },
+    { name: "collection", modelName: "collection", displayName: "Collection" },
+    { name: "fixture", modelName: "fixture", displayName: "Fixture" },
+] as const satisfies readonly directReferenceContextType[];
 
 export const directReference = z.union([
     z.object({
