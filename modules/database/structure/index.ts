@@ -94,6 +94,14 @@ function checkDatabaseStructure() {
         }
 
         for (const property of model.properties) {
+            if (!property.name) {
+                throw new Error(`Model ${modelName} has property with invalid name`);
+            }
+
+            if (!property.displayName) {
+                throw new Error(`Model ${modelName} has property ${property.name} with invalid displayName`);
+            }
+
             if (property.name === 'id') {
                 if (property.type !== 'string') {
                     throw new Error(`Model ${modelName} has invalid id property type ${property.type}`);
