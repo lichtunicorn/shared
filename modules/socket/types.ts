@@ -4,7 +4,7 @@ import type { showData, showDataInput } from '../../modules/show/schema';
 import type { z } from 'zod';
 import type { errorInfo } from '../error/types';
 import type { outputOptions } from '../output/types';
-import type { publicFixture as publicFixtureType } from '../fixtureTypes/types';
+import type { publicFixtureType } from '../fixtureTypes/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
