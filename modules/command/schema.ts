@@ -1,19 +1,29 @@
 import { z } from "zod";
 import { kinds } from "../../kinds";
 
+type operation = {
+    name: string;
+    displayName: string;
+    source: boolean;
+    requiresSourceModel: boolean;
+    destination: boolean;
+    value: boolean;
+    emptyOptions: boolean;
+};
+
 export const operations = [
-    { name: "copy", displayName: "Copy", source: true, destination: true, value: false, emptyOptions: true },
-    { name: "move", displayName: "Move", source: true, destination: false, value: true, emptyOptions: true },
-    { name: "set", displayName: "Set", source: true, destination: false, value: true, emptyOptions: true },
-    { name: "delete", displayName: "Delete", source: true, destination: false, value: false, emptyOptions: true },
-    { name: "go", displayName: "Go", source: true, destination: false, value: false, emptyOptions: true }, // no value for go, because you can also go a specific cue from a cuelist
-    { name: "open", displayName: "Open", source: true, destination: false, value: false, emptyOptions: false },
-    { name: "empty", displayName: "Empty", source: false, destination: true, value: false, emptyOptions: true },
-    { name: "record", displayName: "Record", source: false, destination: true, value: false, emptyOptions: true },
-    { name: "assign", displayName: "Assign", source: true, destination: true, value: false, emptyOptions: true },
-    { name: "select", displayName: "Select", source: true, destination: false, value: false, emptyOptions: true },
-    { name: "setAttribute", displayName: "Set attribute", source: true, destination: false, value: true, emptyOptions: false },
-] as const;
+    { name: "copy", displayName: "Copy", source: true, requiresSourceModel: true, destination: true, value: false, emptyOptions: true },
+    { name: "move", displayName: "Move", source: true, requiresSourceModel: true, destination: false, value: true, emptyOptions: true },
+    { name: "set", displayName: "Set", source: true, requiresSourceModel: false, destination: false, value: true, emptyOptions: true },
+    { name: "delete", displayName: "Delete", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true },
+    { name: "go", displayName: "Go", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true }, // no value for go, because you can also go a specific cue from a cuelist
+    { name: "open", displayName: "Open", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: false },
+    { name: "empty", displayName: "Empty", source: false, requiresSourceModel: false, destination: true, value: false, emptyOptions: true },
+    { name: "record", displayName: "Record", source: false, requiresSourceModel: false, destination: true, value: false, emptyOptions: true },
+    { name: "assign", displayName: "Assign", source: true, requiresSourceModel: true, destination: true, value: false, emptyOptions: true },
+    { name: "select", displayName: "Select", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true },
+    { name: "setAttribute", displayName: "Set attribute", source: true, requiresSourceModel: true, destination: false, value: true, emptyOptions: false },
+] as const satisfies readonly operation[];
 
 export const value = z.union([
     z.object({

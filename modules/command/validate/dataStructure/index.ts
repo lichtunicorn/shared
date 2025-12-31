@@ -6,6 +6,7 @@ import { noGetCommand as noGetCommandSchema, getCommand as getCommandSchema } fr
 import { validateReferenceDataStructure } from "./reference";
 import { validateValueDataStructure } from "./value";
 import { kinds } from "../../../../kinds";
+import { operations } from "../../../../modules/command/schema";
 
 export function validateDataStructure(command: z.infer<typeof noGetCommandSchema | typeof getCommandSchema>, canBeGetCommand: boolean = false): validateDataStructureReturn {
     if (command.operation === 'get' && !canBeGetCommand) {
@@ -13,6 +14,16 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             valid: false,
             part: 'operation',
             error: 'get command is not allowed'
+        }
+    }
+
+    const foundOperation = operations.find(operation => operation.name === command.operation);
+
+    if (!foundOperation) {
+        return {
+            valid: false,
+            part: 'operation',
+            error: 'Unknown operation'
         }
     }
 
@@ -58,7 +69,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
             sourceValueType = result.valueType;
         }
 
-        if (['move', 'copy', 'open', 'delete', 'assign', 'go', 'select', 'setAttribute'].includes(command.operation) && !result.isModel) {
+        if (foundOperation.requiresSourceModel && !result.isModel) {
             return {
                 valid: false,
                 part: 'source',
