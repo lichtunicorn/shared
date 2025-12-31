@@ -18,7 +18,7 @@ export const effect: model = {
     move: 'index',
     deletable: true,
     selectable: true,
-    recursiveDeleteProperties: ['contents'],
+    recursiveDeleteProperties: ['elements'],
     properties: [
         {
             name: "id",
@@ -44,7 +44,7 @@ export const effect: model = {
             settable: true,
         },
         {
-            name: "contents",
+            name: "elements",
             type: "array",
             valueType: {
                 reference: "effectElement"

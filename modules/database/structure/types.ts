@@ -379,7 +379,7 @@ export type public_effect = {
     /** settable, unique */
     index: number;
     /** settable */
-    contents: { reference: string; }[];
+    elements: { reference: string; }[];
 };
 export type effect = public_effect;
 export type public_effectElement = {
