@@ -4,6 +4,7 @@ import type { showData, showDataInput } from '../../modules/show/schema';
 import type { z } from 'zod';
 import type { errorInfo } from '../error/types';
 import type { outputOptions } from '../output/types';
+import type { publicFixture as publicFixtureType } from '../fixtureTypes/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -18,6 +19,7 @@ export interface ServerToClientEvents {
     errors(errors: errorInfo[]): void;
     outputShowId(showId: string | null): void;
     outputOptions(options: outputOptions): void;
+    fixtureTypes(fixtureTypes: publicFixtureType[]): void;
 
     debugSocketUrl: (url: string) => void;
 }
@@ -45,6 +47,8 @@ export interface ClientToServerEvents {
     subscribeOutputOptions: () => void;
     unsubscribeOutputOptions: () => void;
     setOutputOptions: (options: outputOptions) => void;
+
+    getFixtureTypes: () => void;
 }
 
 export interface InterServerEvents {
