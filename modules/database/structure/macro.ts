@@ -30,6 +30,16 @@ export const macro: model = {
             settable: true,
         },
         {
+            name: "name",
+            displayName: "Name",
+            type: "string",
+            default: {
+                type: "name"
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
             name: 'actionButtons',
             displayName: "Action buttons",
             type: 'array',
