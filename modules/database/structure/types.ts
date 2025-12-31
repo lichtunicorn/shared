@@ -54,6 +54,7 @@ export type attributesType = {
 
 export type property<name extends string> = {
     name: name;
+    displayName: string;
     comment?: string;
     optional?: boolean;
     gettable: boolean;
