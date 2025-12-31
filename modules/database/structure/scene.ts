@@ -13,6 +13,7 @@ export const scene: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -23,6 +24,7 @@ export const scene: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -30,12 +32,14 @@ export const scene: model = {
         },
         {
             name: "name",
+            displayName: "Name",
             type: "string",
             gettable: true,
             settable: true,
         },
         {
             name: "priority",
+            displayName: "Priority",
             type: "number",
             default: {
                 type: "value",
@@ -46,6 +50,7 @@ export const scene: model = {
         },
         {
             name: 'active',
+            displayName: "Active",
             type: 'number',
             default: {
                 type: 'value',
@@ -57,6 +62,7 @@ export const scene: model = {
         },
         {
             name: 'activatedAt',
+            displayName: "Activated at",
             type: 'number',
             optional: true,
             gettable: true,
@@ -65,6 +71,7 @@ export const scene: model = {
         },
         {
             name: 'releaseStartTime',
+            displayName: "Release start time",
             type: 'number',
             optional: true,
             gettable: true,
@@ -73,6 +80,7 @@ export const scene: model = {
         },
         {
             name: 'activeStartTime',
+            displayName: "Active start time",
             type: 'number',
             optional: true,
             gettable: true,
@@ -81,6 +89,7 @@ export const scene: model = {
         },
         {
             name: 'intensity',
+            displayName: "Intensity",
             type: 'number',
             default: {
                 type: 'value',
@@ -92,6 +101,7 @@ export const scene: model = {
         },
         {
             name: 'executors',
+            displayName: "Executors",
             type: 'array',
             valueType: {
                 reference: 'executor'
@@ -102,6 +112,7 @@ export const scene: model = {
         },
         {
             name: 'actionButtons',
+            displayName: "Action buttons",
             type: 'array',
             valueType: {
                 reference: 'actionButton'
@@ -112,6 +123,7 @@ export const scene: model = {
         },
         {
             name: "elements",
+            displayName: "Elements",
             type: "array",
             valueType: {
                 reference: "sceneElement"
@@ -131,6 +143,7 @@ export const sceneElement: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -141,12 +154,14 @@ export const sceneElement: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             gettable: true,
             settable: true,
         },
         {
             name: "fixtures",
+            displayName: "Fixtures",
             optional: true,
             type: "array",
             valueType: {
@@ -158,6 +173,7 @@ export const sceneElement: model = {
         },
         {
             name: "group",
+            displayName: "Group",
             optional: true,
             type: {
                 reference: "group"
@@ -168,6 +184,7 @@ export const sceneElement: model = {
         },
         {
             name: "contents",
+            displayName: "Contents",
             type: "array",
             valueType: {
                 reference: "sceneElementContent"
@@ -178,6 +195,7 @@ export const sceneElement: model = {
         },
         {
             name: "scene",
+            displayName: "Scene",
             backReference: true,
             type: {
                 reference: "scene"
@@ -196,6 +214,7 @@ export const sceneElementContent: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -206,12 +225,14 @@ export const sceneElementContent: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: 'number',
             gettable: true,
             settable: true,
         },
         {
             name: "activeFade",
+            displayName: "Active fade",
             type: 'number',
             default: {
                 type: 'value',
@@ -222,6 +243,7 @@ export const sceneElementContent: model = {
         },
         {
             name: "releaseFade",
+            displayName: "Release fade",
             type: 'number',
             default: {
                 type: 'value',
@@ -232,6 +254,7 @@ export const sceneElementContent: model = {
         },
         {
             name: "preset",
+            displayName: "Preset",
             optional: true,
             type: {
                 reference: "preset"
@@ -242,6 +265,7 @@ export const sceneElementContent: model = {
         },
         {
             name: "effects",
+            displayName: "Effects",
             optional: true,
             type: "array",
             valueType: {
@@ -253,6 +277,7 @@ export const sceneElementContent: model = {
         },
         {
             name: "attributes",
+            displayName: "Attributes",
             optional: true,
             type: "attributes",
             gettable: true,
@@ -260,6 +285,7 @@ export const sceneElementContent: model = {
         },
         {
             name: "sceneElement",
+            displayName: "Scene element",
             backReference: true,
             type: {
                 reference: "sceneElement"

@@ -13,6 +13,7 @@ export const cuelist: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -23,6 +24,7 @@ export const cuelist: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -30,6 +32,7 @@ export const cuelist: model = {
         },
         {
             name: "name",
+            displayName: "Name",
             type: "string",
             default: {
                 type: "name"
@@ -39,6 +42,7 @@ export const cuelist: model = {
         },
         {
             name: "priority",
+            displayName: "Priority",
             type: "number",
             default: {
                 type: "value",
@@ -49,6 +53,7 @@ export const cuelist: model = {
         },
         {
             name: 'currentCue',
+            displayName: "Current cue",
             type: 'number',
             optional: true,
             gettable: true,
@@ -56,6 +61,7 @@ export const cuelist: model = {
         },
         {
             name: 'active',
+            displayName: "Active",
             type: 'number',
             default: {
                 type: 'value',
@@ -67,6 +73,7 @@ export const cuelist: model = {
         },
         {
             name: 'cueCrossfade',
+            displayName: "Cue crossfade",
             type: 'number',
             optional: true,
             gettable: true,
@@ -75,6 +82,7 @@ export const cuelist: model = {
         },
         {
             name: 'activatedAt',
+            displayName: "Activated at",
             type: 'number',
             optional: true,
             gettable: true,
@@ -83,6 +91,7 @@ export const cuelist: model = {
         },
         {
             name: 'releaseStartTime',
+            displayName: "Release start time",
             type: 'number',
             optional: true,
             gettable: true,
@@ -91,6 +100,7 @@ export const cuelist: model = {
         },
         {
             name: 'activeStartTime',
+            displayName: "Active start time",
             type: 'number',
             optional: true,
             gettable: true,
@@ -99,6 +109,7 @@ export const cuelist: model = {
         },
         {
             name: 'cueStartTime',
+            displayName: "Cue start time",
             type: 'number',
             optional: true,
             gettable: true,
@@ -107,6 +118,7 @@ export const cuelist: model = {
         },
         {
             name: 'transitionFromCue',
+            displayName: "Transition from cue",
             type: 'number',
             optional: true,
             gettable: true,
@@ -115,6 +127,7 @@ export const cuelist: model = {
         },
         {
             name: 'intensity',
+            displayName: "Intensity",
             type: 'number',
             default: {
                 type: 'value',
@@ -126,6 +139,7 @@ export const cuelist: model = {
         },
         {
             name: 'executors',
+            displayName: "Executors",
             type: 'array',
             valueType: {
                 reference: 'executor'
@@ -136,6 +150,7 @@ export const cuelist: model = {
         },
         {
             name: 'actionButtons',
+            displayName: "Action buttons",
             type: 'array',
             valueType: {
                 reference: 'actionButton'
@@ -146,6 +161,7 @@ export const cuelist: model = {
         },
         {
             name: "cues",
+            displayName: "Cues",
             type: "array",
             valueType: {
                 reference: "cue"
@@ -167,6 +183,7 @@ export const cue: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -177,12 +194,14 @@ export const cue: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             gettable: true,
             settable: true,
         },
         {
             name: "cueFade",
+            displayName: "Cue fade",
             type: 'number',
             default: {
                 type: 'value',
@@ -193,6 +212,7 @@ export const cue: model = {
         },
         {
             name: 'macro',
+            displayName: "Macro",
             type: {
                 reference: 'macro'
             },
@@ -204,6 +224,7 @@ export const cue: model = {
         },
         {
             name: "elements",
+            displayName: "Elements",
             type: "array",
             valueType: {
                 reference: "cueElement"
@@ -214,6 +235,7 @@ export const cue: model = {
         },
         {
             name: "cuelist",
+            displayName: "Cuelist",
             backReference: true,
             type: {
                 reference: "cuelist"
@@ -233,6 +255,7 @@ export const cueElement: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -243,12 +266,14 @@ export const cueElement: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             gettable: true,
             settable: true,
         },
         {
             name: "fixtures",
+            displayName: "Fixtures",
             optional: true,
             type: "array",
             valueType: {
@@ -260,6 +285,7 @@ export const cueElement: model = {
         },
         {
             name: "group",
+            displayName: "Group",
             optional: true,
             type: {
                 reference: "group"
@@ -270,6 +296,7 @@ export const cueElement: model = {
         },
         {
             name: "contents",
+            displayName: "Contents",
             type: "array",
             valueType: {
                 reference: "cueElementContent"
@@ -280,6 +307,7 @@ export const cueElement: model = {
         },
         {
             name: "cue",
+            displayName: "Cue",
             backReference: true,
             type: {
                 reference: "cue"
@@ -298,6 +326,7 @@ export const cueElementContent: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -308,12 +337,14 @@ export const cueElementContent: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: 'number',
             gettable: true,
             settable: true,
         },
         {
             name: "activeFade",
+            displayName: "Active fade",
             type: 'number',
             default: {
                 type: 'value',
@@ -324,6 +355,7 @@ export const cueElementContent: model = {
         },
         {
             name: "releaseFade",
+            displayName: "Release fade",
             type: 'number',
             default: {
                 type: 'value',
@@ -334,6 +366,7 @@ export const cueElementContent: model = {
         },
         {
             name: "preset",
+            displayName: "Preset",
             optional: true,
             type: {
                 reference: "preset"
@@ -344,6 +377,7 @@ export const cueElementContent: model = {
         },
         {
             name: "effects",
+            displayName: "Effects",
             optional: true,
             type: "array",
             valueType: {
@@ -355,6 +389,7 @@ export const cueElementContent: model = {
         },
         {
             name: "attributes",
+            displayName: "Attributes",
             optional: true,
             type: "attributes",
             gettable: true,
@@ -362,6 +397,7 @@ export const cueElementContent: model = {
         },
         {
             name: "cueElement",
+            displayName: "Cue element",
             backReference: true,
             type: {
                 reference: "cueElement"

@@ -9,6 +9,7 @@ export const variable: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -19,6 +20,7 @@ export const variable: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -26,6 +28,7 @@ export const variable: model = {
         },
         {
             name: "name",
+            displayName: "Name",
             type: "string",
             unique: true,
             gettable: true,
@@ -33,12 +36,14 @@ export const variable: model = {
         },
         {
             name: "value",
+            displayName: "Value",
             type: "stringOrNumberOrBooleanOrNull",
             gettable: true,
             settable: true,
         },
         {
             name: "executors",
+            displayName: "Executors",
             type: "array",
             valueType: {
                 reference: "executor"

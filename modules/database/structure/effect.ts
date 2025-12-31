@@ -22,6 +22,7 @@ export const effect: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -32,12 +33,14 @@ export const effect: model = {
         },
         {
             name: "name",
+            displayName: "Name",
             type: "string",
             gettable: true,
             settable: true,
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -45,6 +48,7 @@ export const effect: model = {
         },
         {
             name: "elements",
+            displayName: "Elements",
             type: "array",
             valueType: {
                 reference: "effectElement"
@@ -66,6 +70,7 @@ export const effectElement: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -76,12 +81,14 @@ export const effectElement: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             gettable: true,
             settable: true,
         },
         {
             name: "effect",
+            displayName: "Effect",
             type: {
                 reference: "effect"
             },
@@ -92,6 +99,7 @@ export const effectElement: model = {
         },
         {
             name: "kinds",
+            displayName: "Kinds",
             type: "array",
             valueType: {
                 reference: "effectKind"
@@ -102,6 +110,7 @@ export const effectElement: model = {
         },
         {
             name: "type",
+            displayName: "Type",
             type: "oneOf",
             default: {
                 type: "value",
@@ -113,6 +122,7 @@ export const effectElement: model = {
         },
         {
             name: "speedGroup",
+            displayName: "Speed group",
             type: {
                 reference: "speedGroup"
             },
@@ -122,6 +132,7 @@ export const effectElement: model = {
         },
         {
             name: "multiplier",
+            displayName: "Multiplier",
             type: "number",
             default: {
                 type: "value",
@@ -132,6 +143,7 @@ export const effectElement: model = {
         },
         {
             name: "template",
+            displayName: "Template",
             type: "boolean",
             default: {
                 type: "value",
@@ -143,6 +155,7 @@ export const effectElement: model = {
         },
         {
             name: "templateOffsetBase",
+            displayName: "Template offset base",
             type: "number",
             default: {
                 type: "value",
@@ -155,6 +168,7 @@ export const effectElement: model = {
         },
         {
             name: "xWings",
+            displayName: "X wings",
             type: "number",
             gettable: true,
             settable: true,
@@ -163,6 +177,7 @@ export const effectElement: model = {
         },
         {
             name: "xGroups",
+            displayName: "X groups",
             type: "number",
             gettable: true,
             settable: true,
@@ -171,6 +186,7 @@ export const effectElement: model = {
         },
         {
             name: "xBlocks",
+            displayName: "X blocks",
             type: "number",
             gettable: true,
             settable: true,
@@ -179,6 +195,7 @@ export const effectElement: model = {
         },
         {
             name: "yWings",
+            displayName: "Y wings",
             type: "number",
             gettable: true,
             settable: true,
@@ -187,6 +204,7 @@ export const effectElement: model = {
         },
         {
             name: "yGroups",
+            displayName: "Y groups",
             type: "number",
             gettable: true,
             settable: true,
@@ -195,6 +213,7 @@ export const effectElement: model = {
         },
         {
             name: "yBlocks",
+            displayName: "Y blocks",
             type: "number",
             gettable: true,
             settable: true,
@@ -203,6 +222,7 @@ export const effectElement: model = {
         },
         {
             name: "templateOffsetXIncrease",
+            displayName: "Template offset X increase",
             type: "number",
             optional: true,
             gettable: true,
@@ -211,6 +231,7 @@ export const effectElement: model = {
         },
         {
             name: "templateOffsetXSymmetrical",
+            displayName: "Template offset X symmetrical",
             type: "boolean",
             optional: true,
             gettable: true,
@@ -219,6 +240,7 @@ export const effectElement: model = {
         },
         {
             name: "templateOffsetYIncrease",
+            displayName: "Template offset Y increase",
             type: "number",
             optional: true,
             gettable: true,
@@ -227,6 +249,7 @@ export const effectElement: model = {
         },
         {
             name: "templateOffsetYSymmetrical",
+            displayName: "Template offset Y symmetrical",
             type: "boolean",
             optional: true,
             gettable: true,
@@ -235,6 +258,7 @@ export const effectElement: model = {
         },
         {
             name: "nonTemplateOffsets",
+            displayName: "Non template offsets",
             type: "array",
             valueType: {
                 reference: "effectOffset"
@@ -247,6 +271,7 @@ export const effectElement: model = {
         },
         {
             name: "currentValue",
+            displayName: "Current value",
             type: "oneOf",
             options: ["lowValue", "middleValue", "highValue"],
             optional: true,
@@ -256,6 +281,7 @@ export const effectElement: model = {
         },
         {
             name: "lowValue",
+            displayName: "Low value",
             type: "attributes",
             optional: true,
             gettable: true,
@@ -264,6 +290,7 @@ export const effectElement: model = {
         },
         {
             name: "lowPreset",
+            displayName: "Low preset",
             type: {
                 reference: "preset"
             },
@@ -275,6 +302,7 @@ export const effectElement: model = {
         },
         {
             name: "highValue",
+            displayName: "High value",
             type: "attributes",
             optional: true,
             gettable: true,
@@ -283,6 +311,7 @@ export const effectElement: model = {
         },
         {
             name: "highPreset",
+            displayName: "High preset",
             type: {
                 reference: "preset"
             },
@@ -302,6 +331,7 @@ export const effectKind: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -312,6 +342,7 @@ export const effectKind: model = {
         },
         {
             name: "kind",
+            displayName: "Kind",
             type: "oneOf",
             options: [...kinds],
             gettable: true,
@@ -319,12 +350,14 @@ export const effectKind: model = {
         },
         {
             name: "subKind",
+            displayName: "Sub kind",
             type: "string",
             gettable: true,
             settable: true,
         },
         {
             name: "effectElement",
+            displayName: "Effect element",
             type: {
                 reference: "effectElement"
             },
@@ -343,6 +376,7 @@ export const effectOffset: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -353,12 +387,14 @@ export const effectOffset: model = {
         },
         {
             name: "offset",
+            displayName: "Offset",
             type: "number",
             gettable: true,
             settable: true,
         },
         {
             name: "effectElement",
+            displayName: "Effect element",
             type: {
                 reference: "effectElement"
             },
@@ -378,6 +414,7 @@ export const speedGroup: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -388,6 +425,7 @@ export const speedGroup: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -395,12 +433,14 @@ export const speedGroup: model = {
         },
         {
             name: "name",
+            displayName: "Name",
             type: "string",
             gettable: true,
             settable: true,
         },
         {
             name: "bpm",
+            displayName: "BPM",
             type: "number",
             default: {
                 type: "value",
@@ -411,6 +451,7 @@ export const speedGroup: model = {
         },
         {
             name: "firstHitTime",
+            displayName: "First hit time",
             type: "number",
             default: {
                 type: "now"

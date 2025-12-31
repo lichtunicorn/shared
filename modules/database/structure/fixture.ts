@@ -10,6 +10,7 @@ export const fixture: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -20,6 +21,7 @@ export const fixture: model = {
         },
         {
             name: "fixtureNumber",
+            displayName: "Fixture number",
             type: "number",
             unique: true,
             gettable: true,
@@ -27,12 +29,14 @@ export const fixture: model = {
         },
         {
             name: "fixtureType",
+            displayName: "Fixture type",
             type: "string",
             gettable: true,
             settable: false,
         },
         {
             name: "universe",
+            displayName: "Universe",
             type: "number",
             default: {
                 type: "value",
@@ -43,6 +47,7 @@ export const fixture: model = {
         },
         {
             name: "address",
+            displayName: "Address",
             type: "number",
             default: {
                 type: "value",

@@ -10,6 +10,7 @@ export const preset: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -20,6 +21,7 @@ export const preset: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -27,6 +29,7 @@ export const preset: model = {
         },
         {
             name: "usePresetSelectionGrid",
+            displayName: "Use preset selection grid",
             type: "boolean",
             gettable: true,
             settable: true,
@@ -34,6 +37,7 @@ export const preset: model = {
         },
         {
             name: "name",
+            displayName: "Name",
             type: "string",
             default: {
                 type: "name"
@@ -43,6 +47,7 @@ export const preset: model = {
         },
         {
             name: "elements",
+            displayName: "Elements",
             type: "array",
             valueType: {
                 reference: "presetElement"
@@ -63,6 +68,7 @@ export const presetElement: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -73,12 +79,14 @@ export const presetElement: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             gettable: true,
             settable: true,
         },
         {
             name: "fixtures",
+            displayName: "Fixtures",
             type: "array",
             optional: true,
             valueType: {
@@ -90,6 +98,7 @@ export const presetElement: model = {
         },
         {
             name: "group",
+            displayName: "Group",
             optional: true,
             type: {
                 reference: "group"
@@ -100,6 +109,7 @@ export const presetElement: model = {
         },
         {
             name: "attributes",
+            displayName: "Attributes",
             type: "attributes",
             gettable: true,
             settable: true,

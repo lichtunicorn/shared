@@ -11,6 +11,7 @@ export const collection: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -21,6 +22,7 @@ export const collection: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -28,6 +30,7 @@ export const collection: model = {
         },
         {
             name: "name",
+            displayName: "Name",
             type: "string",
             default: {
                 type: "name"
@@ -37,6 +40,7 @@ export const collection: model = {
         },
         {
             name: "scenes",
+            displayName: "Scenes",
             type: "array",
             valueType: {
                 reference: "scene"
@@ -47,6 +51,7 @@ export const collection: model = {
         },
         {
             name: "cuelists",
+            displayName: "Cuelists",
             type: "array",
             valueType: {
                 reference: "cuelist"
@@ -57,6 +62,7 @@ export const collection: model = {
         },
         {
             name: 'executors',
+            displayName: "Executors",
             type: 'array',
             valueType: {
                 reference: 'executor'
@@ -67,6 +73,7 @@ export const collection: model = {
         },
         {
             name: 'actionButtons',
+            displayName: "Action buttons",
             type: 'array',
             valueType: {
                 reference: 'actionButton'

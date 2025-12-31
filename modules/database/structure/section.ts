@@ -9,6 +9,7 @@ export const section: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -19,6 +20,7 @@ export const section: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -26,6 +28,7 @@ export const section: model = {
         },
         {
             name: "sceneStates",
+            displayName: "Scene states",
             type: "array",
             valueType: {
                 reference: "sectionSceneState"
@@ -37,6 +40,7 @@ export const section: model = {
         },
         {
             name: "cuelistStates",
+            displayName: "Cuelist states",
             type: "array",
             valueType: {
                 reference: "sectionCuelistState"
@@ -48,6 +52,7 @@ export const section: model = {
         },
         {
             name: "actionButtons",
+            displayName: "Action buttons",
             type: "array",
             valueType: {
                 reference: "actionButton"
@@ -65,6 +70,7 @@ export const sectionSceneState: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -75,6 +81,7 @@ export const sectionSceneState: model = {
         },
         {
             name: "scene",
+            displayName: "Scene",
             type: {
                 reference: "scene"
             },
@@ -84,12 +91,14 @@ export const sectionSceneState: model = {
         },
         {
             name: "active",
+            displayName: "Active",
             type: "boolean",
             gettable: true,
             settable: true,
         },
         {
             name: "section",
+            displayName: "Section",
             backReference: true,
             type: {
                 reference: "section"
@@ -107,6 +116,7 @@ export const sectionCuelistState: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -117,6 +127,7 @@ export const sectionCuelistState: model = {
         },
         {
             name: "cue",
+            displayName: "Cue",
             type: {
                 reference: "cue"
             },
@@ -126,12 +137,14 @@ export const sectionCuelistState: model = {
         },
         {
             name: "active",
+            displayName: "Active",
             type: "boolean",
             gettable: true,
             settable: true,
         },
         {
             name: "section",
+            displayName: "Section",
             backReference: true,
             type: {
                 reference: "section"

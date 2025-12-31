@@ -26,6 +26,7 @@ export const executor: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -36,6 +37,7 @@ export const executor: model = {
         },
         {
             name: 'index',
+            displayName: "Index",
             type: 'number',
             unique: true,
             gettable: true,
@@ -43,6 +45,7 @@ export const executor: model = {
         },
         {
             name: 'faders',
+            displayName: "Faders",
             type: {
                 reference: 'executorFader'
             },
@@ -52,6 +55,7 @@ export const executor: model = {
         },
         {
             name: 'scene',
+            displayName: "Scene",
             type: {
                 reference: 'scene'
             },
@@ -63,6 +67,7 @@ export const executor: model = {
         },
         {
             name: 'cuelist',
+            displayName: "Cuelist",
             type: {
                 reference: 'cuelist'
             },
@@ -74,6 +79,7 @@ export const executor: model = {
         },
         {
             name: 'collection',
+            displayName: "Collection",
             type: {
                 reference: 'collection'
             },
@@ -85,6 +91,7 @@ export const executor: model = {
         },
         {
             name: 'executorButtons',
+            displayName: "Executor buttons",
             type: 'array',
             valueType: {
                 reference: 'executorButton'
@@ -102,6 +109,7 @@ export const executorFader: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -112,6 +120,7 @@ export const executorFader: model = {
         },
         {
             name: 'physicalButtonIndex',
+            displayName: "Physical button index",
             type: 'number',
             unique: true,
             optional: true,
@@ -120,6 +129,7 @@ export const executorFader: model = {
         },
         {
             name: 'function',
+            displayName: "Function",
             type: 'oneOf',
             options: [...faderFunctionNames],
             default: {
@@ -139,6 +149,7 @@ export const executorButton: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -149,6 +160,7 @@ export const executorButton: model = {
         },
         {
             name: 'index',
+            displayName: "Index",
             type: 'number',
             unique: true,
             gettable: true,
@@ -156,6 +168,7 @@ export const executorButton: model = {
         },
         {
             name: 'physicalButtonIndex',
+            displayName: "Physical button index",
             type: 'number',
             unique: true,
             optional: true,
@@ -164,6 +177,7 @@ export const executorButton: model = {
         },
         {
             name: 'executor',
+            displayName: "Executor",
             type: {
                 reference: 'executor'
             },
@@ -174,6 +188,7 @@ export const executorButton: model = {
         },
         {
             name: 'function',
+            displayName: "Function",
             type: 'oneOf',
             options: [...executorButtonFunctionNames],
             default: {

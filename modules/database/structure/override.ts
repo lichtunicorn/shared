@@ -8,6 +8,7 @@ export const override: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -18,6 +19,7 @@ export const override: model = {
         },
         {
             name: "fixture",
+            displayName: "Fixture",
             type: {
                 reference: "fixture"
             },
@@ -27,6 +29,7 @@ export const override: model = {
         },
         {
             name: "attributes",
+            displayName: "Attributes",
             type: "attributes",
             gettable: true,
             settable: true,

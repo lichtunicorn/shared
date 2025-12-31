@@ -67,6 +67,7 @@ export const actionButton: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -77,6 +78,7 @@ export const actionButton: model = {
         },
         {
             name: 'index',
+            displayName: "Index",
             type: 'number',
             unique: true,
             gettable: true,
@@ -84,6 +86,7 @@ export const actionButton: model = {
         },
         {
             name: 'physicalButtonIndex',
+            displayName: "Physical button index",
             type: 'number',
             unique: true,
             optional: true,
@@ -92,6 +95,7 @@ export const actionButton: model = {
         },
         {
             name: 'macro',
+            displayName: "Macro",
             type: {
                 reference: 'macro'
             },
@@ -103,6 +107,7 @@ export const actionButton: model = {
         },
         {
             name: 'scene',
+            displayName: "Scene",
             type: {
                 reference: 'scene'
             },
@@ -114,6 +119,7 @@ export const actionButton: model = {
         },
         {
             name: 'cuelist',
+            displayName: "Cuelist",
             type: {
                 reference: 'cuelist'
             },
@@ -125,6 +131,7 @@ export const actionButton: model = {
         },
         {
             name: 'collection',
+            displayName: "Collection",
             type: {
                 reference: 'collection'
             },
@@ -136,6 +143,7 @@ export const actionButton: model = {
         },
         {
             name: 'section',
+            displayName: "Section",
             type: {
                 reference: 'section'
             },
@@ -147,6 +155,7 @@ export const actionButton: model = {
         },
         {
             name: 'generalFunction',
+            displayName: "General function",
             type: 'oneOf',
             options: generalFunctionNames,
             optional: true,

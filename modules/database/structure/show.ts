@@ -1,19 +1,19 @@
 import type { model } from './types';
 
-const manyModelNames = [
-    "actionButton",
-    "collection",
-    "cuelist",
-    "effect",
-    "executor",
-    "fixture",
-    "group",
-    "macro",
-    "override",
-    "programmerElement",
-    "scene",
-    "section",
-    "variable",
+const manyModelNames: [string, string][] = [
+    ["actionButton", "Action buttons"],
+    ["collection", "Collections"],
+    ["cuelist", "Cuelists"],
+    ["effect", "Effects"],
+    ["executor", "Executors"],
+    ["fixture", "Fixtures"],
+    ["group", "Groups"],
+    ["macro", "Macros"],
+    ["override", "Overrides"],
+    ["programmerElement", "Programmer elements"],
+    ["scene", "Scenes"],
+    ["section", "Sections"],
+    ["variable", "Variables"],
 ];
 
 export const show: model = {
@@ -23,6 +23,7 @@ export const show: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -33,6 +34,7 @@ export const show: model = {
         },
         {
             name: "name",
+            displayName: "Name",
             type: "string",
             unique: true,
             gettable: true,
@@ -40,6 +42,7 @@ export const show: model = {
         },
         {
             name: "blind",
+            displayName: "Blind",
             type: "boolean",
             default: {
                 type: "value",
@@ -50,6 +53,7 @@ export const show: model = {
         },
         {
             name: "highlight",
+            displayName: "Highlight",
             type: "boolean",
             default: {
                 type: "value",
@@ -58,8 +62,9 @@ export const show: model = {
             gettable: true,
             settable: true
         },
-        ...(manyModelNames.map(name => ({
+        ...(manyModelNames.map(([name, displayName]) => ({
             name: name + "s",
+            displayName,
             type: "array" as const,
             valueType: {
                 reference: name

@@ -12,6 +12,7 @@ export const macro: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -22,6 +23,7 @@ export const macro: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -29,6 +31,7 @@ export const macro: model = {
         },
         {
             name: 'actionButtons',
+            displayName: "Action buttons",
             type: 'array',
             valueType: {
                 reference: 'actionButton'
@@ -39,6 +42,7 @@ export const macro: model = {
         },
         {
             name: 'cues',
+            displayName: "Cues",
             type: 'array',
             valueType: {
                 reference: 'cue'
@@ -50,6 +54,7 @@ export const macro: model = {
         },
         {
             name: "commands",
+            displayName: "Commands",
             type: "array",
             valueType: {
                 reference: "macroCommand"
@@ -68,6 +73,7 @@ export const macroCommand: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -78,12 +84,14 @@ export const macroCommand: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             gettable: true,
             settable: true,
         },
         {
             name: "macro",
+            displayName: "Macro",
             backReference: true,
             type: {
                 reference: "macro"
@@ -94,6 +102,7 @@ export const macroCommand: model = {
         },
         {
             name: "contents",
+            displayName: "Contents",
             type: "string", // todo: better type
             gettable: true,
             settable: false,

@@ -9,6 +9,7 @@ export const programmerElement: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -19,6 +20,7 @@ export const programmerElement: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -26,6 +28,7 @@ export const programmerElement: model = {
         },
         {
             name: "selected",
+            displayName: "Selected",
             type: "boolean",
             default: {
                 type: "value",
@@ -36,6 +39,7 @@ export const programmerElement: model = {
         },
         {
             name: "fixtures",
+            displayName: "Fixtures",
             optional: true,
             type: "array",
             valueType: {
@@ -47,6 +51,7 @@ export const programmerElement: model = {
         },
         {
             name: "group",
+            displayName: "Group",
             optional: true,
             type: {
                 reference: "group"
@@ -57,6 +62,7 @@ export const programmerElement: model = {
         },
         {
             name: "contents",
+            displayName: "Contents",
             type: "array",
             valueType: {
                 reference: "programmerElementContent"
@@ -75,6 +81,7 @@ export const programmerElementContent: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -85,12 +92,14 @@ export const programmerElementContent: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: 'number',
             gettable: true,
             settable: true,
         },
         {
             name: "effects",
+            displayName: "Effects",
             optional: true,
             type: "array",
             valueType: {
@@ -102,6 +111,7 @@ export const programmerElementContent: model = {
         },
         {
             name: "preset",
+            displayName: "Preset",
             optional: true,
             type: {
                 reference: "preset"
@@ -112,6 +122,7 @@ export const programmerElementContent: model = {
         },
         {
             name: "attributes",
+            displayName: "Attributes",
             optional: true,
             type: "attributes",
             gettable: true,
@@ -119,6 +130,7 @@ export const programmerElementContent: model = {
         },
         {
             name: "programmerElement",
+            displayName: "Programmer element",
             backReference: true,
             type: {
                 reference: "programmerElement"

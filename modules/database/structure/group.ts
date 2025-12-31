@@ -12,6 +12,7 @@ export const group: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -22,6 +23,7 @@ export const group: model = {
         },
         {
             name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
@@ -29,12 +31,14 @@ export const group: model = {
         },
         {
             name: "name",
+            displayName: "Name",
             type: "string",
             gettable: true,
             settable: true,
         },
         {
             name: "elements",
+            displayName: "Elements",
             type: "array",
             valueType: {
                 reference: "groupElement"
@@ -53,6 +57,7 @@ export const groupElement: model = {
     properties: [
         {
             name: "id",
+            displayName: "ID",
             type: "string",
             unique: true,
             default: {
@@ -63,18 +68,21 @@ export const groupElement: model = {
         },
         {
             name: "x",
+            displayName: "X",
             type: "number",
             gettable: true,
             settable: true,
         },
         {
             name: "y",
+            displayName: "Y",
             type: "number",
             gettable: true,
             settable: true,
         },
         {
             name: "fixture",
+            displayName: "Fixture",
             type: {
                 reference: "fixture"
             },
@@ -84,6 +92,7 @@ export const groupElement: model = {
         },
         {
             name: "group",
+            displayName: "Group",
             backReference: true,
             type: {
                 reference: "group"
