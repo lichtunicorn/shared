@@ -44,6 +44,16 @@ export const executor: model = {
             settable: true,
         },
         {
+            name: 'name',
+            displayName: "Name",
+            type: 'string',
+            default: {
+                type: "name"
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
             name: 'faders',
             displayName: "Faders",
             type: {

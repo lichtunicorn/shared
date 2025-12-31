@@ -85,6 +85,16 @@ export const actionButton: model = {
             settable: true,
         },
         {
+            name: 'name',
+            displayName: "Name",
+            type: 'string',
+            default: {
+                type: "name"
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
             name: 'physicalButtonIndex',
             displayName: "Physical button index",
             type: 'number',

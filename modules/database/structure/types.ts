@@ -134,7 +134,7 @@ export type modelName = "show" | "section" | "sectionSceneState" | "sectionCueli
 export type public_show = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, default name() */
     name: string;
     /** settable, default false */
     blind: boolean;
@@ -208,7 +208,7 @@ export type public_group = {
     id: string;
     /** settable, unique */
     index: number;
-    /** settable */
+    /** settable, default name() */
     name: string;
     /** read only */
     elements: { reference: string; }[];
@@ -232,7 +232,7 @@ export type public_scene = {
     id: string;
     /** settable, unique */
     index: number;
-    /** settable */
+    /** settable, default name() */
     name: string;
     /** settable, default 0 */
     priority: number;
@@ -375,7 +375,7 @@ export type cueElementContent = public_cueElementContent;
 export type public_effect = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable */
+    /** settable, default name() */
     name: string;
     /** settable, unique */
     index: number;
@@ -461,7 +461,7 @@ export type public_speedGroup = {
     id: string;
     /** settable, unique */
     index: number;
-    /** settable */
+    /** settable, default name() */
     name: string;
     /** settable, default 60 */
     bpm: number;
@@ -483,7 +483,7 @@ export type public_variable = {
     id: string;
     /** settable, unique */
     index: number;
-    /** settable, unique */
+    /** settable, unique, default name() */
     name: string;
     /** settable */
     value: string | number | boolean | null;
@@ -496,6 +496,8 @@ export type public_macro = {
     id: string;
     /** settable, unique */
     index: number;
+    /** settable, default name() */
+    name: string;
     /** settable */
     actionButtons: { reference: string; }[];
     /** settable */
@@ -576,6 +578,8 @@ export type public_executor = {
     id: string;
     /** settable, unique */
     index: number;
+    /** settable, default name() */
+    name: string;
     /** settable */
     faders: { reference: string; };
     /** settable, back reference */
@@ -593,6 +597,8 @@ export type public_actionButton = {
     id: string;
     /** settable, unique */
     index: number;
+    /** settable, default name() */
+    name: string;
     /** settable, unique */
     physicalButtonIndex: null | number;
     /** settable, back reference */
