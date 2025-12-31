@@ -2,7 +2,7 @@ import type { z } from "zod";
 import type { literalPropertyType, referencePropertyType, property as databaseProperty, model as databaseModel } from "../../../../modules/database/structure/types";
 import type { validateDataStructureValuePath } from "./types";
 
-import { directReference as directReferenceSchema, subReference as subReferenceSchema } from "../../../../modules/command/schema";
+import { directReference as directReferenceSchema, subReference as subReferenceSchema, directReferenceContextTypes } from "../../../../modules/command/schema";
 import { structure as databaseStructure } from "../../../../modules/database/structure";
 import { validateValueDataStructure } from "./value";
 
@@ -95,31 +95,17 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             isDirectArray = true;
         }
     } else if (directReference.type === 'context') {
-        let modelName;
+        const foundDirectReferenceContextType = directReferenceContextTypes.find(contextType => contextType.name === directReference.context);
 
-        if ([
-            'show',
-            'section',
-            'scene',
-            'cuelist',
-            'cue',
-            'speedGroup',
-            'variable',
-            'collection',
-            'fixture'
-        ].includes(directReference.context))
-            modelName = directReference.context;
-        else if (directReference.context === 'executingMacro' || directReference.context === 'calledMacro') {
-            modelName = 'macro';
-        } else if (directReference.context === 'executingMacroCommand') {
-            modelName = 'macroCommand';
-        } else {
+        if (!foundDirectReferenceContextType) {
             return {
                 valid: false,
-                error: 'Unknown reference context',
+                error: 'Unknown context type',
                 isDirectReference: true
             }
         }
+
+        const modelName = foundDirectReferenceContextType.modelName;
 
         const foundModel = databaseStructure[modelName];
 
