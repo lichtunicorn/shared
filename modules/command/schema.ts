@@ -14,19 +14,20 @@ type operation = {
 };
 
 export const operations = [
+    { name: "empty", displayName: "Empty", source: false, requiresSourceModel: false, destination: true, value: false, emptyOptions: true },
     { name: "copy", displayName: "Copy", source: true, requiresSourceModel: true, destination: true, value: false, emptyOptions: true },
     { name: "move", displayName: "Move", source: true, requiresSourceModel: true, destination: false, value: true, emptyOptions: true },
     { name: "delete", displayName: "Delete", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true },
-    { name: "empty", displayName: "Empty", source: false, requiresSourceModel: false, destination: true, value: false, emptyOptions: true },
 
-    { name: "record", displayName: "Record", source: false, requiresSourceModel: false, destination: true, value: false, emptyOptions: true },
     { name: "select", displayName: "Select", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true },
+    { name: "record", displayName: "Record", source: false, requiresSourceModel: false, destination: true, value: false, emptyOptions: true },
     { name: "set", displayName: "Set", source: true, requiresSourceModel: false, destination: false, value: true, emptyOptions: true },
     { name: "setAttribute", displayName: "Set attribute", source: true, requiresSourceModel: true, destination: false, value: true, emptyOptions: false },
 
     { name: "go", displayName: "Go", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true }, // no value for go, because you can also go a specific cue from a cuelist
-    { name: "open", displayName: "Open", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: false },
+    // release here
     { name: "assign", displayName: "Assign", source: true, requiresSourceModel: true, destination: true, value: false, emptyOptions: true },
+    { name: "open", displayName: "Open", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: false },
 ] as const satisfies readonly operation[];
 
 export const value = z.union([
