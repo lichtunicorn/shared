@@ -18,7 +18,7 @@ const manyModelNames: [string, string][] = [
 
 export const show: model = {
     displayName: "Show",
-    common: false,
+    common: true,
     creatable: false,
     properties: [
         {
