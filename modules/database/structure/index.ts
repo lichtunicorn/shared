@@ -103,6 +103,10 @@ function checkDatabaseStructure() {
             }
 
             if (property.name === 'id') {
+                if (property.displayName !== 'ID') {
+                    throw new Error(`Model ${modelName} has id property, but displayName is not 'ID'`);
+                }
+
                 if (property.type !== 'string') {
                     throw new Error(`Model ${modelName} has invalid id property type ${property.type}`);
                 }
