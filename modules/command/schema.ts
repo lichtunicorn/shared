@@ -66,15 +66,15 @@ export const directReferenceContextTypes = [
     { name: "cue", modelName: "cue", displayName: "Cue" },
     { name: "collection", modelName: "collection", displayName: "Collection" },
 
+    { name: "fixture", modelName: "fixture", displayName: "Fixture" },
+    { name: "variable", modelName: "variable", displayName: "Variable" },
+    { name: "speedGroup", modelName: "speedGroup", displayName: "Speed group" },
+    { name: "section", modelName: "section", displayName: "Section" },
+
     { name: "show", modelName: "show", displayName: "Show" },
     { name: "calledMacro", modelName: "macro", displayName: "Called macro" },
     { name: "executingMacro", modelName: "macro", displayName: "Executing macro" },
     { name: "executingMacroCommand", modelName: "macroCommand", displayName: "Executing macro command" },
-
-    { name: "fixture", modelName: "fixture", displayName: "Fixture" },
-    { name: "variable", modelName: "variable", displayName: "Variable" },
-    { name: "section", modelName: "section", displayName: "Section" },
-    { name: "speedGroup", modelName: "speedGroup", displayName: "Speed group" },
 ] as const satisfies readonly directReferenceContextType[];
 
 export const directReference = z.union([
