@@ -175,7 +175,6 @@ export const cuelist: model = {
 
 export const cue: model = {
     displayName: "Cue",
-    common: true,
     canInfluenceOutput: true,
     creatable: true,
     deletable: true,

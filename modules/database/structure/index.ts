@@ -23,23 +23,23 @@ export const structure: structureType = {
     // common models
     scene,
     cuelist,
-    cue,
     collection,
     section,
+    show,
+
+    executor,
+    actionButton,
+    macro,
+    variable,
+    speedGroup,
 
     fixture,
     group,
     preset,
     effect,
-    speedGroup,
-
-    show,
-    executor,
-    actionButton,
-    macro,
-    variable,
 
     // uncommon models
+    cue,
     override,
     sectionSceneState,
     sectionCuelistState,
