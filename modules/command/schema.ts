@@ -22,7 +22,7 @@ export const operations = [
     { name: "select", displayName: "Select", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true },
     { name: "record", displayName: "Record", source: false, requiresSourceModel: false, destination: true, value: false, emptyOptions: true },
     { name: "set", displayName: "Set", source: true, requiresSourceModel: false, destination: false, value: true, emptyOptions: true },
-    { name: "setAttribute", displayName: "Set attribute", source: true, requiresSourceModel: true, destination: false, value: true, emptyOptions: false },
+    { name: "setAttribute", displayName: "Set attribute", source: true, requiresSourceModel: false, destination: false, value: true, emptyOptions: false },
 
     { name: "go", displayName: "Go", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true }, // no value for go, because you can also go a specific cue from a cuelist
     // release here
