@@ -19,7 +19,7 @@ export const operations = [
     { name: "move", displayName: "Move", source: true, requiresSourceModel: true, destination: false, value: true, emptyOptions: true },
     { name: "delete", displayName: "Delete", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true },
 
-    { name: "select", displayName: "Select", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true },
+    { name: "select", displayName: "Select", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: false },
     { name: "record", displayName: "Record", source: false, requiresSourceModel: false, destination: true, value: false, emptyOptions: true },
     { name: "set", displayName: "Set", source: true, requiresSourceModel: false, destination: false, value: true, emptyOptions: true },
     { name: "setAttribute", displayName: "Set attribute", source: true, requiresSourceModel: false, destination: false, value: true, emptyOptions: false },
@@ -150,10 +150,19 @@ export const setAttributeCommand = z.object({
 });
 
 export const sourceCommand = z.object({
-    operation: z.enum(["delete", "select", "go", "release"]),
+    operation: z.enum(["delete", "go", "release"]),
     source: directReference,
     subSources: z.array(subReference),
     options: z.object({}),
+});
+
+export const selectCommand = z.object({
+    operation: z.literal("select"),
+    source: directReference,
+    subSources: z.array(subReference),
+    options: z.object({
+        additive: z.boolean(),
+    }),
 });
 
 export const openCommand = z.object({
@@ -200,6 +209,7 @@ export const noGetCommand = z.union([
     setCommand,
     setAttributeCommand,
     sourceCommand,
+    selectCommand,
     openCommand,
     destinationCommand,
     sourceDestinationCommand,
