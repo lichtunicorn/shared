@@ -84,10 +84,11 @@ export const presetElement: model = {
             settable: true,
         },
         {
-            name: "fixture",
-            displayName: "Fixture",
+            name: "fixtures",
+            displayName: "Fixtures",
+            type: "array",
             optional: true,
-            type: {
+            valueType: {
                 reference: "fixture"
             },
             gettable: true,

@@ -38,10 +38,11 @@ export const programmerElement: model = {
             settable: false,
         },
         {
-            name: "fixture",
-            displayName: "Fixture",
+            name: "fixtures",
+            displayName: "Fixtures",
             optional: true,
-            type: {
+            type: "array",
+            valueType: {
                 reference: "fixture"
             },
             gettable: true,

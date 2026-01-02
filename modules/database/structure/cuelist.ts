@@ -274,10 +274,11 @@ export const cueElement: model = {
             settable: true,
         },
         {
-            name: "fixture",
-            displayName: "Fixture",
+            name: "fixtures",
+            displayName: "Fixtures",
             optional: true,
-            type: {
+            type: "array",
+            valueType: {
                 reference: "fixture"
             },
             gettable: true,
