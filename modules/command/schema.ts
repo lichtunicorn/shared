@@ -30,6 +30,10 @@ export const operations = [
     { name: "open", displayName: "Open", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: false },
 ] as const satisfies readonly operation[];
 
+export const getOperation = {
+    name: "get", displayName: "Get", source: true, requiresSourceModel: false, destination: false, value: false, emptyOptions: true
+} as const satisfies operation;
+
 export const value = z.union([
     z.object({
         type: z.literal("value"),
