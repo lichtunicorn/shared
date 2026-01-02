@@ -119,7 +119,7 @@ export const subReference = z.union([
 ]);
 
 export const sourceValueCommand = z.object({
-    operation: z.literal("move"),
+    operation: z.enum(["move"]),
     source: directReference,
     subSources: z.array(subReference),
     value,
@@ -168,7 +168,7 @@ export const openCommand = z.object({
 })
 
 export const destinationCommand = z.object({
-    operation: z.union([z.literal("empty"), z.literal("record")]),
+    operation: z.enum(["empty", "record"]),
     destination: directReference,
     subDestinations: z.array(subReference),
     options: z.object({}),
@@ -176,7 +176,7 @@ export const destinationCommand = z.object({
 
 export const sourceDestinationCommand = z.object({
     // copy has destination (and not value), because you can for example copy from scene to cuelist
-    operation: z.union([z.literal("copy"), z.literal("assign")]),
+    operation: z.enum(["copy", "assign"]),
     source: directReference,
     subSources: z.array(subReference),
     destination: directReference,
