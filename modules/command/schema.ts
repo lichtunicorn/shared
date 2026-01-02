@@ -36,6 +36,10 @@ export const value = z.union([
         value: z.union([z.string(), z.number(), z.boolean(), z.null()]),
     }),
     z.object({
+        type: z.literal("not"),
+        get value() { return value } // get because of recursiveness
+    }),
+    z.object({
         type: z.literal("getCommand"),
         get command() { // get because of recursiveness
             return getCommand;
