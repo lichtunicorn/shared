@@ -25,7 +25,7 @@ export const operations = [
     { name: "setAttribute", displayName: "Set attribute", source: true, requiresSourceModel: false, destination: false, value: true, emptyOptions: false },
 
     { name: "go", displayName: "Go", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true }, // no value for go, because you can also go a specific cue from a cuelist
-    // release here
+    { name: "release", displayName: "Release", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true },
     { name: "assign", displayName: "Assign", source: true, requiresSourceModel: true, destination: true, value: false, emptyOptions: true },
     { name: "open", displayName: "Open", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: false },
 ] as const satisfies readonly operation[];
@@ -146,7 +146,7 @@ export const setAttributeCommand = z.object({
 });
 
 export const sourceCommand = z.object({
-    operation: z.union([z.literal("delete"), z.literal("select"), z.literal("go")]),
+    operation: z.enum(["delete", "select", "go", "release"]),
     source: directReference,
     subSources: z.array(subReference),
     options: z.object({}),
