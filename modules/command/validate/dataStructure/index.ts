@@ -297,6 +297,14 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
                 error: 'No subKind provided'
             };
         };
+    } else if (command.operation === 'select') {
+        if (typeof command.options.additive !== 'boolean') {
+            return {
+                valid: false,
+                part: 'options',
+                error: 'additive must be a boolean'
+            };
+        }
     }
 
     if (command.operation === 'get') {
