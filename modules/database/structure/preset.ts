@@ -64,7 +64,6 @@ export const presetElement: model = {
     canInfluenceOutput: true,
     creatable: true,
     move: 'index',
-    selectable: true,
     properties: [
         {
             name: "id",

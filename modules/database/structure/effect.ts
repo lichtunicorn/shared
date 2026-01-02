@@ -68,7 +68,6 @@ export const effectElement: model = {
     canInfluenceOutput: true,
     creatable: true,
     deletable: true,
-    selectable: true,
     recursiveDeleteProperties: ['nonTemplateOffsets'],
     properties: [
         {
