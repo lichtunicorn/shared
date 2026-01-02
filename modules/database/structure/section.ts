@@ -112,7 +112,7 @@ export const sectionSceneState: model = {
 };
 
 export const sectionCuelistState: model = {
-    displayName: "Section scene state",
+    displayName: "Section cuelist state",
     creatable: true,
     properties: [
         {
@@ -127,14 +127,22 @@ export const sectionCuelistState: model = {
             settable: false,
         },
         {
-            name: "cue",
-            displayName: "Cue",
+            name: "cuelist",
+            displayName: "Cuelist",
             type: {
-                reference: "cue"
+                reference: "cuelist"
             },
             gettable: true,
             settable: false,
             canInfluenceThisOutput: false,
+        },
+        {
+            name: "currentCue",
+            displayName: "Current cue",
+            type: 'number',
+            optional: true,
+            gettable: true,
+            settable: true,
         },
         {
             name: "active",

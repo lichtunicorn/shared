@@ -431,7 +431,9 @@ export type public_sectionCuelistState = {
     /** read only, unique, default cuid() */
     id: string;
     /** read only */
-    cue: { reference: string; };
+    cuelist: { reference: string; };
+    /** settable */
+    currentCue: null | number;
     /** settable */
     active: boolean;
     /** read only, back reference */
