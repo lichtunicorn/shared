@@ -68,6 +68,12 @@ export type validateDataStructureValuePath = {
     type: 'value';
     error: validateDatStructureValueError;
 } | {
+    type: 'not';
+    error: validateDatStructureValueError;
+} | {
+    type: 'not';
+    value: validateDataStructureValuePath;
+} | {
     type: 'getCommand';
     command: validateDataStructureReturn;
 } | {

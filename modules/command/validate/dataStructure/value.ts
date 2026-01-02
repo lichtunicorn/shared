@@ -79,6 +79,55 @@ export function validateValueDataStructure(
         return {
             valid: true
         };
+    } else if (value.type === 'not') {
+        if (requiredType !== 'boolean' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
+            if (requiredType === 'array') {
+
+                if (requiredValueType === null)
+                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
+
+                return {
+                    valid: false,
+                    path: {
+                        type: 'not',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            requiredValueType,
+                            evaluatedType: 'boolean'
+                        }
+                    }
+                }
+            } else {
+                return {
+                    valid: false,
+                    path: {
+                        type: 'not',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            evaluatedType: 'boolean'
+                        }
+                    }
+                }
+            }
+        }
+
+        const valueResult = validateValueDataStructure(value.value, 'boolean', false, null);
+
+        if (!valueResult.valid) {
+            return {
+                valid: false,
+                path: {
+                    type: 'not',
+                    value: valueResult.path
+                }
+            }
+        }
+
+        return {
+            valid: true
+        };
     } else if (value.type === 'getCommand') {
         if (value.command.operation !== 'get') {
             return {
