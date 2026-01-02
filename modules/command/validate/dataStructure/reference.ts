@@ -13,6 +13,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     canDelete: boolean;
     canCreate: boolean;
     canGo: boolean;
+    canRelease: boolean;
     canSelect: boolean;
     canSetAttribute: boolean;
     /** check if this is a thing that can be assigned to something else */
@@ -30,6 +31,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     canDelete: boolean;
     canCreate: boolean;
     canGo: boolean;
+    canRelease: boolean;
     canSelect: boolean;
     canSetAttribute: boolean;
     /** check if this is a thing that can be assigned to something else */
@@ -48,6 +50,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     canDelete: boolean;
     canCreate: boolean;
     canGo: boolean;
+    canRelease: boolean;
     canSelect: boolean;
     canSetAttribute: boolean;
     /** check if this is a thing that can be assigned to something else */
@@ -336,6 +339,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
     let canDelete = false;
     let canCreate = false;
     let canGo = false;
+    let canRelease = false;
     let canSelect = false;
     let canSetAttribute = false;
     let canAssign = false;
@@ -346,6 +350,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         canDelete = nextModel.deletable === true;
         canCreate = nextModel.creatable === true;
         canGo = nextModel.goable === true;
+        canRelease = nextModel.releasable === true;
         canSelect = nextModel.selectable === true;
         canAssign = nextModel.canAssign === true;
         isAssignable = nextModel.isAssignable === true;
@@ -358,6 +363,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
         canDelete = currentModel.deletable === true;
         canCreate = currentModel.creatable === true;
         canGo = currentModel.goable === true;
+        canRelease = currentModel.releasable === true;
         canSelect = currentModel.selectable === true;
         canAssign = currentModel.canAssign === true;
         isAssignable = currentModel.isAssignable === true;
@@ -386,6 +392,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             canDelete,
             canCreate,
             canGo,
+            canRelease,
             canSelect,
             canSetAttribute,
             canAssign,
@@ -403,6 +410,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             canDelete,
             canCreate,
             canGo,
+            canRelease,
             canSelect,
             canSetAttribute,
             canAssign,
@@ -422,6 +430,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             canDelete,
             canCreate,
             canGo,
+            canRelease,
             canSelect,
             canSetAttribute,
             canAssign,
@@ -438,6 +447,7 @@ export function validateReferenceDataStructure(directReference: z.infer<typeof d
             canDelete,
             canCreate,
             canGo,
+            canRelease,
             canSelect,
             canSetAttribute,
             canAssign,

@@ -2,7 +2,7 @@ import type { z } from "zod";
 import type { literalPropertyType, referencePropertyType } from "../../../../modules/database/structure/types";
 import type { validateDataStructureReturn } from "./types";
 
-import { noGetCommand as noGetCommandSchema, getCommand as getCommandSchema } from "../../../../modules/command/schema";
+import { noGetCommand as noGetCommandSchema, getCommand as getCommandSchema, getOperation } from "../../../../modules/command/schema";
 import { validateReferenceDataStructure } from "./reference";
 import { validateValueDataStructure } from "./value";
 import { kinds } from "../../../../kinds";
@@ -17,7 +17,10 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
         }
     }
 
-    const foundOperation = operations.find(operation => operation.name === command.operation);
+    const foundOperation =
+        command.operation === 'get' ?
+            getOperation :
+            operations.find(operation => operation.name === command.operation);
 
     if (!foundOperation) {
         return {
@@ -32,7 +35,20 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
     let sourceOptional: boolean | null = null;
 
     // source check
-    if (command.operation === 'move' || command.operation === 'copy' || command.operation === 'set' || command.operation === 'open' || command.operation === 'delete' || command.operation === 'assign' || command.operation === 'go' || command.operation === 'get' || command.operation === 'select' || command.operation === 'setAttribute') {
+    if (
+        command.operation === 'copy' ||
+        command.operation === 'move' ||
+        command.operation === 'delete' ||
+
+        command.operation === 'select' ||
+        command.operation === 'set' ||
+        command.operation === 'setAttribute' ||
+
+        command.operation === 'go' ||
+        command.operation === 'release' ||
+        command.operation === 'assign' ||
+        command.operation === 'open'
+    ) {
         const result = validateReferenceDataStructure(command.source, command.subSources);
 
         if (!result.valid) {
@@ -103,6 +119,15 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
                 error: 'Command operation is go, but this source can\'t be goed',
                 isDirectReference: null
             };
+        }
+
+        if (command.operation === 'release' && !result.canRelease) {
+            return {
+                valid: false,
+                part: 'source',
+                error: 'Command operation is release, but this source can\'t be released',
+                isDirectReference: null
+            }
         }
 
         if (command.operation === 'assign' && !result.canAssign) {

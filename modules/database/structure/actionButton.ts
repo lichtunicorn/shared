@@ -26,14 +26,20 @@ export const generalFunctionNames = [
     'scene',
     'cuelist',
 
-    'delete',
-    'move',
-    'copy',
-    'open',
-    'assign',
-    'record',
-    'go',
     'empty',
+    'copy',
+    'move',
+    'delete',
+
+    'select',
+    'record',
+    'set',
+    'setAttribute',
+
+    'go',
+    'release',
+    'assign',
+    'open',
 
     'arrowLeft',
     'arrowRight',
@@ -57,7 +63,7 @@ export const generalFunctionNames = [
     'enter',
     'backspace',
     'set'
-];
+] as const;
 
 export const actionButton: model = {
     displayName: "Action button",
@@ -167,7 +173,7 @@ export const actionButton: model = {
             name: 'generalFunction',
             displayName: "General function",
             type: 'oneOf',
-            options: generalFunctionNames,
+            options: [...generalFunctionNames],
             optional: true,
             gettable: true,
             settable: true,
