@@ -6,6 +6,7 @@ export const section: model = {
     creatable: false,
     recursiveDeleteProperties: ['sceneStates', 'cuelistStates'],
     goable: true,
+    releasable: false,
     properties: [
         {
             name: "id",

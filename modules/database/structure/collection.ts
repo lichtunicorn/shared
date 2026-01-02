@@ -7,6 +7,7 @@ export const collection: model = {
     move: 'index',
     deletable: true,
     goable: true,
+    releasable: true,
     canAssign: true,
     properties: [
         {

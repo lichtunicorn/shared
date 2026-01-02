@@ -9,6 +9,7 @@ export const cuelist: model = {
     recursiveDeleteProperties: ['cues'],
     deletable: true,
     goable: true,
+    releasable: true,
     canAssign: true,
     properties: [
         {
@@ -179,6 +180,7 @@ export const cue: model = {
     creatable: true,
     deletable: true,
     goable: true,
+    releasable: false, // you should release the cuelist, not the cue
     recursiveDeleteProperties: ['elements'],
     properties: [
         {

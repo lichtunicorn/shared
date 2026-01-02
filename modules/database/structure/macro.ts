@@ -8,6 +8,7 @@ export const macro: model = {
     recursiveDeleteProperties: ['commands'],
     deletable: true,
     goable: true,
+    releasable: false,
     canAssign: true,
     properties: [
         {

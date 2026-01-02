@@ -7,6 +7,7 @@ export type model = {
     creatable: boolean;
     deletable?: boolean;
     goable?: boolean;
+    releasable?: boolean;
     selectable?: boolean;
     /** Whether this model shows up on the client in the common section */
     common?: boolean;

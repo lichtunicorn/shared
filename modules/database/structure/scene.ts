@@ -9,6 +9,7 @@ export const scene: model = {
     recursiveDeleteProperties: ['elements'],
     deletable: true,
     goable: true,
+    releasable: false,
     canAssign: true,
     properties: [
         {
