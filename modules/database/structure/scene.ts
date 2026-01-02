@@ -164,11 +164,10 @@ export const sceneElement: model = {
             settable: true,
         },
         {
-            name: "fixtures",
-            displayName: "Fixtures",
+            name: "fixture",
+            displayName: "Fixture",
             optional: true,
-            type: "array",
-            valueType: {
+            type: {
                 reference: "fixture"
             },
             gettable: true,
