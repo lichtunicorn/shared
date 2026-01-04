@@ -52,7 +52,7 @@ export const value = z.union([
         get value2() { return value } // get because of recursiveness
     }),
     z.object({
-        type: z.literal("excludeArrays"),
+        type: z.literal("excludeFromArray"),
         get value() { return value }, // get because of recursiveness
         get exclude() { return value } // get because of recursiveness
     }),

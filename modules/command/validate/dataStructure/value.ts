@@ -12,14 +12,15 @@ export function validateValueDataStructure(
     requiredValueType: referencePropertyType | null
 ): {
     valid: true;
+    type: literalPropertyType | referencePropertyType;
+} | {
+    valid: true;
+    type: "array";
+    valueType: referencePropertyType;
 } | {
     valid: false;
     path: validateDataStructureValuePath;
 } {
-    if (requiredType === 'array' && !requiredValueType) {
-        throw new Error('requiredType is array, but not requiredValueType given');
-    }
-
     if (value.type === 'value') {
         const evaluatedType = value.value === null ? 'null' : typeof value.value;
 
@@ -45,10 +46,6 @@ export function validateValueDataStructure(
 
         if (wrongType) {
             if (requiredType === 'array') {
-
-                if (requiredValueType === null)
-                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
-
                 return {
                     valid: false,
                     path: {
@@ -77,15 +74,12 @@ export function validateValueDataStructure(
         }
 
         return {
-            valid: true
+            valid: true,
+            type: evaluatedType === 'null' ? 'stringOrNumberOrBooleanOrNull' : evaluatedType
         };
     } else if (value.type === 'not') {
         if (requiredType !== 'boolean' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
             if (requiredType === 'array') {
-
-                if (requiredValueType === null)
-                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
-
                 return {
                     valid: false,
                     path: {
@@ -126,15 +120,12 @@ export function validateValueDataStructure(
         }
 
         return {
-            valid: true
+            valid: true,
+            type: 'boolean'
         };
     } else if (value.type === 'now') {
         if (requiredType !== 'number' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
             if (requiredType === 'array') {
-
-                if (requiredValueType === null)
-                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
-
                 return {
                     valid: false,
                     path: {
@@ -163,7 +154,85 @@ export function validateValueDataStructure(
         }
 
         return {
-            valid: true
+            valid: true,
+            type: 'number'
+        };
+    } else if (value.type === 'combineArrays') {
+        const value1Result = validateValueDataStructure(value.value1, 'array', false, null);
+
+        if (!value1Result.valid) {
+            return {
+                valid: false,
+                path: {
+                    type: 'combineArrays',
+                    value1: value1Result.path
+                }
+            }
+        }
+
+        if (value1Result.type !== 'array') {
+            return {
+                valid: false,
+                path: {
+                    type: 'combineArrays',
+                    error: {
+                        type: 'type',
+                        requiredType: 'array',
+                        requiredValueType: null,
+                        evaluatedType: value1Result.type
+                    }
+                }
+            }
+        }
+
+        const value2Result = validateValueDataStructure(value.value2, 'array', false, value1Result.valueType);
+
+        if (!value2Result.valid) {
+            return {
+                valid: false,
+                path: {
+                    type: 'combineArrays',
+                    value2: value2Result.path
+                }
+            }
+        }
+
+        if (requiredType !== 'array') {
+            return {
+                valid: false,
+                path: {
+                    type: 'combineArrays',
+                    error: {
+                        type: 'type',
+                        requiredType: 'array',
+                        requiredValueType: null,
+                        evaluatedType: 'array',
+                        evaluatedValueType: value1Result.valueType
+                    }
+                }
+            }
+        }
+
+        if (requiredValueType !== null && requiredValueType.reference !== value1Result.valueType.reference) {
+            return {
+                valid: false,
+                path: {
+                    type: 'combineArrays',
+                    error: {
+                        type: 'type',
+                        requiredType: 'array',
+                        requiredValueType,
+                        evaluatedType: 'array',
+                        evaluatedValueType: value1Result.valueType
+                    }
+                }
+            }
+        }
+
+        return {
+            valid: true,
+            type: 'array',
+            valueType: value1Result.valueType
         };
     } else if (value.type === 'getCommand') {
         if (value.command.operation !== 'get') {
@@ -198,10 +267,6 @@ export function validateValueDataStructure(
 
             if (!(typeof requiredType !== 'string' && requiredType.reference)) {
                 if (requiredType === 'array') {
-
-                    if (requiredValueType === null)
-                        throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
-
                     return {
                         valid: false,
                         path: {
@@ -243,12 +308,13 @@ export function validateValueDataStructure(
                 }
             }
 
+            return {
+                valid: true,
+                type: result.type
+            };
+
         } else if (result.type === 'array' || requiredType === 'array') {
             if (result.type !== 'array' && requiredType === 'array') {
-
-                if (requiredValueType === null)
-                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
-
                 return {
                     valid: false,
                     path: {
@@ -282,9 +348,7 @@ export function validateValueDataStructure(
             if (!result.valueType) throw new Error('result.valueType is null');
             if (requiredType !== 'array') throw new Error('requiredType is not array');
 
-            if (requiredValueType === null) throw new Error('requiredValueType is null');
-
-            if (result.valueType.reference !== requiredValueType.reference) {
+            if (requiredValueType !== null && result.valueType.reference !== requiredValueType.reference) {
                 return {
                     valid: false,
                     path: {
@@ -298,6 +362,12 @@ export function validateValueDataStructure(
                         }
                     }
                 }
+            }
+
+            return {
+                valid: true,
+                type: 'array',
+                valueType: result.valueType
             }
         } else {
 
@@ -317,19 +387,15 @@ export function validateValueDataStructure(
                 }
             }
 
+            return {
+                valid: true,
+                type: result.type === 'oneOf' ? 'string' : result.type
+            }
+
         }
-
-        return {
-            valid: true
-        };
-
     } else if (value.type === 'mathDualExpression') {
         if (requiredType !== 'number' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
             if (requiredType === 'array') {
-
-                if (requiredValueType === null)
-                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
-
                 return {
                     valid: false,
                     path: {
@@ -382,15 +448,12 @@ export function validateValueDataStructure(
         }
 
         return {
-            valid: true
+            valid: true,
+            type: 'number'
         };
     } else if (value.type === 'mathUnaryExpression') {
         if (requiredType !== 'number' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
             if (requiredType === 'array') {
-
-                if (requiredValueType === null)
-                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
-
                 return {
                     valid: false,
                     path: {
@@ -431,7 +494,8 @@ export function validateValueDataStructure(
         }
 
         return {
-            valid: true
+            valid: true,
+            type: 'number'
         };
     } else {
         // typescript requires an else here, idk why

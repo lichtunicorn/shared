@@ -52,7 +52,7 @@ export type validateDatStructureValueError = {
                 requiredType: literalPropertyType | referencePropertyType;
             } | {
                 requiredType: "array";
-                requiredValueType: referencePropertyType;
+                requiredValueType: referencePropertyType | null;
             }
         ) & (
             {
@@ -76,6 +76,24 @@ export type validateDataStructureValuePath = {
 } | {
     type: 'now';
     error: validateDatStructureValueError;
+} | {
+    type: 'combineArrays';
+    error: validateDatStructureValueError;
+} | {
+    type: 'combineArrays';
+    value1: validateDataStructureValuePath;
+} | {
+    type: 'combineArrays';
+    value2: validateDataStructureValuePath;
+} | {
+    type: 'excludeFromArray';
+    error: validateDatStructureValueError;
+} | {
+    type: 'excludeFromArray';
+    value: validateDataStructureValuePath;
+} | {
+    type: 'excludeFromArray';
+    exclude: validateDataStructureValuePath;
 } | {
     type: 'getCommand';
     command: validateDataStructureReturn;
