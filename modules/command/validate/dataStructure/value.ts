@@ -234,6 +234,83 @@ export function validateValueDataStructure(
             type: 'array',
             valueType: value1Result.valueType
         };
+    } else if (value.type === 'excludeFromArray') {
+        const valueResult = validateValueDataStructure(value.value, 'array', false, null);
+
+        if (!valueResult.valid) {
+            return {
+                valid: false,
+                path: {
+                    type: 'excludeFromArray',
+                    value: valueResult.path
+                }
+            }
+        }
+
+        if (valueResult.type !== 'array') {
+            return {
+                valid: false,
+                path: {
+                    type: 'excludeFromArray',
+                    error: {
+                        type: 'type',
+                        requiredType: 'array',
+                        requiredValueType: null,
+                        evaluatedType: valueResult.type
+                    }
+                }
+            }
+        }
+
+        const excludeResult = validateValueDataStructure(value.exclude, 'array', false, valueResult.valueType);
+
+        if (!excludeResult.valid) {
+            return {
+                valid: false,
+                path: {
+                    type: 'excludeFromArray',
+                    exclude: excludeResult.path
+                }
+            }
+        }
+
+        if (requiredType !== 'array') {
+            return {
+                valid: false,
+                path: {
+                    type: 'excludeFromArray',
+                    error: {
+                        type: 'type',
+                        requiredType: 'array',
+                        requiredValueType: null,
+                        evaluatedType: 'array',
+                        evaluatedValueType: valueResult.valueType
+                    }
+                }
+            }
+        }
+
+        if (requiredValueType !== null && requiredValueType.reference !== valueResult.valueType.reference) {
+            return {
+                valid: false,
+                path: {
+                    type: 'excludeFromArray',
+                    error: {
+                        type: 'type',
+                        requiredType: 'array',
+                        requiredValueType,
+                        evaluatedType: 'array',
+                        evaluatedValueType: valueResult.valueType
+                    }
+                }
+            }
+        }
+
+        return {
+            valid: true,
+            type: 'array',
+            valueType: valueResult.valueType
+        };
     } else if (value.type === 'getCommand') {
         if (value.command.operation !== 'get') {
             return {
