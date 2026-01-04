@@ -9,7 +9,6 @@ export const macro: model = {
     deletable: true,
     goable: true,
     releasable: false,
-    canAssign: true,
     properties: [
         {
             name: "id",

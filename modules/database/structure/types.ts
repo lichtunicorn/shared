@@ -276,6 +276,8 @@ export type public_executor = {
     cuelist: null | { reference: string; };
     /** settable, back reference */
     collection: null | { reference: string; };
+    /** settable, back reference, Variable uses intensity fader function */
+    variable: null | { reference: string; };
     /** settable */
     executorButtons: { reference: string; }[];
 };

@@ -100,6 +100,19 @@ export const executor: model = {
             optional: true
         },
         {
+            name: 'variable',
+            displayName: "Variable",
+            type: {
+                reference: 'variable'
+            },
+            backReference: true,
+            gettable: true,
+            settable: true,
+            canInfluenceThisOutput: false,
+            optional: true,
+            comment: "Variable uses intensity fader function"
+        },
+        {
             name: 'executorButtons',
             displayName: "Executor buttons",
             type: 'array',
