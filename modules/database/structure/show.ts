@@ -1,6 +1,6 @@
 import type { model } from './types';
 
-const manyModelNames: [string, string][] = [
+export const manyModelNames: [string, string][] = [
     ["actionButton", "Action buttons"],
     ["collection", "Collections"],
     ["cuelist", "Cuelists"],
