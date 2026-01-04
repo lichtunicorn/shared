@@ -345,13 +345,71 @@ export function validateValueDataStructure(
 
         if (typeof nonArrayResultType !== 'string' && nonArrayResultType.reference) {
             if (nonArrayRequiredType === null) {
-                // todo: valid true
-                return;
+                return {
+                    valid: true,
+                    type: 'array',
+                    valueType: nonArrayResultType
+                };
             }
 
             if (typeof nonArrayRequiredType === 'string') {
-                // todo: valid false
-                return;
+                if (requiredType === 'array') {
+                    if (result.type === 'array') {
+                        return {
+                            valid: false,
+                            path: {
+                                type: 'getCommand',
+                                error: {
+                                    type: 'type',
+                                    requiredType,
+                                    requiredValueType,
+                                    evaluatedType: result.type,
+                                    evaluatedValueType: result.valueType
+                                }
+                            }
+                        }
+                    } else {
+                        return {
+                            valid: false,
+                            path: {
+                                type: 'getCommand',
+                                error: {
+                                    type: 'type',
+                                    requiredType,
+                                    requiredValueType,
+                                    evaluatedType: result.type
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if (result.type === 'array') {
+                        return {
+                            valid: false,
+                            path: {
+                                type: 'getCommand',
+                                error: {
+                                    type: 'type',
+                                    requiredType,
+                                    evaluatedType: result.type,
+                                    evaluatedValueType: result.valueType
+                                }
+                            }
+                        }
+                    } else {
+                        return {
+                            valid: false,
+                            path: {
+                                type: 'getCommand',
+                                error: {
+                                    type: 'type',
+                                    requiredType,
+                                    evaluatedType: result.type
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             if (nonArrayRequiredType.reference !== nonArrayResultType.reference) {
