@@ -413,12 +413,77 @@ export function validateValueDataStructure(
             }
 
             if (nonArrayRequiredType.reference !== nonArrayResultType.reference) {
-                // todo: valid false
-                return
+                if (requiredType === 'array') {
+                    if (result.type === 'array') {
+                        return {
+                            valid: false,
+                            path: {
+                                type: 'getCommand',
+                                error: {
+                                    type: 'type',
+                                    requiredType,
+                                    requiredValueType,
+                                    evaluatedType: result.type,
+                                    evaluatedValueType: result.valueType
+                                }
+                            }
+                        }
+                    } else {
+                        return {
+                            valid: false,
+                            path: {
+                                type: 'getCommand',
+                                error: {
+                                    type: 'type',
+                                    requiredType,
+                                    requiredValueType,
+                                    evaluatedType: result.type
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if (result.type === 'array') {
+                        return {
+                            valid: false,
+                            path: {
+                                type: 'getCommand',
+                                error: {
+                                    type: 'type',
+                                    requiredType,
+                                    evaluatedType: result.type,
+                                    evaluatedValueType: result.valueType
+                                }
+                            }
+                        }
+                    } else {
+                        return {
+                            valid: false,
+                            path: {
+                                type: 'getCommand',
+                                error: {
+                                    type: 'type',
+                                    requiredType,
+                                    evaluatedType: result.type
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
-            // todo: valid true
-            return;
+            if (result.type === 'array') {
+                return {
+                    valid: true,
+                    type: result.type,
+                    valueType: result.valueType
+                }
+            } else {
+                return {
+                    valid: true,
+                    type: result.type === 'oneOf' ? 'string' : result.type
+                }
+            }
         } else {
             if (nonArrayRequiredType === null) {
                 // todo: valid false
