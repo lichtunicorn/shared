@@ -340,135 +340,45 @@ export function validateValueDataStructure(
         if (!('type' in result))
             throw new Error('validateDataStructure called with get command, but no type is returned');
 
-        if (typeof result.type !== 'string' && result.type.reference) {
+        const nonArrayResultType = result.type === 'array' ? result.valueType : result.type;
+        const nonArrayRequiredType = requiredType === 'array' ? requiredValueType : requiredType;
 
-            if (!(typeof requiredType !== 'string' && requiredType.reference)) {
-                if (requiredType === 'array') {
-                    return {
-                        valid: false,
-                        path: {
-                            type: 'getCommand',
-                            error: {
-                                type: 'type',
-                                requiredType,
-                                requiredValueType,
-                                evaluatedType: result.type
-                            }
-                        }
-                    }
-                } else {
-                    return {
-                        valid: false,
-                        path: {
-                            type: 'getCommand',
-                            error: {
-                                type: 'type',
-                                requiredType,
-                                evaluatedType: result.type
-                            }
-                        }
-                    }
-                }
+        if (typeof nonArrayResultType !== 'string' && nonArrayResultType.reference) {
+            if (nonArrayRequiredType === null) {
+                // todo: valid true
+                return;
             }
 
-            if (requiredType.reference !== result.type.reference) {
-                return {
-                    valid: false,
-                    path: {
-                        type: 'getCommand',
-                        error: {
-                            type: 'type',
-                            requiredType,
-                            evaluatedType: result.type
-                        }
-                    }
-                }
+            if (typeof nonArrayRequiredType === 'string') {
+                // todo: valid false
+                return;
             }
 
-            return {
-                valid: true,
-                type: result.type
-            };
-
-        } else if (result.type === 'array' || requiredType === 'array') {
-            if (result.type !== 'array' && requiredType === 'array') {
-                return {
-                    valid: false,
-                    path: {
-                        type: 'getCommand',
-                        error: {
-                            type: 'type',
-                            requiredType,
-                            requiredValueType,
-                            evaluatedType: result.type
-                        }
-                    }
-                }
+            if (nonArrayRequiredType.reference !== nonArrayResultType.reference) {
+                // todo: valid false
+                return
             }
 
-            if (requiredType !== 'array' && result.type === 'array') {
-                return {
-                    valid: false,
-                    path: {
-                        type: 'getCommand',
-                        error: {
-                            type: 'type',
-                            requiredType,
-                            evaluatedType: result.type,
-                            evaluatedValueType: result.valueType
-                        }
-                    }
-                }
-            }
-
-            if (result.type !== 'array') throw new Error('result.type is not array');
-            if (!result.valueType) throw new Error('result.valueType is null');
-            if (requiredType !== 'array') throw new Error('requiredType is not array');
-
-            if (requiredValueType !== null && result.valueType.reference !== requiredValueType.reference) {
-                return {
-                    valid: false,
-                    path: {
-                        type: 'getCommand',
-                        error: {
-                            type: 'type',
-                            requiredType,
-                            requiredValueType,
-                            evaluatedType: result.type,
-                            evaluatedValueType: result.valueType
-                        }
-                    }
-                }
-            }
-
-            return {
-                valid: true,
-                type: 'array',
-                valueType: result.valueType
-            }
+            // todo: valid true
+            return;
         } else {
-
-            const checkingResultType = result.type === 'oneOf' ? 'string' : result.type;
-
-            if (requiredType !== 'stringOrNumberOrBooleanOrNull' && result.type !== 'stringOrNumberOrBooleanOrNull' && requiredType !== checkingResultType) {
-                return {
-                    valid: false,
-                    path: {
-                        type: 'getCommand',
-                        error: {
-                            type: 'type',
-                            requiredType,
-                            evaluatedType: result.type
-                        }
-                    }
-                }
+            if (nonArrayRequiredType === null) {
+                // todo: valid false
+                return;
             }
 
-            return {
-                valid: true,
-                type: result.type === 'oneOf' ? 'string' : result.type
+            if (typeof nonArrayRequiredType !== 'string') {
+                // todo: valid false
+                return;
             }
 
+            if (nonArrayRequiredType !== nonArrayResultType) {
+                // todo: valid false
+                return;
+            }
+
+            // todo: valid true
+            return;
         }
     } else if (value.type === 'mathDualExpression') {
         if (requiredType !== 'number' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
