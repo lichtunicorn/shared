@@ -47,6 +47,16 @@ export const value = z.union([
         type: z.literal("now")
     }),
     z.object({
+        type: z.literal("combineArrays"),
+        get value1() { return value }, // get because of recursiveness
+        get value2() { return value } // get because of recursiveness
+    }),
+    z.object({
+        type: z.literal("excludeArrays"),
+        get value() { return value }, // get because of recursiveness
+        get exclude() { return value } // get because of recursiveness
+    }),
+    z.object({
         type: z.literal("getCommand"),
         get command() { // get because of recursiveness
             return getCommand;
