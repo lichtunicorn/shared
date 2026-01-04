@@ -70,6 +70,7 @@ export const actionButton: model = {
     common: true,
     creatable: true,
     move: 'index',
+    isAssignable: true,
     properties: [
         {
             name: "id",
