@@ -74,6 +74,9 @@ export type validateDataStructureValuePath = {
     type: 'not';
     value: validateDataStructureValuePath;
 } | {
+    type: 'now';
+    error: validateDatStructureValueError;
+} | {
     type: 'getCommand';
     command: validateDataStructureReturn;
 } | {

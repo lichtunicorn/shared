@@ -128,6 +128,43 @@ export function validateValueDataStructure(
         return {
             valid: true
         };
+    } else if (value.type === 'now') {
+        if (requiredType !== 'number' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
+            if (requiredType === 'array') {
+
+                if (requiredValueType === null)
+                    throw new Error('validateValueDataStructure called with requiredType=array, but requiredValueType is null');
+
+                return {
+                    valid: false,
+                    path: {
+                        type: 'now',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            requiredValueType,
+                            evaluatedType: 'number'
+                        }
+                    }
+                }
+            } else {
+                return {
+                    valid: false,
+                    path: {
+                        type: 'now',
+                        error: {
+                            type: 'type',
+                            requiredType,
+                            evaluatedType: 'number'
+                        }
+                    }
+                }
+            }
+        }
+
+        return {
+            valid: true
+        };
     } else if (value.type === 'getCommand') {
         if (value.command.operation !== 'get') {
             return {
