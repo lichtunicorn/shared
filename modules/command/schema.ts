@@ -44,6 +44,9 @@ export const value = z.union([
         get value() { return value } // get because of recursiveness
     }),
     z.object({
+        type: z.literal("now")
+    }),
+    z.object({
         type: z.literal("getCommand"),
         get command() { // get because of recursiveness
             return getCommand;
