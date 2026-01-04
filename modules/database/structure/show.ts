@@ -1,6 +1,6 @@
 import type { model } from './types';
 
-export const manyModelNames: [string, string][] = [
+export const manyModelNames = [
     ["actionButton", "Action buttons"],
     ["collection", "Collections"],
     ["cuelist", "Cuelists"],
@@ -14,7 +14,7 @@ export const manyModelNames: [string, string][] = [
     ["scene", "Scenes"],
     ["section", "Sections"],
     ["variable", "Variables"],
-];
+] as const satisfies [string, string][];
 
 export const show: model = {
     displayName: "Show",
