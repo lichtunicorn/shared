@@ -500,8 +500,18 @@ export function validateValueDataStructure(
                 return;
             }
 
-            // todo: valid true
-            return;
+            if (result.type === 'array') {
+                return {
+                    valid: true,
+                    type: result.type,
+                    valueType: result.valueType
+                }
+            } else {
+                return {
+                    valid: true,
+                    type: result.type === 'oneOf' ? 'string' : result.type
+                }
+            }
         }
     } else if (value.type === 'mathDualExpression') {
         if (requiredType !== 'number' && requiredType !== 'stringOrNumberOrBooleanOrNull') {
