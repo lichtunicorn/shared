@@ -486,8 +486,18 @@ export function validateValueDataStructure(
             }
         } else {
             if (nonArrayRequiredType === null) {
-                // todo: valid false
-                return;
+                return {
+                    valid: false,
+                    path: {
+                        type: 'getCommand',
+                        error: {
+                            type: 'type',
+                            requiredType: 'array',
+                            requiredValueType: null,
+                            evaluatedType: result.type as Exclude<typeof result.type, 'array'>,
+                        }
+                    }
+                }
             }
 
             if (typeof nonArrayRequiredType !== 'string') {
