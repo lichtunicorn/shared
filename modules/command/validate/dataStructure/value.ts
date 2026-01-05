@@ -494,15 +494,39 @@ export function validateValueDataStructure(
                             type: 'type',
                             requiredType: 'array',
                             requiredValueType: null,
-                            evaluatedType: result.type as Exclude<typeof result.type, 'array'>,
+                            evaluatedType: result.type as Exclude<typeof result.type, 'array'>, // cant be array, because of nonArrayResultType check
                         }
                     }
                 }
             }
 
             if (typeof nonArrayRequiredType !== 'string') {
-                // todo: valid false
-                return;
+                if (requiredType === 'array') {
+                    return {
+                        valid: false,
+                        path: {
+                            type: 'getCommand',
+                            error: {
+                                type: 'type',
+                                requiredType,
+                                requiredValueType,
+                                evaluatedType: result.type as Exclude<typeof result.type, 'array'>, // cant be array, because of nonArrayResultType check
+                            }
+                        }
+                    }
+                } else {
+                    return {
+                        valid: false,
+                        path: {
+                            type: 'getCommand',
+                            error: {
+                                type: 'type',
+                                requiredType,
+                                evaluatedType: result.type as Exclude<typeof result.type, 'array'>, // cant be array, because of nonArrayResultType check
+                            }
+                        }
+                    }
+                }
             }
 
             if (nonArrayRequiredType !== nonArrayResultType) {
