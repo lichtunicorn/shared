@@ -9,7 +9,6 @@ export const collection: model = {
     goable: true,
     releasable: true,
     canAssign: true,
-    isAssignable: true,
     properties: [
         {
             name: "id",
