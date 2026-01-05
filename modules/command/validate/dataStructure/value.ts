@@ -530,8 +530,17 @@ export function validateValueDataStructure(
             }
 
             if (nonArrayRequiredType !== nonArrayResultType) {
-                // todo: valid false
-                return;
+                return {
+                    valid: false,
+                    path: {
+                        type: 'getCommand',
+                        error: {
+                            type: 'type',
+                            requiredType: requiredType as Exclude<typeof requiredType, 'array'>, // cant be array, because of nonArrayRequiredType check
+                            evaluatedType: result.type as Exclude<typeof result.type, 'array'>, // cant be array, because of nonArrayResultType check
+                        }
+                    }
+                }
             }
 
             if (result.type === 'array') {
