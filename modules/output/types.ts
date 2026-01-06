@@ -5,7 +5,6 @@ export type artnetOptions = {
     refresh: number;
     /** Always send full DMX universe, instead of only sending changed values */
     sendAll: boolean;
-    universes: number;
 };
 
 export type outputOptions = {
