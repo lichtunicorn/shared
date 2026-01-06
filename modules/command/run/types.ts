@@ -1,6 +1,11 @@
 import type { literalPropertyType, referencePropertyType } from "../../database/structure/types";
+import type { directReferenceContextTypes } from "../schema";
 
 export type runCommandSource = 'commandLine';
+
+export type contextType = {
+    [contextType in Exclude<typeof directReferenceContextTypes[number]["name"], "show">]?: string;
+};
 
 export type runCommandReturn = {
     valid: true;
