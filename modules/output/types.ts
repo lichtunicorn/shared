@@ -5,6 +5,8 @@ export type artnetOptions = {
     refresh: number;
     /** Always send full DMX universe, instead of only sending changed values */
     sendAll: boolean;
+    /** Ip address of network interface to bind to */
+    bind: string | null;
 };
 
 export type outputOptions = {
