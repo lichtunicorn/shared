@@ -7,6 +7,8 @@ import type { errorInfo } from '../error/types';
 import type { outputOptions } from '../output/types';
 import type { publicFixtureType } from '../fixtureTypes/types';
 import type { networkInterface } from '../network/types';
+import type { noGetCommand as noGetCommandSchema } from '../command/schema';
+import type { commandRunSource, runCommandReturn } from '../command/run/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -53,6 +55,13 @@ export interface ClientToServerEvents {
 
     getFixtureTypes: () => void;
     getNetworkInterfaces: () => void;
+
+    command(
+        command: z.infer<typeof noGetCommandSchema>,
+        run: boolean,
+        source: commandRunSource,
+        callback: (result: runCommandReturn) => void
+    ): void;
 }
 
 export interface InterServerEvents {
