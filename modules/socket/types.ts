@@ -6,7 +6,7 @@ import type { showData, showDataInput } from '../../modules/show/schema';
 import type { errorInfo } from '../error/types';
 import type { outputOptions } from '../output/types';
 import type { publicFixtureType } from '../fixtureTypes/types';
-import type { networkInterfaces } from '../network/types';
+import type { networkInterface } from '../network/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -22,7 +22,7 @@ export interface ServerToClientEvents {
     outputShowId(showId: string | null): void;
     outputOptions(options: outputOptions): void;
     fixtureTypes(fixtureTypes: publicFixtureType[]): void;
-    networkInterfaces(networkInterfaces: networkInterfaces): void;
+    networkInterfaces(networkInterfaces: networkInterface[]): void;
 
     debugSocketUrl: (url: string) => void;
 }
