@@ -354,9 +354,9 @@ export type public_fixture = {
     /** read only */
     fixtureType: string;
     /** settable, default 0 */
-    universe: number;
+    universe: null | number;
     /** settable, default 0 */
-    address: number;
+    address: null | number;
 };
 export type fixture = public_fixture;
 export type public_group = {

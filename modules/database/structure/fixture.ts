@@ -42,6 +42,7 @@ export const fixture: model = {
                 type: "value",
                 value: 0
             },
+            optional: true,
             gettable: true,
             settable: true,
         },
@@ -53,6 +54,7 @@ export const fixture: model = {
                 type: "value",
                 value: 0
             },
+            optional: true,
             gettable: true,
             settable: true,
         }
