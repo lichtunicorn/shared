@@ -1,6 +1,6 @@
 import type { literalPropertyType, referencePropertyType } from "../../database/structure/types";
 
-export type commandRunSource = 'commandLine';
+export type runCommandSource = 'commandLine';
 
 export type runCommandReturn = {
     valid: true;

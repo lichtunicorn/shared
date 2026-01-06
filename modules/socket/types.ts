@@ -8,7 +8,7 @@ import type { outputOptions } from '../output/types';
 import type { publicFixtureType } from '../fixtureTypes/types';
 import type { networkInterface } from '../network/types';
 import type { noGetCommand as noGetCommandSchema } from '../command/schema';
-import type { commandRunSource, runCommandReturn } from '../command/run/types';
+import type { runCommandSource, runCommandReturn } from '../command/run/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -59,7 +59,7 @@ export interface ClientToServerEvents {
     command(
         command: z.infer<typeof noGetCommandSchema>,
         run: boolean,
-        source: commandRunSource,
+        source: runCommandSource,
         callback: (result: runCommandReturn) => void
     ): void;
 }
