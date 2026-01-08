@@ -2,8 +2,8 @@
   "name": "shared",
   "private": true,
   "scripts": {
-    "u": "bun modules/database/structure/index",
-    "dev": "bun --watch modules/database/structure/index"
+    "u": "bun ./dev",
+    "dev": "bun --watch ./dev"
   },
   "exports": {
     "./*": "./*"
