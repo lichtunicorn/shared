@@ -108,7 +108,7 @@ export const value = z.union([
     }),
     z.object({
         type: z.literal("mathDualExpression"),
-        operator: z.enum(["add", "subtract", "multiply", "divide", "mod", "exponent"]),
+        operator: z.enum(valueMathDualExpressionOperators.map(({ operator }) => operator)),
         get value1() { return value }, // get because of recursiveness
         get value2() { return value } // get because of recursiveness
     }),
