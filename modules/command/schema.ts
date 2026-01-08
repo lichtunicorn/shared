@@ -34,7 +34,7 @@ export const getOperation = {
     name: "get", displayName: "Get", source: true, requiresSourceModel: false, destination: false, value: false, emptyOptions: true
 } as const satisfies operation;
 
-export type partialValue = {
+export type partialValue = Partial<{
     type: "value";
     value: string | number | boolean | null;
 } | {
@@ -62,7 +62,7 @@ export type partialValue = {
     type: "mathUnaryExpression";
     value: partialValue;
     operator: "squareRoot";
-};
+}>;
 
 export const value = z.union([
     z.object({
