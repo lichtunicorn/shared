@@ -64,6 +64,20 @@ export type partialValue = Partial<{
     operator: "squareRoot";
 }>;
 
+type valueMathDualExpressionOperator = {
+    operator: string;
+    displayName: string;
+};
+
+export const valueMathDualExpressionOperators = [
+    { operator: "add", displayName: "Add" },
+    { operator: "subtract", displayName: "Subtract" },
+    { operator: "multiply", displayName: "Multiply" },
+    { operator: "divide", displayName: "Divide" },
+    { operator: "mod", displayName: "Mod" },
+    { operator: "exponent", displayName: "Exponent" },
+] as const satisfies readonly valueMathDualExpressionOperator[];
+
 export const value = z.union([
     z.object({
         type: z.literal("value"),
