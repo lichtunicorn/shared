@@ -34,6 +34,36 @@ export const getOperation = {
     name: "get", displayName: "Get", source: true, requiresSourceModel: false, destination: false, value: false, emptyOptions: true
 } as const satisfies operation;
 
+export type partialValue = {
+    type: "value";
+    value: string | number | boolean | null;
+} | {
+    type: "not";
+    value: partialValue;
+} | {
+    type: "now";
+} | {
+    type: "combineArrays";
+    value1: partialValue;
+    value2: partialValue;
+} | {
+    type: "excludeFromArray";
+    value: partialValue;
+    exclude: partialValue;
+} | {
+    type: "getCommand";
+    // todo: command type
+} | {
+    type: "mathDualExpression";
+    value1: partialValue;
+    value2: partialValue;
+    operator: "add" | "subtract" | "multiply" | "divide" | "mod" | "exponent";
+} | {
+    type: "mathUnaryExpression";
+    value: partialValue;
+    operator: "squareRoot";
+};
+
 export const value = z.union([
     z.object({
         type: z.literal("value"),
@@ -64,13 +94,13 @@ export const value = z.union([
     }),
     z.object({
         type: z.literal("mathDualExpression"),
-        operator: z.union([z.literal("add"), z.literal("subtract"), z.literal("multiply"), z.literal("divide"), z.literal("mod"), z.literal("exponent")]),
+        operator: z.enum(["add", "subtract", "multiply", "divide", "mod", "exponent"]),
         get value1() { return value }, // get because of recursiveness
         get value2() { return value } // get because of recursiveness
     }),
     z.object({
         type: z.literal("mathUnaryExpression"),
-        operator: z.literal("squareRoot"),
+        operator: z.enum(["squareRoot"]),
         get value() { return value }
     })
 ]);
