@@ -1,15 +1,15 @@
-import type { model } from './types';
+import type { model } from '../types';
 
-export const scene: model = {
-    displayName: "Scene",
+export const cuelist: model = {
+    displayName: "Cuelist",
     common: true,
     canInfluenceOutput: true,
     creatable: true,
     move: 'index',
-    recursiveDeleteProperties: ['elements'],
+    recursiveDeleteProperties: ['cues'],
     deletable: true,
     goable: true,
-    releasable: false,
+    releasable: true,
     canAssign: true,
     properties: [
         {
@@ -53,6 +53,14 @@ export const scene: model = {
             settable: true,
         },
         {
+            name: 'currentCue',
+            displayName: "Current cue",
+            type: 'number',
+            optional: true,
+            gettable: true,
+            settable: true,
+        },
+        {
             name: 'active',
             displayName: "Active",
             type: 'number',
@@ -65,13 +73,22 @@ export const scene: model = {
             comment: "0 if not active. 100 if active. In between if active is crossfading. Active property is only 100 or 0 when automatically fading, releaseStartTime and activeStartTime are used for the in between values."
         },
         {
+            name: 'cueCrossfade',
+            displayName: "Cue crossfade",
+            type: 'number',
+            optional: true,
+            gettable: true,
+            settable: true,
+            comment: "From 0 to 100. 0 if at transitionFromCue. 100 if at currentCue. Null if not transitioning between cues"
+        },
+        {
             name: 'activatedAt',
             displayName: "Activated at",
             type: 'number',
             optional: true,
             gettable: true,
             settable: false,
-            comment: "dateTime when activated last went of 0. Used for latest takes priority.  If active goes back to 0, activatedAt stays the same."
+            comment: "dateTime when activated last went of 0. Used for latest takes priority. If active goes back to 0, activatedAt stays the same."
         },
         {
             name: 'releaseStartTime',
@@ -79,8 +96,8 @@ export const scene: model = {
             type: 'number',
             optional: true,
             gettable: true,
-            settable: false,
-            comment: "dateTime when the scene started a release. Used for fading. Null if not releasing, or in crossfade. Active is original value if this is used",
+            settable: true,
+            comment: "dateTime when the cuelist started a release. Used for fading. Null if not releasing, or in crossfade. Active is original value if this is used"
         },
         {
             name: 'activeStartTime',
@@ -88,8 +105,26 @@ export const scene: model = {
             type: 'number',
             optional: true,
             gettable: true,
-            settable: false,
-            comment: "dateTime when the scene started to become active. Used for fading. Null if not active, or in crossfade. Active is new value if this is used"
+            settable: true,
+            comment: "dateTime when the cuelist started to become active. Used for fading. Null if not active, or in crossfade. Active is new value if this is used"
+        },
+        {
+            name: 'cueStartTime',
+            displayName: "Cue start time",
+            type: 'number',
+            optional: true,
+            gettable: true,
+            settable: true,
+            comment: "dateTime when the transition from one cue to another started. Used for fading. Null if not transitioning, or in crossfade (between cues)"
+        },
+        {
+            name: 'transitionFromCue',
+            displayName: "Transition from cue",
+            type: 'number',
+            optional: true,
+            gettable: true,
+            settable: true,
+            comment: "The cue the transition started from. Null if not transitioning between cues"
         },
         {
             name: 'intensity',
@@ -101,7 +136,7 @@ export const scene: model = {
             },
             gettable: true,
             settable: true,
-            comment: "From 0 to 100"
+            comment: 'From 0 to 100'
         },
         {
             name: 'executors',
@@ -126,21 +161,96 @@ export const scene: model = {
             canInfluenceThisOutput: false,
         },
         {
-            name: "elements",
-            displayName: "Elements",
+            name: "cues",
+            displayName: "Cues",
             type: "array",
             valueType: {
-                reference: "sceneElement"
+                reference: "cue"
             },
             gettable: true,
-            settable: false,
-            canInfluenceThisOutput: true
+            settable: true,
+            canInfluenceThisOutput: true,
         }
     ]
 };
 
-export const sceneElement: model = {
-    displayName: "Scene element",
+export const cue: model = {
+    displayName: "Cue",
+    canInfluenceOutput: true,
+    creatable: true,
+    deletable: true,
+    goable: true,
+    releasable: false, // you should release the cuelist, not the cue
+    recursiveDeleteProperties: ['elements'],
+    properties: [
+        {
+            name: "id",
+            displayName: "ID",
+            type: "string",
+            unique: true,
+            default: {
+                type: "cuid"
+            },
+            gettable: true,
+            settable: false,
+        },
+        {
+            name: "index",
+            displayName: "Index",
+            type: "number",
+            gettable: true,
+            settable: true,
+        },
+        {
+            name: "cueFade",
+            displayName: "Cue fade",
+            type: 'number',
+            default: {
+                type: 'value',
+                value: 0
+            },
+            gettable: true,
+            settable: true,
+        },
+        {
+            name: 'macro',
+            displayName: "Macro",
+            type: {
+                reference: 'macro'
+            },
+            backReference: true,
+            optional: true,
+            gettable: true,
+            settable: true,
+            canInfluenceThisOutput: false,
+        },
+        {
+            name: "elements",
+            displayName: "Elements",
+            type: "array",
+            valueType: {
+                reference: "cueElement"
+            },
+            gettable: true,
+            settable: false,
+            canInfluenceThisOutput: true,
+        },
+        {
+            name: "cuelist",
+            displayName: "Cuelist",
+            backReference: true,
+            type: {
+                reference: "cuelist"
+            },
+            gettable: true,
+            settable: false,
+            canInfluenceThisOutput: false,
+        }
+    ]
+};
+
+export const cueElement: model = {
+    displayName: "Cue element",
     canInfluenceOutput: true,
     creatable: true,
     recursiveDeleteProperties: ['contents'],
@@ -172,8 +282,8 @@ export const sceneElement: model = {
                 reference: "fixture"
             },
             gettable: true,
-            settable: true,
-            canInfluenceThisOutput: true
+            settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "group",
@@ -183,36 +293,36 @@ export const sceneElement: model = {
                 reference: "group"
             },
             gettable: true,
-            settable: true,
-            canInfluenceThisOutput: true
+            settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "contents",
             displayName: "Contents",
             type: "array",
             valueType: {
-                reference: "sceneElementContent"
+                reference: "cueElementContent"
             },
             gettable: true,
             settable: false,
-            canInfluenceThisOutput: true
+            canInfluenceThisOutput: true,
         },
         {
-            name: "scene",
-            displayName: "Scene",
+            name: "cue",
+            displayName: "Cue",
             backReference: true,
             type: {
-                reference: "scene"
+                reference: "cue"
             },
             gettable: true,
             settable: false,
             canInfluenceThisOutput: false,
-        },
+        }
     ]
 };
 
-export const sceneElementContent: model = {
-    displayName: "Scene element content",
+export const cueElementContent: model = {
+    displayName: "Cue element content",
     canInfluenceOutput: true,
     creatable: true,
     properties: [
@@ -264,8 +374,8 @@ export const sceneElementContent: model = {
                 reference: "preset"
             },
             gettable: true,
-            settable: true,
-            canInfluenceThisOutput: true
+            settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "effects",
@@ -276,8 +386,8 @@ export const sceneElementContent: model = {
                 reference: "effect"
             },
             gettable: true,
-            settable: true,
-            canInfluenceThisOutput: true
+            settable: false,
+            canInfluenceThisOutput: true,
         },
         {
             name: "attributes",
@@ -288,11 +398,11 @@ export const sceneElementContent: model = {
             settable: true,
         },
         {
-            name: "sceneElement",
-            displayName: "Scene element",
+            name: "cueElement",
+            displayName: "Cue element",
             backReference: true,
             type: {
-                reference: "sceneElement"
+                reference: "cueElement"
             },
             gettable: true,
             settable: false,

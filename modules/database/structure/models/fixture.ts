@@ -1,4 +1,4 @@
-import type { model } from './types';
+import type { model } from '../types';
 
 export const fixture: model = {
     displayName: "Fixture",

@@ -1,4 +1,4 @@
-import type { model } from './types';
+import type { model } from '../types';
 
 // first one is the default
 export const executorButtonFunctionNames = [

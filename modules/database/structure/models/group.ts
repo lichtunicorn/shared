@@ -1,15 +1,14 @@
-import type { model } from './types';
+import type { model } from '../types';
 
-export const macro: model = {
-    displayName: "Macro",
+export const group: model = {
+    displayName: "Group",
     common: true,
+    canInfluenceOutput: true,
     creatable: true,
     move: 'index',
-    recursiveDeleteProperties: ['commands'],
+    recursiveDeleteProperties: ['elements'],
     deletable: true,
-    goable: true,
-    releasable: false,
-    canAssign: true,
+    selectable: true,
     properties: [
         {
             name: "id",
@@ -41,46 +40,23 @@ export const macro: model = {
             settable: true,
         },
         {
-            name: 'actionButtons',
-            displayName: "Action buttons",
-            type: 'array',
-            valueType: {
-                reference: 'actionButton'
-            },
-            gettable: true,
-            settable: true,
-            canInfluenceThisOutput: false,
-        },
-        {
-            name: 'cues',
-            displayName: "Cues",
-            type: 'array',
-            valueType: {
-                reference: 'cue'
-            },
-            gettable: true,
-            settable: true,
-            canInfluenceThisOutput: false,
-            optional: true
-        },
-        {
-            name: "commands",
-            displayName: "Commands",
+            name: "elements",
+            displayName: "Elements",
             type: "array",
             valueType: {
-                reference: "macroCommand"
+                reference: "groupElement"
             },
             gettable: true,
             settable: false,
-            canInfluenceThisOutput: false,
+            canInfluenceThisOutput: true,
         }
     ]
 };
 
-export const macroCommand: model = {
-    displayName: "Macro command",
+export const groupElement: model = {
+    displayName: "Group element",
+    canInfluenceOutput: true,
     creatable: true,
-    move: 'index',
     properties: [
         {
             name: "id",
@@ -94,30 +70,39 @@ export const macroCommand: model = {
             settable: false,
         },
         {
-            name: "index",
-            displayName: "Index",
+            name: "x",
+            displayName: "X",
             type: "number",
             gettable: true,
             settable: true,
         },
         {
-            name: "macro",
-            displayName: "Macro",
+            name: "y",
+            displayName: "Y",
+            type: "number",
+            gettable: true,
+            settable: true,
+        },
+        {
+            name: "fixture",
+            displayName: "Fixture",
+            type: {
+                reference: "fixture"
+            },
+            gettable: true,
+            settable: true,
+            canInfluenceThisOutput: true,
+        },
+        {
+            name: "group",
+            displayName: "Group",
             backReference: true,
             type: {
-                reference: "macro"
+                reference: "group"
             },
             gettable: true,
             settable: false,
-            canInfluenceThisOutput: false,
-        },
-        {
-            name: "contents",
-            displayName: "Contents",
-            type: "string", // todo: better type
-            gettable: true,
-            settable: false,
-            comment: 'todo: better type'
+            canInfluenceThisOutput: true,
         }
     ]
 };

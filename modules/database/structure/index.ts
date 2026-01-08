@@ -3,21 +3,21 @@ import path from "path";
 
 import type { modelName, structure as structureType } from "./types";
 
-import { show } from "./show";
-import { section, sectionSceneState, sectionCuelistState } from "./section";
-import { group, groupElement } from "./group";
-import { scene, sceneElement, sceneElementContent } from "./scene";
-import { cuelist, cue, cueElement, cueElementContent } from "./cuelist";
-import { effect, effectElement, speedGroup, effectKind, effectOffset } from "./effect";
-import { override } from "./override";
-import { variable } from "./variable";
-import { macro, macroCommand } from "./macro";
-import { collection } from "./collection";
-import { fixture } from "./fixture";
-import { preset, presetElement } from "./preset";
-import { executor, executorButton, executorFader } from "./executor";
-import { actionButton } from "./actionButton";
-import { programmerElement, programmerElementContent } from "./programmer";
+import { show } from "./models/show";
+import { section, sectionSceneState, sectionCuelistState } from "./models/section";
+import { group, groupElement } from "./models/group";
+import { scene, sceneElement, sceneElementContent } from "./models/scene";
+import { cuelist, cue, cueElement, cueElementContent } from "./models/cuelist";
+import { effect, effectElement, speedGroup, effectKind, effectOffset } from "./models/effect";
+import { override } from "./models/override";
+import { variable } from "./models/variable";
+import { macro, macroCommand } from "./models/macro";
+import { collection } from "./models/collection";
+import { fixture } from "./models/fixture";
+import { preset, presetElement } from "./models/preset";
+import { executor, executorButton, executorFader } from "./models/executor";
+import { actionButton } from "./models/actionButton";
+import { programmerElement, programmerElementContent } from "./models/programmer";
 
 export const structure: structureType = {
     // common models
