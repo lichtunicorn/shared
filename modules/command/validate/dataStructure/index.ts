@@ -254,7 +254,7 @@ export function validateDataStructure(command: z.infer<typeof noGetCommandSchema
 
             requiredOptional = sourceOptional;
         } else if (command.operation === 'setAttribute') {
-            requiredValueType = 'stringOrNumberOrBooleanOrNull';
+            requiredValueType = 'attributes';
             requiredOptional = true;
         } else
             throw new Error(`Unknown operation ${(command as any).operation}`);
