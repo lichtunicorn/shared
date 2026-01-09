@@ -52,7 +52,7 @@ export type partialValue = Partial<{
     exclude: partialValue;
 } | {
     type: "getCommand";
-    // todo: command type
+    command: Partial<z.infer<typeof getCommand>>;
 } | {
     type: "mathDualExpression";
     value1: partialValue;
