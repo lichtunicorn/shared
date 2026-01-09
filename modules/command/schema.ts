@@ -72,15 +72,16 @@ export type partialValue = Partial<{
 type valueMathDualExpressionOperator = {
     operator: string;
     displayName: string;
+    short: string;
 };
 
 export const valueMathDualExpressionOperators = [
-    { operator: "add", displayName: "Add" },
-    { operator: "subtract", displayName: "Subtract" },
-    { operator: "multiply", displayName: "Multiply" },
-    { operator: "divide", displayName: "Divide" },
-    { operator: "mod", displayName: "Mod" },
-    { operator: "exponent", displayName: "Exponent" },
+    { operator: "add", displayName: "Add", short: "+" },
+    { operator: "subtract", displayName: "Subtract", short: "-" },
+    { operator: "multiply", displayName: "Multiply", short: "*" },
+    { operator: "divide", displayName: "Divide", short: "/" },
+    { operator: "mod", displayName: "Mod", short: "mod" },
+    { operator: "exponent", displayName: "Exponent", short: "^" },
 ] as const satisfies readonly valueMathDualExpressionOperator[];
 
 export const value = z.union([
