@@ -56,7 +56,7 @@ export type partialValue = Partial<{
         operation?: "get";
         options?: {};
         source?: Partial<z.infer<typeof directReference>>;
-        subSources?: Partial<z.infer<typeof subReference>>[];
+        subSources?: partialSubReference[];
     };
 } | {
     type: "mathDualExpression";
@@ -164,6 +164,21 @@ export const directReference = z.union([
         context: z.enum(directReferenceContextTypes.map(contextType => contextType.name)),
     })
 ]);
+
+export type partialSubReference = Partial<{
+    type: "key";
+    key: string;
+} | {
+    type: "getUniqueFromArray";
+    key: string;
+    value: partialValue;
+} | {
+    type: "filter";
+    key: string;
+    value: partialValue;
+} | {
+    type: "every";
+}>;
 
 export const subReference = z.union([
     z.object({
