@@ -2,7 +2,6 @@ import type { model } from '../types';
 
 export const preset: model = {
     displayName: "Preset",
-    common: true,
     canInfluenceOutput: true,
     creatable: true,
     move: 'index',

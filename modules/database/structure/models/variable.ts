@@ -2,7 +2,6 @@ import type { model } from '../types';
 
 export const variable: model = {
     displayName: "Variable",
-    common: true,
     creatable: true,
     deletable: true,
     canAssign: true,

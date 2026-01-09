@@ -18,7 +18,6 @@ export const manyModelNames = [
 
 export const show: model = {
     displayName: "Show",
-    common: true,
     creatable: false,
     properties: [
         {

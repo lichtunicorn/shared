@@ -2,7 +2,6 @@ import type { model } from '../types';
 
 export const group: model = {
     displayName: "Group",
-    common: true,
     canInfluenceOutput: true,
     creatable: true,
     move: 'index',

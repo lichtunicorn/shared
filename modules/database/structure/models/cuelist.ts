@@ -2,7 +2,6 @@ import type { model } from '../types';
 
 export const cuelist: model = {
     displayName: "Cuelist",
-    common: true,
     canInfluenceOutput: true,
     creatable: true,
     move: 'index',

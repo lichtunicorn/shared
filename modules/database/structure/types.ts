@@ -9,8 +9,6 @@ export type model = {
     goable?: boolean;
     releasable?: boolean;
     selectable?: boolean;
-    /** Whether this model shows up on the client in the common section */
-    common?: boolean;
     displayName: string;
     /** if this is a thing that can be assigned to something else */
     canAssign?: boolean;
@@ -98,20 +96,20 @@ export type property<name extends string> = {
 // <auto generated, do not edit>
 
 export type database = {
-    scene: scene[];
-    cuelist: cuelist[];
-    collection: collection[];
-    section: section[];
-    show: show[];
     executor: executor[];
     actionButton: actionButton[];
     macro: macro[];
     variable: variable[];
     speedGroup: speedGroup[];
+    scene: scene[];
+    cuelist: cuelist[];
+    collection: collection[];
+    section: section[];
     fixture: fixture[];
     group: group[];
     preset: preset[];
     effect: effect[];
+    show: show[];
     cue: cue[];
     override: override[];
     sectionSceneState: sectionSceneState[];
@@ -131,7 +129,92 @@ export type database = {
     programmerElement: programmerElement[];
     programmerElementContent: programmerElementContent[];
 };
-export type modelName = "scene" | "cuelist" | "collection" | "section" | "show" | "executor" | "actionButton" | "macro" | "variable" | "speedGroup" | "fixture" | "group" | "preset" | "effect" | "cue" | "override" | "sectionSceneState" | "sectionCuelistState" | "groupElement" | "sceneElement" | "sceneElementContent" | "cueElement" | "cueElementContent" | "effectElement" | "effectOffset" | "effectKind" | "macroCommand" | "presetElement" | "executorButton" | "executorFader" | "programmerElement" | "programmerElementContent";
+export type modelName = "executor" | "actionButton" | "macro" | "variable" | "speedGroup" | "scene" | "cuelist" | "collection" | "section" | "fixture" | "group" | "preset" | "effect" | "show" | "cue" | "override" | "sectionSceneState" | "sectionCuelistState" | "groupElement" | "sceneElement" | "sceneElementContent" | "cueElement" | "cueElementContent" | "effectElement" | "effectOffset" | "effectKind" | "macroCommand" | "presetElement" | "executorButton" | "executorFader" | "programmerElement" | "programmerElementContent";
+export type public_executor = {
+    /** read only, unique, default cuid() */
+    id: string;
+    /** settable, unique */
+    index: number;
+    /** settable, default name() */
+    name: string;
+    /** settable */
+    faders: { reference: string; };
+    /** settable, back reference */
+    scene: null | { reference: string; };
+    /** settable, back reference */
+    cuelist: null | { reference: string; };
+    /** settable, back reference */
+    collection: null | { reference: string; };
+    /** settable, back reference, Variable uses intensity fader function */
+    variable: null | { reference: string; };
+    /** settable */
+    executorButtons: { reference: string; }[];
+};
+export type executor = public_executor;
+export type public_actionButton = {
+    /** read only, unique, default cuid() */
+    id: string;
+    /** settable, unique */
+    index: number;
+    /** settable, default name() */
+    name: string;
+    /** settable, unique */
+    physicalButtonIndex: null | number;
+    /** settable, back reference */
+    macro: null | { reference: string; };
+    /** settable, back reference */
+    scene: null | { reference: string; };
+    /** settable, back reference */
+    cuelist: null | { reference: string; };
+    /** settable, back reference */
+    collection: null | { reference: string; };
+    /** settable, back reference */
+    section: null | { reference: string; };
+    /** settable */
+    generalFunction: null | "clear" | "blind" | "highlight" | "previous" | "all" | "next" | "uni" | "nextPage" | "previousPage" | "section-1" | "section-2" | "section-3" | "section-4" | "section-5" | "kindIntensity" | "kindPosition" | "kindColor" | "kindBeam" | "group" | "scene" | "cuelist" | "empty" | "copy" | "move" | "delete" | "select" | "record" | "set" | "setAttribute" | "go" | "release" | "assign" | "open" | "arrowLeft" | "arrowRight" | "arrowUp" | "arrowDown" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "dot" | "at" | "thru" | "plus" | "enter" | "backspace" | "set";
+};
+export type actionButton = public_actionButton;
+export type public_macro = {
+    /** read only, unique, default cuid() */
+    id: string;
+    /** settable, unique */
+    index: number;
+    /** settable, default name() */
+    name: string;
+    /** settable */
+    actionButtons: { reference: string; }[];
+    /** settable */
+    cues: null | { reference: string; }[];
+    /** read only */
+    commands: { reference: string; }[];
+};
+export type macro = public_macro;
+export type public_variable = {
+    /** read only, unique, default cuid() */
+    id: string;
+    /** settable, unique */
+    index: number;
+    /** settable, unique, default name() */
+    name: string;
+    /** settable */
+    value: string | number | boolean | null;
+    /** settable */
+    executors: { reference: string; }[];
+};
+export type variable = public_variable;
+export type public_speedGroup = {
+    /** read only, unique, default cuid() */
+    id: string;
+    /** settable, unique */
+    index: number;
+    /** settable, default name() */
+    name: string;
+    /** settable, default 60 */
+    bpm: number;
+    /** settable, default now() */
+    firstHitTime: number;
+};
+export type speedGroup = public_speedGroup;
 export type public_scene = {
     /** read only, unique, default cuid() */
     id: string;
@@ -224,128 +307,6 @@ export type public_section = {
     actionButtons: { reference: string; }[];
 };
 export type section = public_section;
-export type public_show = {
-    /** read only, unique, default cuid() */
-    id: string;
-    /** settable, default name() */
-    name: string;
-    /** settable, default false */
-    blind: boolean;
-    /** settable, default false */
-    highlight: boolean;
-    /** read only */
-    actionButtons: { reference: string; }[];
-    /** read only */
-    collections: { reference: string; }[];
-    /** read only */
-    cuelists: { reference: string; }[];
-    /** read only */
-    effects: { reference: string; }[];
-    /** read only */
-    executors: { reference: string; }[];
-    /** read only */
-    fixtures: { reference: string; }[];
-    /** read only */
-    groups: { reference: string; }[];
-    /** read only */
-    macros: { reference: string; }[];
-    /** read only */
-    overrides: { reference: string; }[];
-    /** read only */
-    programmerElements: { reference: string; }[];
-    /** read only */
-    scenes: { reference: string; }[];
-    /** read only */
-    sections: { reference: string; }[];
-    /** read only */
-    variables: { reference: string; }[];
-};
-export type show = public_show;
-export type public_executor = {
-    /** read only, unique, default cuid() */
-    id: string;
-    /** settable, unique */
-    index: number;
-    /** settable, default name() */
-    name: string;
-    /** settable */
-    faders: { reference: string; };
-    /** settable, back reference */
-    scene: null | { reference: string; };
-    /** settable, back reference */
-    cuelist: null | { reference: string; };
-    /** settable, back reference */
-    collection: null | { reference: string; };
-    /** settable, back reference, Variable uses intensity fader function */
-    variable: null | { reference: string; };
-    /** settable */
-    executorButtons: { reference: string; }[];
-};
-export type executor = public_executor;
-export type public_actionButton = {
-    /** read only, unique, default cuid() */
-    id: string;
-    /** settable, unique */
-    index: number;
-    /** settable, default name() */
-    name: string;
-    /** settable, unique */
-    physicalButtonIndex: null | number;
-    /** settable, back reference */
-    macro: null | { reference: string; };
-    /** settable, back reference */
-    scene: null | { reference: string; };
-    /** settable, back reference */
-    cuelist: null | { reference: string; };
-    /** settable, back reference */
-    collection: null | { reference: string; };
-    /** settable, back reference */
-    section: null | { reference: string; };
-    /** settable */
-    generalFunction: null | "clear" | "blind" | "highlight" | "previous" | "all" | "next" | "uni" | "nextPage" | "previousPage" | "section-1" | "section-2" | "section-3" | "section-4" | "section-5" | "kindIntensity" | "kindPosition" | "kindColor" | "kindBeam" | "group" | "scene" | "cuelist" | "empty" | "copy" | "move" | "delete" | "select" | "record" | "set" | "setAttribute" | "go" | "release" | "assign" | "open" | "arrowLeft" | "arrowRight" | "arrowUp" | "arrowDown" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "dot" | "at" | "thru" | "plus" | "enter" | "backspace" | "set";
-};
-export type actionButton = public_actionButton;
-export type public_macro = {
-    /** read only, unique, default cuid() */
-    id: string;
-    /** settable, unique */
-    index: number;
-    /** settable, default name() */
-    name: string;
-    /** settable */
-    actionButtons: { reference: string; }[];
-    /** settable */
-    cues: null | { reference: string; }[];
-    /** read only */
-    commands: { reference: string; }[];
-};
-export type macro = public_macro;
-export type public_variable = {
-    /** read only, unique, default cuid() */
-    id: string;
-    /** settable, unique */
-    index: number;
-    /** settable, unique, default name() */
-    name: string;
-    /** settable */
-    value: string | number | boolean | null;
-    /** settable */
-    executors: { reference: string; }[];
-};
-export type variable = public_variable;
-export type public_speedGroup = {
-    /** read only, unique, default cuid() */
-    id: string;
-    /** settable, unique */
-    index: number;
-    /** settable, default name() */
-    name: string;
-    /** settable, default 60 */
-    bpm: number;
-    /** settable, default now() */
-    firstHitTime: number;
-};
-export type speedGroup = public_speedGroup;
 export type public_fixture = {
     /** read only, unique, default cuid() */
     id: string;
@@ -394,6 +355,43 @@ export type public_effect = {
     elements: { reference: string; }[];
 };
 export type effect = public_effect;
+export type public_show = {
+    /** read only, unique, default cuid() */
+    id: string;
+    /** settable, default name() */
+    name: string;
+    /** settable, default false */
+    blind: boolean;
+    /** settable, default false */
+    highlight: boolean;
+    /** read only */
+    actionButtons: { reference: string; }[];
+    /** read only */
+    collections: { reference: string; }[];
+    /** read only */
+    cuelists: { reference: string; }[];
+    /** read only */
+    effects: { reference: string; }[];
+    /** read only */
+    executors: { reference: string; }[];
+    /** read only */
+    fixtures: { reference: string; }[];
+    /** read only */
+    groups: { reference: string; }[];
+    /** read only */
+    macros: { reference: string; }[];
+    /** read only */
+    overrides: { reference: string; }[];
+    /** read only */
+    programmerElements: { reference: string; }[];
+    /** read only */
+    scenes: { reference: string; }[];
+    /** read only */
+    sections: { reference: string; }[];
+    /** read only */
+    variables: { reference: string; }[];
+};
+export type show = public_show;
 export type public_cue = {
     /** read only, unique, default cuid() */
     id: string;
@@ -673,9 +671,9 @@ export type public_programmerElementContent = {
 };
 export type programmerElementContent = public_programmerElementContent;
 
-export type modelData<currentModelName extends modelName> = currentModelName extends "scene" ? scene : currentModelName extends "cuelist" ? cuelist : currentModelName extends "collection" ? collection : currentModelName extends "section" ? section : currentModelName extends "show" ? show : currentModelName extends "executor" ? executor : currentModelName extends "actionButton" ? actionButton : currentModelName extends "macro" ? macro : currentModelName extends "variable" ? variable : currentModelName extends "speedGroup" ? speedGroup : currentModelName extends "fixture" ? fixture : currentModelName extends "group" ? group : currentModelName extends "preset" ? preset : currentModelName extends "effect" ? effect : currentModelName extends "cue" ? cue : currentModelName extends "override" ? override : currentModelName extends "sectionSceneState" ? sectionSceneState : currentModelName extends "sectionCuelistState" ? sectionCuelistState : currentModelName extends "groupElement" ? groupElement : currentModelName extends "sceneElement" ? sceneElement : currentModelName extends "sceneElementContent" ? sceneElementContent : currentModelName extends "cueElement" ? cueElement : currentModelName extends "cueElementContent" ? cueElementContent : currentModelName extends "effectElement" ? effectElement : currentModelName extends "effectOffset" ? effectOffset : currentModelName extends "effectKind" ? effectKind : currentModelName extends "macroCommand" ? macroCommand : currentModelName extends "presetElement" ? presetElement : currentModelName extends "executorButton" ? executorButton : currentModelName extends "executorFader" ? executorFader : currentModelName extends "programmerElement" ? programmerElement : currentModelName extends "programmerElementContent" ? programmerElementContent : never;
-export type publicModelData<currentModelName extends modelName> = currentModelName extends "scene" ? public_scene : currentModelName extends "cuelist" ? public_cuelist : currentModelName extends "collection" ? public_collection : currentModelName extends "section" ? public_section : currentModelName extends "show" ? public_show : currentModelName extends "executor" ? public_executor : currentModelName extends "actionButton" ? public_actionButton : currentModelName extends "macro" ? public_macro : currentModelName extends "variable" ? public_variable : currentModelName extends "speedGroup" ? public_speedGroup : currentModelName extends "fixture" ? public_fixture : currentModelName extends "group" ? public_group : currentModelName extends "preset" ? public_preset : currentModelName extends "effect" ? public_effect : currentModelName extends "cue" ? public_cue : currentModelName extends "override" ? public_override : currentModelName extends "sectionSceneState" ? public_sectionSceneState : currentModelName extends "sectionCuelistState" ? public_sectionCuelistState : currentModelName extends "groupElement" ? public_groupElement : currentModelName extends "sceneElement" ? public_sceneElement : currentModelName extends "sceneElementContent" ? public_sceneElementContent : currentModelName extends "cueElement" ? public_cueElement : currentModelName extends "cueElementContent" ? public_cueElementContent : currentModelName extends "effectElement" ? public_effectElement : currentModelName extends "effectOffset" ? public_effectOffset : currentModelName extends "effectKind" ? public_effectKind : currentModelName extends "macroCommand" ? public_macroCommand : currentModelName extends "presetElement" ? public_presetElement : currentModelName extends "executorButton" ? public_executorButton : currentModelName extends "executorFader" ? public_executorFader : currentModelName extends "programmerElement" ? public_programmerElement : currentModelName extends "programmerElementContent" ? public_programmerElementContent : never;
+export type modelData<currentModelName extends modelName> = currentModelName extends "executor" ? executor : currentModelName extends "actionButton" ? actionButton : currentModelName extends "macro" ? macro : currentModelName extends "variable" ? variable : currentModelName extends "speedGroup" ? speedGroup : currentModelName extends "scene" ? scene : currentModelName extends "cuelist" ? cuelist : currentModelName extends "collection" ? collection : currentModelName extends "section" ? section : currentModelName extends "fixture" ? fixture : currentModelName extends "group" ? group : currentModelName extends "preset" ? preset : currentModelName extends "effect" ? effect : currentModelName extends "show" ? show : currentModelName extends "cue" ? cue : currentModelName extends "override" ? override : currentModelName extends "sectionSceneState" ? sectionSceneState : currentModelName extends "sectionCuelistState" ? sectionCuelistState : currentModelName extends "groupElement" ? groupElement : currentModelName extends "sceneElement" ? sceneElement : currentModelName extends "sceneElementContent" ? sceneElementContent : currentModelName extends "cueElement" ? cueElement : currentModelName extends "cueElementContent" ? cueElementContent : currentModelName extends "effectElement" ? effectElement : currentModelName extends "effectOffset" ? effectOffset : currentModelName extends "effectKind" ? effectKind : currentModelName extends "macroCommand" ? macroCommand : currentModelName extends "presetElement" ? presetElement : currentModelName extends "executorButton" ? executorButton : currentModelName extends "executorFader" ? executorFader : currentModelName extends "programmerElement" ? programmerElement : currentModelName extends "programmerElementContent" ? programmerElementContent : never;
+export type publicModelData<currentModelName extends modelName> = currentModelName extends "executor" ? public_executor : currentModelName extends "actionButton" ? public_actionButton : currentModelName extends "macro" ? public_macro : currentModelName extends "variable" ? public_variable : currentModelName extends "speedGroup" ? public_speedGroup : currentModelName extends "scene" ? public_scene : currentModelName extends "cuelist" ? public_cuelist : currentModelName extends "collection" ? public_collection : currentModelName extends "section" ? public_section : currentModelName extends "fixture" ? public_fixture : currentModelName extends "group" ? public_group : currentModelName extends "preset" ? public_preset : currentModelName extends "effect" ? public_effect : currentModelName extends "show" ? public_show : currentModelName extends "cue" ? public_cue : currentModelName extends "override" ? public_override : currentModelName extends "sectionSceneState" ? public_sectionSceneState : currentModelName extends "sectionCuelistState" ? public_sectionCuelistState : currentModelName extends "groupElement" ? public_groupElement : currentModelName extends "sceneElement" ? public_sceneElement : currentModelName extends "sceneElementContent" ? public_sceneElementContent : currentModelName extends "cueElement" ? public_cueElement : currentModelName extends "cueElementContent" ? public_cueElementContent : currentModelName extends "effectElement" ? public_effectElement : currentModelName extends "effectOffset" ? public_effectOffset : currentModelName extends "effectKind" ? public_effectKind : currentModelName extends "macroCommand" ? public_macroCommand : currentModelName extends "presetElement" ? public_presetElement : currentModelName extends "executorButton" ? public_executorButton : currentModelName extends "executorFader" ? public_executorFader : currentModelName extends "programmerElement" ? public_programmerElement : currentModelName extends "programmerElementContent" ? public_programmerElementContent : never;
 
-export type canInfluenceOutputModelName = "scene" | "cuelist" | "speedGroup" | "fixture" | "group" | "preset" | "effect" | "cue" | "override" | "groupElement" | "sceneElement" | "sceneElementContent" | "cueElement" | "cueElementContent" | "effectElement" | "effectOffset" | "effectKind" | "presetElement" | "programmerElement" | "programmerElementContent";
+export type canInfluenceOutputModelName = "speedGroup" | "scene" | "cuelist" | "fixture" | "group" | "preset" | "effect" | "cue" | "override" | "groupElement" | "sceneElement" | "sceneElementContent" | "cueElement" | "cueElementContent" | "effectElement" | "effectOffset" | "effectKind" | "presetElement" | "programmerElement" | "programmerElementContent";
 
 // </auto generated, do not edit>

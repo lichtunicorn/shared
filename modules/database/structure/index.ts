@@ -16,13 +16,29 @@ import { executor, executorButton, executorFader } from "./models/executor";
 import { actionButton } from "./models/actionButton";
 import { programmerElement, programmerElementContent } from "./models/programmer";
 
+export const modelsLayout: modelName[][] = [
+    [
+        'executor',
+        'actionButton',
+        'macro',
+        'variable',
+        'speedGroup',
+    ],
+    [
+        'scene',
+        'cuelist',
+        'collection',
+        'section',
+    ],
+    [
+        'fixture',
+        'group',
+        'preset',
+        'effect',
+    ]
+];
+
 export const structure: structureType = {
-    // common models
-    scene,
-    cuelist,
-    collection,
-    section,
-    show,
 
     executor,
     actionButton,
@@ -30,12 +46,17 @@ export const structure: structureType = {
     variable,
     speedGroup,
 
+    scene,
+    cuelist,
+    collection,
+    section,
+
     fixture,
     group,
     preset,
     effect,
 
-    // uncommon models
+    show,
     cue,
     override,
     sectionSceneState,

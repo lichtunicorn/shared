@@ -2,7 +2,6 @@ import type { model } from '../types';
 
 export const scene: model = {
     displayName: "Scene",
-    common: true,
     canInfluenceOutput: true,
     creatable: true,
     move: 'index',

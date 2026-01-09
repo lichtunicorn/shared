@@ -19,7 +19,6 @@ export const faderFunctionNames = [
 
 export const executor: model = {
     displayName: "Executor",
-    common: true,
     creatable: false,
     isAssignable: true,
     recursiveDeleteProperties: ['executorButtons'],

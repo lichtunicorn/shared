@@ -2,7 +2,6 @@ import type { model } from '../types';
 
 export const collection: model = {
     displayName: "Collection",
-    common: true,
     creatable: true,
     move: 'index',
     deletable: true,

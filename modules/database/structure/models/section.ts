@@ -2,7 +2,6 @@ import type { model } from '../types';
 
 export const section: model = {
     displayName: "Section",
-    common: true,
     creatable: false,
     recursiveDeleteProperties: ['sceneStates', 'cuelistStates'],
     goable: true,
