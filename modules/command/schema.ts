@@ -52,7 +52,12 @@ export type partialValue = Partial<{
     exclude: partialValue;
 } | {
     type: "getCommand";
-    command: Partial<z.infer<typeof getCommand>>;
+    command: {
+        operation?: "get";
+        options?: {};
+        source?: Partial<z.infer<typeof directReference>>;
+        subSources?: Partial<z.infer<typeof subReference>>[];
+    };
 } | {
     type: "mathDualExpression";
     value1: partialValue;
