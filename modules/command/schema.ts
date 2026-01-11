@@ -271,6 +271,7 @@ export const recordCommand = z.object({
     subDestinations: z.array(subReference),
     options: z.object({
         selected: z.boolean(),
+        overwrite: z.boolean(),
     }),
 });
 
