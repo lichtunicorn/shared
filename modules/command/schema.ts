@@ -20,7 +20,7 @@ export const operations = [
     { name: "delete", displayName: "Delete", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: true },
 
     { name: "select", displayName: "Select", source: true, requiresSourceModel: true, destination: false, value: false, emptyOptions: false },
-    { name: "record", displayName: "Record", source: false, requiresSourceModel: false, destination: true, value: false, emptyOptions: true },
+    { name: "record", displayName: "Record", source: false, requiresSourceModel: false, destination: true, value: false, emptyOptions: false },
     { name: "set", displayName: "Set", source: true, requiresSourceModel: false, destination: false, value: true, emptyOptions: true },
     { name: "setAttribute", displayName: "Set attribute", source: true, requiresSourceModel: false, destination: false, value: true, emptyOptions: false },
 
@@ -259,10 +259,19 @@ export const openCommand = z.object({
 })
 
 export const destinationCommand = z.object({
-    operation: z.enum(["empty", "record"]),
+    operation: z.enum(["empty"]),
     destination: directReference,
     subDestinations: z.array(subReference),
     options: z.object({}),
+});
+
+export const recordCommand = z.object({
+    operation: z.literal("record"),
+    destination: directReference,
+    subDestinations: z.array(subReference),
+    options: z.object({
+        selected: z.boolean(),
+    }),
 });
 
 export const sourceDestinationCommand = z.object({
@@ -290,5 +299,6 @@ export const noGetCommand = z.union([
     selectCommand,
     openCommand,
     destinationCommand,
+    recordCommand,
     sourceDestinationCommand,
 ]);
