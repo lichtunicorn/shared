@@ -131,7 +131,7 @@ export const cuelist: model = {
             type: 'number',
             default: {
                 type: 'value',
-                value: 100
+                value: 0
             },
             gettable: true,
             settable: true,
