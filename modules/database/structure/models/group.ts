@@ -22,6 +22,9 @@ export const group: model = {
         },
         {
             name: "index",
+            default: {
+                type: 'afterLast'
+            },
             displayName: "Index",
             type: "number",
             unique: true,

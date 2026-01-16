@@ -42,6 +42,9 @@ export const effect: model = {
         },
         {
             name: "index",
+            default: {
+                type: 'afterLast'
+            },
             displayName: "Index",
             type: "number",
             unique: true,
@@ -425,6 +428,9 @@ export const speedGroup: model = {
         },
         {
             name: "index",
+            default: {
+                type: 'afterLast'
+            },
             displayName: "Index",
             type: "number",
             unique: true,

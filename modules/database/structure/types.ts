@@ -181,7 +181,7 @@ export type actionButton = public_actionButton;
 export type public_macro = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** settable, default name() */
     name: string;
@@ -196,7 +196,7 @@ export type macro = public_macro;
 export type public_variable = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** settable, unique, default name() */
     name: string;
@@ -209,7 +209,7 @@ export type variable = public_variable;
 export type public_speedGroup = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** settable, default name() */
     name: string;
@@ -222,7 +222,7 @@ export type speedGroup = public_speedGroup;
 export type public_scene = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** settable, default name() */
     name: string;
@@ -249,7 +249,7 @@ export type scene = public_scene;
 export type public_cuelist = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** settable, default name() */
     name: string;
@@ -284,7 +284,7 @@ export type cuelist = public_cuelist;
 export type public_collection = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** settable, default name() */
     name: string;
@@ -301,7 +301,7 @@ export type collection = public_collection;
 export type public_section = {
     /** read only, unique, default cuid() */
     id: string;
-    /** read only, unique */
+    /** read only, unique, default afterLast() */
     index: number;
     /** read only, this is where the actual section contents/state is stored */
     sceneStates: { reference: string; }[];
@@ -327,7 +327,7 @@ export type fixture = public_fixture;
 export type public_group = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** settable, default name() */
     name: string;
@@ -338,7 +338,7 @@ export type group = public_group;
 export type public_preset = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** settable, If true, uses the selection grid stored in the preset. If false, uses the selection grid of the model referencing the preset */
     usePresetSelectionGrid: boolean;
@@ -353,7 +353,7 @@ export type public_effect = {
     id: string;
     /** settable, default name() */
     name: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** settable */
     elements: { reference: string; }[];

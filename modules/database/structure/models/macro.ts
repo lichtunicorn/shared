@@ -23,6 +23,9 @@ export const macro: model = {
         },
         {
             name: "index",
+            default: {
+                type: 'afterLast'
+            },
             displayName: "Index",
             type: "number",
             unique: true,
