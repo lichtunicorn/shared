@@ -74,6 +74,8 @@ export type property<name extends string> = {
                 type: "name";
             } | {
                 type: "now";
+            } | {
+                type: "afterLast";
             };
         } | {
             type: referencePropertyType;

@@ -79,6 +79,8 @@ function generatePublicModelTypeContents(modelStructure: structureType[string]):
                 string = 'name()';
             } else if (property.default.type === 'now') {
                 string = 'now()';
+            } else if (property.default.type === 'afterLast') {
+                string = 'afterLast()';
             } else {
                 throw new Error(`Unknown default type ${(property.default as any).type}`);
             }
