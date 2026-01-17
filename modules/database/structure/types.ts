@@ -158,7 +158,7 @@ export type executor = public_executor;
 export type public_actionButton = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** settable, default name() */
     name: string;
