@@ -60,7 +60,6 @@ export type property<name extends string> = {
     optional?: boolean;
     gettable: boolean;
     settable: boolean;
-    copyable: boolean;
 } &
     (
         {
