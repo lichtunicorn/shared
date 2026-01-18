@@ -312,7 +312,7 @@ export type section = public_section;
 export type public_fixture = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
+    /** settable, unique, default afterLast() */
     index: number;
     /** read only */
     fixtureType: string;
