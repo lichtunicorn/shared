@@ -313,7 +313,7 @@ export type public_fixture = {
     /** read only, unique, default cuid() */
     id: string;
     /** settable, unique */
-    fixtureNumber: number;
+    index: number;
     /** read only */
     fixtureType: string;
     /** settable, default 0 */

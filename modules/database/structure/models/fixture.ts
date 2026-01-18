@@ -19,8 +19,8 @@ export const fixture: model = {
             settable: false,
         },
         {
-            name: "fixtureNumber",
-            displayName: "Fixture number",
+            name: "index",
+            displayName: "Index",
             type: "number",
             unique: true,
             gettable: true,
