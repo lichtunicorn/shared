@@ -21,7 +21,8 @@ export const executor: model = {
     displayName: "Executor",
     creatable: false,
     isAssignable: true,
-    recursiveDeleteProperties: ['executorButtons'],
+    recursiveDeleteProperties: ['buttons', 'faders'],
+    move: 'index',
     properties: [
         {
             name: "id",
@@ -51,16 +52,7 @@ export const executor: model = {
             },
             gettable: true,
             settable: true,
-        },
-        {
-            name: 'faders',
-            displayName: "Faders",
-            type: {
-                reference: 'executorFader'
-            },
-            gettable: true,
-            settable: true,
-            canInfluenceThisOutput: false,
+            copyable: true,
         },
         {
             name: 'scene',
@@ -112,8 +104,18 @@ export const executor: model = {
             comment: "Variable uses intensity fader function"
         },
         {
-            name: 'executorButtons',
-            displayName: "Executor buttons",
+            name: 'faders',
+            displayName: "Faders",
+            type: {
+                reference: 'executorFader'
+            },
+            gettable: true,
+            settable: true,
+            canInfluenceThisOutput: false,
+        },
+        {
+            name: 'buttons',
+            displayName: "Buttons",
             type: 'array',
             valueType: {
                 reference: 'executorButton'
