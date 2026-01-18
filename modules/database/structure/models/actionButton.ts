@@ -146,30 +146,7 @@ export const actionButton: model = {
             optional: true,
             gettable: true,
             settable: true,
-            canInfluenceThisOutput: false,
-        },
-        {
-            name: 'collection',
-            displayName: "Collection",
-            type: {
-                reference: 'collection'
-            },
-            backReference: true,
-            optional: true,
-            gettable: true,
-            settable: true,
-            canInfluenceThisOutput: false,
-        },
-        {
-            name: 'section',
-            displayName: "Section",
-            type: {
-                reference: 'section'
-            },
-            backReference: true,
-            optional: true,
-            gettable: true,
-            settable: true,
+            copyable: true,
             canInfluenceThisOutput: false,
         },
         {
