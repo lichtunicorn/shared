@@ -143,8 +143,6 @@ export type public_executor = {
     index: number;
     /** settable, default name() */
     name: string;
-    /** settable */
-    faders: { reference: string; };
     /** settable, back reference */
     scene: null | { reference: string; };
     /** settable, back reference */
@@ -154,7 +152,9 @@ export type public_executor = {
     /** settable, back reference, Variable uses intensity fader function */
     variable: null | { reference: string; };
     /** settable */
-    executorButtons: { reference: string; }[];
+    faders: { reference: string; };
+    /** settable */
+    buttons: { reference: string; }[];
 };
 export type executor = public_executor;
 export type public_actionButton = {
@@ -172,10 +172,6 @@ export type public_actionButton = {
     scene: null | { reference: string; };
     /** settable, back reference */
     cuelist: null | { reference: string; };
-    /** settable, back reference */
-    collection: null | { reference: string; };
-    /** settable, back reference */
-    section: null | { reference: string; };
     /** settable */
     generalFunction: null | "clear" | "blind" | "highlight" | "previous" | "all" | "next" | "uni" | "nextPage" | "previousPage" | "section-1" | "section-2" | "section-3" | "section-4" | "section-5" | "kindIntensity" | "kindPosition" | "kindColor" | "kindBeam" | "group" | "scene" | "cuelist" | "empty" | "copy" | "move" | "delete" | "select" | "record" | "set" | "setAttribute" | "go" | "release" | "assign" | "open" | "arrowLeft" | "arrowRight" | "arrowUp" | "arrowDown" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "dot" | "at" | "thru" | "plus" | "enter" | "backspace" | "set";
 };
@@ -607,8 +603,8 @@ export type public_macroCommand = {
     index: number;
     /** read only, back reference */
     macro: { reference: string; };
-    /** read only, todo: better type */
-    contents: string;
+    /** read only, JSON stringified command */
+    command: string;
 };
 export type macroCommand = public_macroCommand;
 export type public_presetElement = {
