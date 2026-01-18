@@ -16,6 +16,7 @@ export type model = {
     isAssignable?: boolean;
     /** if this model gets deleted, recursively delete the models inside the references of these properties */
     recursiveDeleteProperties?: string[];
+    recursiveCopyProperties?: string[];
     move?: string;
     properties: property<string>[];
 };
@@ -60,6 +61,7 @@ export type property<name extends string> = {
     optional?: boolean;
     gettable: boolean;
     settable: boolean;
+    copyable: boolean;
 } &
     (
         {
