@@ -6,6 +6,7 @@ export const scene: model = {
     creatable: true,
     move: 'index',
     recursiveDeleteProperties: ['elements'],
+    recursiveCopyProperties: ['elements'],
     deletable: true,
     goable: true,
     releasable: false,
@@ -42,6 +43,7 @@ export const scene: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "priority",
@@ -53,6 +55,7 @@ export const scene: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: 'active',
@@ -136,6 +139,7 @@ export const scene: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true
         }
     ]
@@ -146,6 +150,7 @@ export const sceneElement: model = {
     canInfluenceOutput: true,
     creatable: true,
     recursiveDeleteProperties: ['contents'],
+    recursiveCopyProperties: ['contents'],
     properties: [
         {
             name: "id",
@@ -164,6 +169,7 @@ export const sceneElement: model = {
             type: "number",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "fixtures",
@@ -175,6 +181,7 @@ export const sceneElement: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true
         },
         {
@@ -186,6 +193,7 @@ export const sceneElement: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true
         },
         {
@@ -197,6 +205,7 @@ export const sceneElement: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true
         },
         {
@@ -208,6 +217,7 @@ export const sceneElement: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         },
     ]
@@ -235,6 +245,7 @@ export const sceneElementContent: model = {
             type: 'number',
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "activeFade",
@@ -246,6 +257,7 @@ export const sceneElementContent: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "releaseFade",
@@ -257,6 +269,7 @@ export const sceneElementContent: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "preset",
@@ -267,6 +280,7 @@ export const sceneElementContent: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true
         },
         {
@@ -279,6 +293,7 @@ export const sceneElementContent: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true
         },
         {
@@ -288,6 +303,7 @@ export const sceneElementContent: model = {
             type: "attributes",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "sceneElement",
@@ -298,6 +314,7 @@ export const sceneElementContent: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         }
     ]

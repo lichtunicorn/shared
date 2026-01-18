@@ -4,7 +4,8 @@ export const programmerElement: model = {
     displayName: "Programmer element",
     canInfluenceOutput: true,
     creatable: true,
-    recursiveDeleteProperties: [],
+    recursiveDeleteProperties: ['contents'],
+    recursiveCopyProperties: ['contents'],
     deletable: true,
     properties: [
         {
@@ -36,6 +37,7 @@ export const programmerElement: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
         },
         {
             name: "fixtures",
@@ -47,6 +49,7 @@ export const programmerElement: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -58,6 +61,7 @@ export const programmerElement: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -69,6 +73,7 @@ export const programmerElement: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
     ]
@@ -96,6 +101,7 @@ export const programmerElementContent: model = {
             type: 'number',
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "effects",
@@ -107,6 +113,7 @@ export const programmerElementContent: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -118,6 +125,7 @@ export const programmerElementContent: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -127,6 +135,7 @@ export const programmerElementContent: model = {
             type: "attributes",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "programmerElement",
@@ -137,6 +146,7 @@ export const programmerElementContent: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         }
     ]

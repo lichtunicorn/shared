@@ -102,6 +102,7 @@ export const actionButton: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: 'physicalButtonIndex',
@@ -122,6 +123,7 @@ export const actionButton: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: false
         },
         {
@@ -134,6 +136,7 @@ export const actionButton: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: false,
         },
         {
@@ -157,6 +160,7 @@ export const actionButton: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
         }
     ]
 };

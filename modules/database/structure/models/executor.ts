@@ -22,6 +22,7 @@ export const executor: model = {
     creatable: false,
     isAssignable: true,
     recursiveDeleteProperties: ['buttons', 'faders'],
+    recursiveCopyProperties: ['buttons', 'faders'],
     move: 'index',
     properties: [
         {
@@ -64,6 +65,7 @@ export const executor: model = {
             gettable: true,
             settable: true,
             optional: true,
+            copyable: true,
             canInfluenceThisOutput: false,
         },
         {
@@ -76,6 +78,7 @@ export const executor: model = {
             gettable: true,
             settable: true,
             optional: true,
+            copyable: true,
             canInfluenceThisOutput: false,
         },
         {
@@ -87,6 +90,7 @@ export const executor: model = {
             backReference: true,
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: false,
             optional: true
         },
@@ -99,6 +103,7 @@ export const executor: model = {
             backReference: true,
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: false,
             optional: true,
             comment: "Variable uses intensity fader function"
@@ -111,6 +116,7 @@ export const executor: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: false,
         },
         {
@@ -122,6 +128,7 @@ export const executor: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: false,
         }
     ]
@@ -162,6 +169,7 @@ export const executorFader: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         }
     ]
 }
@@ -208,6 +216,7 @@ export const executorButton: model = {
             backReference: true,
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         },
         {
@@ -221,6 +230,7 @@ export const executorButton: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         }
     ]
 };

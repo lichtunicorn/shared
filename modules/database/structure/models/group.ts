@@ -6,6 +6,7 @@ export const group: model = {
     creatable: true,
     move: 'index',
     recursiveDeleteProperties: ['elements'],
+    recursiveCopyProperties: ['elements'],
     deletable: true,
     selectable: true,
     properties: [
@@ -40,6 +41,7 @@ export const group: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "elements",
@@ -50,6 +52,7 @@ export const group: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         }
     ]
@@ -77,6 +80,7 @@ export const groupElement: model = {
             type: "number",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "y",
@@ -84,6 +88,7 @@ export const groupElement: model = {
             type: "number",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "fixture",
@@ -93,6 +98,7 @@ export const groupElement: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -104,6 +110,7 @@ export const groupElement: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         }
     ]

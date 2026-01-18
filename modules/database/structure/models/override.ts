@@ -25,6 +25,7 @@ export const override: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -33,6 +34,7 @@ export const override: model = {
             type: "attributes",
             gettable: true,
             settable: true,
+            copyable: true,
         },
     ]
 };

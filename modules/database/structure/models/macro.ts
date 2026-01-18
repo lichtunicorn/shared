@@ -5,6 +5,7 @@ export const macro: model = {
     creatable: true,
     move: 'index',
     recursiveDeleteProperties: ['commands'],
+    recursiveCopyProperties: ['commands'],
     deletable: true,
     goable: true,
     releasable: false,
@@ -41,6 +42,7 @@ export const macro: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: 'actionButtons',
@@ -74,6 +76,7 @@ export const macro: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         }
     ]
@@ -101,6 +104,7 @@ export const macroCommand: model = {
             type: "number",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "macro",
@@ -111,6 +115,7 @@ export const macroCommand: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         },
         {

@@ -6,6 +6,7 @@ export const cuelist: model = {
     creatable: true,
     move: 'index',
     recursiveDeleteProperties: ['cues'],
+    recursiveCopyProperties: ['cues'],
     deletable: true,
     goable: true,
     releasable: true,
@@ -42,6 +43,7 @@ export const cuelist: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "priority",
@@ -53,6 +55,7 @@ export const cuelist: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: 'currentCue',
@@ -171,6 +174,7 @@ export const cuelist: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
         }
     ]
@@ -184,6 +188,7 @@ export const cue: model = {
     goable: true,
     releasable: false, // you should release the cuelist, not the cue
     recursiveDeleteProperties: ['elements'],
+    recursiveCopyProperties: ['elements'],
     properties: [
         {
             name: "id",
@@ -202,6 +207,7 @@ export const cue: model = {
             type: "number",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "cueFade",
@@ -213,6 +219,7 @@ export const cue: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: 'macro',
@@ -224,6 +231,7 @@ export const cue: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: false,
         },
         {
@@ -235,6 +243,7 @@ export const cue: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -246,6 +255,7 @@ export const cue: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         }
     ]
@@ -256,6 +266,7 @@ export const cueElement: model = {
     canInfluenceOutput: true,
     creatable: true,
     recursiveDeleteProperties: ['contents'],
+    recursiveCopyProperties: ['contents'],
     properties: [
         {
             name: "id",
@@ -274,6 +285,7 @@ export const cueElement: model = {
             type: "number",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "fixtures",
@@ -285,6 +297,7 @@ export const cueElement: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -296,6 +309,7 @@ export const cueElement: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -307,6 +321,7 @@ export const cueElement: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -318,6 +333,7 @@ export const cueElement: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         }
     ]
@@ -345,6 +361,7 @@ export const cueElementContent: model = {
             type: 'number',
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "activeFade",
@@ -356,6 +373,7 @@ export const cueElementContent: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "releaseFade",
@@ -367,6 +385,7 @@ export const cueElementContent: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "preset",
@@ -377,6 +396,7 @@ export const cueElementContent: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -389,6 +409,7 @@ export const cueElementContent: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -398,6 +419,7 @@ export const cueElementContent: model = {
             type: "attributes",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "cueElement",
@@ -408,6 +430,7 @@ export const cueElementContent: model = {
             },
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         }
     ]

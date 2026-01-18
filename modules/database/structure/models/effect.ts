@@ -18,6 +18,7 @@ export const effect: model = {
     deletable: true,
     selectable: true,
     recursiveDeleteProperties: ['elements'],
+    recursiveCopyProperties: ['elements'],
     properties: [
         {
             name: "id",
@@ -39,6 +40,7 @@ export const effect: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "index",
@@ -60,7 +62,8 @@ export const effect: model = {
             },
             canInfluenceThisOutput: true,
             gettable: true,
-            settable: true
+            settable: true,
+            copyable: true,
         }
     ]
 }
@@ -70,7 +73,8 @@ export const effectElement: model = {
     canInfluenceOutput: true,
     creatable: true,
     deletable: true,
-    recursiveDeleteProperties: ['nonTemplateOffsets'],
+    recursiveDeleteProperties: ['nonTemplateOffsets', 'kinds'],
+    recursiveCopyProperties: ['nonTemplateOffsets', 'kinds'],
     properties: [
         {
             name: "id",
@@ -89,6 +93,7 @@ export const effectElement: model = {
             type: "number",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "effect",
@@ -99,6 +104,7 @@ export const effectElement: model = {
             backReference: true,
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false
         },
         {
@@ -110,7 +116,8 @@ export const effectElement: model = {
             },
             gettable: true,
             canInfluenceThisOutput: true,
-            settable: true
+            settable: true,
+            copyable: true
         },
         {
             name: "type",
@@ -123,6 +130,7 @@ export const effectElement: model = {
             options: [...effectTypes],
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "speedGroup",
@@ -132,6 +140,7 @@ export const effectElement: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -144,6 +153,7 @@ export const effectElement: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "template",
@@ -155,6 +165,7 @@ export const effectElement: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             comment: "If true, effect works for any amount of fixtures. If false, effect works for specific amount of fixtures"
         },
         {
@@ -168,6 +179,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             comment: "percentage 0 (no offset) to 50 (half offset) to 100 (full offset, so no offset). Null if template is false"
         },
         {
@@ -177,6 +189,7 @@ export const effectElement: model = {
             gettable: true,
             settable: true,
             optional: true,
+            copyable: true,
             comment: "Wings for this effect. If template is true, this is only for the x axis",
         },
         {
@@ -186,6 +199,7 @@ export const effectElement: model = {
             gettable: true,
             settable: true,
             optional: true,
+            copyable: true,
             comment: "Groups for this effect. If template is true, this is only for the x axis",
         },
         {
@@ -195,6 +209,7 @@ export const effectElement: model = {
             gettable: true,
             settable: true,
             optional: true,
+            copyable: true,
             comment: "Blocks for this effect. If template is true, this is only for the x axis",
         },
         {
@@ -204,6 +219,7 @@ export const effectElement: model = {
             gettable: true,
             settable: true,
             optional: true,
+            copyable: true,
             comment: "Wings for this effect on the y axis. This is null if template is false",
         },
         {
@@ -213,6 +229,7 @@ export const effectElement: model = {
             gettable: true,
             settable: true,
             optional: true,
+            copyable: true,
             comment: "Groups for this effect on the y axis. This is null if template is false",
         },
         {
@@ -222,6 +239,7 @@ export const effectElement: model = {
             gettable: true,
             settable: true,
             optional: true,
+            copyable: true,
             comment: "Blocks for this effect on the y axis. This is null if template is false",
         },
         {
@@ -231,6 +249,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             comment: "How much the offset increases per x on selection grid. If template is false this is null"
         },
         {
@@ -240,6 +259,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             comment: "If the offset is symmetrical on x on selection grid. If template is false this is null"
         },
         {
@@ -249,6 +269,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             comment: "How much the offset increases per y on selection grid. If template is false this is null"
         },
         {
@@ -258,6 +279,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             comment: "If the offset is symmetrical on y on selection grid. If template is false this is null"
         },
         {
@@ -270,6 +292,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
             comment: "The offset per fixture if template = false. Null if template = true"
         },
@@ -281,6 +304,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             comment: "Where to use the current value. If null, don't use current value"
         },
         {
@@ -290,6 +314,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             comment: "The low value of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null"
         },
         {
@@ -301,6 +326,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
             comment: "The low preset of the effect. lowValue or lowPreset must be set. If currentValue is lowValue, lowValue and lowPreset must be null. If currentValue is middleValue, lowValue must be set and lowPreset must be null"
         },
@@ -311,6 +337,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             comment: "The high value of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null"
         },
         {
@@ -322,6 +349,7 @@ export const effectElement: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
             comment: "The high preset of the effect. highValue or highPreset must be set. If currentValue is highValue, highValue and highPreset must be null. If currentValue is middleValue, highValue must be set and highPreset must be null"
         },
@@ -351,6 +379,7 @@ export const effectKind: model = {
             options: [...kinds],
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "subKind",
@@ -358,6 +387,7 @@ export const effectKind: model = {
             type: "string",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "effectElement",
@@ -368,6 +398,7 @@ export const effectKind: model = {
             backReference: true,
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         }
     ]
@@ -395,6 +426,7 @@ export const effectOffset: model = {
             type: "number",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "effectElement",
@@ -405,6 +437,7 @@ export const effectOffset: model = {
             backReference: true,
             gettable: true,
             settable: false,
+            copyable: true,
             canInfluenceThisOutput: false,
         }
     ]
@@ -446,6 +479,7 @@ export const speedGroup: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "bpm",
@@ -457,6 +491,7 @@ export const speedGroup: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "firstHitTime",

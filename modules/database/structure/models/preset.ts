@@ -4,6 +4,8 @@ export const preset: model = {
     displayName: "Preset",
     canInfluenceOutput: true,
     creatable: true,
+    recursiveDeleteProperties: ['elements'],
+    recursiveCopyProperties: ['elements'],
     move: 'index',
     selectable: true,
     properties: [
@@ -35,6 +37,7 @@ export const preset: model = {
             type: "boolean",
             gettable: true,
             settable: true,
+            copyable: true,
             comment: "If true, uses the selection grid stored in the preset. If false, uses the selection grid of the model referencing the preset",
         },
         {
@@ -46,6 +49,7 @@ export const preset: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "elements",
@@ -56,6 +60,7 @@ export const preset: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
         }
     ]
@@ -84,6 +89,7 @@ export const presetElement: model = {
             type: "number",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "fixtures",
@@ -95,6 +101,7 @@ export const presetElement: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -106,6 +113,7 @@ export const presetElement: model = {
             },
             gettable: true,
             settable: true,
+            copyable: true,
             canInfluenceThisOutput: true,
         },
         {
@@ -114,6 +122,7 @@ export const presetElement: model = {
             type: "attributes",
             gettable: true,
             settable: true,
+            copyable: true,
         }
     ]
 };

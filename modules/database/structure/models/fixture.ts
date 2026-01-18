@@ -32,6 +32,7 @@ export const fixture: model = {
             type: "string",
             gettable: true,
             settable: false,
+            copyable: true,
         },
         {
             name: "universe",
@@ -44,6 +45,7 @@ export const fixture: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "address",
@@ -56,6 +58,7 @@ export const fixture: model = {
             optional: true,
             gettable: true,
             settable: true,
+            copyable: true,
         }
     ]
 };

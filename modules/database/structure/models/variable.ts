@@ -45,6 +45,7 @@ export const variable: model = {
             type: "stringOrNumberOrBooleanOrNull",
             gettable: true,
             settable: true,
+            copyable: true,
         },
         {
             name: "executors",
