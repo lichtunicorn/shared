@@ -114,12 +114,13 @@ export const macroCommand: model = {
             canInfluenceThisOutput: false,
         },
         {
-            name: "contents",
-            displayName: "Contents",
-            type: "string", // todo: better type
+            name: "command",
+            displayName: "Command",
+            type: "string",
             gettable: true,
             settable: false,
-            comment: 'todo: better type'
+            copyable: true,
+            comment: 'JSON stringified command'
         }
     ]
 };
