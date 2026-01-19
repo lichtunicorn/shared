@@ -17,6 +17,7 @@ export type model = {
     /** if this model gets deleted, recursively delete the models inside the references of these properties */
     recursiveDeleteProperties?: string[];
     recursiveCopyProperties?: string[];
+    copyUniqueContextProperties?: string[];
     move?: string;
     properties: property<string>[];
 };
