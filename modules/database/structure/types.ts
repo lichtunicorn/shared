@@ -172,6 +172,10 @@ export type public_actionButton = {
     scene: null | { reference: string; };
     /** settable, back reference */
     cuelist: null | { reference: string; };
+    /** settable, back reference */
+    collection: null | { reference: string; };
+    /** settable, back reference */
+    section: null | { reference: string; };
     /** settable */
     generalFunction: null | "clear" | "blind" | "highlight" | "previous" | "all" | "next" | "uni" | "nextPage" | "previousPage" | "section-1" | "section-2" | "section-3" | "section-4" | "section-5" | "kindIntensity" | "kindPosition" | "kindColor" | "kindBeam" | "group" | "scene" | "cuelist" | "empty" | "copy" | "move" | "delete" | "select" | "record" | "set" | "setAttribute" | "go" | "release" | "assign" | "open" | "arrowLeft" | "arrowRight" | "arrowUp" | "arrowDown" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "dot" | "at" | "thru" | "plus" | "enter" | "backspace" | "set";
 };
