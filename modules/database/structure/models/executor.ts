@@ -171,6 +171,18 @@ export const executorFader: model = {
             gettable: true,
             settable: true,
             copyable: true,
+        },
+        {
+            name: 'executor',
+            displayName: "Executor",
+            type: {
+                reference: 'executor'
+            },
+            backReference: true,
+            gettable: true,
+            settable: false,
+            copyable: true,
+            canInfluenceThisOutput: false,
         }
     ]
 }
