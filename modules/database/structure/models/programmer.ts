@@ -82,6 +82,7 @@ export const programmerElement: model = {
 export const programmerElementContent: model = {
     displayName: "Programmer element content",
     canInfluenceOutput: true,
+    copyUniqueContextProperties: ['programmerElement'],
     creatable: true,
     properties: [
         {

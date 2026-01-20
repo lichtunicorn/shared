@@ -85,6 +85,7 @@ export const macro: model = {
 export const macroCommand: model = {
     displayName: "Macro command",
     creatable: true,
+    copyUniqueContextProperties: ['macro'],
     move: 'index',
     properties: [
         {

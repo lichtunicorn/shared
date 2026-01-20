@@ -189,6 +189,7 @@ export const cue: model = {
     releasable: false, // you should release the cuelist, not the cue
     recursiveDeleteProperties: ['elements'],
     recursiveCopyProperties: ['elements'],
+    copyUniqueContextProperties: ['cuelist'],
     properties: [
         {
             name: "id",
@@ -267,6 +268,7 @@ export const cueElement: model = {
     creatable: true,
     recursiveDeleteProperties: ['contents'],
     recursiveCopyProperties: ['contents'],
+    copyUniqueContextProperties: ['cue'],
     properties: [
         {
             name: "id",
@@ -343,6 +345,7 @@ export const cueElementContent: model = {
     displayName: "Cue element content",
     canInfluenceOutput: true,
     creatable: true,
+    copyUniqueContextProperties: ['cueElement'],
     properties: [
         {
             name: "id",

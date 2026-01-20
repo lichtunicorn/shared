@@ -136,6 +136,7 @@ export const executor: model = {
 
 export const executorFader: model = {
     displayName: "Executor fader",
+    copyUniqueContextProperties: ['executor'],
     creatable: true,
     properties: [
         {
@@ -177,6 +178,7 @@ export const executorFader: model = {
 export const executorButton: model = {
     displayName: "Executor button",
     creatable: true,
+    copyUniqueContextProperties: ['executor'],
     move: 'index',
     properties: [
         {

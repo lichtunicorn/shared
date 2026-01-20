@@ -69,6 +69,7 @@ export const preset: model = {
 export const presetElement: model = {
     displayName: "Preset element",
     canInfluenceOutput: true,
+    copyUniqueContextProperties: ['preset'],
     creatable: true,
     move: 'index',
     properties: [

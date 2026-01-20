@@ -61,6 +61,7 @@ export const group: model = {
 export const groupElement: model = {
     displayName: "Group element",
     canInfluenceOutput: true,
+    copyUniqueContextProperties: ['group'],
     creatable: true,
     properties: [
         {

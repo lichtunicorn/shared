@@ -151,6 +151,7 @@ export const sceneElement: model = {
     creatable: true,
     recursiveDeleteProperties: ['contents'],
     recursiveCopyProperties: ['contents'],
+    copyUniqueContextProperties: ['scene'],
     properties: [
         {
             name: "id",
@@ -226,6 +227,7 @@ export const sceneElement: model = {
 export const sceneElementContent: model = {
     displayName: "Scene element content",
     canInfluenceOutput: true,
+    copyUniqueContextProperties: ['sceneElement'],
     creatable: true,
     properties: [
         {

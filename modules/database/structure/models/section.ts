@@ -69,6 +69,7 @@ export const section: model = {
 
 export const sectionSceneState: model = {
     displayName: "Section scene state",
+    copyUniqueContextProperties: ['section'],
     creatable: true,
     properties: [
         {
@@ -115,6 +116,7 @@ export const sectionSceneState: model = {
 
 export const sectionCuelistState: model = {
     displayName: "Section cuelist state",
+    copyUniqueContextProperties: ['section'],
     creatable: true,
     properties: [
         {

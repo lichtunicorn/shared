@@ -71,6 +71,7 @@ export const effect: model = {
 export const effectElement: model = {
     displayName: "Effect element",
     canInfluenceOutput: true,
+    copyUniqueContextProperties: ['effect'],
     creatable: true,
     deletable: true,
     recursiveDeleteProperties: ['nonTemplateOffsets', 'kinds'],
@@ -359,6 +360,7 @@ export const effectElement: model = {
 export const effectKind: model = {
     displayName: "Effect kind",
     canInfluenceOutput: true,
+    copyUniqueContextProperties: ['effect'],
     creatable: true,
     properties: [
         {
@@ -407,6 +409,7 @@ export const effectKind: model = {
 export const effectOffset: model = {
     displayName: "Effect offset",
     canInfluenceOutput: true,
+    copyUniqueContextProperties: ['effect'],
     creatable: true,
     properties: [
         {
