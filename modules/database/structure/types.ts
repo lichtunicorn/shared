@@ -623,6 +623,8 @@ export type public_presetElement = {
     group: null | { reference: string; };
     /** settable */
     attributes: attributesType;
+    /** read only */
+    preset: { reference: string; };
 };
 export type presetElement = public_presetElement;
 export type public_executorButton = {
@@ -645,6 +647,8 @@ export type public_executorFader = {
     physicalButtonIndex: null | number;
     /** settable, default intensity */
     function: "intensity" | "activeCrossfade" | "cueCrossfade";
+    /** read only, back reference */
+    executor: { reference: string; };
 };
 export type executorFader = public_executorFader;
 export type public_programmerElement = {
