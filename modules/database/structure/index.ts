@@ -116,6 +116,28 @@ function checkDatabaseStructure() {
             }
         }
 
+        if (model.recursiveCopyProperties) {
+            for (const propertyName of model.recursiveCopyProperties) {
+                const property = model.properties.find(a => a.name === propertyName);
+
+                if (!property)
+                    throw new Error(`Model ${modelName} has invalid recursiveCopyProperties ${propertyName}`);
+
+                if (property.type !== 'array' && !(typeof property.type !== 'string' && property.type.reference)) {
+                    throw new Error(`Model ${modelName} has recursiveCopyProperties ${propertyName}, but that property is not a reference`);
+                }
+            }
+        }
+
+        if (model.copyUniqueContextProperties) {
+            for (const propertyName of model.copyUniqueContextProperties) {
+                const property = model.properties.find(a => a.name === propertyName);
+
+                if (!property)
+                    throw new Error(`Model ${modelName} has invalid copyUniqueContextProperties ${propertyName}`);
+            }
+        }
+
         for (const property of model.properties) {
             if (!property.name) {
                 throw new Error(`Model ${modelName} has property with invalid name`);
