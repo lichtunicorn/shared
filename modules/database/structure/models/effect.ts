@@ -360,7 +360,7 @@ export const effectElement: model = {
 export const effectKind: model = {
     displayName: "Effect kind",
     canInfluenceOutput: true,
-    copyUniqueContextProperties: ['effect'],
+    copyUniqueContextProperties: ['effectElement'],
     creatable: true,
     properties: [
         {
@@ -409,7 +409,7 @@ export const effectKind: model = {
 export const effectOffset: model = {
     displayName: "Effect offset",
     canInfluenceOutput: true,
-    copyUniqueContextProperties: ['effect'],
+    copyUniqueContextProperties: ['effectElement'],
     creatable: true,
     properties: [
         {
