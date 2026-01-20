@@ -124,6 +124,17 @@ export const presetElement: model = {
             gettable: true,
             settable: true,
             copyable: true,
+        },
+        {
+            name: "preset",
+            displayName: "Preset",
+            type: {
+                reference: "preset"
+            },
+            gettable: true,
+            settable: false,
+            copyable: true,
+            canInfluenceThisOutput: false,
         }
     ]
 };
