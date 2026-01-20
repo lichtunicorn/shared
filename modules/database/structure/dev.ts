@@ -36,96 +36,104 @@ function updateConstTypes() {
     }
 }
 
+function generatePropertyTypeContents(property: structureType[string]['properties'][number]): string {
+    let output = '';
+
+    let typescriptType: string;
+
+    if (property.type === 'array') {
+        typescriptType = `{ reference: string; }[]`;
+    } else if (property.type === 'boolean') {
+        typescriptType = 'boolean';
+    } else if (property.type === 'string') {
+        typescriptType = 'string';
+    } else if (property.type === 'number') {
+        typescriptType = 'number';
+    } else if (property.type === 'oneOf') {
+        typescriptType = property.options.map(option => `"${option}"`).join(' | ');
+    } else if (property.type === 'stringOrNumberOrBooleanOrNull') {
+        typescriptType = 'string | number | boolean | null';
+    } else if (typeof property.type !== 'string' && property.type.reference) {
+        typescriptType = `{ reference: string; }`;
+    } else if (property.type === 'attributes') {
+        typescriptType = 'attributesType';
+    } else {
+        throw new Error(`Unknown property type ${property.type}`);
+    }
+
+    if (property.optional && property.type !== 'stringOrNumberOrBooleanOrNull') {
+        typescriptType = `null | ${typescriptType}`;
+    }
+
+    let comment = property.comment;
+
+    if ('default' in property && property.default) {
+        let string;
+
+        if (property.default.type === 'value') {
+            string = `${property.default.value}`;
+        } else if (property.default.type === 'cuid') {
+            string = 'cuid()';
+        } else if (property.default.type === 'name') {
+            string = 'name()';
+        } else if (property.default.type === 'now') {
+            string = 'now()';
+        } else if (property.default.type === 'afterLast') {
+            string = 'afterLast()';
+        } else {
+            throw new Error(`Unknown default type ${(property.default as any).type}`);
+        }
+
+        if (comment) {
+            comment = `default ${string}, ${comment}`;
+        } else {
+            comment = `default ${string}`;
+        }
+    }
+
+    if ('backReference' in property && property.backReference) {
+        if (comment) {
+            comment = `back reference, ${comment}`;
+        } else {
+            comment = 'back reference';
+        }
+    }
+
+    if ('unique' in property && property.unique) {
+        if (comment) {
+            comment = `unique, ${comment}`;
+        } else {
+            comment = 'unique';
+        }
+    }
+
+    if (property.settable) {
+        if (comment) {
+            comment = `settable, ${comment}`;
+        } else {
+            comment = 'settable';
+        }
+    } else {
+        if (comment) {
+            comment = `read only, ${comment}`;
+        } else {
+            comment = 'read only';
+        }
+    }
+
+    if (comment) {
+        output += `    /** ${comment} */\n`;
+    }
+    output += `    ${property.name}: ${typescriptType};\n`;
+
+    return output;
+}
+
 function generatePublicModelTypeContents(modelStructure: structureType[string]): string {
     let output = '';
 
     for (const property of modelStructure.properties) {
-        let typescriptType: string;
-
-        if (property.type === 'array') {
-            typescriptType = `{ reference: string; }[]`;
-        } else if (property.type === 'boolean') {
-            typescriptType = 'boolean';
-        } else if (property.type === 'string') {
-            typescriptType = 'string';
-        } else if (property.type === 'number') {
-            typescriptType = 'number';
-        } else if (property.type === 'oneOf') {
-            typescriptType = property.options.map(option => `"${option}"`).join(' | ');
-        } else if (property.type === 'stringOrNumberOrBooleanOrNull') {
-            typescriptType = 'string | number | boolean | null';
-        } else if (typeof property.type !== 'string' && property.type.reference) {
-            typescriptType = `{ reference: string; }`;
-        } else if (property.type === 'attributes') {
-            typescriptType = 'attributesType';
-        } else {
-            throw new Error(`Unknown property type ${property.type}`);
-        }
-
-        if (property.optional && property.type !== 'stringOrNumberOrBooleanOrNull') {
-            typescriptType = `null | ${typescriptType}`;
-        }
-
-        let comment = property.comment;
-
-        if ('default' in property && property.default) {
-            let string;
-
-            if (property.default.type === 'value') {
-                string = `${property.default.value}`;
-            } else if (property.default.type === 'cuid') {
-                string = 'cuid()';
-            } else if (property.default.type === 'name') {
-                string = 'name()';
-            } else if (property.default.type === 'now') {
-                string = 'now()';
-            } else if (property.default.type === 'afterLast') {
-                string = 'afterLast()';
-            } else {
-                throw new Error(`Unknown default type ${(property.default as any).type}`);
-            }
-
-            if (comment) {
-                comment = `default ${string}, ${comment}`;
-            } else {
-                comment = `default ${string}`;
-            }
-        }
-
-        if ('backReference' in property && property.backReference) {
-            if (comment) {
-                comment = `back reference, ${comment}`;
-            } else {
-                comment = 'back reference';
-            }
-        }
-
-        if ('unique' in property && property.unique) {
-            if (comment) {
-                comment = `unique, ${comment}`;
-            } else {
-                comment = 'unique';
-            }
-        }
-
-        if (property.settable) {
-            if (comment) {
-                comment = `settable, ${comment}`;
-            } else {
-                comment = 'settable';
-            }
-        } else {
-            if (comment) {
-                comment = `read only, ${comment}`;
-            } else {
-                comment = 'read only';
-            }
-        }
-
-        if (comment) {
-            output += `    /** ${comment} */\n`;
-        }
-        output += `    ${property.name}: ${typescriptType};\n`;
+        output += generatePropertyTypeContents(property);
     }
 
     return output;
@@ -155,9 +163,31 @@ function generateAutoTypes(structure: structureType): string {
             output += `export type ${modelName} = Omit<public_${modelName}, ${privateProperties.map(property => `"${property.name}"`).join(' | ')
                 }>;\n`;
         }
+
+        output += `export type copyUniqueContext_${modelName} = {\n`;
+
+        const indexProperty = modelStructure.properties.find(p => p.name === 'index');
+        if (indexProperty) {
+            output += generatePropertyTypeContents(indexProperty);
+        }
+
+        if (modelStructure.copyUniqueContextProperties) {
+            for (const propertyName of modelStructure.copyUniqueContextProperties) {
+                const property = modelStructure.properties.find(prop => prop.name === propertyName);
+                if (!property) {
+                    throw new Error(`Property ${propertyName} not found in model ${modelName} for copyUniqueContextProperties`);
+                }
+
+                output += generatePropertyTypeContents(property);
+            }
+        }
+
+        output += `};\n`;
     }
 
-    output += `\nexport type modelData<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
+    output += '\n';
+
+    output += `export type modelData<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
         `currentModelName extends "${modelName}" ? ${modelName}`
     ).join(' : ')
         } : never;\n`;
@@ -167,7 +197,12 @@ function generateAutoTypes(structure: structureType): string {
     ).join(' : ')
         } : never;\n`;
 
-    output += `\nexport type canInfluenceOutputModelName = ${Object.entries(structure).filter(([modelName, modelStructure]) => modelStructure.canInfluenceOutput === true).map(([modelName]) => `"${modelName}"`).join(' | ')};\n`;
+    output += `export type copyUniqueContext<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
+        `currentModelName extends "${modelName}" ? copyUniqueContext_${modelName}`
+    ).join(' : ')
+        } : never;\n`;
+
+    output += `export type canInfluenceOutputModelName = ${Object.entries(structure).filter(([modelName, modelStructure]) => modelStructure.canInfluenceOutput === true).map(([modelName]) => `"${modelName}"`).join(' | ')};\n`;
 
     return output;
 }
