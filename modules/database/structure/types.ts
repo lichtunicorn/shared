@@ -24,7 +24,7 @@ export type model = {
 
 export type literalPropertyType = "number" | "string" | "boolean" | "stringOrNumberOrBooleanOrNull" | "attributes";
 export type referencePropertyType = {
-    reference: string;
+    reference: modelName;
 };
 
 export type attributesType = {
