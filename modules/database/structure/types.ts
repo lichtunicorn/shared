@@ -458,6 +458,8 @@ export type public_cue = {
     id: string;
     /** settable */
     index: number;
+    /** settable, default name() */
+    name: string;
     /** settable, default 0 */
     cueFade: number;
     /** settable, back reference */

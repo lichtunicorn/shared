@@ -211,6 +211,17 @@ export const cue: model = {
             copyable: true,
         },
         {
+            name: "name",
+            displayName: "Name",
+            type: "string",
+            default: {
+                type: "name"
+            },
+            gettable: true,
+            settable: true,
+            copyable: true,
+        },
+        {
             name: "cueFade",
             displayName: "Cue fade",
             type: 'number',
