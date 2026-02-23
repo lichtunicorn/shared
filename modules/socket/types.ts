@@ -9,6 +9,7 @@ import type { publicFixtureType } from '../fixtureTypes/types';
 import type { networkInterface } from '../network/types';
 import type { noGetCommand as noGetCommandSchema } from '../command/schema';
 import type { runCommandSource, runCommandReturn, contextType } from '../command/run/types';
+import type { hardwareState } from '../hardware/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -25,6 +26,7 @@ export interface ServerToClientEvents {
     outputOptions(options: outputOptions): void;
     fixtureTypes(fixtureTypes: publicFixtureType[]): void;
     networkInterfaces(networkInterfaces: networkInterface[]): void;
+    hardwareState(hardwareState: hardwareState): void;
 
     debugSocketUrl: (url: string) => void;
 }
@@ -56,6 +58,10 @@ export interface ClientToServerEvents {
     getFixtureTypes: () => void;
     getNetworkInterfaces: () => void;
 
+    subscribeHardwareState: () => void;
+    unsubscribeHardwareState: () => void;
+    setWebBoardHardwareState: (hardwareState: hardwareState) => void;
+
     command(
         command: z.infer<typeof noGetCommandSchema>,
         context: contextType,
@@ -77,6 +83,7 @@ export interface SocketData {
     errorsSubscribed: boolean;
     outputShowIdSubscribed: boolean;
     outputOptionsSubscribed: boolean;
+    hardwareStateSubscribed: boolean;
 
     manySubscribedModels: modelName[];
     specificSubscribedModels: Partial<{
