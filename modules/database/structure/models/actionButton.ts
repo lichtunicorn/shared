@@ -10,6 +10,7 @@ export const generalFunctionNames = [
     'uni',
     'nextPage',
     'previousPage',
+    'nextSection',
 
     'section-1',
     'section-2',
