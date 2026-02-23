@@ -9,7 +9,7 @@ import type { publicFixtureType } from '../fixtureTypes/types';
 import type { networkInterface } from '../network/types';
 import type { noGetCommand as noGetCommandSchema } from '../command/schema';
 import type { runCommandSource, runCommandReturn, contextType } from '../command/run/types';
-import type { hardwareState } from '../hardware/types';
+import type { hardwareEncoderState, hardwareFaderSetState, hardwareGeneralButtonState, hardwareState } from '../hardware/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -61,6 +61,9 @@ export interface ClientToServerEvents {
     subscribeHardwareState: () => void;
     unsubscribeHardwareState: () => void;
     setWebBoardHardwareState: (hardwareState: hardwareState) => void;
+    setWebBoardFaderState: (faderSetIndex: number, faderSetState: hardwareFaderSetState) => void;
+    setWebBoardEncoderState: (encoderIndex: number, encoderState: hardwareEncoderState) => void;
+    setWebBoardButtonState: (buttonIndex: number, buttonState: hardwareGeneralButtonState) => void;
 
     command(
         command: z.infer<typeof noGetCommandSchema>,
