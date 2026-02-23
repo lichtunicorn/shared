@@ -61,7 +61,7 @@ export interface ClientToServerEvents {
     subscribeHardwareState: () => void;
     unsubscribeHardwareState: () => void;
     setWebBoardHardwareState: (hardwareState: hardwareState) => void;
-    setWebBoardFaderState: (faderSetIndex: number, faderSetState: hardwareFaderSetState) => void;
+    setWebBoardFaderSetState: (faderSetIndex: number, faderSetState: hardwareFaderSetState) => void;
     setWebBoardEncoderState: (encoderIndex: number, encoderState: hardwareEncoderState) => void;
     setWebBoardButtonState: (buttonIndex: number, buttonState: hardwareGeneralButtonState) => void;
 
