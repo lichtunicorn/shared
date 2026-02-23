@@ -26,7 +26,7 @@ export interface ServerToClientEvents {
     outputOptions(options: outputOptions): void;
     fixtureTypes(fixtureTypes: publicFixtureType[]): void;
     networkInterfaces(networkInterfaces: networkInterface[]): void;
-    hardwareState(hardwareState: hardwareState): void;
+    hardwareState(hardwareState: hardwareState | null): void;
 
     debugSocketUrl: (url: string) => void;
 }
