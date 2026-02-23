@@ -29,7 +29,6 @@ export type hardwareFaderSetState = {
 
 export type hardwareEncoderState = {
     button: boolean;
-    withClock: boolean;
-    /** Number from 0 to 100, (100 being full rotation). Relative to previous state */
+    /** Number from -100 to 100, (100 being full rotation clockwise). Relative to previous state */
     relativeRotation: number;
 };
