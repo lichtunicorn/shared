@@ -34,7 +34,6 @@ export const generalFunctionNames = [
 
     'select',
     'record',
-    'set',
     'setAttribute',
 
     'go',
