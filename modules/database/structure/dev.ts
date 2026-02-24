@@ -153,14 +153,14 @@ function generateAutoTypes(structure: structureType): string {
     for (const [modelName, modelStructure] of Object.entries(structure)) {
         const publicModelOutput = generatePublicModelTypeContents(modelStructure);
 
-        output += `export type public_${modelName} = {\n${publicModelOutput}};\n`;
+        output += `export type ${modelName} = {\n${publicModelOutput}};\n`;
 
         const privateProperties = modelStructure.properties.filter(property => property.gettable !== true);
 
         if (privateProperties.length === 0) {
-            output += `export type ${modelName} = public_${modelName};\n`;
+            output += `export type public_${modelName} = ${modelName};\n`;
         } else {
-            output += `export type ${modelName} = Omit<public_${modelName}, ${privateProperties.map(property => `"${property.name}"`).join(' | ')
+            output += `export type public_${modelName} = Omit<${modelName}, ${privateProperties.map(property => `"${property.name}"`).join(' | ')
                 }>;\n`;
         }
 
