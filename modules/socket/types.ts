@@ -75,7 +75,7 @@ export interface ClientToServerEvents {
     unsubscribeHardwareOptions: () => void;
     setHardwareOptions: (options: hardwareOptions) => void;
 
-    edit<T extends modelName>(
+    update<T extends modelName>(
         model: T,
         id: string,
         data: Partial<publicSettableModelData<T>>
