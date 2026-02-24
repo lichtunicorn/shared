@@ -97,6 +97,8 @@ export interface SocketData {
     outputShowIdSubscribed: boolean;
     outputOptionsSubscribed: boolean;
     hardwareStateSubscribed: boolean;
+    hardwareShowIdSubscribed: boolean;
+    hardwareOptionsSubscribed: boolean;
 
     manySubscribedModels: modelName[];
     specificSubscribedModels: Partial<{
