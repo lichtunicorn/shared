@@ -27,6 +27,7 @@ export interface ServerToClientEvents {
     fixtureTypes(fixtureTypes: publicFixtureType[]): void;
     networkInterfaces(networkInterfaces: networkInterface[]): void;
     hardwareState(hardwareState: hardwareState | null): void;
+    hardwareShowId(showId: string | null): void;
 
     debugSocketUrl: (url: string) => void;
 }
@@ -64,6 +65,10 @@ export interface ClientToServerEvents {
     setWebBoardFaderSetState: (faderSetIndex: number, faderSetState: hardwareFaderSetState) => void;
     setWebBoardEncoderState: (encoderIndex: number, encoderState: hardwareEncoderState) => void;
     setWebBoardButtonState: (buttonIndex: number, buttonState: hardwareGeneralButtonState) => void;
+
+    subscribeHardwareShowId: () => void;
+    unsubscribeHardwareShowId: () => void;
+    setHardwareShowId: (showId: string | null) => void;
 
     command(
         command: z.infer<typeof noGetCommandSchema>,
