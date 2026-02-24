@@ -196,23 +196,23 @@ function generateAutoTypes(structure: structureType): string {
 
     output += '\n';
 
-    output += `export type modelData<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
-        `currentModelName extends "${modelName}" ? ${modelName}`
+    output += `export type modelData<T extends modelName> = ${Object.keys(structure).map(modelName =>
+        `T extends "${modelName}" ? ${modelName}`
     ).join(' : ')
         } : never;\n`;
 
-    output += `export type publicModelData<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
-        `currentModelName extends "${modelName}" ? public_${modelName}`
+    output += `export type publicModelData<T extends modelName> = ${Object.keys(structure).map(modelName =>
+        `T extends "${modelName}" ? public_${modelName}`
     ).join(' : ')
         } : never;\n`;
 
-    output += `export type publicSettableModelData<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
-        `currentModelName extends "${modelName}" ? public_settable_${modelName}`
+    output += `export type publicSettableModelData<T extends modelName> = ${Object.keys(structure).map(modelName =>
+        `T extends "${modelName}" ? public_settable_${modelName}`
     ).join(' : ')
         } : never;\n`;
 
-    output += `export type copyUniqueContext<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
-        `currentModelName extends "${modelName}" ? copyUniqueContext_${modelName}`
+    output += `export type copyUniqueContext<T extends modelName> = ${Object.keys(structure).map(modelName =>
+        `T extends "${modelName}" ? copyUniqueContext_${modelName}`
     ).join(' : ')
         } : never;\n`;
 
