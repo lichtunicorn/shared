@@ -75,6 +75,12 @@ export interface ClientToServerEvents {
     unsubscribeHardwareOptions: () => void;
     setHardwareOptions: (options: hardwareOptions) => void;
 
+    edit<T extends modelName>(
+        model: modelName,
+        id: string,
+        data: Partial<publicModelData<T>>
+    ): void;
+
     command(
         command: z.infer<typeof noGetCommandSchema>,
         context: contextType,
