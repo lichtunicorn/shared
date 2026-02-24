@@ -9,7 +9,7 @@ import type { publicFixtureType } from '../fixtureTypes/types';
 import type { networkInterface } from '../network/types';
 import type { noGetCommand as noGetCommandSchema } from '../command/schema';
 import type { runCommandSource, runCommandReturn, contextType } from '../command/run/types';
-import type { hardwareEncoderState, hardwareFaderSetState, hardwareGeneralButtonState, hardwareState, serialOptions } from '../hardware/types';
+import type { hardwareEncoderState, hardwareFaderSetState, hardwareGeneralButtonState, hardwareState, hardwareOptions } from '../hardware/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -28,7 +28,7 @@ export interface ServerToClientEvents {
     networkInterfaces(networkInterfaces: networkInterface[]): void;
     hardwareState(hardwareState: hardwareState | null): void;
     hardwareShowId(showId: string | null): void;
-    hardwareOptions(options: serialOptions): void;
+    hardwareOptions(options: hardwareOptions): void;
 
     debugSocketUrl: (url: string) => void;
 }
@@ -73,7 +73,7 @@ export interface ClientToServerEvents {
 
     subscribeHardwareOptions: () => void;
     unsubscribeHardwareOptions: () => void;
-    setHardwareOptions: (options: serialOptions) => void;
+    setHardwareOptions: (options: hardwareOptions) => void;
 
     command(
         command: z.infer<typeof noGetCommandSchema>,

@@ -1,7 +1,7 @@
 import type { generalFunctionNames } from '../database/structure/models/actionButton.ts';
 import type { serialPaths } from './index.ts';
 
-export type serialOptions = {
+export type hardwareOptions = {
     path: typeof serialPaths[number];
     baudRate: number;
 };
