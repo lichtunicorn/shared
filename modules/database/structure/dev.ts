@@ -206,6 +206,11 @@ function generateAutoTypes(structure: structureType): string {
     ).join(' : ')
         } : never;\n`;
 
+    output += `export type publicSettableModelData<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
+        `currentModelName extends "${modelName}" ? public_settable_${modelName}`
+    ).join(' : ')
+        } : never;\n`;
+
     output += `export type copyUniqueContext<currentModelName extends modelName> = ${Object.keys(structure).map(modelName =>
         `currentModelName extends "${modelName}" ? copyUniqueContext_${modelName}`
     ).join(' : ')
