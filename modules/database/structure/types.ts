@@ -158,6 +158,7 @@ export type executor = {
     buttons: { reference: string; }[];
 };
 export type public_executor = executor;
+export type public_settable_executor = Omit<public_executor, "id">;
 export type copyUniqueContext_executor = {
     /** settable, unique */
     index: number;
@@ -185,6 +186,7 @@ export type actionButton = {
     generalFunction: null | "clear" | "blind" | "highlight" | "previous" | "all" | "next" | "uni" | "nextPage" | "previousPage" | "nextSection" | "section-1" | "section-2" | "section-3" | "section-4" | "section-5" | "kindIntensity" | "kindPosition" | "kindColor" | "kindBeam" | "group" | "scene" | "cuelist" | "empty" | "copy" | "move" | "delete" | "select" | "record" | "setAttribute" | "go" | "release" | "assign" | "open" | "arrowLeft" | "arrowRight" | "arrowUp" | "arrowDown" | "number0" | "number1" | "number2" | "number3" | "number4" | "number5" | "number6" | "number7" | "number8" | "number9" | "dot" | "at" | "thru" | "plus" | "enter" | "backspace" | "set";
 };
 export type public_actionButton = actionButton;
+export type public_settable_actionButton = Omit<public_actionButton, "id">;
 export type copyUniqueContext_actionButton = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -204,6 +206,7 @@ export type macro = {
     commands: { reference: string; }[];
 };
 export type public_macro = macro;
+export type public_settable_macro = Omit<public_macro, "id" | "commands">;
 export type copyUniqueContext_macro = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -221,6 +224,7 @@ export type variable = {
     executors: { reference: string; }[];
 };
 export type public_variable = variable;
+export type public_settable_variable = Omit<public_variable, "id">;
 export type copyUniqueContext_variable = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -238,6 +242,7 @@ export type speedGroup = {
     firstHitTime: number;
 };
 export type public_speedGroup = speedGroup;
+export type public_settable_speedGroup = Omit<public_speedGroup, "id">;
 export type copyUniqueContext_speedGroup = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -269,6 +274,7 @@ export type scene = {
     elements: { reference: string; }[];
 };
 export type public_scene = scene;
+export type public_settable_scene = Omit<public_scene, "id" | "activatedAt" | "releaseStartTime" | "activeStartTime" | "elements">;
 export type copyUniqueContext_scene = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -308,6 +314,7 @@ export type cuelist = {
     cues: { reference: string; }[];
 };
 export type public_cuelist = cuelist;
+export type public_settable_cuelist = Omit<public_cuelist, "id" | "activatedAt">;
 export type copyUniqueContext_cuelist = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -329,6 +336,7 @@ export type collection = {
     actionButtons: { reference: string; }[];
 };
 export type public_collection = collection;
+export type public_settable_collection = Omit<public_collection, "id">;
 export type copyUniqueContext_collection = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -346,6 +354,7 @@ export type section = {
     actionButtons: { reference: string; }[];
 };
 export type public_section = section;
+export type public_settable_section = Omit<public_section, "id" | "index" | "sceneStates" | "cuelistStates">;
 export type copyUniqueContext_section = {
     /** read only, unique, default afterLast() */
     index: number;
@@ -363,6 +372,7 @@ export type fixture = {
     address: null | number;
 };
 export type public_fixture = fixture;
+export type public_settable_fixture = Omit<public_fixture, "id" | "fixtureType">;
 export type copyUniqueContext_fixture = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -378,6 +388,7 @@ export type group = {
     elements: { reference: string; }[];
 };
 export type public_group = group;
+export type public_settable_group = Omit<public_group, "id" | "elements">;
 export type copyUniqueContext_group = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -395,6 +406,7 @@ export type preset = {
     elements: { reference: string; }[];
 };
 export type public_preset = preset;
+export type public_settable_preset = Omit<public_preset, "id">;
 export type copyUniqueContext_preset = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -410,6 +422,7 @@ export type effect = {
     elements: { reference: string; }[];
 };
 export type public_effect = effect;
+export type public_settable_effect = Omit<public_effect, "id">;
 export type copyUniqueContext_effect = {
     /** settable, unique, default afterLast() */
     index: number;
@@ -451,6 +464,7 @@ export type show = {
     variables: { reference: string; }[];
 };
 export type public_show = show;
+export type public_settable_show = Omit<public_show, "id" | "actionButtons" | "collections" | "cuelists" | "effects" | "executors" | "fixtures" | "groups" | "macros" | "overrides" | "programmerElements" | "scenes" | "sections" | "variables">;
 export type copyUniqueContext_show = {
 };
 export type cue = {
@@ -470,6 +484,7 @@ export type cue = {
     cuelist: { reference: string; };
 };
 export type public_cue = cue;
+export type public_settable_cue = Omit<public_cue, "id" | "elements" | "cuelist">;
 export type copyUniqueContext_cue = {
     /** settable */
     index: number;
@@ -485,6 +500,7 @@ export type override = {
     attributes: attributesType;
 };
 export type public_override = override;
+export type public_settable_override = Omit<public_override, "id">;
 export type copyUniqueContext_override = {
 };
 export type sectionSceneState = {
@@ -498,6 +514,7 @@ export type sectionSceneState = {
     section: { reference: string; };
 };
 export type public_sectionSceneState = sectionSceneState;
+export type public_settable_sectionSceneState = Omit<public_sectionSceneState, "id" | "scene" | "section">;
 export type copyUniqueContext_sectionSceneState = {
     /** read only, back reference */
     section: { reference: string; };
@@ -515,6 +532,7 @@ export type sectionCuelistState = {
     section: { reference: string; };
 };
 export type public_sectionCuelistState = sectionCuelistState;
+export type public_settable_sectionCuelistState = Omit<public_sectionCuelistState, "id" | "cuelist" | "section">;
 export type copyUniqueContext_sectionCuelistState = {
     /** read only, back reference */
     section: { reference: string; };
@@ -532,6 +550,7 @@ export type groupElement = {
     group: { reference: string; };
 };
 export type public_groupElement = groupElement;
+export type public_settable_groupElement = Omit<public_groupElement, "id" | "group">;
 export type copyUniqueContext_groupElement = {
     /** read only, back reference */
     group: { reference: string; };
@@ -551,6 +570,7 @@ export type sceneElement = {
     scene: { reference: string; };
 };
 export type public_sceneElement = sceneElement;
+export type public_settable_sceneElement = Omit<public_sceneElement, "id" | "contents" | "scene">;
 export type copyUniqueContext_sceneElement = {
     /** settable */
     index: number;
@@ -576,6 +596,7 @@ export type sceneElementContent = {
     sceneElement: { reference: string; };
 };
 export type public_sceneElementContent = sceneElementContent;
+export type public_settable_sceneElementContent = Omit<public_sceneElementContent, "id" | "sceneElement">;
 export type copyUniqueContext_sceneElementContent = {
     /** settable */
     index: number;
@@ -597,6 +618,7 @@ export type cueElement = {
     cue: { reference: string; };
 };
 export type public_cueElement = cueElement;
+export type public_settable_cueElement = Omit<public_cueElement, "id" | "fixtures" | "group" | "contents" | "cue">;
 export type copyUniqueContext_cueElement = {
     /** settable */
     index: number;
@@ -622,6 +644,7 @@ export type cueElementContent = {
     cueElement: { reference: string; };
 };
 export type public_cueElementContent = cueElementContent;
+export type public_settable_cueElementContent = Omit<public_cueElementContent, "id" | "preset" | "effects" | "cueElement">;
 export type copyUniqueContext_cueElementContent = {
     /** settable */
     index: number;
@@ -681,6 +704,7 @@ export type effectElement = {
     highPreset: null | { reference: string; };
 };
 export type public_effectElement = effectElement;
+export type public_settable_effectElement = Omit<public_effectElement, "id" | "effect">;
 export type copyUniqueContext_effectElement = {
     /** settable */
     index: number;
@@ -696,6 +720,7 @@ export type effectOffset = {
     effectElement: { reference: string; };
 };
 export type public_effectOffset = effectOffset;
+export type public_settable_effectOffset = Omit<public_effectOffset, "id" | "effectElement">;
 export type copyUniqueContext_effectOffset = {
     /** read only, back reference */
     effectElement: { reference: string; };
@@ -711,6 +736,7 @@ export type effectKind = {
     effectElement: { reference: string; };
 };
 export type public_effectKind = effectKind;
+export type public_settable_effectKind = Omit<public_effectKind, "id" | "effectElement">;
 export type copyUniqueContext_effectKind = {
     /** read only, back reference */
     effectElement: { reference: string; };
@@ -726,6 +752,7 @@ export type macroCommand = {
     command: string;
 };
 export type public_macroCommand = macroCommand;
+export type public_settable_macroCommand = Omit<public_macroCommand, "id" | "macro" | "command">;
 export type copyUniqueContext_macroCommand = {
     /** settable */
     index: number;
@@ -747,6 +774,7 @@ export type presetElement = {
     preset: { reference: string; };
 };
 export type public_presetElement = presetElement;
+export type public_settable_presetElement = Omit<public_presetElement, "id" | "preset">;
 export type copyUniqueContext_presetElement = {
     /** settable */
     index: number;
@@ -766,6 +794,7 @@ export type executorButton = {
     function: "flashFull" | "flashZero" | "flashActive" | "go" | "goBack" | "release";
 };
 export type public_executorButton = executorButton;
+export type public_settable_executorButton = Omit<public_executorButton, "id" | "executor">;
 export type copyUniqueContext_executorButton = {
     /** settable, unique */
     index: number;
@@ -783,6 +812,7 @@ export type executorFader = {
     executor: { reference: string; };
 };
 export type public_executorFader = executorFader;
+export type public_settable_executorFader = Omit<public_executorFader, "id" | "executor">;
 export type copyUniqueContext_executorFader = {
     /** read only, back reference */
     executor: { reference: string; };
@@ -802,6 +832,7 @@ export type programmerElement = {
     contents: { reference: string; }[];
 };
 export type public_programmerElement = programmerElement;
+export type public_settable_programmerElement = Omit<public_programmerElement, "id" | "selected" | "contents">;
 export type copyUniqueContext_programmerElement = {
     /** settable, unique */
     index: number;
@@ -821,6 +852,7 @@ export type programmerElementContent = {
     programmerElement: { reference: string; };
 };
 export type public_programmerElementContent = programmerElementContent;
+export type public_settable_programmerElementContent = Omit<public_programmerElementContent, "id" | "effects" | "preset" | "programmerElement">;
 export type copyUniqueContext_programmerElementContent = {
     /** settable */
     index: number;

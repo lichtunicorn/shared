@@ -129,7 +129,7 @@ function generatePropertyTypeContents(property: structureType[string]['propertie
     return output;
 }
 
-function generatePublicModelTypeContents(modelStructure: structureType[string]): string {
+function generateModelTypeContents(modelStructure: structureType[string]): string {
     let output = '';
 
     for (const property of modelStructure.properties) {
@@ -151,7 +151,7 @@ function generateAutoTypes(structure: structureType): string {
     output += `export type modelName = ${Object.keys(structure).map(modelName => `"${modelName}"`).join(' | ')};\n`;
 
     for (const [modelName, modelStructure] of Object.entries(structure)) {
-        const publicModelOutput = generatePublicModelTypeContents(modelStructure);
+        const publicModelOutput = generateModelTypeContents(modelStructure);
 
         output += `export type ${modelName} = {\n${publicModelOutput}};\n`;
 
@@ -161,6 +161,15 @@ function generateAutoTypes(structure: structureType): string {
             output += `export type public_${modelName} = ${modelName};\n`;
         } else {
             output += `export type public_${modelName} = Omit<${modelName}, ${privateProperties.map(property => `"${property.name}"`).join(' | ')
+                }>;\n`;
+        }
+
+        const publicNotSettableProperties = modelStructure.properties.filter(property => property.gettable === true && property.settable !== true);
+
+        if (publicNotSettableProperties.length === 0) {
+            output += `export type public_settable_${modelName} = public_${modelName};\n`;
+        } else {
+            output += `export type public_settable_${modelName} = Omit<public_${modelName}, ${publicNotSettableProperties.map(property => `"${property.name}"`).join(' | ')
                 }>;\n`;
         }
 
