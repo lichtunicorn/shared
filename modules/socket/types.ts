@@ -28,6 +28,7 @@ export interface ServerToClientEvents {
     networkInterfaces(networkInterfaces: networkInterface[]): void;
     hardwareState(hardwareState: hardwareState | null): void;
     hardwareShowId(showId: string | null): void;
+    hardwareClientId(clientId: string | null): void;
     hardwareOptions(options: hardwareOptions): void;
 
     debugSocketUrl: (url: string) => void;
@@ -71,6 +72,10 @@ export interface ClientToServerEvents {
     unsubscribeHardwareShowId: () => void;
     setHardwareShowId: (showId: string | null) => void;
 
+    subscribeHardwareClientId: () => void;
+    unsubscribeHardwareClientId: () => void;
+    setHardwareClientId: (clientId: string | null) => void;
+
     subscribeHardwareOptions: () => void;
     unsubscribeHardwareOptions: () => void;
     setHardwareOptions: (options: hardwareOptions) => void;
@@ -104,6 +109,7 @@ export interface SocketData {
     outputOptionsSubscribed: boolean;
     hardwareStateSubscribed: boolean;
     hardwareShowIdSubscribed: boolean;
+    hardwareClientIdSubscribed: boolean;
     hardwareOptionsSubscribed: boolean;
 
     manySubscribedModels: modelName[];
