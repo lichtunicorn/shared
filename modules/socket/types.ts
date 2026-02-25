@@ -32,8 +32,8 @@ export interface ServerToClientEvents {
     hardwareClientId(clientId: string | null): void;
     hardwareOptions(options: hardwareOptions): void;
 
-    hardwareButtonClick(button: typeof clientClickButtons[number], uniHeld: boolean): void;
-    hardwareButtonHold(button: typeof clientHoldButtons[number], clicked: boolean): void;
+    hardwareClientButtonClick(button: typeof clientClickButtons[number], uniHeld: boolean): void;
+    hardwareClientButtonHold(button: typeof clientHoldButtons[number], clicked: boolean): void;
 
     debugSocketUrl: (url: string) => void;
 }
