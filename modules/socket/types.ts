@@ -10,6 +10,7 @@ import type { networkInterface } from '../network/types';
 import type { noGetCommand as noGetCommandSchema } from '../command/schema';
 import type { runCommandSource, runCommandReturn, contextType } from '../command/run/types';
 import type { hardwareEncoderState, hardwareFaderSetState, hardwareGeneralButtonState, hardwareState, hardwareOptions } from '../hardware/types';
+import type { clientClickButtons, clientHoldButtons } from '../hardware';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -30,6 +31,9 @@ export interface ServerToClientEvents {
     hardwareShowId(showId: string | null): void;
     hardwareClientId(clientId: string | null): void;
     hardwareOptions(options: hardwareOptions): void;
+
+    hardwareButtonClick(button: typeof clientClickButtons[number], uniHeld: boolean): void;
+    hardwareButtonHold(button: typeof clientHoldButtons[number], clicked: boolean): void;
 
     debugSocketUrl: (url: string) => void;
 }
