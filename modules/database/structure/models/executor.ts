@@ -111,7 +111,8 @@ export const executor: model = {
         {
             name: 'faders',
             displayName: "Faders",
-            type: {
+            type: 'array',
+            valueType: {
                 reference: 'executorFader'
             },
             gettable: true,

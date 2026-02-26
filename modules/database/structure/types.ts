@@ -153,7 +153,7 @@ export type executor = {
     /** settable, back reference, Variable uses intensity fader function */
     variable: null | { reference: string; };
     /** settable */
-    faders: { reference: string; };
+    faders: { reference: string; }[];
     /** settable */
     buttons: { reference: string; }[];
 };
