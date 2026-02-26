@@ -22,6 +22,7 @@ export const generalFunctionNames = [
     'kindPosition',
     'kindColor',
     'kindBeam',
+    'kindControl',
 
     'group',
     'scene',

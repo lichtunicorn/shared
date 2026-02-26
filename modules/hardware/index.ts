@@ -19,6 +19,7 @@ export const clientClickButtons = [
     'kindPosition',
     'kindColor',
     'kindBeam',
+    'kindControl',
 
     'group',
     'scene',
