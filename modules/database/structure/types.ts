@@ -262,7 +262,7 @@ export type scene = {
     releaseStartTime: null | number;
     /** read only, dateTime when the scene started to become active. Used for fading. Null if not active, or in crossfade. Active is new value if this is used */
     activeStartTime: null | number;
-    /** settable, default 0, From 0 to 100 */
+    /** settable, default 100, From 0 to 100 */
     intensity: number;
     /** settable */
     executors: { reference: string; }[];
@@ -302,7 +302,7 @@ export type cuelist = {
     cueStartTime: null | number;
     /** settable, The cue the transition started from. Null if not transitioning between cues */
     transitionFromCue: null | number;
-    /** settable, default 0, From 0 to 100 */
+    /** settable, default 100, From 0 to 100 */
     intensity: number;
     /** settable */
     executors: { reference: string; }[];
