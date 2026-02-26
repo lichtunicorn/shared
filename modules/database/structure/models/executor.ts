@@ -95,20 +95,6 @@ export const executor: model = {
             optional: true
         },
         {
-            name: 'variable',
-            displayName: "Variable",
-            type: {
-                reference: 'variable'
-            },
-            backReference: true,
-            gettable: true,
-            settable: true,
-            copyable: true,
-            canInfluenceThisOutput: false,
-            optional: true,
-            comment: "Variable uses intensity fader function"
-        },
-        {
             name: 'faders',
             displayName: "Faders",
             type: 'array',
