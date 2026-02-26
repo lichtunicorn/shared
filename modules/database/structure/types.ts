@@ -797,7 +797,7 @@ export type executorFader = {
     /** read only, unique, default cuid() */
     id: string;
     /** settable, default intensity */
-    function: "intensity" | "activeCrossfade" | "cueCrossfade";
+    function: "intensity" | "activeFade" | "cueCrossfade";
     /** read only, back reference */
     executor: { reference: string; };
 };
