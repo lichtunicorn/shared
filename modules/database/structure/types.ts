@@ -784,8 +784,6 @@ export type copyUniqueContext_presetElement = {
 export type executorButton = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
-    index: number;
     /** read only, back reference */
     executor: { reference: string; };
     /** settable, default flashFull */
@@ -794,8 +792,6 @@ export type executorButton = {
 export type public_executorButton = executorButton;
 export type public_settable_executorButton = Omit<public_executorButton, "id" | "executor">;
 export type copyUniqueContext_executorButton = {
-    /** settable, unique */
-    index: number;
     /** read only, back reference */
     executor: { reference: string; };
 };

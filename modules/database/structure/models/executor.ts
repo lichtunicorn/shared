@@ -183,7 +183,6 @@ export const executorButton: model = {
     displayName: "Executor button",
     creatable: true,
     copyUniqueContextProperties: ['executor'],
-    move: 'index',
     properties: [
         {
             name: "id",
@@ -195,14 +194,6 @@ export const executorButton: model = {
             },
             gettable: true,
             settable: false,
-        },
-        {
-            name: 'index',
-            displayName: "Index",
-            type: 'number',
-            unique: true,
-            gettable: true,
-            settable: true,
         },
         {
             name: 'executor',
