@@ -786,8 +786,6 @@ export type executorButton = {
     id: string;
     /** settable, unique */
     index: number;
-    /** settable, unique */
-    physicalButtonIndex: null | number;
     /** read only, back reference */
     executor: { reference: string; };
     /** settable, default flashFull */
@@ -804,8 +802,6 @@ export type copyUniqueContext_executorButton = {
 export type executorFader = {
     /** read only, unique, default cuid() */
     id: string;
-    /** settable, unique */
-    physicalButtonIndex: null | number;
     /** settable, default intensity */
     function: "intensity" | "activeCrossfade" | "cueCrossfade";
     /** read only, back reference */
