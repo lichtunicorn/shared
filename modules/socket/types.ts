@@ -92,7 +92,7 @@ export interface ClientToServerEvents {
 
     create<T extends modelName>(
         model: T,
-        data: Partial<publicSettableModelData<T>>
+        data: Partial<publicModelData<T>>
     ): void;
 
     command(
