@@ -90,6 +90,11 @@ export interface ClientToServerEvents {
         data: Partial<publicSettableModelData<T>>
     ): void;
 
+    create<T extends modelName>(
+        model: T,
+        data: Partial<publicSettableModelData<T>>
+    ): void;
+
     command(
         command: z.infer<typeof noGetCommandSchema>,
         context: contextType,
