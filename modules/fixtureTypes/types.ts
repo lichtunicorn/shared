@@ -1,7 +1,7 @@
 import z from "zod";
 import { kinds } from "../../kinds";
 
-const subKindOptionIconSchema = z.union([
+export const subKindOptionIconSchema = z.union([
     z.null().meta({ description: "No icon" }),
     z.object({
         type: z.literal('image').meta({ description: "One of the predefined images" }),
@@ -24,7 +24,7 @@ const subKindOptionIconSchema = z.union([
     })
 ]);
 
-const subKindSchema = z.union([
+export const subKindSchema = z.union([
     z.object({
         name: z.string(),
         type: z.literal("percentage"),
