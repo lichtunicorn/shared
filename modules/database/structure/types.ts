@@ -362,6 +362,8 @@ export type fixture = {
     id: string;
     /** settable, unique, default afterLast() */
     index: number;
+    /** settable */
+    note: null | string;
     /** read only */
     fixtureType: string;
     /** settable, default 0 */

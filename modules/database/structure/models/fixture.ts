@@ -30,6 +30,14 @@ export const fixture: model = {
             settable: true,
         },
         {
+            name: "note",
+            displayName: "Note",
+            type: "string",
+            optional: true,
+            gettable: true,
+            settable: true
+        },
+        {
             name: "fixtureType",
             displayName: "Fixture type",
             type: "string",
