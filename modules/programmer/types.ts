@@ -7,4 +7,5 @@ export type programmerState = {
     currentParams: z.infer<typeof subKindSchema>[];
     currentPage: number;
     currentPageParams: z.infer<typeof subKindSchema>[];
+    totalPages: number;
 };
