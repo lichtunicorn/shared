@@ -4,6 +4,7 @@ import type { subKindSchema } from "../fixtureTypes/schema";
 
 export type programmerState = {
     chosenKind: kind;
-    currentPage: number;
     currentParams: z.infer<typeof subKindSchema>[];
+    currentPage: number;
+    currentPageParams: z.infer<typeof subKindSchema>[];
 };
