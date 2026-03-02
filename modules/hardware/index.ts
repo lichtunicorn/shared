@@ -11,16 +11,16 @@ export const serverClickButtons = [
     'next',
     'nextPage',
     'previousPage',
-    'nextSection',
-] as const satisfies typeof generalFunctionNames[number][];
 
-export const clientClickButtons = [
+    'nextSection',
     'kindIntensity',
     'kindPosition',
     'kindColor',
     'kindBeam',
     'kindControl',
+] as const satisfies typeof generalFunctionNames[number][];
 
+export const clientClickButtons = [
     'group',
     'scene',
     'cuelist',
