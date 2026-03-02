@@ -89,8 +89,8 @@ export interface ClientToServerEvents {
 
     subscribeProgrammerState: () => void;
     unsubscribeProgrammerState: () => void;
+    setProgrammerStatePage: (page: number) => void;
     chooseKind: (kind: kind) => void;
-    choosePage: (page: number) => void;
 
     update<T extends modelName>(
         model: T,
