@@ -11,6 +11,7 @@ import type { noGetCommand as noGetCommandSchema } from '../command/schema';
 import type { runCommandSource, runCommandReturn, contextType } from '../command/run/types';
 import type { hardwareEncoderState, hardwareFaderSetState, hardwareGeneralButtonState, hardwareState, hardwareOptions } from '../hardware/types';
 import type { clientClickButtons, clientHoldButtons } from '../hardware';
+import type { programmerState } from '../programmer/types';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -31,6 +32,7 @@ export interface ServerToClientEvents {
     hardwareShowId(showId: string | null): void;
     hardwareClientId(clientId: string | null): void;
     hardwareOptions(options: hardwareOptions): void;
+    programmerState(programmerState: programmerState): void;
 
     hardwareClientButtonClick(button: typeof clientClickButtons[number], uniHeld: boolean): void;
     hardwareClientButtonHold(button: typeof clientHoldButtons[number], clicked: boolean): void;
@@ -84,6 +86,9 @@ export interface ClientToServerEvents {
     unsubscribeHardwareOptions: () => void;
     setHardwareOptions: (options: hardwareOptions) => void;
 
+    subscribeProgrammerState: () => void;
+    unsubscribeProgrammerState: () => void;
+
     update<T extends modelName>(
         model: T,
         id: string,
@@ -120,6 +125,7 @@ export interface SocketData {
     hardwareShowIdSubscribed: boolean;
     hardwareClientIdSubscribed: boolean;
     hardwareOptionsSubscribed: boolean;
+    programmerStateSubscribed: boolean;
 
     manySubscribedModels: modelName[];
     specificSubscribedModels: Partial<{
