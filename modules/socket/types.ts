@@ -12,6 +12,7 @@ import type { runCommandSource, runCommandReturn, contextType } from '../command
 import type { hardwareEncoderState, hardwareFaderSetState, hardwareGeneralButtonState, hardwareState, hardwareOptions } from '../hardware/types';
 import type { clientClickButtons, clientHoldButtons } from '../hardware';
 import type { programmerState } from '../programmer/types';
+import type { kind } from '../../kinds';
 
 export interface ServerToClientEvents {
     connect: () => void;
@@ -88,6 +89,8 @@ export interface ClientToServerEvents {
 
     subscribeProgrammerState: () => void;
     unsubscribeProgrammerState: () => void;
+    chooseKind: (kind: kind) => void;
+    choosePage: (page: number) => void;
 
     update<T extends modelName>(
         model: T,
