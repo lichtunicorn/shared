@@ -19,6 +19,7 @@ export const manyModelNames = [
 export const show: model = {
     displayName: "Show",
     creatable: false,
+    canInfluenceOutput: true,
     properties: [
         {
             name: "id",
